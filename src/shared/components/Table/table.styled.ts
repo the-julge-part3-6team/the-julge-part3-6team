@@ -20,6 +20,18 @@ export const CustomTableHeader = styled.ul`
   }
   @media (max-width: 744px) {
     font-size: 12px;
+    li:nth-child(1) {
+      order: 1;
+    }
+    li:nth-child(2) {
+      order: 4;
+    }
+    li:nth-child(3) {
+      order: 3;
+    }
+    li:nth-child(4) {
+      order: 2;
+    }
   }
 `;
 
