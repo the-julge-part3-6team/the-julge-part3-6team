@@ -5,7 +5,7 @@ export const RedButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 14px 0;
+  padding: 14px 20px;
   width: 100%;
 
   border-radius: 6px;
