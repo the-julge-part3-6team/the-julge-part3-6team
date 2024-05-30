@@ -7,6 +7,7 @@ import testImg from '@/assets/caution.svg';
 import Image from 'next/image';
 import Toast from '@/shared/components/Toast/Toast';
 import { useToast } from '@/shared/store/useToast';
+import Table from '@/shared/components/Table/Table';
 
 const index = () => {
   const { setIsOpen } = useModal();
@@ -59,6 +60,7 @@ const index = () => {
         누르면 토스트가 나타납니다
       </button>
       {isToast && <Toast text="삭제 되었습니다." />}
+      <Table />
     </>
   );
 };
