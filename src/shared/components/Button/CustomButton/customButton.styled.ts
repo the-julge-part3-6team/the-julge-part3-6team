@@ -9,7 +9,7 @@ export const CustomButton = styled.button<CustomButtonProps>`
   display: flex;
   justify-content: center;
   align-items: c enter;
-  padding: 14px 0;
+  padding: 14px 20px;
   width: 100%;
 
   border: ${props => `1px solid ${props.$color}`};
