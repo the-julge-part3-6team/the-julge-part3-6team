@@ -1,27 +1,29 @@
-import axios from "axios";
+import axios from 'axios';
 
 const apiInstance = axios.create({
-  baseURL: "https://bootcamp-api.codeit.kr/api/5-6/the-julge",
+  baseURL: 'https://bootcamp-api.codeit.kr/api/5-6/the-julge',
   withCredentials: true,
 });
 
-apiInstance.interceptors.request.use((configOrigin) => {
+apiInstance.interceptors.request.use(configOrigin => {
   const config = configOrigin;
-  const accessToken = localStorage.getItem("access_token");
+  if (typeof window !== 'undefined') {
+    const accessToken = localStorage.getItem('access_token');
 
-  if (config.headers && accessToken !== null) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
+    if (config.headers && accessToken !== null) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
   }
 
   return config;
 });
 
 apiInstance.interceptors.response.use(
-  (response) => {
+  response => {
     console.debug(response);
     return response;
   },
-  (error) => {
+  error => {
     console.error(error);
-  }
+  },
 );

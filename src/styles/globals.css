@@ -1,4 +1,4 @@
-@import url("./font.css");
+@import url('./font.css');
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -122,7 +122,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
@@ -144,6 +144,6 @@ input {
 }
 
 body:lang(ko) {
-  font-family: "Spoqa Han Sans Neo", sans-serif;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 16px;
 }
