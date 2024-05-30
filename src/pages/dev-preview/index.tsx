@@ -1,7 +1,9 @@
+import PrimaryButton from "@/shared/components/Button/PrimaryButton/PrimaryButton";
+
 const index = () => {
   return (
     <>
-      <div>asdsa</div>
+      <PrimaryButton />
       <hr />
       <div>asdas</div>
       <hr />
