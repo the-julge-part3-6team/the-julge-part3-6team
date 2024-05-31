@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './badge.styled';
+import * as S from './Badge.styled';
 
 export interface BadgeStyled {
   status: '거절' | '대기중' | '승인 완료';

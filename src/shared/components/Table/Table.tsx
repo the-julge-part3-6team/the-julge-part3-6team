@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './table.styled';
+import * as S from './Table.styled';
 import PrimaryBadge from './Badge/Badge';
 
 interface Test {
