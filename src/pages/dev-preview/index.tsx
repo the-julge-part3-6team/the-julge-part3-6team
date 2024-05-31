@@ -9,6 +9,7 @@ import Toast from '@/shared/components/Toast/Toast';
 import { useToast } from '@/shared/store/useToast';
 import Table from '@/shared/components/Table/Table';
 import { ITable } from '@/types/table';
+import Footer from '@/shared/components/Footer/Footer';
 
 const list: ITable[] = [
   { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '대기중' },
@@ -87,6 +88,7 @@ const index = () => {
       <Toast text="삭제 되었습니다." />
       <Toast text="두 번째 입니다." />
       <Table list={list} />
+      <Footer />
     </>
   );
 };
