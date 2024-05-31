@@ -30,10 +30,14 @@ const index = () => {
         onClick={() => console.log('text')}
       />
       <hr />
-      <button onClick={setIsOpen} style={{ background: 'red' }}>
+      <button
+        onClick={() => setIsOpen('거절모달')}
+        style={{ background: 'red' }}
+      >
         클릭하면 모달이 나타납니다
       </button>
       <Modal
+        modalKey="거절모달"
         modalHeader={
           <>
             <Image src={testImg} alt="경고 표시" />
@@ -56,10 +60,20 @@ const index = () => {
         }
       />
       <hr />
-      <button onClick={setOpenToast} style={{ background: 'pink' }}>
-        누르면 토스트가 나타납니다
+      <button
+        onClick={() => setOpenToast('삭제 되었습니다.')}
+        style={{ background: 'pink' }}
+      >
+        누르면 "삭제되었습니다." 토스트가 나타납니다
       </button>
-      {isToast && <Toast text="삭제 되었습니다." />}
+      <button
+        onClick={() => setOpenToast('두 번째 입니다.')}
+        style={{ background: 'green' }}
+      >
+        누르면 "두 번째 입니다." 토스트가 나타납니다
+      </button>
+      <Toast text="삭제 되었습니다." />
+      <Toast text="두 번째 입니다." />
       <Table />
     </>
   );
