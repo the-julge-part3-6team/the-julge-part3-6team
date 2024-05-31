@@ -5,9 +5,13 @@ import Modal from '@/shared/components/Modal/Modal';
 import { useModal } from '@/shared/store/useModal';
 import testImg from '@/assets/caution.svg';
 import Image from 'next/image';
+import Toast from '@/shared/components/Toast/Toast';
+import { useToast } from '@/shared/store/useToast';
+import Table from '@/shared/components/Table/Table';
 
 const index = () => {
   const { setIsOpen } = useModal();
+  const { isToast, setOpenToast } = useToast();
 
   return (
     <>
@@ -52,6 +56,11 @@ const index = () => {
         }
       />
       <hr />
+      <button onClick={setOpenToast} style={{ background: 'pink' }}>
+        누르면 토스트가 나타납니다
+      </button>
+      {isToast && <Toast text="삭제 되었습니다." />}
+      <Table />
     </>
   );
 };
