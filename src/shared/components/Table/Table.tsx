@@ -1,26 +1,13 @@
 import React from 'react';
 import * as S from './Table.styled';
 import PrimaryBadge from './Badge/Badge';
+import { ITable } from '@/types/table';
 
-interface Test {
-  title: string;
-  date: string;
-  price: string;
-  status: '대기중' | '거절' | '승인 완료';
+interface Props {
+  list: ITable[];
 }
 
-const list: Test[] = [
-  { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '대기중' },
-  { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '거절' },
-  {
-    title: 'hs 과일',
-    date: '2023-01-12',
-    price: '15,000',
-    status: '승인 완료',
-  },
-];
-
-const Table = () => {
+const Table = ({ list }: Props) => {
   return (
     <S.CustomTable>
       <S.CustomTableWrap>
