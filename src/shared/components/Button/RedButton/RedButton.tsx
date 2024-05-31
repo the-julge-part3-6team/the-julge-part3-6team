@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './redButton.styled';
+import * as S from './RedButton.styled';
 
 interface Props {
   text: string;
