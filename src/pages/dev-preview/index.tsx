@@ -8,6 +8,18 @@ import Image from 'next/image';
 import Toast from '@/shared/components/Toast/Toast';
 import { useToast } from '@/shared/store/useToast';
 import Table from '@/shared/components/Table/Table';
+import { ITable } from '@/types/table';
+
+const list: ITable[] = [
+  { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '대기중' },
+  { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '거절' },
+  {
+    title: 'hs 과일',
+    date: '2023-01-12',
+    price: '15,000',
+    status: '승인 완료',
+  },
+];
 
 const index = () => {
   const { setIsOpen } = useModal();
@@ -74,7 +86,7 @@ const index = () => {
       </button>
       <Toast text="삭제 되었습니다." />
       <Toast text="두 번째 입니다." />
-      <Table />
+      <Table list={list} />
     </>
   );
 };
