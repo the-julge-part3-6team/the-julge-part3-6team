@@ -9,6 +9,7 @@ import Toast from '@/shared/components/Toast/Toast';
 import { useToast } from '@/shared/store/useToast';
 import Table from '@/shared/components/Table/Table';
 import Input from '@/shared/components/Input/Input';
+import Pagination from '@/shared/components/Pagination/Pagination';
 
 const index = () => {
   const { setIsOpen } = useModal();
@@ -101,6 +102,7 @@ const index = () => {
         ]}
       />
       <hr />
+      <Pagination currentPage={1} totalPages={10} onPageChange={(page: any) => console.log(page)} />
     </>
   );
 };
