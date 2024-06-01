@@ -1,76 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import * as S from './DropDown.styled';
-import '../../../assets/fonts/font.css';
-import Triangle from '../../../assets/triangle.svg';
+import React, { useState } from 'react';
+import * as S from './Dropdown.styled';
 
-function DropDown({
-  items,
-  type,
-  messageBody,
-  setMessageBody,
-  setSelectedFont,
-}) {
+interface DropdownProps {
+  label: string;
+  options: { value: string; label: string }[];
+  error?: string | null;
+}
+
+const Dropdown: React.FC<DropdownProps> = ({ label, options, error }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(items[0]);
+  const [selectedValue, setSelectedValue] = useState<string | null>(null);
 
-  useEffect(() => {
-    setSelectedFont(messageBody.font);
-  }, [messageBody.font]);
-
-  const toggleDropDown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleItemClick = (item) => {
-    setSelectedItem(item);
-    setIsOpen(false);
-    setSelectedFont(item);
-    setMessageBody(() => ({
-      ...messageBody,
-      [type]: item,
-    }));
-  };
-
-  const handleSelectedFont = (font) => {
-    setSelectedItem(font);
-    setSelectedFont(font);
-    setMessageBody({ ...messageBody, font });
+  const toggleDropdown = () => setIsOpen(!isOpen);
+  const handleOptionClick = (value: string) => {
+    setSelectedValue(value);
     setIsOpen(false);
   };
 
   return (
-    <S.DropDownLayout>
-      <S.DropDownInput
-        onClick={toggleDropDown}
-        style={{ fontFamily: messageBody.font }}
-      >
-        {selectedItem}
-        <img
-          src={isOpen ? ArrowUp : ArrowDown}
-          alt='arrow-icon'
-          className='dropdown-arrow'
-        />
-      </S.DropDownInput>
-      {isOpen && (
-        <S.DropDownItemList>
-          {items.map((item) => (
-            <S.DropDownItem key={item}>
-              <S.DropDownItemHover
-                onClick={() => {
-                  type === 'font'
-                    ? handleSelectedFont(item)
-                    : handleItemClick(item);
-                }}
-                style={{ fontFamily: item }}
-              >
-                {item}
-              </S.DropDownItemHover>
-            </S.DropDownItem>
-          ))}
-        </S.DropDownItemList>
-      )}
-    </S.DropDownLayout>
+    <S.InputContainer>
+      <S.InputLabel>{label}</S.InputLabel>
+      <S.InputFrame hasError={!!error}>
+        <S.DropdownContainer>
+          <S.SelectedValue onClick={toggleDropdown}>
+            {selectedValue || '선택하세요'}
+          </S.SelectedValue>
+          {isOpen && (
+            <S.OptionsContainer>
+              {options.map(option => (
+                <S.Option key={option.value} onClick={() => handleOptionClick(option.value)}>
+                  {option.label}
+                </S.Option>
+              ))}
+            </S.OptionsContainer>
+          )}
+        </S.DropdownContainer>
+      </S.InputFrame>
+      {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
+    </S.InputContainer>
   );
-}
+};
 
-export default DropDown;
+export default Dropdown;

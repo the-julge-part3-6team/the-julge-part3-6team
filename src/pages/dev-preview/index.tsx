@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Toast from '@/shared/components/Toast/Toast';
 import { useToast } from '@/shared/store/useToast';
 import Table from '@/shared/components/Table/Table';
+import Input from '@/shared/components/Input/Input';
 
 const index = () => {
   const { setIsOpen } = useModal();
@@ -61,6 +62,13 @@ const index = () => {
       </button>
       {isToast && <Toast text="삭제 되었습니다." />}
       <Table />
+      <hr />
+      <Input label={'이메일'} type={'email'} />
+      <hr />
+      <Input label={'비밀번호'} type={'password'} />
+      <hr />
+      <Input label={'시급*'} type={'hourlyWage'} />
+      <hr />
     </>
   );
 };
