@@ -71,26 +71,26 @@ const Input: React.FC<InputProps> = ({ label, type, ...props }) => {
             {...props}
             type="number"
             onChange={handleInputChange as React.ChangeEventHandler<HTMLInputElement>}
+            placeholder="입력"
           />
           <S.UnitLabel>원</S.UnitLabel>
         </>
       );
     }
     if (type === 'dropdown') {
-      return ( 
+      return (
         <Dropdown
-          label={label}
           options={[
             { value: '', label: '선택하세요' },
             { value: 'category1', label: '분류 1' },
             { value: 'category2', label: '분류 2' },
             { value: 'category3', label: '분류 3' },
           ]}
-          error={error}
         />
       );
     }
 
+    const placeholderText = type === 'confirmPassword' ? '비밀번호 확인' : '입력';
     return (
       <S.InputField
         {...props}
@@ -100,6 +100,7 @@ const Input: React.FC<InputProps> = ({ label, type, ...props }) => {
             ? handleConfirmPasswordChange
             : handlePasswordChange
         }
+        placeholder={placeholderText}
       />
     );
   };
@@ -107,9 +108,12 @@ const Input: React.FC<InputProps> = ({ label, type, ...props }) => {
   return (
     <S.InputContainer>
       <S.InputLabel>{label}</S.InputLabel>
-      <S.InputFrame hasError={!!error}>
-        {renderInput()}
-      </S.InputFrame>
+      {type !== 'dropdown' && (
+        <S.InputFrame hasError={!!error}>
+          {renderInput()}
+        </S.InputFrame>
+      )}
+      {type === 'dropdown' && renderInput()}
       {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
     </S.InputContainer>
   );

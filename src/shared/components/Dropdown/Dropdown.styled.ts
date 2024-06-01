@@ -11,7 +11,7 @@ export const InputContainer = styled.div`
   align-items: flex-start;
   gap: 8px;
   width: 350px;
-  height: 92px;
+  height: auto;
 `;
 
 export const InputLabel = styled.label`
@@ -47,14 +47,8 @@ export const DropdownContainer = styled.div`
 `;
 
 export const SelectedValue = styled.div`
-  width: 100%;
-  height: 26px;
-  font-size: 16px;
-  line-height: 26px;
-  color: ${theme.Colors.Black};
-  background: ${theme.Colors.White};
-  border: none;
-  outline: none;
+  display: flex;
+  align-items: center;
   cursor: pointer;
 `;
 
@@ -73,6 +67,7 @@ export const OptionsContainer = styled.div`
 
 export const Option = styled.div`
   padding: 8px 16px;
+  border-bottom: 1px solid #E5E4E7;
   cursor: pointer;
   &:hover {
     background: #f6f6f6;
@@ -85,10 +80,10 @@ export const UnitLabel = styled.span`
   color: ${theme.Colors.Black};
 `;
 
-export const ErrorMessage = styled.div`
-  width: 100%;
-  height: 16px;
-  font-size: 12px;
-  line-height: 16px;
-  color: ${theme.Colors.Red[40]};
+export const ScrollBar = styled.div`
+  position: absolute;
+  width: 4px;
+  height: 63px;
+  right: 4px;
+  top: 12px;
 `;

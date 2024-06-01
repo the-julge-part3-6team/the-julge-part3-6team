@@ -69,6 +69,7 @@ const index = () => {
       <hr />
       <Input label={'시급*'} type={'hourlyWage'} />
       <hr />
+      <Input label={'분류*'} type={'dropdown'} />
     </>
   );
 };
