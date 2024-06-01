@@ -51,7 +51,7 @@ export const SelectedValue = styled.div`
 
 export const OptionsContainer = styled.div<OptionsContainerProps>`
   position: absolute;
-  width: ${({ width }) => (width ? `${width}px` : 'auto')};
+  width: 100%;
   max-height: 230px;
   z-index: 200;
   background: #ffffff;
@@ -61,15 +61,46 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   overflow-y: auto;
   top: 100%;
   left: 0;
-  margin-top: 8px;
+  margin-top: 35px;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 63px;
+    background: transparent;
+    right: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #7d7986;
+    border-radius: 40px 0 0 40px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    opacity: 1;
+  }
+
+  &::-webkit-scrollbar-thumb:vertical {
+    height: 63px;
+  }
 `;
 
 export const Option = styled.div`
   height: 46px;
-  padding: 8px 16px;
+  padding: 0 12px;
   border-bottom: 1px solid #e5e4e7;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     background: #f6f6f6;
   }
@@ -79,12 +110,4 @@ export const UnitLabel = styled.span`
   font-size: 16px;
   line-height: 26px;
   color: ${theme.Colors.Black};
-`;
-
-export const ScrollBar = styled.div`
-  position: absolute;
-  width: 4px;
-  height: 63px;
-  right: 4px;
-  top: 12px;
 `;

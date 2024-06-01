@@ -85,6 +85,9 @@ const Input: React.FC<InputProps> = ({ label, type, ...props }) => {
             { value: 'category1', label: '분류 1' },
             { value: 'category2', label: '분류 2' },
             { value: 'category3', label: '분류 3' },
+            { value: 'category4', label: '분류 4' },
+            { value: 'category4', label: '분류 4' },
+            { value: 'category4', label: '분류 4' },
           ]}
         />
       );
