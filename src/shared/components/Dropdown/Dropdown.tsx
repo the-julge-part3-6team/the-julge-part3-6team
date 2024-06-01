@@ -1,28 +1,23 @@
+
 import React, { useState } from 'react';
 import * as S from './Dropdown.styled';
-import TriangleIcon from '@/assets/triangle.svg'; 
+import Image from 'next/image';
+import TriangleIcon from '@/assets/triangle.svg';
 
 interface DropdownProps {
   label: string;
   options: { value: string; label: string }[];
-  error?: string | null;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ label, options, error }) => {
-  const [isOpen, setIsOpen] = useState(false); 
+const Dropdown: React.FC<DropdownProps> = ({ label, options }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   return (
+    <S.InputContainer>
       <S.InputFrame>
         <S.DropdownContainer>
-          <S.SelectedValue onClick={toggleDropdown}>
-            <img
-              src={TriangleIcon}
-              alt='triangle-icon'
-              className={isOpen ? 'dropdown-arrow open' : 'dropdown-arrow'}
-            />
-          </S.SelectedValue>
           {isOpen && (
             <S.OptionsContainer>
               {options.map(option => (
@@ -30,8 +25,17 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, error }) => {
               ))}
             </S.OptionsContainer>
           )}
+          <S.SelectedValue
+            onClick={toggleDropdown}
+            className={isOpen ? 'open' : ''}
+          >
+            <div className="dropdown-arrow">
+              <Image src={TriangleIcon} alt="dropdown" />
+            </div>
+          </S.SelectedValue>
         </S.DropdownContainer>
       </S.InputFrame>
+    </S.InputContainer>
   );
 };
 
