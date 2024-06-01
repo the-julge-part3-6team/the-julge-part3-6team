@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import * as S from './Dropdown.styled';
 import Image from 'next/image';
@@ -9,7 +8,7 @@ interface DropdownProps {
   options: { value: string; label: string }[];
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ label, options }) => {
+const Dropdown: React.FC<DropdownProps> = ({ options }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
