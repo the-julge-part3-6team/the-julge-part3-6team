@@ -36,11 +36,12 @@ export const SelectedValue = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 내부 요소를 오른쪽으로 정렬 */
-  cursor: pointer;
+  justify-content: space-between;
 
   .dropdown-arrow {
-    margin-right: 21px; /* 오른쪽으로 이동 */
+    margin-left: 295px;
+    // margin-right: 21px가 안먹혀서 임의로 지정함 (추후 수정 필요)
+    cursor: pointer;
   }
 
   &.open .dropdown-arrow {
@@ -58,8 +59,8 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   border-radius: 8px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
   overflow-y: auto;
-  top: 100%; /* 입력 컨테이너의 하단에 배치 */
-  left: 0; /* 입력 컨테이너의 왼쪽에 정렬 */
+  top: 100%;
+  left: 0;
   margin-top: 8px;
 `;
 
