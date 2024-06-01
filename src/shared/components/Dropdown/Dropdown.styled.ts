@@ -51,7 +51,8 @@ export const SelectedValue = styled.div`
 
 export const OptionsContainer = styled.div<OptionsContainerProps>`
   position: absolute;
-  width: 100%;
+  width: calc(100% + 40px);
+  // InputContainer와 width 동일하게 맞추기 위함 (추후 수정 필요)
   max-height: 230px;
   z-index: 200;
   background: #ffffff;
@@ -62,6 +63,7 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   top: 100%;
   left: 0;
   margin-top: 35px;
+  margin-left: -20px;
 
   &::-webkit-scrollbar {
     width: 4px;
