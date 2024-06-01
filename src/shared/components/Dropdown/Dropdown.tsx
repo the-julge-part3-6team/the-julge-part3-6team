@@ -14,11 +14,9 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, error }) => {
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   return (
-    <S.InputContainer>
-      <S.InputFrame hasError={!!error}>
+      <S.InputFrame>
         <S.DropdownContainer>
           <S.SelectedValue onClick={toggleDropdown}>
-            {/* 드롭다운 상태에 따라 이미지가 회전되도록 조건부 스타일을 적용합니다. */}
             <img
               src={TriangleIcon}
               alt='triangle-icon'
@@ -34,7 +32,6 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, error }) => {
           )}
         </S.DropdownContainer>
       </S.InputFrame>
-    </S.InputContainer>
   );
 };
 

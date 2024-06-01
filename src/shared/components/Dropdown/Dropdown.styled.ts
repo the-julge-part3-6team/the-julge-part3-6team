@@ -1,20 +1,7 @@
 import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
 
-interface InputFrameProps {
-  hasError?: boolean;
-}
-
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  width: 350px;
-  height: auto;
-`;
-
-export const InputFrame = styled.div<InputFrameProps>`
+export const InputFrame = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -26,11 +13,6 @@ export const InputFrame = styled.div<InputFrameProps>`
   background: ${theme.Colors.White};
   border: 1px solid ${theme.Colors.Gray[30]};
   border-radius: 5px;
-  ${props =>
-    props.hasError &&
-    css`
-      border-color: ${theme.Colors.Red[40]};
-    `}
 `;
 
 export const DropdownContainer = styled.div`
