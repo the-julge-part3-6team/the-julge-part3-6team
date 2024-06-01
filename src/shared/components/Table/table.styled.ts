@@ -19,8 +19,12 @@ export const CustomTableHeader = styled.ul`
     padding: 14px 12px;
   }
   @media (max-width: 744px) {
+    position: relative;
     font-size: 12px;
     li:nth-child(1) {
+      position: sticky;
+      left: 0;
+      background: ${theme.Colors.Red[10]};
       order: 1;
     }
     li:nth-child(2) {
@@ -49,9 +53,13 @@ export const CustomTableBody = styled.ul`
   }
 
   @media (max-width: 744px) {
+    position: relative;
     font-size: 14px;
     li:nth-child(1) {
       order: 1;
+      position: sticky;
+      left: 0;
+      background: ${theme.Colors.White};
     }
     li:nth-child(2) {
       order: 4;

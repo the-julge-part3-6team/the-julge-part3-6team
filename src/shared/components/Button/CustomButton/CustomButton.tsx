@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './customButton.styled';
+import * as S from './CustomButton.styled';
 
 interface Props {
   text: string;
