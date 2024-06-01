@@ -14,14 +14,6 @@ export const InputContainer = styled.div`
   height: auto;
 `;
 
-export const InputLabel = styled.label`
-  width: 100%;
-  height: 26px;
-  font-size: 16px;
-  line-height: 26px;
-  color: ${theme.Colors.Black};
-`;
-
 export const InputFrame = styled.div<InputFrameProps>`
   box-sizing: border-box;
   display: flex;

@@ -15,7 +15,6 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, error }) => {
 
   return (
     <S.InputContainer>
-      <S.InputLabel>{label}</S.InputLabel>
       <S.InputFrame hasError={!!error}>
         <S.DropdownContainer>
           <S.SelectedValue onClick={toggleDropdown}>

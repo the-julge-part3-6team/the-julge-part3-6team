@@ -39,6 +39,9 @@ export const InputFrame = styled.div<InputFrameProps>`
     css`
       border-color: ${theme.Colors.Red[40]};
     `}
+  &:hover {
+    border-color: ${theme.Colors.Black};
+  }
 `;
 
 export const InputField = styled.input`
@@ -70,7 +73,7 @@ export const SelectField = styled.select`
   border: none;
   outline: none;
   background: ${theme.Colors.White};
-  appearance: none; 
+  appearance: none;
 `;
 
 export const Option = styled.option`
@@ -83,8 +86,8 @@ export const Option = styled.option`
   border: 1px solid #cccccc;
   border-radius: 8px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
-  overflow-y: auto; 
-  
+  overflow-y: auto;
+
   &:hover {
     background: #f6f6f6;
   }
