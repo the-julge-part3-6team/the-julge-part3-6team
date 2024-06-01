@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import * as S from './Input.styled';
 import Dropdown from '../Dropdown/Dropdown';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLSelectElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLSelectElement> {
   label: string;
   type: string;
+  options?: string[];
 }
 
-const Input: React.FC<InputProps> = ({ label, type, ...props }) => {
+const Input: React.FC<InputProps> = ({ label, type, options, ...props }) => { 
   const [error, setError] = useState<string | null>(null);
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -80,15 +81,7 @@ const Input: React.FC<InputProps> = ({ label, type, ...props }) => {
     if (type === 'dropdown') {
       return (
         <Dropdown
-          options={[
-            { value: '', label: '선택하세요' },
-            { value: 'category1', label: '분류 1' },
-            { value: 'category2', label: '분류 2' },
-            { value: 'category3', label: '분류 3' },
-            { value: 'category4', label: '분류 4' },
-            { value: 'category4', label: '분류 4' },
-            { value: 'category4', label: '분류 4' },
-          ]}
+          options={options} 
         />
       );
     }

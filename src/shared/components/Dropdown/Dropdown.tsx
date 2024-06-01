@@ -4,13 +4,12 @@ import Image from 'next/image';
 import TriangleIcon from '@/assets/triangle.svg';
 
 interface DropdownProps {
-  label: string;
-  options: { value: string; label: string }[];
+  options: string[];
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ options }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<{ value: string; label: string } | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
@@ -31,7 +30,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
     };
   }, []);
 
-  const handleOptionSelect = (option: { value: string; label: string }) => {
+  const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
   };
@@ -43,8 +42,8 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
           {isOpen && (
             <S.OptionsContainer>
               {options.map(option => (
-                <S.Option key={option.value} onClick={() => handleOptionSelect(option)}>
-                  {option.label}
+                <S.Option key={option} onClick={() => handleOptionSelect(option)}>
+                  {option}
                 </S.Option>
               ))}
             </S.OptionsContainer>
@@ -53,7 +52,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
             onClick={toggleDropdown}
             className={isOpen ? 'open' : ''}
           >
-            {selectedOption ? selectedOption.label : '선택'}
+            {selectedOption ? selectedOption : '선택'}
             <div className="dropdown-arrow">
               <Image src={TriangleIcon} alt="dropdown" />
             </div>

@@ -64,7 +64,8 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   overflow-y: auto;
   top: 100%;
   left: 0;
-  margin-top: 15px;
+  margin-top: 30px;
+  // (추후 수정 필요)
   margin-left: -20px;
 
   &::-webkit-scrollbar {
