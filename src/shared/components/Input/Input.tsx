@@ -8,7 +8,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement |
   options?: string[];
 }
 
-const Input: React.FC<InputProps> = ({ label, type, options, ...props }) => { 
+const Input: React.FC<InputProps> = ({ label, type, options = [], ...props }) => {
   const [error, setError] = useState<string | null>(null);
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
