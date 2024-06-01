@@ -37,8 +37,10 @@ export const SelectedValue = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  white-space: nowrap;
 
   .dropdown-arrow {
+    position: absolute;
     margin-left: 295px;
     // margin-right: 21px가 안먹혀서 임의로 지정함 (추후 수정 필요)
     cursor: pointer;
@@ -62,7 +64,7 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   overflow-y: auto;
   top: 100%;
   left: 0;
-  margin-top: 35px;
+  margin-top: 15px;
   margin-left: -20px;
 
   &::-webkit-scrollbar {
