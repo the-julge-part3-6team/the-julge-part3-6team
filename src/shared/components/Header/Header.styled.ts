@@ -20,6 +20,7 @@ export const HeaderContainer = styled.div`
   }
 
   @media (max-width: 744px) {
+    padding: 16px 20px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     & > *:nth-child(1) {
