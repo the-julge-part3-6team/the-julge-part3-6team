@@ -141,7 +141,6 @@ const index = () => {
       </div>
       <Footer />
       {isToast && <Toast text="삭제 되었습니다." />}
-      <Table />
       <hr />
       <Input label={'이메일'} type={'email'} />
       <hr />
