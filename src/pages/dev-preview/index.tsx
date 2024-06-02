@@ -15,6 +15,7 @@ import NotificationModal, {
   Notifications,
 } from '@/shared/components/NotificationModal/NotificationModal';
 import Input from '@/shared/components/Input/Input';
+import Header from '@/shared/components/Header/Header';
 
 const list: ITable[] = [
   { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '대기중' },
@@ -125,6 +126,8 @@ const index = () => {
       <Toast text="삭제 되었습니다." />
       <Toast text="두 번째 입니다." />
       <Table list={list} />
+      <Header />
+
       <hr />
       <div
         style={{
