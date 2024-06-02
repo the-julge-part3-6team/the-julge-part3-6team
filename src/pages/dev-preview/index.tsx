@@ -16,6 +16,11 @@ import NotificationModal, {
 } from '@/shared/components/NotificationModal/NotificationModal';
 import Input from '@/shared/components/Input/Input';
 import Header from '@/shared/components/Header/Header';
+import Pagination from '@/shared/components/Pagination/Pagination';
+
+const handlePageChange = (page: number) => {
+  console.log(page);
+};
 
 const list: ITable[] = [
   { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '대기중' },
@@ -51,7 +56,6 @@ const notifications: Notifications[] = [
     timeAgo: '7분 전',
   },
 ];
-import Pagination from '@/shared/components/Pagination/Pagination';
 
 const index = () => {
   const { isOpen, setIsOpen, setIsClose } = useModal();
@@ -184,7 +188,11 @@ const index = () => {
         ]}
       />
       <hr />
-      <Pagination currentPage={1} totalPages={10} onPageChange={handlePageChange} />
+      <Pagination
+        currentPage={1}
+        totalPages={10}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 };
