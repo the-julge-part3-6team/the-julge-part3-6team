@@ -42,7 +42,10 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
           {isOpen && (
             <S.OptionsContainer>
               {options.map(option => (
-                <S.Option key={option} onClick={() => handleOptionSelect(option)}>
+                <S.Option
+                  key={option}
+                  onClick={() => handleOptionSelect(option)}
+                >
                   {option}
                 </S.Option>
               ))}

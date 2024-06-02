@@ -15,6 +15,7 @@ export const TypeSelectBtn = ({ typeValidation }: Props) => {
         id="employee"
         type="radio"
         name="type"
+        value="employee"
         {...typeValidation}
       />
       <S.RadioLabel htmlFor="employee">알바님</S.RadioLabel>
@@ -22,6 +23,7 @@ export const TypeSelectBtn = ({ typeValidation }: Props) => {
         id="employer"
         type="radio"
         name="type"
+        value="employer"
         {...typeValidation}
       />
       <S.RadioLabel htmlFor="employer">사장님</S.RadioLabel>
