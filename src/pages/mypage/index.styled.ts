@@ -2,7 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 228px);
+  height: calc(100vh - 172px);
+
+  @media (max-width: 744px) {
+    height: calc(100vh - 228px);
+  }
 `;
 
 export const ContentWrap = styled.div`
@@ -16,7 +20,7 @@ export const ContentWrap = styled.div`
   }
 
   @media (max-width: 744px) {
-    padding: 40px 12px;
+    padding: 40px 20px;
   }
 `;
 
