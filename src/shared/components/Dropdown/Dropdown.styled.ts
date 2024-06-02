@@ -1,5 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
+
+interface InputFrameProps {
+  width?: string;
+}
+
+interface DropdownArrowProps {
+  isOpen: boolean;
+}
 
 interface OptionsContainerProps {
   width?: number | null;
@@ -10,21 +18,21 @@ export const InputContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  width: 100%;
 `;
 
-export const InputFrame = styled.div`
+export const InputFrame = styled.div<InputFrameProps>`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 16px 20px;
   gap: 10px;
-  width: 100%;
+  width: ${props => props.width || '350px'};
   height: 58px;
   background: ${theme.Colors.White};
   border: 1px solid ${theme.Colors.Gray[30]};
   border-radius: 5px;
+  position: relative;
 `;
 
 export const DropdownContainer = styled.div`
@@ -33,28 +41,27 @@ export const DropdownContainer = styled.div`
 `;
 
 export const SelectedValue = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   white-space: nowrap;
+`;
 
-  .dropdown-arrow {
-    position: absolute;
-    margin-left: 295px;
-    // margin-right: 21px가 안먹혀서 임의로 지정함 (추후 수정 필요)
-    cursor: pointer;
-  }
+export const DropdownArrow = styled.div<DropdownArrowProps>`
+  position: absolute;
+  right: 21px;
+  cursor: pointer;
 
-  &.open .dropdown-arrow {
-    transform: rotate(180deg);
-  }
+  ${props =>
+    props.isOpen &&
+    css`
+      transform: rotate(180deg);
+    `}
 `;
 
 export const OptionsContainer = styled.div<OptionsContainerProps>`
   position: absolute;
-  width: calc(100% + 40px);
-  // InputContainer와 width 동일하게 맞추기 위함 (추후 수정 필요)
+  width: ${props => (props.width ? `${props.width}px` : 'auto')};
   max-height: 230px;
   z-index: 200;
   background: #ffffff;
@@ -62,18 +69,16 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   border-radius: 8px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
   overflow-y: auto;
-  top: 100%;
+  top: calc(100% + 10px); /* 선택된 값 아래에 위치 */
   left: 0;
-  margin-top: 30px;
-  // (추후 수정 필요)
+  margin-top: 15px;
   margin-left: -20px;
 
   &::-webkit-scrollbar {
     width: 4px;
     height: 63px;
-    margin-right: 4px;
     background: transparent;
-    right: 4px;
+    right: 4px; /* 속성 안먹힘 */
   }
 
   &::-webkit-scrollbar-track {
@@ -83,6 +88,7 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   &::-webkit-scrollbar-thumb {
     background: #7d7986;
     border-radius: 40px 0 0 40px;
+    left: 4px;
   }
 
   &::-webkit-scrollbar-thumb:hover {

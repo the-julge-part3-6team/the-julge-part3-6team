@@ -42,7 +42,10 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
           {isOpen && (
             <S.OptionsContainer>
               {options.map(option => (
-                <S.Option key={option} onClick={() => handleOptionSelect(option)}>
+                <S.Option
+                  key={option}
+                  onClick={() => handleOptionSelect(option)}
+                >
                   {option}
                 </S.Option>
               ))}
@@ -53,9 +56,9 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
             className={isOpen ? 'open' : ''}
           >
             {selectedOption ? selectedOption : '선택'}
-            <div className="dropdown-arrow">
+            <S.DropdownArrow isOpen={isOpen} className={isOpen ? 'open' : ''}>
               <Image src={TriangleIcon} alt="dropdown" />
-            </div>
+            </S.DropdownArrow>
           </S.SelectedValue>
         </S.DropdownContainer>
       </S.InputFrame>
