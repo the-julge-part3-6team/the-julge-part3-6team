@@ -11,9 +11,9 @@ import { useToast } from '@/shared/store/useToast';
 import Table from '@/shared/components/Table/Table';
 import { ITable } from '@/types/table';
 import Footer from '@/shared/components/Footer/Footer';
-import NotificationModal, {
-  Notifications,
-} from '@/shared/components/NotificationModal/NotificationModal';
+import NotificationModal from '@/components/notifications/ui/NotificationModal/NotificationModal';
+import { Notifications } from '@/types/notification';
+import Filter from '@/components/filter/ui/Filter';
 
 const list: ITable[] = [
   { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '대기중' },
@@ -59,6 +59,14 @@ const index = () => {
       setIsClose();
     } else {
       setIsOpen('알림모달');
+    }
+  };
+
+  const toggleFilterModal = () => {
+    if (isOpen) {
+      setIsClose();
+    } else {
+      setIsOpen('필터모달');
     }
   };
 
@@ -137,6 +145,31 @@ const index = () => {
           <Image src={notificationImg} alt="알림 아이콘" />
         </button>
         <NotificationModal modalContents={notifications} modalKey="알림모달" />
+      </div>
+      <hr />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginRight: '100px',
+          position: 'relative',
+        }}
+      >
+        <button
+          style={{
+            display: 'flex',
+            padding: '12px',
+            alignItems: 'center',
+            borderRadius: '5px',
+            backgroundColor: '#FF8D72',
+            color: '#fff',
+            fontWeight: '700',
+          }}
+          onClick={toggleFilterModal}
+        >
+          상세 필터
+        </button>
+        <Filter modalKey="필터모달" />
       </div>
       <Footer />
     </>

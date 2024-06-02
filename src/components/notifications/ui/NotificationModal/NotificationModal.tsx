@@ -2,14 +2,7 @@ import React from 'react';
 import * as S from './NotificationModal.styled';
 import NotificationItem from './NotificationItem/NotificationItem';
 import { useModal } from '@/shared/store/useModal';
-
-export interface Notifications {
-  id: number;
-  title: string;
-  date: string;
-  status: 'approved' | 'rejected';
-  timeAgo: string;
-}
+import { Notifications } from '@/types/notification';
 
 interface Props {
   modalContents: Notifications[];
