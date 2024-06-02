@@ -34,4 +34,9 @@ export const MyPageBox = styled.div`
 
 export const CustomRedButton = styled(RedButton)`
   width: 336px;
+
+  @media (max-width: 744px) {
+    width: 150px;
+    font-size: 14px;
+  }
 `;

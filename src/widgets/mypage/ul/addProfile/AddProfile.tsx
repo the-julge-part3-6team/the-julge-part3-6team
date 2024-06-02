@@ -10,7 +10,7 @@ export const AddProfile = () => {
           console.log('login');
         }}
       >
-        로그인 하기
+        내 프로필 등록하기
       </S.CustomRedButton>
     </S.MyPageBox>
   );
