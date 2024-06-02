@@ -51,6 +51,7 @@ const notifications: Notifications[] = [
     timeAgo: '7분 전',
   },
 ];
+import Pagination from '@/shared/components/Pagination/Pagination';
 
 const index = () => {
   const { isOpen, setIsOpen, setIsClose } = useModal();
@@ -183,6 +184,7 @@ const index = () => {
         ]}
       />
       <hr />
+      <Pagination currentPage={1} totalPages={10} onPageChange={handlePageChange} />
     </>
   );
 };
