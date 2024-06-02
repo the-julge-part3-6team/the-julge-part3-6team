@@ -71,6 +71,7 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   &::-webkit-scrollbar {
     width: 4px;
     height: 63px;
+    margin-right: 4px;
     background: transparent;
     right: 4px;
   }
