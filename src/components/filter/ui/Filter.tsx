@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useModal } from '@/shared/store/useModal';
 import DatePicker from 'react-datepicker';
 
-const locations: string[] = [
+export const locations: string[] = [
   '서울시 강남구',
   '서울시 중구',
   '서울시 용산구',
@@ -34,14 +34,21 @@ const locations: string[] = [
 
 interface Props {
   modalKey: string;
+  onApply: (filters: FilterState) => void;
 }
 
-const Filter = ({ modalKey }: Props) => {
+export interface FilterState {
+  startDate: Date | null;
+  price: number;
+  selectedLocations: string[];
+}
+
+const Filter = ({ modalKey, onApply }: Props) => {
   const { isOpen, key } = useModal();
   const isSelected = key === modalKey;
 
   const [startDate, setStartDate] = useState<Date | null>(null);
-  const [price, setPrice] = useState<number>();
+  const [price, setPrice] = useState<number>(0);
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
 
   const onChangeStartDate = (date: Date | null) => {
@@ -68,6 +75,15 @@ const Filter = ({ modalKey }: Props) => {
     setStartDate(null);
     setPrice(0);
     setSelectedLocations([]);
+  };
+
+  const applyFilters = () => {
+    const filters: FilterState = {
+      startDate,
+      price,
+      selectedLocations,
+    };
+    onApply(filters);
   };
 
   return (
@@ -128,7 +144,7 @@ const Filter = ({ modalKey }: Props) => {
           </S.Section>
           <S.ButtonContainer>
             <S.ResetButton onClick={resetFilters}>초기화</S.ResetButton>
-            <S.ApplyButton>적용하기</S.ApplyButton>
+            <S.ApplyButton onClick={applyFilters}>적용하기</S.ApplyButton>
           </S.ButtonContainer>
         </S.FilterContainer>
       )}

@@ -12,6 +12,7 @@ export const NotificationModalContainer = styled.div`
   border: 1px solid #cbc9cf;
   box-shadow: 0px 2px 8px 0px rgba(120, 116, 134, 0.25);
   z-index: 3;
+  box-sizing: border-box;
 `;
 
 export const NotificationModalHeader = styled.h2`

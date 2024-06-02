@@ -13,7 +13,15 @@ import { ITable } from '@/types/table';
 import Footer from '@/shared/components/Footer/Footer';
 import NotificationModal from '@/components/notifications/ui/NotificationModal/NotificationModal';
 import { Notifications } from '@/types/notification';
-import Filter from '@/components/filter/ui/Filter';
+import Filter, { FilterState } from '@/components/filter/ui/Filter';
+import Input from '@/shared/components/Input/Input';
+import Header from '@/shared/components/Header/Header';
+import Pagination from '@/shared/components/Pagination/Pagination';
+import { useState } from 'react';
+
+const handlePageChange = (page: number) => {
+  console.log(page);
+};
 
 const list: ITable[] = [
   { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '대기중' },
@@ -53,6 +61,11 @@ const notifications: Notifications[] = [
 const index = () => {
   const { isOpen, setIsOpen, setIsClose } = useModal();
   const { isToast, setOpenToast } = useToast();
+  const [filters, setFilters] = useState<FilterState | null>(null);
+
+  const handleApplyFilters = (filters: FilterState) => {
+    setFilters(filters);
+  };
 
   const toggleNotificationModal = () => {
     if (isOpen) {
@@ -132,6 +145,8 @@ const index = () => {
       <Toast text="삭제 되었습니다." />
       <Toast text="두 번째 입니다." />
       <Table list={list} />
+      <Header />
+
       <hr />
       <div
         style={{
@@ -169,9 +184,65 @@ const index = () => {
         >
           상세 필터
         </button>
-        <Filter modalKey="필터모달" />
+        <Filter modalKey="필터모달" onApply={handleApplyFilters} />
       </div>
+      {filters && (
+        <div>
+          <p>선택된 시작일: {filters.startDate?.toLocaleDateString()}</p>
+          <p>
+            선택된 금액:{' '}
+            {filters.price ? `${filters.price}원 이상` : '설정되지 않음'}
+          </p>
+          <p>선택된 위치: {filters.selectedLocations.join(', ')}</p>
+        </div>
+      )}
+      <hr />
       <Footer />
+      {isToast && <Toast text="삭제 되었습니다." />}
+      <hr />
+      <Input label={'이메일'} type={'email'} />
+      <hr />
+      <Input label={'비밀번호'} type={'password'} />
+      <hr />
+      <Input label={'시급*'} type={'hourlyWage'} />
+      <hr />
+      <Input
+        label={'분류*'}
+        type={'dropdown'}
+        options={[
+          '서울시 종로구',
+          '서울시 중구',
+          '서울시 용산구',
+          '서울시 성동구',
+          '서울시 광진구',
+          '서울시 동대문구',
+          '서울시 중랑구',
+          '서울시 성북구',
+          '서울시 강북구',
+          '서울시 도봉구',
+          '서울시 노원구',
+          '서울시 은평구',
+          '서울시 서대문구',
+          '서울시 마포구',
+          '서울시 양천구',
+          '서울시 강서구',
+          '서울시 구로구',
+          '서울시 금천구',
+          '서울시 영등포구',
+          '서울시 동작구',
+          '서울시 관악구',
+          '서울시 서초구',
+          '서울시 강남구',
+          '서울시 송파구',
+          '서울시 강동구',
+        ]}
+      />
+      <hr />
+      <Pagination
+        currentPage={1}
+        totalPages={10}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 };

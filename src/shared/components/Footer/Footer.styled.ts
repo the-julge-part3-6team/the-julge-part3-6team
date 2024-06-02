@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const FooterWrap = styled.footer`
   width: 100%;
+
   background: ${theme.Colors.Gray[10]};
   color: ${theme.Colors.Gray[50]};
   padding: 37px 0;
@@ -13,6 +14,7 @@ export const FooterWrap = styled.footer`
   }
 
   @media (max-width: 744px) {
+    min-height: 126px;
     position: relative;
     padding: 32px 20px 16px;
   }
@@ -24,6 +26,7 @@ export const FooterContainer = styled.div`
   margin: 0 auto;
 
   ul {
+    font-size: 14px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -52,7 +55,6 @@ export const FooterContainer = styled.div`
 
   @media (max-width: 744px) {
     width: auto;
-    min-height: 126px;
 
     .footer_codeit {
       position: absolute;

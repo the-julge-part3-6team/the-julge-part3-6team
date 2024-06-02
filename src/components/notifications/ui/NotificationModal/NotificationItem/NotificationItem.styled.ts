@@ -11,7 +11,8 @@ export const NotificationItemContainer = styled.div`
   background: #fff;
   border-radius: 5px;
   border: 1px solid ${theme.Colors.Gray[20]};
-  margin-bottom: 8px;
+  margin-top: 8px;
+  box-sizing: border-box;
 `;
 
 export const NotificationItemContent = styled.div`

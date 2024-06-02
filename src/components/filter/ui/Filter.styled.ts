@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export const FilterContainer = styled.div`
   position: absolute;
-  top: 30px;
+  top: 25px;
   right: -25px;
   margin: 24px;
   background: #fff;
