@@ -33,6 +33,7 @@ export const InputFrame = styled.div<InputFrameProps>`
   border: 1px solid ${theme.Colors.Gray[30]};
   border-radius: 5px;
   position: relative;
+  padding-right: 0px;
 `;
 
 export const DropdownContainer = styled.div`
@@ -49,7 +50,7 @@ export const SelectedValue = styled.div`
 
 export const DropdownArrow = styled.div<DropdownArrowProps>`
   position: absolute;
-  right: 21px;
+  right: 20px;
   cursor: pointer;
 
   ${props =>
@@ -69,7 +70,7 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   border-radius: 8px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
   overflow-y: auto;
-  top: calc(100% + 10px); /* 선택된 값 아래에 위치 */
+  top: calc(100% + 10px);
   left: 0;
   margin-top: 15px;
   margin-left: -20px;
