@@ -10,7 +10,7 @@ interface DropdownArrowProps {
 }
 
 interface OptionsContainerProps {
-  width?: number | null;
+  width?: string;
 }
 
 export const InputContainer = styled.div`
@@ -62,7 +62,7 @@ export const DropdownArrow = styled.div<DropdownArrowProps>`
 
 export const OptionsContainer = styled.div<OptionsContainerProps>`
   position: absolute;
-  width: ${props => (props.width ? `${props.width}px` : 'auto')};
+  width: ${props => props.width || '350px'};
   max-height: 230px;
   z-index: 200;
   background: #ffffff;
