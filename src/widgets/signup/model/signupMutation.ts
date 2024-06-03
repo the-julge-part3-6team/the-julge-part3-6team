@@ -9,13 +9,13 @@ interface SignUpData {
   type: string;
 }
 
-export const signupMutate = (setError: any) => {
+export const signupMutation = (setError: any) => {
   const router = useRouter();
 
   return useMutation({
     mutationKey: ['/users'],
-    mutationFn: (data: SignUpData) =>
-      signupApi(data.email, data.password, data.type),
+    mutationFn: ({ email, password, type }: SignUpData) =>
+      signupApi(email, password, type),
 
     onSuccess: () => router.push('/login'),
     onError: (error: AxiosError) => {
@@ -26,6 +26,11 @@ export const signupMutate = (setError: any) => {
             type: 'manual',
             message: '이미 존재하는 이메일 입니다.',
           });
+          return;
+
+        default:
+          console.log(error);
+          return;
       }
     },
   });

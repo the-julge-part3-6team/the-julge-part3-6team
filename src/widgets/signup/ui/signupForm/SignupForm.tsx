@@ -2,7 +2,7 @@ import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import * as S from './SignupForm.styled';
 import { TypeSelectBtn } from '@/components/auth';
 import { useSignupState } from '../../model/useSignupValidate';
-import { signupMutate } from '../../model/signupMutate';
+import { signupMutation } from '../../model/signupMutation';
 
 export const SignupForm = () => {
   const {
@@ -15,7 +15,7 @@ export const SignupForm = () => {
     handleSubmit,
   } = useSignupState();
 
-  const { mutate } = signupMutate(setError);
+  const { mutate } = signupMutation(setError);
 
   return (
     <S.SignupFormLayout onSubmit={handleSubmit(data => mutate(data))}>

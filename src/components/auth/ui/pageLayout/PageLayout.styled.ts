@@ -8,7 +8,7 @@ export const PageLayout = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 744px) {
+  @media (max-width: '744px') {
     padding: 0px 20px;
   }
 `;

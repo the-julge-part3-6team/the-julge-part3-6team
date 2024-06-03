@@ -140,7 +140,6 @@ export const ResetButton = styled.button`
   color: ${theme.Colors.Red[40]};
   font-size: 16px;
   font-weight: 700;
-}
 `;
 
 export const ApplyButton = styled.button`
