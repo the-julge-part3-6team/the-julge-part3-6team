@@ -1,11 +1,5 @@
 import { useForm } from 'react-hook-form';
-
-enum SignupFormState {
-  email = 'email',
-  password = 'password',
-  confirmPassword = 'confirmPassword',
-  type = 'type',
-}
+import { SignupFormState } from '../constant/signupFormState';
 
 export const useSignupState = () => {
   const {
@@ -34,6 +28,10 @@ export const useSignupState = () => {
   const passwordValidation = {
     ...register(SignupFormState.password, {
       required: { value: true, message: '비밀번호를 입력해주세요.' },
+      pattern: {
+        value: /^[a-zA-Z0-9]{8,}$/,
+        message: '8자 이상이어야합니다.',
+      },
     }),
   };
 
