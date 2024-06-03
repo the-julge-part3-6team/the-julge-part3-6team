@@ -18,6 +18,7 @@ export const signupMutation = (setError: any) => {
       signupApi(email, password, type),
 
     onSuccess: () => router.push('/login'),
+
     onError: (error: AxiosError) => {
       const statusCode = error.response?.status;
       switch (statusCode) {
