@@ -7,9 +7,10 @@ export interface InputProps {
   label: string;
   type: "email" | "password" | "confirmPassword" | "hourlyWage" | "dropdown"; 
   options?: string[];
+  width?: string; 
 }
 
-const Input = ({ label, type, options = [] }: InputProps) => {
+const Input = ({ label, type, options = [], width }: InputProps) => {
   const { register, formState: { errors } } = useFormContext();
 
   const renderInput = () => {
@@ -43,7 +44,7 @@ const Input = ({ label, type, options = [] }: InputProps) => {
   return (
     <S.InputContainer>
       <S.InputLabel>{label}</S.InputLabel>
-      <S.InputFrame hasError={!!errors[type]}>
+      <S.InputFrame hasError={!!errors[type]} width={width}>
         {renderInput()}
       </S.InputFrame>
       {errors[type] && <S.ErrorMessage>{errors[type].message}</S.ErrorMessage>}
