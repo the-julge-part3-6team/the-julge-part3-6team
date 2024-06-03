@@ -22,8 +22,11 @@ export const SignupForm = () => {
       <input type="text" {...emailValidation} />
       <input type="password" {...passwordValidation} />
       <input type="password" {...confirmPasswordValidation} />
-      회원 유형
-      <TypeSelectBtn typeValidation={typeValidation} />
+      <S.TypeSelectContainer>
+        회원 유형
+        <TypeSelectBtn typeValidation={typeValidation} />
+      </S.TypeSelectContainer>
+
       <RedButton text="가입하기" onClick={handleSubmit(data => mutate(data))} />
     </S.SignupFormLayout>
   );
