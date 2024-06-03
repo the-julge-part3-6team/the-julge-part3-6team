@@ -76,32 +76,24 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   margin-left: -20px;
 
   &::-webkit-scrollbar {
-    width: 4px;
-    height: 63px;
-    background: transparent;
-    right: 4px; /* 속성 안먹힘 */
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #7d7986;
+    background-clip: padding-box;
+    border-radius: 40px;
+    border: 2px solid transparent;
+    padding: 10px;
+    cursor: pointer;
   }
 
   &::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  &::-webkit-scrollbar-thumb {
-    background: #7d7986;
-    border-radius: 40px 0 0 40px;
-    left: 4px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-
   &:hover::-webkit-scrollbar-thumb {
     opacity: 1;
-  }
-
-  &::-webkit-scrollbar-thumb:vertical {
-    height: 63px;
   }
 `;
 
