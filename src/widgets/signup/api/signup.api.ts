@@ -6,9 +6,5 @@ export const signupApi = async (
   password: string,
   type: string,
 ) => {
-  return await apiInstance.post('/users', {
-    email: email,
-    password: password,
-    type: type,
-  });
+  return await apiInstance.post('/users', { email, password, type });
 };
