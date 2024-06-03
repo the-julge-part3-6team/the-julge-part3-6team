@@ -7,11 +7,11 @@ interface PageItemProps {
   handlePageChange: (pageNumber: number) => void;
 }
 
-const PageItem: React.FC<PageItemProps> = ({
+const PageItem = ({
   pageNumber,
   currentPage,
   handlePageChange,
-}) => {
+}: PageItemProps) => {
   const PageLinkComponent =
     pageNumber === currentPage ? ActivePageLink : PageLink;
 

@@ -1,94 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './Input.styled';
 import Dropdown from '../Dropdown/Dropdown';
+import { useFormContext } from 'react-hook-form';
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement | HTMLSelectElement> {
+export interface InputProps {
   label: string;
-  type: string;
+  type: "email" | "password" | "confirmPassword" | "hourlyWage" | "dropdown"; 
   options?: string[];
 }
 
-const Input: React.FC<InputProps> = ({
-  label,
-  type,
-  options = [],
-  ...props
-}) => {
-  const [error, setError] = useState<string | null>(null);
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
-
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePasswordLength = (password: string): boolean => {
-    return password.length >= 8;
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setPassword(value);
-    handleInputChange(event);
-  };
-
-  const handleConfirmPasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const { value } = event.target;
-    setConfirmPassword(value);
-    handleInputChange(event);
-  };
-
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const { value } = event.target;
-    if (value === '') {
-      setError(null);
-      return;
-    }
-
-    interface Config {
-      [key: string]: {
-        validate: boolean;
-        errMsg: string;
-      };
-    }
-    const config: Config = {
-      email: {
-        validate: !validateEmail(value),
-        errMsg: '유효한 이메일 주소를 입력해 주세요.',
-      },
-      password: {
-        validate: !validatePasswordLength(value),
-        errMsg: '8자 이상 입력해 주세요.',
-      },
-      confirmPassword: {
-        validate: value !== password,
-        errMsg: '비밀번호가 일치하지 않습니다.',
-      },
-    };
-
-    if (config[type]['validate']) {
-      setError(config[type]['errMsg']);
-    } else {
-      setError(null);
-    }
-  };
+const Input = ({ label, type, options = [] }: InputProps) => {
+  const { register, formState: { errors } } = useFormContext();
 
   const renderInput = () => {
     if (type === 'hourlyWage') {
       return (
         <>
           <S.InputField
-            {...props}
+            {...register('hourlyWage', { required: true })}
             type="number"
-            onChange={
-              handleInputChange as React.ChangeEventHandler<HTMLInputElement>
-            }
             placeholder="입력"
           />
           <S.UnitLabel>원</S.UnitLabel>
@@ -103,13 +33,8 @@ const Input: React.FC<InputProps> = ({
       type === 'confirmPassword' ? '비밀번호 확인' : '입력';
     return (
       <S.InputField
-        {...props}
+        {...register(type, { required: true })}
         type={type === 'confirmPassword' ? 'password' : type}
-        onChange={
-          type === 'confirmPassword'
-            ? handleConfirmPasswordChange
-            : handlePasswordChange
-        }
         placeholder={placeholderText}
       />
     );
@@ -118,11 +43,10 @@ const Input: React.FC<InputProps> = ({
   return (
     <S.InputContainer>
       <S.InputLabel>{label}</S.InputLabel>
-      {type !== 'dropdown' && (
-        <S.InputFrame hasError={!!error}>{renderInput()}</S.InputFrame>
-      )}
-      {type === 'dropdown' && renderInput()}
-      {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
+      <S.InputFrame hasError={!!errors[type]}>
+        {renderInput()}
+      </S.InputFrame>
+      {errors[type] && <S.ErrorMessage>{errors[type].message}</S.ErrorMessage>}
     </S.InputContainer>
   );
 };

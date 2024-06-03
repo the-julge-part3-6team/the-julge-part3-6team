@@ -7,7 +7,7 @@ interface DropdownProps {
   options: string[];
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ options }) => {
+const Dropdown = ({ options }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
