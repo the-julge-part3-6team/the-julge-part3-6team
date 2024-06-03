@@ -5,13 +5,16 @@ export const Title = styled.h1`
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 0.56px;
+  margin-bottom: 23px;
 `;
 
 export const MyStoreContentWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-  padding: 60px 237px;
-  gap: 23px;
+  padding: 60px 0;
+  width: 964px;
+  margin: 0 auto;
+
+  @media (max-width: 1440px) {
+    width: auto;
+    padding: 60px 20px;
+  }
 `;

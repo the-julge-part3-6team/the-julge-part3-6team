@@ -8,7 +8,6 @@ export const Description = styled.p`
 `;
 
 export const MyStoreContent = styled.div`
-  width: 965px;
   border-radius: 12px;
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
   padding: 60px 24px;
@@ -21,6 +20,10 @@ export const MyStoreContent = styled.div`
 
 export const ButtonWrap = styled.div`
   width: 346px;
+
+  @media (max-width: 744px) {
+    width: 150px;
+  }
 `;
 
 // export const Title = styled.h1`
