@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const apiInstance = axios.create({
+export const apiInstance = axios.create({
   baseURL: 'https://bootcamp-api.codeit.kr/api/5-6/the-julge',
-  withCredentials: true,
 });
 
 apiInstance.interceptors.request.use(configOrigin => {
@@ -18,12 +17,12 @@ apiInstance.interceptors.request.use(configOrigin => {
   return config;
 });
 
-apiInstance.interceptors.response.use(
-  response => {
-    console.debug(response);
-    return response;
-  },
-  error => {
-    console.error(error);
-  },
-);
+// apiInstance.interceptors.response.use(
+//   response => {
+//     console.debug(response);
+//     return response;
+//   },
+//   error => {
+//     console.error(error);
+//   },
+// );

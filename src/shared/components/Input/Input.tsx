@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import * as S from './Input.styled';
 import Dropdown from '../Dropdown/Dropdown';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLSelectElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement | HTMLSelectElement> {
   label: string;
   type: string;
   options?: string[];
 }
 
-const Input: React.FC<InputProps> = ({ label, type, options = [], ...props }) => {
+const Input: React.FC<InputProps> = ({
+  label,
+  type,
+  options = [],
+  ...props
+}) => {
   const [error, setError] = useState<string | null>(null);
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -36,13 +42,15 @@ const Input: React.FC<InputProps> = ({ label, type, options = [], ...props }) =>
     handleInputChange(event);
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { value } = event.target;
     if (value === '') {
       setError(null);
       return;
     }
-    
+
     if (type === 'email') {
       if (!validateEmail(value)) {
         setError('유효한 이메일 주소를 입력해 주세요.');
@@ -71,7 +79,9 @@ const Input: React.FC<InputProps> = ({ label, type, options = [], ...props }) =>
           <S.InputField
             {...props}
             type="number"
-            onChange={handleInputChange as React.ChangeEventHandler<HTMLInputElement>}
+            onChange={
+              handleInputChange as React.ChangeEventHandler<HTMLInputElement>
+            }
             placeholder="입력"
           />
           <S.UnitLabel>원</S.UnitLabel>
@@ -79,14 +89,11 @@ const Input: React.FC<InputProps> = ({ label, type, options = [], ...props }) =>
       );
     }
     if (type === 'dropdown') {
-      return (
-        <Dropdown
-          options={options} 
-        />
-      );
+      return <Dropdown options={options} />;
     }
 
-    const placeholderText = type === 'confirmPassword' ? '비밀번호 확인' : '입력';
+    const placeholderText =
+      type === 'confirmPassword' ? '비밀번호 확인' : '입력';
     return (
       <S.InputField
         {...props}
@@ -105,9 +112,7 @@ const Input: React.FC<InputProps> = ({ label, type, options = [], ...props }) =>
     <S.InputContainer>
       <S.InputLabel>{label}</S.InputLabel>
       {type !== 'dropdown' && (
-        <S.InputFrame hasError={!!error}>
-          {renderInput()}
-        </S.InputFrame>
+        <S.InputFrame hasError={!!error}>{renderInput()}</S.InputFrame>
       )}
       {type === 'dropdown' && renderInput()}
       {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
