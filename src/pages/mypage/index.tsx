@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import * as S from './index.styled';
 import { AddProfile } from '@/widgets/mypage/ul/addProfile/AddProfile';
 import Header from '@/shared/components/Header/Header';

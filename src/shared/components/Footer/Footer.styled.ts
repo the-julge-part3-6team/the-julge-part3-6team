@@ -50,7 +50,7 @@ export const FooterContainer = styled.div`
   }
 
   @media (max-width: 1440px) {
-    width: 744px;
+    width: auto;
   }
 
   @media (max-width: 744px) {
