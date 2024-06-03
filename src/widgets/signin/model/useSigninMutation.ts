@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { signinApi } from '../api/signin.api';
 import { AxiosError } from 'axios';
+import { useUserData } from '@/shared/store/useUserData';
 
 interface SigninData {
   email: string;
@@ -11,6 +12,7 @@ interface SigninData {
 
 export const useSigninMutation = (setError: any) => {
   const router = useRouter();
+  const { setUserId, setType } = useUserData();
 
   return useMutation({
     mutationKey: ['/token'],
@@ -19,8 +21,13 @@ export const useSigninMutation = (setError: any) => {
 
     onSuccess: data => {
       const token = data.data.item.token;
+      const id = data.data.item.user.item.id;
+      const type = data.data.item.user.item.type;
       document.cookie = `token=${token}`;
       //   router.push('로그인 후에 이동할 경로');
+      // id, type 저장
+      setUserId(id);
+      setType(type);
     },
 
     onError: (error: AxiosError) => {
