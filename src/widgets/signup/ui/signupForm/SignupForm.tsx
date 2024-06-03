@@ -17,6 +17,8 @@ export const SignupForm = () => {
 
   const { mutate } = signupMutation(setError);
 
+  console.log(errors);
+
   return (
     <S.SignupFormLayout onSubmit={handleSubmit(data => mutate(data))}>
       <input type="text" {...emailValidation} />
@@ -26,7 +28,6 @@ export const SignupForm = () => {
         회원 유형
         <TypeSelectBtn typeValidation={typeValidation} />
       </S.TypeSelectContainer>
-
       <RedButton text="가입하기" onClick={handleSubmit(data => mutate(data))} />
     </S.SignupFormLayout>
   );

@@ -1,8 +1,8 @@
 import { Logo } from '@/components/auth';
 import { PageLayout } from '@/components/auth';
-import SigninForm from '@/widgets/signin/ui/signinForm/SigninForm';
 import * as S from './index.styled';
 import Link from 'next/link';
+import { SigninForm } from '@/widgets/signin';
 
 const index = () => {
   return (

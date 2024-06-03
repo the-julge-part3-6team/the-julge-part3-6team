@@ -34,16 +34,9 @@ export const useSigninState = () => {
     }),
   };
 
-  const typeValidation = {
-    ...register(SignupFormState.type, {
-      required: { value: true, message: '유형을 선택해 주세요.' },
-    }),
-  };
-
   return {
     emailValidation,
     passwordValidation,
-    typeValidation,
     errors,
     handleSubmit,
     setError,

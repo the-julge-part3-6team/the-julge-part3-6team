@@ -17,7 +17,10 @@ export const signupMutation = (setError: any) => {
     mutationFn: ({ email, password, type }: SignUpData) =>
       signupApi(email, password, type),
 
-    onSuccess: () => router.push('/login'),
+    onSuccess: () => {
+      alert('가입이 완료되었습니다');
+      router.push('/signin');
+    },
 
     onError: (error: AxiosError) => {
       const statusCode = error.response?.status;
