@@ -1,14 +1,11 @@
 import { SignupForm } from '@/widgets/signup';
 import * as S from './index.styled';
-import Image from 'next/image';
-import logo from '../../../public/logo.svg';
+import Logo from '@/components/auth/ui/logo/Logo';
 
 const index = () => {
   return (
     <S.PageLayout>
-      <S.Logo>
-        <Image src={logo} alt="logo" />
-      </S.Logo>
+      <Logo />
       <SignupForm />
     </S.PageLayout>
   );

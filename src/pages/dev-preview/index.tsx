@@ -13,11 +13,12 @@ import { ITable } from '@/types/table';
 import Footer from '@/shared/components/Footer/Footer';
 import NotificationModal from '@/components/notifications/ui/NotificationModal/NotificationModal';
 import { Notifications } from '@/types/notification';
-import Filter, { FilterState } from '@/components/filter/ui/Filter';
+import Filter from '@/components/filter/ui/Filter';
 import Input from '@/shared/components/Input/Input';
 import Header from '@/shared/components/Header/Header';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { useState } from 'react';
+import { FilterState } from '@/types/filterState';
 
 const handlePageChange = (page: number) => {
   console.log(page);

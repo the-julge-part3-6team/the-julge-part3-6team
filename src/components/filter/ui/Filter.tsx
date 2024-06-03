@@ -4,6 +4,7 @@ import closeImg from '@/assets/close.svg';
 import { useState } from 'react';
 import { useModal } from '@/shared/store/useModal';
 import DatePicker from 'react-datepicker';
+import { FilterState } from '@/types/filterState';
 
 export const locations: string[] = [
   '서울시 강남구',
@@ -35,12 +36,6 @@ export const locations: string[] = [
 interface Props {
   modalKey: string;
   onApply: (filters: FilterState) => void;
-}
-
-export interface FilterState {
-  startDate: Date | null;
-  price: number;
-  selectedLocations: string[];
 }
 
 const Filter = ({ modalKey, onApply }: Props) => {
