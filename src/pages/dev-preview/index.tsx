@@ -19,10 +19,39 @@ import Header from '@/shared/components/Header/Header';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { useState } from 'react';
 import { FilterState } from '@/types/filterState';
+import Post from '@/shared/components/Post/Post';
+import { PostContent } from '@/types/post';
 
 const handlePageChange = (page: number) => {
   console.log(page);
 };
+
+const postList: PostContent[] = [
+  {
+    status: 'active',
+    title: '도토리 식당',
+    date: '2023-01-02 15:00~18:00 (3시간)',
+    location: '서울시 송파구',
+    price: 15000,
+    priceChange: 100,
+  },
+  {
+    status: 'closed',
+    title: '잇타이 플러스',
+    date: '2023-01-02 15:00~18:00 (3시간)',
+    location: '수원시 팔달구',
+    price: 7000,
+    priceChange: 30,
+  },
+  {
+    status: 'expired',
+    title: '할머니 국수',
+    date: '2023-01-02 15:00~18:00 (3시간)',
+    location: '성남시 수정구',
+    price: 1500,
+    priceChange: 10,
+  },
+];
 
 const list: ITable[] = [
   { title: 'hs 과일', date: '2023-01-12', price: '15,000', status: '대기중' },
@@ -191,12 +220,21 @@ const index = () => {
         <div>
           <p>선택된 시작일: {filters.startDate?.toLocaleDateString()}</p>
           <p>
-            선택된 금액:{' '}
+            선택된 금액:
             {filters.price ? `${filters.price}원 이상` : '설정되지 않음'}
           </p>
           <p>선택된 위치: {filters.selectedLocations.join(', ')}</p>
         </div>
       )}
+      <hr />
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+        {postList.map(post => (
+          <div>
+            <Post {...post} />
+          </div>
+        ))}
+      </div>
+
       <hr />
       <Footer />
       {isToast && <Toast text="삭제 되었습니다." />}
