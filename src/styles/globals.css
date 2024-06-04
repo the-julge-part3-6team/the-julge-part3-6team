@@ -147,3 +147,8 @@ body:lang(ko) {
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 16px;
 }
+
+body {
+  width: 100vw;
+  height: 100vh;
+}

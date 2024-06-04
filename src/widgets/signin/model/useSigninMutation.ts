@@ -24,8 +24,8 @@ export const useSigninMutation = (setError: any) => {
       const id = data.data.item.user.item.id;
       const type = data.data.item.user.item.type;
       document.cookie = `token=${token}`;
-      //   router.push('로그인 후에 이동할 경로');
-      // id, type 저장
+      //  TODO: router.push('로그인 후에 이동할 경로');
+
       setUserId(id);
       setType(type);
     },
