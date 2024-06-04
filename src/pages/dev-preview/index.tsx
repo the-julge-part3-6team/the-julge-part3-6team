@@ -17,10 +17,11 @@ import Filter from '@/components/filter/ui/Filter';
 // import Input from '@/shared/components/Input/Input';
 import Header from '@/shared/components/Header/Header';
 import Pagination from '@/shared/components/Pagination/Pagination';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { FilterState } from '@/types/filterState';
 import Post from '@/shared/components/Post/Post';
 import { PostContent } from '@/types/post';
+import { Textarea } from '@/shared/components/Textarea/Textarea';
 
 const handlePageChange = (page: number) => {
   console.log(page);
@@ -112,6 +113,14 @@ const index = () => {
       setIsOpen('필터모달');
     }
   };
+
+  // textarea
+  const [value, setValue] = useState('');
+
+  const onChangeValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(e.target.value);
+  };
+  // textarea
 
   return (
     <>
@@ -281,6 +290,16 @@ const index = () => {
         currentPage={1}
         totalPages={10}
         onPageChange={handlePageChange}
+      />
+
+      <hr />
+      <Textarea
+        id="bio"
+        name="bio"
+        placeholder="입력"
+        label="소개"
+        value={value}
+        onChange={onChangeValue}
       />
       <hr />
     </>

@@ -30,7 +30,7 @@ export const InputFrame = styled.div<InputFrameProps>`
   align-items: center;
   padding: 16px 20px;
   gap: 10px;
-  width: ${props => props.width || '350px'};
+  width: 100%;
   height: 58px;
   background: ${theme.Colors.White};
   border: 1px solid ${theme.Colors.Gray[30]};
