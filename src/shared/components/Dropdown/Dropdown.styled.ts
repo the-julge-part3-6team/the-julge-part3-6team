@@ -26,7 +26,6 @@ export const InputFrame = styled.div<InputFrameProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 16px 20px;
   gap: 10px;
   width: 100%;
   height: 58px;
@@ -34,11 +33,10 @@ export const InputFrame = styled.div<InputFrameProps>`
   border: 1px solid ${theme.Colors.Gray[30]};
   border-radius: 5px;
   position: relative;
-  padding-right: 0px;
+  cursor: pointer;
 `;
 
 export const DropdownContainer = styled.div`
-  position: relative;
   width: 100%;
 `;
 
@@ -47,12 +45,12 @@ export const SelectedValue = styled.div`
   align-items: center;
   justify-content: space-between;
   white-space: nowrap;
+  padding: 16px 20px;
 `;
 
 export const DropdownArrow = styled.div<DropdownArrowProps>`
   position: absolute;
   right: 20px;
-  cursor: pointer;
 
   ${props =>
     props.isOpen &&
@@ -71,10 +69,9 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
   border-radius: 8px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
   overflow-y: auto;
-  top: calc(100% + 10px);
   left: 0;
-  margin-top: 15px;
-  margin-left: -20px;
+  top: 0;
+  transform: translateY(30%);
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -100,7 +97,6 @@ export const OptionsContainer = styled.div<OptionsContainerProps>`
 
 export const Option = styled.div`
   height: 46px;
-  padding: 0 12px;
   border-bottom: 1px solid #e5e4e7;
   text-align: center;
   cursor: pointer;
