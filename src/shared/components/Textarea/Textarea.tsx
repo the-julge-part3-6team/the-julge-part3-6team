@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import * as S from './Textarea.styled';
 
 interface props {
@@ -6,15 +6,18 @@ interface props {
   name: string;
   placeholder: string;
   label: string;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-export const Textarea = ({ id, name, placeholder, label }: props) => {
-  const [value, setValue] = useState('');
-
-  const onChangeValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
-  };
-
+export const Textarea = ({
+  id,
+  name,
+  placeholder,
+  label,
+  value,
+  onChange,
+}: props) => {
   return (
     <>
       <S.Label htmlFor={id}>{label}</S.Label>
@@ -22,7 +25,7 @@ export const Textarea = ({ id, name, placeholder, label }: props) => {
         id={id}
         name={name}
         placeholder={placeholder}
-        onChange={onChangeValue}
+        onChange={onChange}
         value={value}
       />
     </>
