@@ -62,6 +62,7 @@ const Input: React.FC<InputProps> = ({
         />
       )}
       {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
+
     </S.InputContainer>
   );
 };

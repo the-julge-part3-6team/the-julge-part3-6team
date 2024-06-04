@@ -11,7 +11,7 @@ export const InputContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  width: 350px;
+  width: 100%;
   height: 92px;
 `;
 
@@ -79,7 +79,7 @@ export const SelectField = styled.select`
 
 export const Option = styled.option`
   position: absolute;
-  width: 318px;
+  width: 100%;
   padding: 0;
   margin-top: 10px;
   z-index: 200;
