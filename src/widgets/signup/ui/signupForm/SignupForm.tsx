@@ -3,6 +3,7 @@ import * as S from './SignupForm.styled';
 import { TypeSelectBtn } from '@/components/auth';
 import { useSignupState } from '../../model/useSignupValidate';
 import { signupMutation } from '../../model/signupMutation';
+import Input from '@/shared/components/Input/Input';
 
 export const SignupForm = () => {
   const {
@@ -21,9 +22,31 @@ export const SignupForm = () => {
 
   return (
     <S.SignupFormLayout onSubmit={handleSubmit(data => mutate(data))}>
-      <input type="text" {...emailValidation} />
-      <input type="password" {...passwordValidation} />
-      <input type="password" {...confirmPasswordValidation} />
+      <Input
+        inputType="text"
+        type="basic"
+        label="이메일"
+        register={emailValidation}
+        error={errors.email?.message}
+        placeholder="이메일을 입력해주세요."
+      />
+      <Input
+        inputType="password"
+        type="basic"
+        label="비밀번호"
+        register={passwordValidation}
+        error={errors.password?.message}
+        placeholder="비밀번호를 입력해주세요."
+      />
+      <Input
+        inputType="password"
+        type="basic"
+        label="비밀번호 확인"
+        register={confirmPasswordValidation}
+        error={errors.confirmPassword?.message}
+        placeholder="비밀번호를 다시 입력해주세요."
+      />
+
       <S.TypeSelectContainer>
         회원 유형
         <TypeSelectBtn typeValidation={typeValidation} />

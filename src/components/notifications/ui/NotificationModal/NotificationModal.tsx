@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from './NotificationModal.styled';
 import NotificationItem from './NotificationItem/NotificationItem';
 import { useModal } from '@/shared/store/useModal';
