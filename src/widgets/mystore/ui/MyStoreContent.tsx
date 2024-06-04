@@ -4,13 +4,19 @@ import { useQuery } from '@tanstack/react-query';
 import { useUserData } from '@/shared/store/useUserData';
 import { apiInstance } from '@/shared/utils/axios';
 import { useUserQuery } from '../model/useUserData';
+import { useRouter } from 'next/router';
 
 const MyStoreContent = () => {
+  const router = useRouter();
+
   return (
     <S.MyStoreContent>
       <S.Description>내 가게를 소개하고 공고도 등록해 보세요.</S.Description>
       <S.ButtonWrap>
-        <RedButton text="가게 등록하기" onClick={() => {}} />
+        <RedButton
+          text="가게 등록하기"
+          onClick={() => router.push('/mystore/create')}
+        />
       </S.ButtonWrap>
     </S.MyStoreContent>
   );

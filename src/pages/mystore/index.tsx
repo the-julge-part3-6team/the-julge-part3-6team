@@ -10,10 +10,12 @@ const index = () => {
   return (
     <>
       <Header />
-      <S.MyStoreContentWrap>
-        <S.Title>내 가게</S.Title>
-        {content}
-      </S.MyStoreContentWrap>
+      <S.Body>
+        <S.MyStoreContentWrap>
+          <S.Title>내 가게</S.Title>
+          {content}
+        </S.MyStoreContentWrap>
+      </S.Body>
     </>
   );
 };
