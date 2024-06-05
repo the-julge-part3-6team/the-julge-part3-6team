@@ -22,7 +22,7 @@ export const PostImage = styled.div<PostContainerProps>`
       filter: brightness(0.3);
     `}
 
-  @media (max-width: 768px) {
+  @media (max-width: 744px) {
     height: 100px;
   }
 `;
@@ -38,7 +38,7 @@ export const PostStatusLabel = styled.div`
   font-weight: 700;
   letter-spacing: 0.56px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 744px) {
     font-size: 20px;
   }
 `;

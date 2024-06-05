@@ -18,17 +18,19 @@ export const PostInform = styled.div<PostContainerProps>`
       color: ${theme.Colors.Gray[30]};
     `}
 
-  @media (max-width: 768px) {
+  @media (max-width: 744px) {
     font-size: 12px;
   }
 `;
 
 export const PostInformImage = styled.div`
+  display: flex;
+  align-item: center;
   img {
     width: 24px;
     height: 24px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 744px) {
       width: 16px;
       height: 16px;
     }
