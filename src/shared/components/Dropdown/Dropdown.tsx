@@ -6,9 +6,10 @@ import TriangleIcon from '@/assets/triangle.svg';
 interface DropdownProps {
   options: string[];
   register?: any;
+  onClick?: (option: string) => void;
 }
 
-const Dropdown = ({ options }: DropdownProps) => {
+const Dropdown = ({ options, onClick }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -45,7 +46,10 @@ const Dropdown = ({ options }: DropdownProps) => {
               {options.map(option => (
                 <S.Option
                   key={option}
-                  onClick={() => handleOptionSelect(option)}
+                  onClick={() => {
+                    handleOptionSelect(option);
+                    onClick && onClick(option);
+                  }}
                 >
                   {option}
                 </S.Option>

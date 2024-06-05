@@ -4,7 +4,8 @@ import Dropdown from '../Dropdown/Dropdown';
 
 interface InputProps {
   id?: string | undefined;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (option: string) => void;
   label: string;
   options?: string[];
   register?: any;
@@ -52,9 +53,13 @@ const inputComponents = {
     </S.InputFrame>
   ),
 
-  dropdown: ({ options }: { options?: string[] }) => (
-    <Dropdown options={options || []} />
-  ),
+  dropdown: ({
+    options,
+    onClick,
+  }: {
+    options?: string[];
+    onClick?: (option: string) => void;
+  }) => <Dropdown options={options || []} onClick={onClick} />,
 };
 
 const Input = ({
@@ -64,6 +69,7 @@ const Input = ({
   register,
   error,
   placeholder,
+  onClick,
   type,
   inputType,
   options = [],
@@ -81,6 +87,7 @@ const Input = ({
           inputType={inputType}
           id={id || ''}
           onChange={onChange}
+          onClick={onClick}
         />
       )}
       {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
