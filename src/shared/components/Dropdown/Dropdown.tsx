@@ -34,7 +34,6 @@ const Dropdown = ({ options, register }: DropdownProps) => {
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
-    console.log(selectedOption);
   };
 
   return (
@@ -64,6 +63,7 @@ const Dropdown = ({ options, register }: DropdownProps) => {
                 {...register}
                 type="text"
                 value={selectedOption || ''}
+                id="asd"
               />
             </S.DropdownArrow>
           </S.SelectedValue>

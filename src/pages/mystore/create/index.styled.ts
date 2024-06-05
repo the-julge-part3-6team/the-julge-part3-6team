@@ -21,6 +21,16 @@ export const MyStoreContentWrap = styled.div`
 
 export const Body = styled.div`
   width: 100%;
-  height: calc(100vh - 72px);
   background: var(--The-julge-gray-05, #fafafa);
+  padding-bottom: 60px;
+`;
+
+export const ButtonCotainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const ButtonWrap = styled.div`
+  width: 336px;
 `;

@@ -33,9 +33,7 @@ export const useUserUpdateForm = () => {
   const locationValidation = {
     ...register(userUpdateForm.address, {
       required: { value: true, message: '위치를 선택해 주세요.' },
-      validate: {
-        validLocation: value => locations.includes(value),
-      },
+      validate: value => locations.includes(value),
     }),
   };
 

@@ -7,22 +7,24 @@ export const apiInstance = axios.create({
 apiInstance.interceptors.request.use(configOrigin => {
   const config = configOrigin;
   if (typeof window !== 'undefined') {
-    const accessToken = localStorage.getItem('access_token');
-
-    if (config.headers && accessToken !== null) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+    const cookies = document.cookie;
+    const [_, token] = cookies.split('=');
+    if (config.headers && token !== undefined) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    if (localStorage.getItem('hasImage')) {
+      config.headers.Authorization = null;
+      localStorage.removeItem('hasImage');
     }
   }
 
   return config;
 });
 
-// apiInstance.interceptors.response.use(
-//   response => {
-//     console.debug(response);
-//     return response;
-//   },
-//   error => {
-//     console.error(error);
-//   },
-// );
+// export const awsApiInstance = axios.create();
+
+// awsApiInstance.interceptors.request.use(config => {
+//   if (typeof window === 'undefined') return config;
+//   config.headers.Authorization = null;
+//   return config;
+// });
