@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import * as S from './index.styled';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
@@ -21,8 +21,6 @@ const CreateForm = () => {
   const onChangeValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
-
-  console.log();
 
   return (
     <>
@@ -62,6 +60,8 @@ const CreateForm = () => {
                     type={'dropdown'}
                     inputType="text"
                     options={locations}
+                    register={locationValidation}
+                    error={errors.address?.message}
                   />
                 </li>
 
