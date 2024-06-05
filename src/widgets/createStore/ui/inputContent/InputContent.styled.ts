@@ -5,8 +5,4 @@ export const ContentLayout = styled.div`
   grid-template-columns: repeat(2, 1fr);
   column-gap: 20px;
   row-gap: 24px;
-
-  & div {
-    width: 100%;
-  }
 `;

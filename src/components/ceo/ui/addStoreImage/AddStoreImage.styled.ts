@@ -6,7 +6,7 @@ export const AddImageLayout = styled.div`
   flex-direction: column;
   gap: 8px;
   align-items: flex-start;
-  margin-top: 18px;
+  margin: 18px 0px 24px;
 `;
 
 export const Label = styled.p`
@@ -18,7 +18,7 @@ export const Label = styled.p`
 
 export const AddProfileContainer = styled.div`
   position: relative;
-  width: 483.002px;
+  width: 50%;
   height: 276px;
   display: flex;
   flex-direction: column;
@@ -33,6 +33,7 @@ export const AddProfileContainer = styled.div`
   cursor: pointer;
 
   label {
+    z-index: 1;
     position: absolute;
     width: 100%;
     height: 100%;
