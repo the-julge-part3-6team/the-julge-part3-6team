@@ -14,7 +14,6 @@ import Footer from '@/shared/components/Footer/Footer';
 import NotificationModal from '@/components/notifications/ui/NotificationModal/NotificationModal';
 import { Notifications } from '@/types/notification';
 import Filter from '@/components/filter/ui/Filter';
-// import Input from '@/shared/components/Input/Input';
 import Header from '@/shared/components/Header/Header';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { ChangeEvent, useState } from 'react';
@@ -248,50 +247,11 @@ const index = () => {
       <Footer />
       {isToast && <Toast text="삭제 되었습니다." />}
       <hr />
-      {/* <Input label={'이메일'} type={'email'} />
-      <hr />
-      <Input label={'비밀번호'} type={'password'} />
-      <hr />
-      <Input label={'시급*'} type={'hourlyWage'} />
-      <hr />
-      <Input
-        label={'분류*'}
-        type={'dropdown'}
-        options={[
-          '서울시 종로구',
-          '서울시 중구',
-          '서울시 용산구',
-          '서울시 성동구',
-          '서울시 광진구',
-          '서울시 동대문구',
-          '서울시 중랑구',
-          '서울시 성북구',
-          '서울시 강북구',
-          '서울시 도봉구',
-          '서울시 노원구',
-          '서울시 은평구',
-          '서울시 서대문구',
-          '서울시 마포구',
-          '서울시 양천구',
-          '서울시 강서구',
-          '서울시 구로구',
-          '서울시 금천구',
-          '서울시 영등포구',
-          '서울시 동작구',
-          '서울시 관악구',
-          '서울시 서초구',
-          '서울시 강남구',
-          '서울시 송파구',
-          '서울시 강동구',
-        ]}
-      /> */}
-      <hr />
       <Pagination
         currentPage={1}
         totalPages={10}
         onPageChange={handlePageChange}
       />
-
       <hr />
       <Textarea
         id="bio"
