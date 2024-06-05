@@ -59,12 +59,6 @@ const Dropdown = ({ options }: DropdownProps) => {
             {selectedOption ? selectedOption : '선택'}
             <S.DropdownArrow isOpen={isOpen} className={isOpen ? 'open' : ''}>
               <Image src={TriangleIcon} alt="dropdown" />
-              <S.HiddenInput
-                {...register}
-                type="text"
-                value={selectedOption || ''}
-                id="asd"
-              />
             </S.DropdownArrow>
           </S.SelectedValue>
         </S.DropdownContainer>
