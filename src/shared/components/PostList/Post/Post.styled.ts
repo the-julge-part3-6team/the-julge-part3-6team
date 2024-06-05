@@ -32,7 +32,7 @@ export const PostTitle = styled.h3`
   font-size: 20px;
   font-weight: 700;
 
-  @media (max-width: 768px) {
+  @media (max-width: 744px) {
     font-size: 16px;
   }
 `;

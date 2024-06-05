@@ -10,7 +10,7 @@ const NotificationItem = ({ title, status, timeAgo, date }: Notifications) => {
     <S.NotificationItemContainer>
       <S.Dot status={status} />
       <S.NotificationItemContent>
-        {title}({date}) 공고 지원이{' '}
+        {title}({date}) 공고 지원이&nbsp;
         <S.NotificationItemStatusText status={status}>
           {statusText}
         </S.NotificationItemStatusText>

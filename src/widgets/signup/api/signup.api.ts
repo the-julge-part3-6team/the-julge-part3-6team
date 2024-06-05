@@ -1,5 +1,4 @@
 import { apiInstance } from '@/shared/utils/axios';
-import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const signupApi = async (
   email: string,
