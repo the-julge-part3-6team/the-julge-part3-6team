@@ -6,6 +6,7 @@ import { useUserUpdateForm } from '@/widgets/mypage/model/useUserValidateion';
 import Input from '@/shared/components/Input/Input';
 import { locations } from '@/components/filter/constant/locations';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
+import { useProfileData } from '@/shared/store/useProfileData';
 
 const CreateForm = () => {
   const {
@@ -16,12 +17,21 @@ const CreateForm = () => {
     setError,
   } = useUserUpdateForm();
 
-  const [value, setValue] = useState('');
+  const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
+    useProfileData();
 
-  const onChangeValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
+  const onChangeValue = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const action: { [key: string]: Function } = {
+      name: setName,
+      phone: setPhone,
+      address: setAddress,
+      bio: setBio,
+    };
+    const zustandAction = action[e.target.id];
+    zustandAction(e.target.value);
   };
-
   return (
     <>
       <Header />
@@ -37,20 +47,24 @@ const CreateForm = () => {
               <S.CreateFormUl>
                 <li>
                   <Input
+                    id={'name'}
                     placeholder="입력"
                     label={'이름*'}
                     type={'basic'}
                     inputType="text"
+                    onChange={onChangeValue}
                   />
                 </li>
                 <li>
                   <Input
+                    id="phone"
                     placeholder="입력"
                     label={'연락처*'}
                     type={'basic'}
                     inputType="text"
                     register={PhoneValidation}
                     error={errors.phone?.message}
+                    onChange={onChangeValue}
                   />
                 </li>
                 <li>
@@ -60,6 +74,7 @@ const CreateForm = () => {
                     type={'dropdown'}
                     inputType="text"
                     options={locations}
+                    onChange={onChangeValue}
                   />
                 </li>
 
@@ -69,7 +84,7 @@ const CreateForm = () => {
                     name="bio"
                     placeholder="입력"
                     label="소개"
-                    value={value}
+                    value={bio}
                     onChange={onChangeValue}
                   />
                 </li>

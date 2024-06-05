@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import * as S from './Input.styled';
 import Dropdown from '../Dropdown/Dropdown';
 
 interface InputProps {
+  id?: string | undefined;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   label: string;
   options?: string[];
   register?: any;
@@ -13,9 +15,18 @@ interface InputProps {
 }
 
 const inputComponents = {
-  hourlyWage: ({ inputType }: { inputType: string }) => (
+  hourlyWage: ({
+    inputType,
+    id,
+    onChange,
+  }: Pick<InputProps, 'inputType' | 'id' | 'onChange'>) => (
     <S.InputFrame>
-      <S.InputField type={inputType} placeholder="입력" />
+      <S.InputField
+        type={inputType}
+        placeholder="입력"
+        id={id}
+        onChange={onChange}
+      />
       <S.UnitLabel>원</S.UnitLabel>
     </S.InputFrame>
   ),
@@ -24,13 +35,20 @@ const inputComponents = {
     placeholder,
     register,
     inputType,
-  }: {
-    placeholder: string;
-    register?: any;
-    inputType: string;
-  }) => (
+    onChange,
+    id,
+  }: Pick<
+    InputProps,
+    'placeholder' | 'register' | 'inputType' | 'onChange' | 'id'
+  >) => (
     <S.InputFrame>
-      <S.InputField type={inputType} placeholder={placeholder} {...register} />
+      <S.InputField
+        id={id}
+        type={inputType}
+        placeholder={placeholder}
+        onChange={onChange}
+        {...register}
+      />
     </S.InputFrame>
   ),
 
@@ -39,7 +57,9 @@ const inputComponents = {
   ),
 };
 
-const Input: React.FC<InputProps> = ({
+const Input = ({
+  id,
+  onChange,
   label,
   register,
   error,
@@ -47,7 +67,7 @@ const Input: React.FC<InputProps> = ({
   type,
   inputType,
   options = [],
-}) => {
+}: InputProps) => {
   const InputComponent = inputComponents[type];
 
   return (
@@ -59,6 +79,8 @@ const Input: React.FC<InputProps> = ({
           register={register}
           options={options}
           inputType={inputType}
+          id={id || ''}
+          onChange={onChange}
         />
       )}
       {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
