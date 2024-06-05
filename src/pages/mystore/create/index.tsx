@@ -5,6 +5,7 @@ import { AddStoreImage } from '@/components/ceo/ui/addStoreImage/AddStoreImage';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
+import { mutateAddStore } from './model/mutateAddStore';
 
 const index = () => {
   const {
@@ -15,7 +16,10 @@ const index = () => {
     pay,
     storeImage,
     storeDescription,
+    setStoreDescription,
   } = useAddStoreState();
+
+  const { mutate } = mutateAddStore();
 
   return (
     <>
@@ -28,8 +32,8 @@ const index = () => {
           <Textarea
             placeholder="입력"
             name="test"
-            onChange={e => console.log(e.target.value)}
-            value=""
+            onChange={e => setStoreDescription(e.target.value)}
+            value={storeDescription}
             label="가게 설명"
             id="1"
           />
@@ -40,16 +44,14 @@ const index = () => {
             <RedButton
               text="등록하기"
               onClick={() =>
-                console.log({
-                  store: {
-                    storeName,
-                    storeType,
-                    storeAddress,
-                    storeAddressDetail,
-                    pay,
-                    storeImage,
-                    storeDescription,
-                  },
+                mutate({
+                  name: storeName,
+                  category: storeType,
+                  address1: storeAddress,
+                  address2: storeAddressDetail,
+                  description: storeDescription,
+                  imageUrl: storeImage,
+                  originalHourlyPay: Number(pay),
                 })
               }
             />
