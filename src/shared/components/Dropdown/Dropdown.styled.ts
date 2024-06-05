@@ -113,12 +113,3 @@ export const UnitLabel = styled.span`
   line-height: 26px;
   color: ${theme.Colors.Black};
 `;
-
-export const HiddenInput = styled.input`
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-`;

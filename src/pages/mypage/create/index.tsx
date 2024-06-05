@@ -60,8 +60,6 @@ const CreateForm = () => {
                     type={'dropdown'}
                     inputType="text"
                     options={locations}
-                    register={locationValidation}
-                    error={errors.address?.message}
                   />
                 </li>
 
