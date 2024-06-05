@@ -6,6 +6,9 @@ import { useModal } from '@/shared/store/useModal';
 import DatePicker from 'react-datepicker';
 import { FilterState } from '@/types/filterState';
 import { locations } from '../constant/locations';
+import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
+import RedButton from '@/shared/components/Button/RedButton/RedButton';
+import Input from '@/shared/components/Input/Input';
 
 interface Props {
   modalKey: string;
@@ -17,16 +20,16 @@ const Filter = ({ modalKey, onApply }: Props) => {
   const isSelected = key === modalKey;
 
   const [startDate, setStartDate] = useState<Date | null>(null);
-  const [price, setPrice] = useState<number>(0);
+  // const [price, setPrice] = useState<number>(0);
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
 
   const onChangeStartDate = (date: Date | null) => {
     setStartDate(date);
   };
 
-  const onChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(Number(e.target.value));
-  };
+  // const onChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setPrice(Number(e.target.value));
+  // };
 
   const toggleLocation = (location: string) => {
     setSelectedLocations(prev =>
@@ -42,14 +45,14 @@ const Filter = ({ modalKey, onApply }: Props) => {
 
   const resetFilters = () => {
     setStartDate(null);
-    setPrice(0);
+    // setPrice(0);
     setSelectedLocations([]);
   };
 
   const applyFilters = () => {
     const filters: FilterState = {
       startDate,
-      price,
+      // price,
       selectedLocations,
     };
     onApply(filters);
@@ -97,8 +100,8 @@ const Filter = ({ modalKey, onApply }: Props) => {
           </S.Section>
           <S.Divider />
           <S.Section>
-            <S.SectionTitle>금액</S.SectionTitle>
-            <S.PriceWrapper>
+            {/* <S.SectionTitle>금액</S.SectionTitle> */}
+            {/* <S.PriceWrapper>
               <S.PriceInputWrapper>
                 <S.PriceInput
                   value={price}
@@ -109,11 +112,30 @@ const Filter = ({ modalKey, onApply }: Props) => {
                 <S.Currency>원</S.Currency>
               </S.PriceInputWrapper>
               <S.PriceText>이상부터</S.PriceText>
+            </S.PriceWrapper> */}
+            <S.PriceWrapper>
+              <S.PriceInputWrapper>
+                <Input
+                  inputType="text"
+                  label="금액"
+                  type="hourlyWage"
+                  placeholder="입력"
+                />
+              </S.PriceInputWrapper>
+              <S.PriceText>이상부터</S.PriceText>
             </S.PriceWrapper>
           </S.Section>
           <S.ButtonContainer>
-            <S.ResetButton onClick={resetFilters}>초기화</S.ResetButton>
-            <S.ApplyButton onClick={applyFilters}>적용하기</S.ApplyButton>
+            <S.ResetButton>
+              <CustomButton
+                text="초기화"
+                color="#EA3C12"
+                onClick={resetFilters}
+              />
+            </S.ResetButton>
+            <S.ApplyButton>
+              <RedButton text="적용하기" onClick={applyFilters} />
+            </S.ApplyButton>
           </S.ButtonContainer>
         </S.FilterContainer>
       )}

@@ -19,9 +19,9 @@ import Header from '@/shared/components/Header/Header';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { ChangeEvent, useState } from 'react';
 import { FilterState } from '@/types/filterState';
-import Post from '@/shared/components/Post/Post';
 import { PostContent } from '@/types/post';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
+import PostList from '@/shared/components/PostList/PostList';
 
 const handlePageChange = (page: number) => {
   console.log(page);
@@ -228,22 +228,15 @@ const index = () => {
       {filters && (
         <div>
           <p>선택된 시작일: {filters.startDate?.toLocaleDateString()}</p>
-          <p>
+          {/* <p>
             선택된 금액:
             {filters.price ? `${filters.price}원 이상` : '설정되지 않음'}
-          </p>
+          </p> */}
           <p>선택된 위치: {filters.selectedLocations.join(', ')}</p>
         </div>
       )}
       <hr />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-        {postList.map(post => (
-          <div>
-            <Post {...post} />
-          </div>
-        ))}
-      </div>
-
+      <PostList postList={postList} />
       <hr />
       <Footer />
       {isToast && <Toast text="삭제 되었습니다." />}

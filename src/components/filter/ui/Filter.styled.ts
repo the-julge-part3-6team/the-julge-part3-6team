@@ -89,9 +89,11 @@ export const CustomDatePickerWrapper = styled.div`
   .react-datepicker__input-container input {
     width: 100%;
     padding: 16px 20px;
-    border-radius: 6px;
+    border-radius: 5px;
     border: 1px solid #cbc9cf;
     background: #fff;
+    height: 58px;
+    font-size: 16px;
   }
 `;
 
@@ -103,6 +105,7 @@ export const PriceWrapper = styled.div`
 
 export const PriceInputWrapper = styled.div`
   position: relative;
+  width: 175px;
 `;
 
 export const PriceInput = styled.input`
@@ -120,6 +123,7 @@ export const Currency = styled.span`
 `;
 
 export const PriceText = styled.span`
+  margin-top: 30px;
   font-size: 16px;
 `;
 
@@ -130,28 +134,9 @@ export const ButtonContainer = styled.div`
 `;
 
 export const ResetButton = styled.button`
-  display: flex;
   width: auto;
-  padding: 14px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  border: 1px solid ${theme.Colors.Red[40]};
-  color: ${theme.Colors.Red[40]};
-  font-size: 16px;
-  font-weight: 700;
 `;
 
 export const ApplyButton = styled.button`
   width: 260px;
-  padding: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  background-color: ${theme.Colors.Red[40]};
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
 `;
