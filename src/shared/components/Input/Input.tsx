@@ -34,8 +34,8 @@ const inputComponents = {
     </S.InputFrame>
   ),
 
-  dropdown: ({ options, register }: { options?: string[]; register?: any }) => (
-    <Dropdown options={options || []} register={register} />
+  dropdown: ({ options }: { options?: string[] }) => (
+    <Dropdown options={options || []} />
   ),
 };
 

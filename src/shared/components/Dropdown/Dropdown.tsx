@@ -8,7 +8,7 @@ interface DropdownProps {
   register?: any;
 }
 
-const Dropdown = ({ options, register }: DropdownProps) => {
+const Dropdown = ({ options }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -34,7 +34,6 @@ const Dropdown = ({ options, register }: DropdownProps) => {
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
-    console.log(selectedOption);
   };
 
   return (
@@ -60,11 +59,6 @@ const Dropdown = ({ options, register }: DropdownProps) => {
             {selectedOption ? selectedOption : '선택'}
             <S.DropdownArrow isOpen={isOpen} className={isOpen ? 'open' : ''}>
               <Image src={TriangleIcon} alt="dropdown" />
-              <S.HiddenInput
-                {...register}
-                type="text"
-                value={selectedOption || ''}
-              />
             </S.DropdownArrow>
           </S.SelectedValue>
         </S.DropdownContainer>
