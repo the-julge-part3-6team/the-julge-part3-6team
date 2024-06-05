@@ -34,8 +34,8 @@ const inputComponents = {
     </S.InputFrame>
   ),
 
-  dropdown: ({ options }: { options?: string[] }) => (
-    <Dropdown options={options || []} />
+  dropdown: ({ options, register }: { options?: string[]; register?: any }) => (
+    <Dropdown options={options || []} register={register} />
   ),
 };
 
@@ -62,7 +62,6 @@ const Input: React.FC<InputProps> = ({
         />
       )}
       {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
-
     </S.InputContainer>
   );
 };
