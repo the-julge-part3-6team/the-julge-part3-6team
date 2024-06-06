@@ -3,9 +3,9 @@ import { persist } from 'zustand/middleware';
 
 interface Props {
   user_id: string;
-  type: string;
+  type: 'employee' | 'employer' | '';
   setUserId: (newId: string) => void;
-  setType: (newType: string) => void;
+  setType: (newType: 'employee' | 'employer') => void;
 }
 
 export const useUserData = create(
@@ -14,7 +14,7 @@ export const useUserData = create(
       user_id: '',
       type: '',
       setUserId: (newId: string) => set({ user_id: newId }),
-      setType: (newType: string) => set({ type: newType }),
+      setType: (newType: 'employee' | 'employer') => set({ type: newType }),
     }),
     { name: 'userData' },
   ),

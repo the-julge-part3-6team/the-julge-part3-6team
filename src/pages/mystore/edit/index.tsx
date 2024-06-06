@@ -5,7 +5,11 @@ import { AddStoreImage } from '@/components/ceo/ui/addStoreImage/AddStoreImage';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
-import { mutateAddStore } from './model/mutateAddStore';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { useUserQuery } from '@/components/user/model/useUserData';
+import { useEffect } from 'react';
+import { mutateUpdateStore } from './model/mutateUpdateStore';
 
 const index = () => {
   const {
@@ -17,10 +21,33 @@ const index = () => {
     pay,
     storeImage,
     storeDescription,
+    setStoreName,
+    setStoreType,
+    setStoreAddress,
+    setStoreAddressDetail,
+    setPay,
     setStoreDescription,
+    setStoreImage,
   } = useAddStoreState();
+  const searchParams = useSearchParams();
+  const shop_id = searchParams.get('shop_id');
+  console.log(shop_id);
 
-  const { mutate } = mutateAddStore();
+  const { data, isError, isLoading } = useUserQuery();
+  const store: Store = data?.data?.item?.shop?.item;
+
+  useEffect(() => {
+    if (isLoading) return;
+    setStoreName(store.name);
+    setStoreType(store.category);
+    setStoreAddress(store.address1);
+    setStoreAddressDetail(store.address2);
+    setPay(String(store.originalHourlyPay));
+    setStoreDescription(store.description);
+    setStoreImage(store.imageUrl);
+  }, [store]);
+
+  const { mutate } = mutateUpdateStore(shop_id || '');
 
   return (
     <>
@@ -39,7 +66,6 @@ const index = () => {
             id="1"
           />
         </S.MyStoreContentWrap>
-
         <S.ButtonCotainer>
           <S.ButtonWrap>
             <RedButton
