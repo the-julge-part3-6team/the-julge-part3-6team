@@ -1,10 +1,10 @@
 import { useUserData } from '@/shared/store/useUserData';
-import { apiInstance } from '@/shared/utils/axios';
 import { getUserApi } from '@/widgets/mystore/api/getUser.api';
 import { useQuery } from '@tanstack/react-query';
 
 export const useUserQuery = () => {
   const { user_id } = useUserData();
+
   const { data, isError, isLoading } = useQuery({
     queryKey: [`/users/${user_id}`],
     queryFn: () => {

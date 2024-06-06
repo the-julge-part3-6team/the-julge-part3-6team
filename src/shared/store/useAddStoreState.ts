@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface Props {
+  id: string;
   storeName: string;
   storeType: string;
   storeAddress: string;
@@ -9,6 +10,7 @@ interface Props {
   pay: string;
   storeImage: string;
   storeDescription: string;
+  setId: (id: string) => void;
   setStoreName: (name: string) => void;
   setStoreType: (type: string) => void;
   setStoreAddress: (address: string) => void;
@@ -19,6 +21,7 @@ interface Props {
 }
 
 export const useAddStoreState = create<Props>(set => ({
+  id: '',
   storeName: '',
   storeType: '',
   storeAddress: '',
@@ -26,6 +29,7 @@ export const useAddStoreState = create<Props>(set => ({
   pay: '',
   storeImage: '',
   storeDescription: '',
+  setId: id => set({ id }),
   setStoreName: name => set({ storeName: name }),
   setStoreType: type => set({ storeType: type }),
   setStoreAddress: address => set({ storeAddress: address }),
