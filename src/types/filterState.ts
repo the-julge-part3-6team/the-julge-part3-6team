@@ -1,5 +1,5 @@
 export interface FilterState {
   startDate: Date | null;
-  price: number;
+  price: string;
   selectedLocations: string[];
 }

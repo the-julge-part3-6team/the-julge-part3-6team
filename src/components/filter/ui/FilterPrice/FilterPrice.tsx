@@ -2,10 +2,11 @@ import * as S from './FilterPrice.styled';
 import Input from '@/shared/components/Input/Input';
 
 interface Props {
-  setPrice: (price: number) => void;
+  price: string;
+  setPrice: (price: string) => void;
 }
 
-const FilterPrice = ({ setPrice }: Props) => {
+const FilterPrice = ({ price, setPrice }: Props) => {
   return (
     <S.PriceWrapper>
       <S.PriceInputWrapper>
@@ -14,7 +15,8 @@ const FilterPrice = ({ setPrice }: Props) => {
           label="금액"
           type="hourlyWage"
           placeholder="입력"
-          onChange={e => setPrice(Number(e.target.value))}
+          onChange={e => setPrice(e.target.value)}
+          value={price}
         />
       </S.PriceInputWrapper>
       <S.PriceText>이상부터</S.PriceText>
