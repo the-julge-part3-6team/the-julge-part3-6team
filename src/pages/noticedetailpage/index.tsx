@@ -2,10 +2,10 @@ import React from 'react';
 import * as S from './index.styled';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
-import PostImage from '@/shared/components/Post/PostImage/PostImage';
-import PostInform from '@/shared/components/Post/PostInform/PostInform';
-import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
-import Post from '@/shared/components/Post/Post';
+import PostImage from '@/shared/components/PostList/PostImage/PostImage';
+import PostInform from '@/shared/components/PostList/PostInform/PostInform';
+import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
+import Post from '@/shared/components/PostList/Post/Post';
 import storeImg from '@/assets/store.png';
 
 const recentPosts = [
@@ -74,13 +74,17 @@ const NoticeDetailPage = () => {
           <S.SmallText>식당</S.SmallText>
           <S.BigText>도토리식당</S.BigText>
         </S.TextWrap>
+
         <S.ContextWrap>
           <S.ImageContainer>
             <PostImage status="active" imgSrc={storeImg} />
           </S.ImageContainer>
+
           <S.TextContainer>
             <S.SmallText>시급</S.SmallText>
+            <S.PriceWrap>
             <PostPrice status="active" price={15000} priceChange={50} />
+            </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
                 status="active"
@@ -98,14 +102,22 @@ const NoticeDetailPage = () => {
             <S.CustomRedButton>신청하기</S.CustomRedButton>
           </S.TextContainer>
         </S.ContextWrap>
-        <S.DescripWrap>
+
+        <S.DescripContainer>
+          <S.SmallText isBlack>공고 설명</S.SmallText>
+          <p>기존 알바 친구가 그만둬서 새로운 친구를 구했는데, 그 사이에 하루가 비네요.</p>
+          <p>급해서 시급도 높였고 그렇게 바쁜 날이 아니라서 괜찮을거예요.</p>
+        </S.DescripContainer>
+
+        <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
-          <S.GridContainer>
+          <S.PostContainer>
             {recentPosts.map((post, index) => (
               <Post key={index} {...post} />
             ))}
-          </S.GridContainer>
-        </S.DescripWrap>
+          </S.PostContainer>
+        </S.RecentWrap>
+        
       </S.PageLayout>
       <Footer />
     </>

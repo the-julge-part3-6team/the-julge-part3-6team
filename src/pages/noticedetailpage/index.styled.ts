@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { RedButton } from '@/shared/components/Button/RedButton/redButton.styled';
+import styled from 'styled-components';
+import { RedButton } from '@/shared/components/Button/RedButton/RedButton.styled';
 
 export const PageLayout = styled.div`
   position: relative;
@@ -21,10 +21,12 @@ export const PageLayout = styled.div`
 `;
 
 export const ContextWrap = styled.div`
+  /* max-width: 963px; */
   border-radius: 12px;
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
-  padding: 60px 24px;
+  padding: 24px;
   gap: 30px;
+  margin-bottom: 24px;
   display: flex;
   height: auto;
   flex-direction: row;
@@ -36,8 +38,8 @@ export const ContextWrap = styled.div`
   }
 `;
 
-export const SmallText = styled.h4`
-  color: #ea3c12;
+export const SmallText = styled.h4<{ isBlack?: boolean }>`
+  color: ${props => (props.isBlack ? '#000' : '#ea3c12')};
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
@@ -67,24 +69,22 @@ export const ImageContainer = styled.div`
 
 export const TextContainer = styled.div`
   width: 346px;
+
+  @media (max-width: 744px) {
+    width: 100%;
+  }
+`;
+
+export const PriceWrap = styled.div`
+/* gap 왜 안먹히는지 PostPrice 보고 수정하기 */
+  display: flex;
 `;
 
 export const WidgetWrap = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 0;
-`;
-
-export const WidgetText = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
-
-  img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-  }
+  gap: 12px;
 `;
 
 export const DetailText = styled.div`
@@ -104,11 +104,34 @@ export const CustomRedButton = styled(RedButton)`
   }
 `;
 
-export const DescripWrap = styled.div`
-  margin-top: 60px;
+export const DescripContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding: 32px;
+  margin-bottom: 120px;
+  border-radius: 12px;
+  background: #f2f2f3;
+
+  ${SmallText} {
+    color: #000;
+  }
+
+  p {
+    margin-top: 32px;
+    line-height: 26px;
+
+    &:last-of-type {
+      margin-top: 0;
+    }
+  }
 `;
 
-export const GridContainer = styled.div`
+export const RecentWrap = styled.div`
+  margin: 60px 0 120px 0; 
+`;
+
+export const PostContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 14px;
