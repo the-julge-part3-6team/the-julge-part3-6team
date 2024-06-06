@@ -184,7 +184,6 @@ const index = () => {
       <Toast text="두 번째 입니다." />
       <Table list={list} />
       <Header />
-
       <hr />
       <div
         style={{
@@ -227,10 +226,10 @@ const index = () => {
       {filters && (
         <div>
           <p>선택된 시작일: {filters.startDate?.toLocaleDateString()}</p>
-          {/* <p>
+          <p>
             선택된 금액:
-            {filters.price ? `${filters.price}원 이상` : '설정되지 않음'}
-          </p> */}
+            {filters.price ? ` ${filters.price}원 이상` : ' 설정되지 않음'}
+          </p>
           <p>선택된 위치: {filters.selectedLocations.join(', ')}</p>
         </div>
       )}

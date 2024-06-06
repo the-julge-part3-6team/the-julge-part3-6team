@@ -25,7 +25,8 @@ export const PostInform = styled.div<PostContainerProps>`
 
 export const PostInformImage = styled.div`
   display: flex;
-  align-item: center;
+  align-items: center;
+
   img {
     width: 24px;
     height: 24px;
