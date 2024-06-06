@@ -10,7 +10,7 @@ interface InputProps {
   options?: string[];
   register?: any;
   error?: string | undefined;
-  value: string;
+  value?: string;
   placeholder: string;
   inputType: 'password' | 'text';
   type: 'hourlyWage' | 'basic' | 'dropdown';
@@ -96,7 +96,7 @@ const Input = ({
           id={id || ''}
           onChange={onChange}
           onClick={onClick}
-          value={value}
+          value={value || ''}
         />
       )}
       {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
