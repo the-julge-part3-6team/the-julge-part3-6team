@@ -2,10 +2,10 @@ import { create } from 'zustand';
 
 interface Props {
   startDate: Date | null;
-  price: number;
+  price: string;
   selectedLocations: string[];
   setStartDate: (date: Date | null) => void;
-  setPrice: (price: number) => void;
+  setPrice: (price: string) => void;
   toggleLocation: (location: string) => void;
   removeLocation: (location: string) => void;
   resetFilters: () => void;
@@ -13,7 +13,7 @@ interface Props {
 
 export const useFilterStore = create<Props>(set => ({
   startDate: null,
-  price: 0,
+  price: '',
   selectedLocations: [],
   setStartDate: date => set({ startDate: date }),
   setPrice: price => set({ price }),
@@ -32,7 +32,7 @@ export const useFilterStore = create<Props>(set => ({
   resetFilters: () =>
     set({
       startDate: null,
-      price: 0,
+      price: '',
       selectedLocations: [],
     }),
 }));

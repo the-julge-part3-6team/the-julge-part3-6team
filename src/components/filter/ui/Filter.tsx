@@ -51,7 +51,7 @@ const Filter = ({ modalKey, onApply }: Props) => {
           <S.SectionTitle>시작일</S.SectionTitle>
           <FilterDate startDate={startDate} setStartDate={setStartDate} />
           <S.Divider />
-          <FilterPrice setPrice={setPrice} />
+          <FilterPrice price={price} setPrice={setPrice} />
           <FilterButton
             resetFilters={resetFilters}
             applyFilters={applyFilters}
