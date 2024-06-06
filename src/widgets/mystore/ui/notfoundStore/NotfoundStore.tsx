@@ -1,12 +1,8 @@
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
-import * as S from './MyStoreContent.styled';
-import { useQuery } from '@tanstack/react-query';
-import { useUserData } from '@/shared/store/useUserData';
-import { apiInstance } from '@/shared/utils/axios';
-import { useUserQuery } from '../model/useUserData';
+import * as S from './NotfoundStore.styled';
 import { useRouter } from 'next/router';
 
-const MyStoreContent = () => {
+export const NotfoundStore = () => {
   const router = useRouter();
 
   return (
@@ -21,5 +17,3 @@ const MyStoreContent = () => {
     </S.MyStoreContent>
   );
 };
-
-export default MyStoreContent;

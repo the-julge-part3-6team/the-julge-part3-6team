@@ -29,24 +29,16 @@ export const AddStoreImage = () => {
     <S.AddImageLayout>
       <S.Label>가게 이미지</S.Label>
       <S.AddProfileContainer>
-        {storeImage ? null : (
-          <label>
-            <input
-              type="file"
-              onChange={e => e.target.files && setFile(e.target.files[0])}
-            />
-          </label>
-        )}
+        <label>
+          <input
+            type="file"
+            onChange={e => e.target.files && setFile(e.target.files[0])}
+          />
+        </label>
+
         <Image src={fiCamera} alt="카메라 아이콘" />
         <p>이미지 추가하기</p>
-        {storeImage && (
-          <Image
-            src={storeImage}
-            style={{ position: 'absolute', top: 0, left: 0 }}
-            fill
-            alt="added_image"
-          />
-        )}
+        {storeImage && <Image src={storeImage} fill alt="added_image" />}
       </S.AddProfileContainer>
     </S.AddImageLayout>
   );

@@ -2,12 +2,16 @@ import Input from '@/shared/components/Input/Input';
 import * as S from './InputContent.styled';
 import { locations } from '@/components/filter/constant/locations';
 import { storeTypes } from '@/components/filter/constant/storeTypes';
-import { ChangeEvent } from 'react';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
 import { useHandleChangeValue } from '../../model/useHandleChangeValue';
 
 export const InputContent = () => {
   const {
+    storeName,
+    storeType,
+    storeAddress,
+    storeAddressDetail,
+    pay,
     setStoreName,
     setStoreType,
     setStoreAddress,
@@ -29,6 +33,7 @@ export const InputContent = () => {
         placeholder="입력"
         inputType="text"
         type="basic"
+        value={storeName}
         onChange={e => useHandleChangeValue(e, action)}
       />
       <Input
@@ -38,6 +43,7 @@ export const InputContent = () => {
         inputType="text"
         type="dropdown"
         options={storeTypes}
+        value={storeType}
         onChange={e => useHandleChangeValue(e, action)}
         onClick={(option: string) => setStoreType(option)}
       />
@@ -47,6 +53,7 @@ export const InputContent = () => {
         placeholder="선택"
         type="dropdown"
         inputType="text"
+        value={storeAddress}
         options={locations}
         onChange={e => useHandleChangeValue(e, action)}
         onClick={(option: string) => setStoreAddress(option)}
@@ -56,6 +63,7 @@ export const InputContent = () => {
         label="상세주소*"
         placeholder="입력"
         type="basic"
+        value={storeAddressDetail}
         inputType="text"
         onChange={e => useHandleChangeValue(e, action)}
       />
@@ -65,6 +73,7 @@ export const InputContent = () => {
         placeholder="입력"
         inputType="text"
         type="hourlyWage"
+        value={pay}
         onChange={e => useHandleChangeValue(e, action)}
       />
     </S.ContentLayout>

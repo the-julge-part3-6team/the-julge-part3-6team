@@ -10,6 +10,7 @@ interface InputProps {
   options?: string[];
   register?: any;
   error?: string | undefined;
+  value?: string;
   placeholder: string;
   inputType: 'password' | 'text';
   type: 'hourlyWage' | 'basic' | 'dropdown';
@@ -20,12 +21,14 @@ const inputComponents = {
     inputType,
     id,
     onChange,
-  }: Pick<InputProps, 'inputType' | 'id' | 'onChange'>) => (
+    value,
+  }: Pick<InputProps, 'inputType' | 'id' | 'onChange' | 'value'>) => (
     <S.InputFrame>
       <S.InputField
         type={inputType}
         placeholder="입력"
         id={id}
+        value={value}
         onChange={onChange}
       />
       <S.UnitLabel>원</S.UnitLabel>
@@ -38,9 +41,10 @@ const inputComponents = {
     inputType,
     onChange,
     id,
+    value,
   }: Pick<
     InputProps,
-    'placeholder' | 'register' | 'inputType' | 'onChange' | 'id'
+    'placeholder' | 'register' | 'inputType' | 'onChange' | 'id' | 'value'
   >) => (
     <S.InputFrame>
       <S.InputField
@@ -48,6 +52,7 @@ const inputComponents = {
         type={inputType}
         placeholder={placeholder}
         onChange={onChange}
+        value={value}
         {...register}
       />
     </S.InputFrame>
@@ -56,10 +61,12 @@ const inputComponents = {
   dropdown: ({
     options,
     onClick,
+    value,
   }: {
     options?: string[];
+    value: string;
     onClick?: (option: string) => void;
-  }) => <Dropdown options={options || []} onClick={onClick} />,
+  }) => <Dropdown options={options || []} value={value} onClick={onClick} />,
 };
 
 const Input = ({
@@ -70,6 +77,7 @@ const Input = ({
   error,
   placeholder,
   onClick,
+  value,
   type,
   inputType,
   options = [],
@@ -88,6 +96,7 @@ const Input = ({
           id={id || ''}
           onChange={onChange}
           onClick={onClick}
+          value={value || ''}
         />
       )}
       {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
