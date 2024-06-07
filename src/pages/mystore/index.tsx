@@ -62,10 +62,12 @@ const index = () => {
             <S.Title>내 가게</S.Title>
             {store}
           </S.MyContentWrap>
-          <S.MyContentWrap>
-            <S.Title>등록한 공고</S.Title>
-            {application}
-          </S.MyContentWrap>
+          {storeData && (
+            <S.MyContentWrap>
+              <S.Title>등록한 공고</S.Title>
+              {application}
+            </S.MyContentWrap>
+          )}
         </S.Body>
       )}
       <Footer />
