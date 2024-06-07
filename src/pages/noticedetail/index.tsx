@@ -1,58 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as S from './index.styled';
+import { useRouter } from 'next/router';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
 import PostImage from '@/shared/components/PostList/PostImage/PostImage';
 import PostInform from '@/shared/components/PostList/PostInform/PostInform';
 import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
 import Post from '@/shared/components/PostList/Post/Post';
+import { useUserQuery } from '@/components/user/model/useUserData';
+import Modal from '@/shared/components/Modal/Modal';
+import { useModal } from '@/shared/store/useModal';
+import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
+import { recentPosts } from './data/recentPosts';
 import storeImg from '@/assets/store.png';
 
-
 const NoticeDetail = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [filteredPosts, setFilteredPosts] = useState([]);
-  const [filter, setFilter] = useState({ limit: 6, hourlyPayGte: 100000, sort: 'time' });
+  const router = useRouter();
+  const { data, isError, isLoading } = useUserQuery();
+  const { setIsOpen, setIsClose, key } = useModal();
 
-  useEffect(() => {
-    setLoading(true);
-    fetch('https://bootcamp-api.codeit.kr/api/5-6/the-julge/notices')
-      .then(response => response.json())
-      .then(data => {
-        setPosts(data.items);
-        setLoading(false);
-        applyFilter(data.items, filter);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      });
-  }, []);
-
-  const applyFilter = (posts, filter) => {
-    let filtered = posts;
-
-    if (filter.hourlyPayGte) {
-      filtered = filtered.filter(post => post.item.hourlyPay >= filter.hourlyPayGte);
+  const handleApplyClick = () => {
+    if (!data?.data.item.phone) {
+      setIsOpen('profileAlert');
+    } else {
+      setIsOpen('applySuccess');
     }
-
-    if (filter.sort === 'time') {
-      filtered = filtered.sort((a, b) => new Date(b.item.startsAt) - new Date(a.item.startsAt));
-    }
-
-    filtered = filtered.slice(0, filter.limit);
-    setFilteredPosts(filtered);
   };
 
-  const handleFilterChange = (newFilter) => {
-    setFilter(newFilter);
-    applyFilter(posts, newFilter);
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const modalHeader = key === 'profileAlert' ? '알림' : '신청 완료';
+  const modalFooter = (
+    <CustomButton onClick={() => {
+      setIsClose();
+      if (key === 'profileAlert') {
+        router.push('/mypage');
+      }
+    }}>
+      확인
+    </CustomButton>
+  );
 
   return (
     <>
@@ -74,14 +59,20 @@ const NoticeDetail = () => {
               <PostPrice status="active" price={15000} priceChange={50} />
             </S.PriceWrap>
             <S.WidgetWrap>
-              <PostInform status="active" type="시간" content="2023.01.02 15:00~18:00 (3시간)" />
+              <PostInform
+                status="active"
+                type="시간"
+                content="2023.01.02 15:00~18:00 (3시간)"
+              />
               <PostInform status="active" type="장소" content="서울시 송파구" />
             </S.WidgetWrap>
             <S.DetailText>
               <p>알바하기 편한 너구리네 라면집!</p>
-              <p>라면 올려두고 끓이기만 하면 되어서 쉬운 편에 속하는 가게입니다.</p>
+              <p>
+                라면 올려두고 끓이기만 하면 되어서 쉬운 편에 속하는 가게입니다.
+              </p>
             </S.DetailText>
-            <S.CustomRedButton>신청하기</S.CustomRedButton>
+            <S.CustomRedButton onClick={handleApplyClick}>신청하기</S.CustomRedButton>
           </S.TextContainer>
         </S.ContextWrap>
 
@@ -94,13 +85,23 @@ const NoticeDetail = () => {
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            {filteredPosts.map((post, index) => (
-              <Post key={index} {...post.item} />
+            {recentPosts.map((post, index) => (
+              <Post key={index} {...post} />
             ))}
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
       <Footer />
+
+      <Modal
+        modalHeader={modalHeader}
+        modalFooter={modalFooter}
+        modalKey={key}
+      >
+        {key === 'profileAlert'
+          ? <div>내 프로필을 먼저 등록해 주세요.</div>
+          : <div>신청이 완료되었습니다.</div>}
+      </Modal>
     </>
   );
 };
