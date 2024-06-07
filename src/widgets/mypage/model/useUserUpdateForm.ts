@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { AxiosError } from 'axios';
 import { useUserData } from '@/shared/store/useUserData';
 import { myPageApi } from '../api/mypage.api';
+import { useModal } from '@/shared/store/useModal';
 
 interface userData {
   name: string;
@@ -14,6 +15,7 @@ interface userData {
 export const useUserValidateion = () => {
   const router = useRouter();
   const { user_id } = useUserData();
+  const { setIsOpen } = useModal();
 
   return useMutation({
     mutationKey: [`/users/${user_id}`],
@@ -21,6 +23,7 @@ export const useUserValidateion = () => {
       myPageApi(name, phone, address, bio, user_id),
     //
     onSuccess: data => {
+      setIsOpen('등록완료');
       console.log(data);
     },
 
