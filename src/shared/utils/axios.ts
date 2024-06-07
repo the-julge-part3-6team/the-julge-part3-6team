@@ -1,29 +1,31 @@
 import axios from 'axios';
 
-const apiInstance = axios.create({
+export const apiInstance = axios.create({
   baseURL: 'https://bootcamp-api.codeit.kr/api/5-6/the-julge',
-  withCredentials: true,
 });
 
 apiInstance.interceptors.request.use(configOrigin => {
   const config = configOrigin;
   if (typeof window !== 'undefined') {
-    const accessToken = localStorage.getItem('access_token');
+    const cookies = document.cookie;
+    const [_, token] = cookies.split('=');
 
-    if (config.headers && accessToken !== null) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+    if (config.headers && token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    if (localStorage.getItem('hasImage')) {
+      config.headers.Authorization = null;
+      localStorage.removeItem('hasImage');
     }
   }
 
   return config;
 });
 
-apiInstance.interceptors.response.use(
-  response => {
-    console.debug(response);
-    return response;
-  },
-  error => {
-    console.error(error);
-  },
-);
+// export const awsApiInstance = axios.create();
+
+// awsApiInstance.interceptors.request.use(config => {
+//   if (typeof window === 'undefined') return config;
+//   config.headers.Authorization = null;
+//   return config;
+// });
