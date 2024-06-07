@@ -6,6 +6,7 @@ export const handleImageUpload = async (
   mutateSaveImage: Function,
 ) => {
   if (file) {
+    console.log(file);
     const presignedUrlResult = await mutatePresignedUrl('.png');
     const presignedUrl = presignedUrlResult.data.item.url;
 

@@ -1,15 +1,12 @@
 import Header from '@/shared/components/Header/Header';
 import * as S from './index.styled';
 import { useUserQuery } from '@/components/user/model/useUserData';
-import {
-  NotFoundApplication,
-  NotfoundStore,
-  StoreCard,
-} from '@/widgets/mystore';
+import { NotFoundNotice, NotfoundStore, StoreCard } from '@/widgets/mystore';
 import { useUserData } from '@/shared/store/useUserData';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Footer from '@/shared/components/Footer/Footer';
+import { useGetNotice } from '@/components/notice/model/useGetNotice';
 
 const index = () => {
   const { type } = useUserData();
@@ -21,8 +18,19 @@ const index = () => {
     }
   }, [type, router]);
 
-  const { data, isError, isLoading: isUserLoading } = useUserQuery();
-  const storeData: Store = data?.data?.item?.shop?.item;
+  const {
+    data: userData,
+    isError: isUserError,
+    isLoading: isUserLoading,
+  } = useUserQuery();
+
+  const storeData: Store = userData?.data?.item?.shop?.item;
+
+  // const {
+  //   data: NoticeData,
+  //   isError: isNoticeError,
+  //   isLoading: isNoticeLoading,
+  // } = useGetNotice(storeData?.id);
 
   let store = storeData ? (
     <StoreCard
@@ -36,7 +44,7 @@ const index = () => {
     <NotfoundStore />
   );
 
-  let application = <NotFoundApplication />;
+  let application = <NotFoundNotice />;
 
   if (isUserLoading) {
     store = <div>Loading...</div>;

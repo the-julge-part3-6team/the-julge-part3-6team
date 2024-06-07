@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import * as S from './NotFoundApplication.styled';
+import * as S from './NotFoundNotice.styled';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 
-export const NotFoundApplication = () => {
+export const NotFoundNotice = () => {
   const router = useRouter();
 
   return (
