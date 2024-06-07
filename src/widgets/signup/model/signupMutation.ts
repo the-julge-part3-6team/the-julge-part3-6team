@@ -10,8 +10,6 @@ interface SignUpData {
 }
 
 export const signupMutation = (setError: any, setIsOpen: any) => {
-  const router = useRouter();
-
   return useMutation({
     mutationKey: ['/users'],
     mutationFn: ({ email, password, type }: SignUpData) =>
