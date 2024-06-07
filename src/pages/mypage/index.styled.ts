@@ -2,11 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 172px);
-
-  @media (max-width: 744px) {
-    height: calc(100vh - 228px);
-  }
 `;
 
 export const ContentWrap = styled.div`
@@ -29,5 +24,14 @@ export const MyPageHeader = styled.h2`
   font-weight: 700;
   @media (max-width: 744px) {
     font-size: 20px;
+  }
+`;
+
+export const ViewFlexBox = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 1440px) {
+    grid-template-columns: 1fr;
   }
 `;
