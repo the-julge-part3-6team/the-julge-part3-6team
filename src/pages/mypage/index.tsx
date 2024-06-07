@@ -9,8 +9,9 @@ import { EmptyList } from '@/widgets/mypage/ui/EmptyList/EmptyList';
 
 const MyPage = () => {
   const { data, isError, isLoading } = useUserQuery();
-  const content = data?.data.item.phone ? (
-    <ViewProfile data={data} />
+  const userData = data?.data.item;
+  const content = data?.data?.item?.phone ? (
+    <ViewProfile userData={userData} />
   ) : (
     <AddProfile />
   );
@@ -19,7 +20,7 @@ const MyPage = () => {
   return (
     <>
       <Header />
-      {content ? (
+      {content.type.name === 'ViewProfile' ? (
         <>
           <S.Container>
             <S.ContentWrap>
