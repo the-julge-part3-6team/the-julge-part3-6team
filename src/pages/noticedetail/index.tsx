@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './index.styled';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
@@ -8,64 +8,52 @@ import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
 import Post from '@/shared/components/PostList/Post/Post';
 import storeImg from '@/assets/store.png';
 
-const recentPosts = [
-  {
-    status: 'closed',
-    title: '수리 에스프레소 샵',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 송파구',
-    price: 10000,
-    priceChange: 30,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'active',
-    title: '별빛카페',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 마포구',
-    price: 9900,
-    priceChange: 12,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'active',
-    title: '커피바다',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 광진구',
-    price: 11000,
-    priceChange: 100,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'active',
-    title: '해피버거',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 도봉구',
-    price: 9500,
-    priceChange: 12,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'expired',
-    title: '정원식당',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 동대문구',
-    price: 16000,
-    priceChange: 12,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'expired',
-    title: '우리동네카페',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 강남구',
-    price: 9500,
-    priceChange: 100,
-    imgSrc: storeImg,
-  },
-];
 
-const NoticeDetailPage = () => {
+const NoticeDetail = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [filter, setFilter] = useState({ limit: 6, hourlyPayGte: 100000, sort: 'time' });
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('https://bootcamp-api.codeit.kr/api/5-6/the-julge/notices')
+      .then(response => response.json())
+      .then(data => {
+        setPosts(data.items);
+        setLoading(false);
+        applyFilter(data.items, filter);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  const applyFilter = (posts, filter) => {
+    let filtered = posts;
+
+    if (filter.hourlyPayGte) {
+      filtered = filtered.filter(post => post.item.hourlyPay >= filter.hourlyPayGte);
+    }
+
+    if (filter.sort === 'time') {
+      filtered = filtered.sort((a, b) => new Date(b.item.startsAt) - new Date(a.item.startsAt));
+    }
+
+    filtered = filtered.slice(0, filter.limit);
+    setFilteredPosts(filtered);
+  };
+
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+    applyFilter(posts, newFilter);
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Header />
@@ -83,21 +71,15 @@ const NoticeDetailPage = () => {
           <S.TextContainer>
             <S.SmallText>시급</S.SmallText>
             <S.PriceWrap>
-            <PostPrice status="active" price={15000} priceChange={50} />
+              <PostPrice status="active" price={15000} priceChange={50} />
             </S.PriceWrap>
             <S.WidgetWrap>
-              <PostInform
-                status="active"
-                type="시간"
-                content="2023.01.02 15:00~18:00 (3시간)"
-              />
+              <PostInform status="active" type="시간" content="2023.01.02 15:00~18:00 (3시간)" />
               <PostInform status="active" type="장소" content="서울시 송파구" />
             </S.WidgetWrap>
             <S.DetailText>
               <p>알바하기 편한 너구리네 라면집!</p>
-              <p>
-                라면 올려두고 끓이기만 하면 되어서 쉬운 편에 속하는 가게입니다.
-              </p>
+              <p>라면 올려두고 끓이기만 하면 되어서 쉬운 편에 속하는 가게입니다.</p>
             </S.DetailText>
             <S.CustomRedButton>신청하기</S.CustomRedButton>
           </S.TextContainer>
@@ -112,16 +94,15 @@ const NoticeDetailPage = () => {
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            {recentPosts.map((post, index) => (
-              <Post key={index} {...post} />
+            {filteredPosts.map((post, index) => (
+              <Post key={index} {...post.item} />
             ))}
           </S.PostContainer>
         </S.RecentWrap>
-        
       </S.PageLayout>
       <Footer />
     </>
   );
 };
 
-export default NoticeDetailPage;
+export default NoticeDetail;
