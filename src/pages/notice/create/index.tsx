@@ -1,0 +1,83 @@
+import Header from '@/shared/components/Header/Header';
+import * as S from './index.styled';
+import { InputContent } from '@/widgets/createNotice';
+import PrimaryButton from '@/shared/components/Button/RedButton/RedButton';
+import { useEffect, useState } from 'react';
+import { handleValidate } from '@/components/notice/model/handleValidate';
+import { createNoticeMutate } from '@/components/notice/model/createNoticeMutate';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { dateTransfromIso } from '@/shared/utils/dateTransform';
+import { useModal } from '@/shared/store/useModal';
+import Modal from '@/shared/components/Modal/Modal';
+
+const index = () => {
+  const searchParams = useSearchParams();
+  const shop_id = searchParams.get('shop_id');
+  const router = useRouter();
+  const { setIsOpen, setIsClose } = useModal();
+
+  useEffect(() => {
+    if (!shop_id) router.push('/mystore');
+  }, []);
+
+  const { mutate } = createNoticeMutate(shop_id || '', setIsOpen);
+
+  const [notice, setNotice] = useState({
+    hourlyPay: 0,
+    startsAt: '',
+    workhour: 0,
+    description: '',
+  });
+
+  const [errors, setErrors] = useState({
+    hourlyPay: '',
+    startsAt: '',
+    workhour: '',
+    description: '',
+  });
+
+  const onSubmit = () => {
+    const hasError = handleValidate(notice, setErrors);
+    console.log('aa');
+    if (!hasError) {
+      console.log('bb');
+      mutate({
+        hourlyPay: notice.hourlyPay,
+        startsAt: dateTransfromIso(notice.startsAt),
+        workhour: Number(notice.workhour),
+        description: notice.description,
+      });
+    }
+  };
+
+  return (
+    <>
+      <Header />
+      <S.BodyWrap>
+        <S.Body>
+          <S.Title>공고 등록</S.Title>
+          <InputContent notice={notice} setNotice={setNotice} errors={errors} />
+          <S.ButtonWrap>
+            <PrimaryButton text="등록하기" onClick={onSubmit} />
+          </S.ButtonWrap>
+        </S.Body>
+        <Modal
+          modalKey="등록완료 모달"
+          modalHeader={<div>header</div>}
+          modalFooter={
+            <PrimaryButton
+              text="확인"
+              onClick={() => {
+                setIsClose;
+                router.push('/mystore');
+              }}
+            />
+          }
+        />
+      </S.BodyWrap>
+    </>
+  );
+};
+
+export default index;
