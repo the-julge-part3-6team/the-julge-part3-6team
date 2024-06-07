@@ -17,13 +17,13 @@ import { Employer } from '@/shared/components/Header/employer/Employer';
 const index = () => {
   const {
     id,
-    storeName,
-    storeType,
-    storeAddress,
-    storeAddressDetail,
-    pay,
-    storeImage,
-    storeDescription,
+    name,
+    category,
+    address1,
+    address2,
+    originalHourlyPay,
+    imageUrl,
+    description,
     setStoreDescription,
   } = useAddStoreState();
   const [errors, setErrors] = useState({
@@ -42,25 +42,25 @@ const index = () => {
   const handleSubmit = () => {
     const hasError = handleValidate(
       {
-        name: storeName,
-        category: storeType,
-        address1: storeAddress,
-        address2: storeAddressDetail,
-        imageUrl: storeImage,
-        originalHourlyPay: Number(pay),
+        name,
+        category,
+        address1,
+        address2,
+        imageUrl,
+        originalHourlyPay,
       },
       setErrors,
     );
     if (!hasError) {
       mutate({
         id: id,
-        name: storeName,
-        category: storeType,
-        address1: storeAddress,
-        address2: storeAddressDetail,
-        description: storeDescription,
-        imageUrl: storeImage,
-        originalHourlyPay: Number(pay),
+        name,
+        category,
+        address1,
+        address2,
+        description,
+        imageUrl,
+        originalHourlyPay,
       });
     }
   };
@@ -82,7 +82,7 @@ const index = () => {
             placeholder="입력"
             name="test"
             onChange={e => setStoreDescription(e.target.value)}
-            value={storeDescription}
+            value={description}
             label="가게 설명"
             id="1"
           />

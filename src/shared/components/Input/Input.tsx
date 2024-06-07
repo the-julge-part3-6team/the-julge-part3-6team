@@ -12,7 +12,7 @@ interface InputProps {
   error?: string | undefined;
   value?: string;
   placeholder: string;
-  inputType: 'password' | 'text';
+  inputType: 'password' | 'text' | 'datetime-local';
   type: 'hourlyWage' | 'basic' | 'dropdown';
 }
 

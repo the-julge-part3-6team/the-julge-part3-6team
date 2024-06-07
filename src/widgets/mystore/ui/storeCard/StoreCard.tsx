@@ -42,7 +42,7 @@ export const StoreCard = ({
           />
           <PrimaryButton
             text="공고 등록하기"
-            onClick={() => router.push('/mystore/edit')}
+            onClick={() => router.push(`/notice/create?shop_id=${shop_id}`)}
           />
         </S.BtnContainer>
       </S.StoreInfo>

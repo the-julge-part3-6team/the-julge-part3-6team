@@ -47,7 +47,7 @@ const index = () => {
     <NotfoundStore />
   );
 
-  let application = <NotFoundNotice />;
+  let application = <NotFoundNotice shop_id={storeData?.id} />;
 
   if (isUserLoading) {
     store = <div>Loading...</div>;
