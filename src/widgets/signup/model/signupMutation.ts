@@ -9,7 +9,7 @@ interface SignUpData {
   type: string;
 }
 
-export const signupMutation = (setError: any) => {
+export const signupMutation = (setError: any, setIsOpen: any) => {
   const router = useRouter();
 
   return useMutation({
@@ -18,18 +18,15 @@ export const signupMutation = (setError: any) => {
       signupApi(email, password, type),
 
     onSuccess: () => {
-      alert('가입이 완료되었습니다');
-      router.push('/signin');
+      setIsOpen('complete_signup_modal');
+      return;
     },
 
     onError: (error: AxiosError) => {
       const statusCode = error.response?.status;
       switch (statusCode) {
         case 409:
-          setError('email', {
-            type: 'manual',
-            message: '이미 존재하는 이메일 입니다.',
-          });
+          setIsOpen('conflict_email_modal');
           return;
 
         default:

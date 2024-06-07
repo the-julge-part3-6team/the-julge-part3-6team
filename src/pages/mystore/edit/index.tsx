@@ -6,14 +6,17 @@ import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
 import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
 import { useUserQuery } from '@/components/user/model/useUserData';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { mutateUpdateStore } from './model/mutateUpdateStore';
+import { handleValidate } from './model/handleValidate';
+import { useRouter } from 'next/router';
+import { useToast } from '@/shared/store/useToast';
+import { useModal } from '@/shared/store/useModal';
+import Modal from '@/shared/components/Modal/Modal';
 
 const index = () => {
   const {
-    id,
     storeName,
     storeType,
     storeAddress,
@@ -29,15 +32,25 @@ const index = () => {
     setStoreDescription,
     setStoreImage,
   } = useAddStoreState();
+  const [errors, setErrors] = useState({
+    name: '',
+    category: '',
+    address1: '',
+    address2: '',
+    originalHourlyPay: '',
+    imageUrl: '',
+    description: '',
+  });
+  const router = useRouter();
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
-  console.log(shop_id);
-
+  const { setIsOpen, setIsClose } = useModal();
   const { data, isError, isLoading } = useUserQuery();
   const store: Store = data?.data?.item?.shop?.item;
 
   useEffect(() => {
     if (isLoading) return;
+    if (!shop_id) router.push('/mystore');
     setStoreName(store.name);
     setStoreType(store.category);
     setStoreAddress(store.address1);
@@ -47,7 +60,38 @@ const index = () => {
     setStoreImage(store.imageUrl);
   }, [store]);
 
-  const { mutate } = mutateUpdateStore(shop_id || '');
+  const { mutate } = mutateUpdateStore(shop_id || '', setIsOpen);
+
+  const handleSubmit = () => {
+    const hasError = handleValidate(
+      {
+        name: storeName,
+        category: storeType,
+        address1: storeAddress,
+        address2: storeAddressDetail,
+        imageUrl: storeImage,
+        originalHourlyPay: Number(pay),
+      },
+      setErrors,
+    );
+
+    if (!hasError) {
+      mutate({
+        name: storeName,
+        category: storeType,
+        address1: storeAddress,
+        address2: storeAddressDetail,
+        description: storeDescription,
+        imageUrl: storeImage,
+        originalHourlyPay: Number(pay),
+      });
+    }
+  };
+
+  const onClickConfirm = () => {
+    setIsClose();
+    router.push('/mystore');
+  };
 
   return (
     <>
@@ -55,7 +99,7 @@ const index = () => {
       <S.Body>
         <S.MyStoreContentWrap>
           <S.Title>가게 정보</S.Title>
-          <InputContent />
+          <InputContent errors={errors} />
           <AddStoreImage />
           <Textarea
             placeholder="입력"
@@ -68,23 +112,18 @@ const index = () => {
         </S.MyStoreContentWrap>
         <S.ButtonCotainer>
           <S.ButtonWrap>
-            <RedButton
-              text="등록하기"
-              onClick={() =>
-                mutate({
-                  id: id,
-                  name: storeName,
-                  category: storeType,
-                  address1: storeAddress,
-                  address2: storeAddressDetail,
-                  description: storeDescription,
-                  imageUrl: storeImage,
-                  originalHourlyPay: Number(pay),
-                })
-              }
-            />
+            <RedButton text="등록하기" onClick={handleSubmit} />
           </S.ButtonWrap>
         </S.ButtonCotainer>
+        <Modal
+          modalKey="수정완료 모달"
+          modalHeader={<S.ModalHeader>수정이 완료되었습니다.</S.ModalHeader>}
+          modalFooter={
+            <S.ModalFooter>
+              <RedButton text="확인" onClick={onClickConfirm} />
+            </S.ModalFooter>
+          }
+        />
       </S.Body>
     </>
   );

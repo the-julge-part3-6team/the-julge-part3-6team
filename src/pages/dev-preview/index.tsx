@@ -90,7 +90,7 @@ const notifications: Notifications[] = [
 
 const index = () => {
   const { isOpen, setIsOpen, setIsClose } = useModal();
-  const { isToast, setOpenToast } = useToast();
+  const { setOpenToast } = useToast();
   const [filters, setFilters] = useState<FilterState | null>(null);
 
   const handleApplyFilters = (filters: FilterState) => {
@@ -238,7 +238,6 @@ const index = () => {
       <PostList postList={postList} />
       <hr />
       <Footer />
-      {isToast && <Toast text="삭제 되었습니다." />}
       <hr />
       <Pagination
         currentPage={1}

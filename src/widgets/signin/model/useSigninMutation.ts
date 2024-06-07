@@ -7,7 +7,6 @@ import { useUserData } from '@/shared/store/useUserData';
 interface SigninData {
   email: string;
   password: string;
-  type: string;
 }
 
 export const useSigninMutation = (setError: any) => {
@@ -16,8 +15,7 @@ export const useSigninMutation = (setError: any) => {
 
   return useMutation({
     mutationKey: ['/token'],
-    mutationFn: ({ email, password, type }: SigninData) =>
-      signinApi(email, password, type),
+    mutationFn: ({ email, password }: SigninData) => signinApi(email, password),
 
     onSuccess: data => {
       const token = data.data.item.token;
