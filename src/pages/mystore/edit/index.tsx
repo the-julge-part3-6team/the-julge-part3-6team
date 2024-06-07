@@ -15,16 +15,17 @@ import { useToast } from '@/shared/store/useToast';
 import { useModal } from '@/shared/store/useModal';
 import Modal from '@/shared/components/Modal/Modal';
 import { Employer } from '@/shared/components/Header/employer/Employer';
+import { handleSubmit } from './model/handleSubmit';
 
 const index = () => {
   const {
-    storeName,
-    storeType,
-    storeAddress,
-    storeAddressDetail,
-    pay,
-    storeImage,
-    storeDescription,
+    name,
+    category,
+    address1,
+    address2,
+    originalHourlyPay,
+    description,
+    imageUrl,
     setStoreName,
     setStoreType,
     setStoreAddress,
@@ -56,38 +57,12 @@ const index = () => {
     setStoreType(store.category);
     setStoreAddress(store.address1);
     setStoreAddressDetail(store.address2);
-    setPay(String(store.originalHourlyPay));
+    setPay(store.originalHourlyPay);
     setStoreDescription(store.description);
     setStoreImage(store.imageUrl);
   }, [store]);
 
   const { mutate } = mutateUpdateStore(shop_id || '', setIsOpen);
-
-  const handleSubmit = () => {
-    const hasError = handleValidate(
-      {
-        name: storeName,
-        category: storeType,
-        address1: storeAddress,
-        address2: storeAddressDetail,
-        imageUrl: storeImage,
-        originalHourlyPay: Number(pay),
-      },
-      setErrors,
-    );
-
-    if (!hasError) {
-      mutate({
-        name: storeName,
-        category: storeType,
-        address1: storeAddress,
-        address2: storeAddressDetail,
-        description: storeDescription,
-        imageUrl: storeImage,
-        originalHourlyPay: Number(pay),
-      });
-    }
-  };
 
   const onClickConfirm = () => {
     setIsClose();
@@ -106,14 +81,31 @@ const index = () => {
             placeholder="입력"
             name="test"
             onChange={e => setStoreDescription(e.target.value)}
-            value={storeDescription}
+            value={description}
             label="가게 설명"
             id="1"
           />
         </S.MyStoreContentWrap>
         <S.ButtonCotainer>
           <S.ButtonWrap>
-            <RedButton text="등록하기" onClick={handleSubmit} />
+            <RedButton
+              text="등록하기"
+              onClick={() =>
+                handleSubmit(
+                  {
+                    name,
+                    category,
+                    address1,
+                    address2,
+                    imageUrl,
+                    originalHourlyPay,
+                    description,
+                  },
+                  mutate,
+                  setErrors,
+                )
+              }
+            />
           </S.ButtonWrap>
         </S.ButtonCotainer>
         <Modal

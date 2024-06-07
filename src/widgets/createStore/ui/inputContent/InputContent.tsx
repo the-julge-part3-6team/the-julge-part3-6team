@@ -11,11 +11,11 @@ interface Props {
 
 export const InputContent = ({ errors }: Props) => {
   const {
-    storeName,
-    storeType,
-    storeAddress,
-    storeAddressDetail,
-    pay,
+    name,
+    category,
+    address1,
+    address2,
+    originalHourlyPay,
     setStoreName,
     setStoreType,
     setStoreAddress,
@@ -37,7 +37,7 @@ export const InputContent = ({ errors }: Props) => {
         placeholder="입력"
         inputType="text"
         type="basic"
-        value={storeName}
+        value={name}
         onChange={e => useHandleChangeValue(e, action)}
         error={errors.name}
       />
@@ -48,7 +48,7 @@ export const InputContent = ({ errors }: Props) => {
         inputType="text"
         type="dropdown"
         options={storeTypes}
-        value={storeType}
+        value={category}
         onChange={e => useHandleChangeValue(e, action)}
         onClick={(option: string) => setStoreType(option)}
         error={errors.category}
@@ -59,7 +59,7 @@ export const InputContent = ({ errors }: Props) => {
         placeholder="선택"
         type="dropdown"
         inputType="text"
-        value={storeAddress}
+        value={address1}
         options={locations}
         onChange={e => useHandleChangeValue(e, action)}
         onClick={(option: string) => setStoreAddress(option)}
@@ -70,7 +70,7 @@ export const InputContent = ({ errors }: Props) => {
         label="상세주소*"
         placeholder="입력"
         type="basic"
-        value={storeAddressDetail}
+        value={address2}
         inputType="text"
         onChange={e => useHandleChangeValue(e, action)}
         error={errors.address2}
@@ -81,7 +81,7 @@ export const InputContent = ({ errors }: Props) => {
         placeholder="입력"
         inputType="text"
         type="hourlyWage"
-        value={pay}
+        value={String(originalHourlyPay)}
         onChange={e => useHandleChangeValue(e, action)}
         error={errors.originalHourlyPay}
       />
