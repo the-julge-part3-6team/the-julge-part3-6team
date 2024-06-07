@@ -12,17 +12,21 @@ const index = () => {
   const { type } = useUserData();
   const router = useRouter();
 
+  const {
+    data: userData,
+    isError: isUserError,
+    isLoading: isUserLoading,
+  } = useUserQuery();
+
   useEffect(() => {
     if (type === 'employee') {
       router.push('/mypage');
     }
   }, [type, router]);
 
-  const {
-    data: userData,
-    isError: isUserError,
-    isLoading: isUserLoading,
-  } = useUserQuery();
+  if (isUserLoading) {
+    <div>...isLoading</div>;
+  }
 
   const storeData: Store = userData?.data?.item?.shop?.item;
 

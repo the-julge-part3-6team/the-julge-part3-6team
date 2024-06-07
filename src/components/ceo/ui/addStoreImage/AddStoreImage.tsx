@@ -9,7 +9,7 @@ import { useAddStoreState } from '@/shared/store/useAddStoreState';
 
 export const AddStoreImage = () => {
   const [file, setFile] = useState<File>();
-  const { storeImage, setStoreImage } = useAddStoreState();
+  const { imageUrl, setStoreImage } = useAddStoreState();
   const { mutatePresignedUrl } = useCreatePresignedUrl();
   const { mutateSaveImage } = useSaveImage();
 
@@ -38,7 +38,7 @@ export const AddStoreImage = () => {
 
         <Image src={fiCamera} alt="카메라 아이콘" />
         <p>이미지 추가하기</p>
-        {storeImage && <Image src={storeImage} fill alt="added_image" />}
+        {imageUrl && <Image src={imageUrl} fill alt="added_image" />}
       </S.AddProfileContainer>
     </S.AddImageLayout>
   );
