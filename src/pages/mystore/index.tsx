@@ -6,7 +6,6 @@ import { useUserData } from '@/shared/store/useUserData';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Footer from '@/shared/components/Footer/Footer';
-import { useGetNotice } from '@/components/notice/model/useGetNotice';
 
 const index = () => {
   const { type } = useUserData();
