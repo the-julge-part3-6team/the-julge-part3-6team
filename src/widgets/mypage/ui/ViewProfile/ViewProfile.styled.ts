@@ -1,3 +1,4 @@
+import { CustomButton } from '@/shared/components/Button/CustomButton/customButton.styled';
 import { RedButton } from '@/shared/components/Button/RedButton/RedButton.styled';
 import theme from '@/styles/theme';
 import styled from 'styled-components';
@@ -8,9 +9,17 @@ export const ProfileBox = styled.div`
   box-sizing: border-box;
   background: ${theme.Colors.Red[10]};
   border-radius: 12px;
+  position: relative;
 
   p {
     margin: 28px 0 0;
+  }
+
+  button {
+    width: 169px;
+    position: absolute;
+    right: 32px;
+    top: 32px;
   }
 
   @media (max-width: 1440px) {
@@ -20,6 +29,13 @@ export const ProfileBox = styled.div`
 
   @media (max-width: 744px) {
     margin: 16px 0 0;
+
+    button {
+      width: 108px;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
   }
 `;
 

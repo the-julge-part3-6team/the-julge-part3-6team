@@ -21,7 +21,6 @@ export const useUserValidateion = () => {
     mutationKey: [`/users/${user_id}`],
     mutationFn: ({ name, phone, address, bio }: userData) =>
       myPageApi(name, phone, address, bio, user_id),
-    //
     onSuccess: data => {
       setIsOpen('등록완료');
       console.log(data);
