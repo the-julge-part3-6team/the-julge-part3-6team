@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import * as S from './FoundStore.styled';
+import * as S from './StoreCard.styled';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import PrimaryButton from '@/shared/components/Button/RedButton/RedButton';
 import fiMap from '../../../../../public/fiMap.svg';
@@ -13,7 +13,7 @@ interface Props {
   description: string;
 }
 
-export const FoundStore = ({
+export const StoreCard = ({
   imageUrl,
   name,
   address,

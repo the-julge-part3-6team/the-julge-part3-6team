@@ -8,7 +8,7 @@ export const Title = styled.h1`
   margin-bottom: 23px;
 `;
 
-export const MyStoreContentWrap = styled.div`
+export const MyContentWrap = styled.div`
   padding: 60px 0;
   width: 964px;
   margin: 0 auto;
@@ -21,6 +21,7 @@ export const MyStoreContentWrap = styled.div`
 
 export const Body = styled.div`
   width: 100%;
-  height: calc(100vh - 72px);
+
   background: var(--The-julge-gray-05, #fafafa);
+  padding-bottom: 120px;
 `;
