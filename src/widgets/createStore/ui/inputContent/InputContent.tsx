@@ -5,7 +5,11 @@ import { storeTypes } from '@/components/filter/constant/storeTypes';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
 import { useHandleChangeValue } from '../../model/useHandleChangeValue';
 
-export const InputContent = () => {
+interface Props {
+  errors: StoreError;
+}
+
+export const InputContent = ({ errors }: Props) => {
   const {
     storeName,
     storeType,
@@ -35,6 +39,7 @@ export const InputContent = () => {
         type="basic"
         value={storeName}
         onChange={e => useHandleChangeValue(e, action)}
+        error={errors.name}
       />
       <Input
         id="storeType"
@@ -46,6 +51,7 @@ export const InputContent = () => {
         value={storeType}
         onChange={e => useHandleChangeValue(e, action)}
         onClick={(option: string) => setStoreType(option)}
+        error={errors.category}
       />
       <Input
         id="storeAddress"
@@ -57,6 +63,7 @@ export const InputContent = () => {
         options={locations}
         onChange={e => useHandleChangeValue(e, action)}
         onClick={(option: string) => setStoreAddress(option)}
+        error={errors.address1}
       />
       <Input
         id="storeAddressDetail"
@@ -66,6 +73,7 @@ export const InputContent = () => {
         value={storeAddressDetail}
         inputType="text"
         onChange={e => useHandleChangeValue(e, action)}
+        error={errors.address2}
       />
       <Input
         id="pay"
@@ -75,6 +83,7 @@ export const InputContent = () => {
         type="hourlyWage"
         value={pay}
         onChange={e => useHandleChangeValue(e, action)}
+        error={errors.originalHourlyPay}
       />
     </S.ContentLayout>
   );

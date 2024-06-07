@@ -6,6 +6,8 @@ import Input from '@/shared/components/Input/Input';
 
 export const SigninForm = () => {
   const {
+    emailValue,
+    passwordValue,
     emailValidation,
     passwordValidation,
     errors,
@@ -18,6 +20,7 @@ export const SigninForm = () => {
   return (
     <S.SigninFormLayout onSubmit={handleSubmit(data => mutate(data))}>
       <Input
+        value={emailValue}
         inputType="text"
         type="basic"
         label="이메일"
@@ -26,6 +29,7 @@ export const SigninForm = () => {
         error={errors.email?.message}
       />
       <Input
+        value={passwordValue}
         inputType="password"
         type="basic"
         label="비밀번호"

@@ -1,9 +1,8 @@
 import { useForm } from 'react-hook-form';
 
-enum SignupFormState {
+enum SigninFormState {
   email = 'email',
   password = 'password',
-  type = 'type',
 }
 
 export const useSigninState = () => {
@@ -15,11 +14,14 @@ export const useSigninState = () => {
     formState: { errors },
   } = useForm({
     mode: 'all',
-    defaultValues: { email: '', password: '', type: '' },
+    defaultValues: { email: '', password: '' },
   });
 
+  const emailValue = watch(SigninFormState.email);
+  const passwordValue = watch(SigninFormState.password);
+
   const emailValidation = {
-    ...register(SignupFormState.email, {
+    ...register(SigninFormState.email, {
       required: { value: true, message: '이메일을 입력해 주세요.' },
       pattern: {
         value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
@@ -29,12 +31,14 @@ export const useSigninState = () => {
   };
 
   const passwordValidation = {
-    ...register(SignupFormState.password, {
+    ...register(SigninFormState.password, {
       required: { value: true, message: '비밀번호를 입력해주세요.' },
     }),
   };
 
   return {
+    emailValue,
+    passwordValue,
     emailValidation,
     passwordValidation,
     errors,

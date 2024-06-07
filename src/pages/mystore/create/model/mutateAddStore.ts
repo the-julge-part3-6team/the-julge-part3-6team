@@ -3,14 +3,10 @@ import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 
-export const mutateAddStore = () => {
-  const router = useRouter();
-
+export const mutateAddStore = (setIsOpen: any) => {
   return useMutation({
     mutationKey: ['/shops'],
     mutationFn: (store: Store) => {
-      console.log(store.originalHourlyPay);
-      console.log(typeof store.originalHourlyPay);
       return apiInstance.post('/shops', {
         name: store.name,
         category: store.category,
@@ -21,9 +17,14 @@ export const mutateAddStore = () => {
         originalHourlyPay: store.originalHourlyPay,
       });
     },
-    onSuccess: () => router.push('/mystore'),
+    onSuccess: () => setIsOpen('등록완료 모달'),
     onError: (error: AxiosError) => {
-      console.log(error);
+      const statusCode = error.response?.status;
+
+      switch (statusCode) {
+        case 409:
+          setIsOpen('이미 등록된 가게가 존재합니다.');
+      }
     },
   });
 };

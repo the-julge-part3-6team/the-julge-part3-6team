@@ -13,7 +13,9 @@ export const useSignupState = () => {
     defaultValues: { email: '', password: '', confirmPassword: '', type: '' },
   });
 
+  const emailValue = watch(SignupFormState.email);
   const passwordValue = watch(SignupFormState.password);
+  const confirmPasswordValue = watch(SignupFormState.confirmPassword);
 
   const emailValidation = {
     ...register(SignupFormState.email, {
@@ -50,6 +52,9 @@ export const useSignupState = () => {
   };
 
   return {
+    emailValue,
+    passwordValue,
+    confirmPasswordValue,
     emailValidation,
     passwordValidation,
     confirmPasswordValidation,
