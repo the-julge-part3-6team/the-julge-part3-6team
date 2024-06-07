@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import { useToast } from '@/shared/store/useToast';
 import { useModal } from '@/shared/store/useModal';
 import Modal from '@/shared/components/Modal/Modal';
+import { Employer } from '@/shared/components/Header/employer/Employer';
 
 const index = () => {
   const {

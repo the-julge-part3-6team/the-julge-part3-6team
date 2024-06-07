@@ -9,7 +9,8 @@ apiInstance.interceptors.request.use(configOrigin => {
   if (typeof window !== 'undefined') {
     const cookies = document.cookie;
     const [_, token] = cookies.split('=');
-    if (config.headers && token !== undefined) {
+
+    if (config.headers && token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     if (localStorage.getItem('hasImage')) {

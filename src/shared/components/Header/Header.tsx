@@ -3,12 +3,15 @@ import * as S from './Header.styled';
 import logo from '../../../../public/logo.svg';
 import Image from 'next/image';
 import Search from './Search/Search';
-import notificationImg from '@/assets/notification.svg';
-import notificationOnImg from '@/assets/notification-on.svg';
+import { useUserData } from '@/shared/store/useUserData';
+import { useGetAlerts } from '@/components/alert/model/useGetAlerts';
+import { NotLogin } from './notLogin/notLogin';
+import { IsLogin } from './isLogin/IsLogin';
 
 const Header = () => {
-  const [test, setTest] = useState('asd');
+  const { user_id, type } = useUserData();
   const [testAlarm, setTestAlarm] = useState('');
+  const { data, isError, isLoading } = useGetAlerts(user_id);
 
   return (
     <S.Header>
@@ -16,32 +19,10 @@ const Header = () => {
         <Image height={20} src={logo} alt="" className="logo" />
         <Search placeholder={'가게 이름으로 찾아보세요.'} />
         <S.AuthContainer>
-          {test ? (
-            <>
-              <li>
-                <a href="">내 가게</a>
-              </li>
-              <li>
-                <a href="">로그아웃</a>
-              </li>
-              <li>
-                <a href="">
-                  <Image
-                    src={testAlarm ? notificationOnImg : notificationImg}
-                    alt=""
-                  />
-                </a>
-              </li>
-            </>
+          {user_id ? (
+            <IsLogin type={type} testAlarm={testAlarm} />
           ) : (
-            <>
-              <li>
-                <a href="">로그인</a>
-              </li>
-              <li>
-                <a href="">회원가입</a>
-              </li>
-            </>
+            <NotLogin />
           )}
         </S.AuthContainer>
       </S.HeaderContainer>
