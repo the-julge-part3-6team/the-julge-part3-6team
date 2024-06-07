@@ -1,71 +1,44 @@
 import React from 'react';
 import * as S from './index.styled';
+import { useRouter } from 'next/router';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
 import PostImage from '@/shared/components/PostList/PostImage/PostImage';
 import PostInform from '@/shared/components/PostList/PostInform/PostInform';
 import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
 import Post from '@/shared/components/PostList/Post/Post';
+import { useUserQuery } from '@/components/user/model/useUserData';
+import Modal from '@/shared/components/Modal/Modal';
+import { useModal } from '@/shared/store/useModal';
+import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
+import { recentPosts } from './data/recentPosts';
 import storeImg from '@/assets/store.png';
 
-const recentPosts = [
-  {
-    status: 'closed',
-    title: '수리 에스프레소 샵',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 송파구',
-    price: 10000,
-    priceChange: 30,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'active',
-    title: '별빛카페',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 마포구',
-    price: 9900,
-    priceChange: 12,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'active',
-    title: '커피바다',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 광진구',
-    price: 11000,
-    priceChange: 100,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'active',
-    title: '해피버거',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 도봉구',
-    price: 9500,
-    priceChange: 12,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'expired',
-    title: '정원식당',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 동대문구',
-    price: 16000,
-    priceChange: 12,
-    imgSrc: storeImg,
-  },
-  {
-    status: 'expired',
-    title: '우리동네카페',
-    date: '2023.01.02 15:00~18:00 (3시간)',
-    location: '서울시 강남구',
-    price: 9500,
-    priceChange: 100,
-    imgSrc: storeImg,
-  },
-];
+const NoticeDetail = () => {
+  const router = useRouter();
+  const { data, isError, isLoading } = useUserQuery();
+  const { setIsOpen, setIsClose, key } = useModal();
 
-const NoticeDetailPage = () => {
+  const handleApplyClick = () => {
+    if (!data?.data.item.phone) {
+      setIsOpen('profileAlert');
+    } else {
+      setIsOpen('applySuccess');
+    }
+  };
+
+  const modalHeader = key === 'profileAlert' ? '알림' : '신청 완료';
+  const modalFooter = (
+    <CustomButton onClick={() => {
+      setIsClose();
+      if (key === 'profileAlert') {
+        router.push('/mypage');
+      }
+    }}>
+      확인
+    </CustomButton>
+  );
+
   return (
     <>
       <Header />
@@ -83,7 +56,7 @@ const NoticeDetailPage = () => {
           <S.TextContainer>
             <S.SmallText>시급</S.SmallText>
             <S.PriceWrap>
-            <PostPrice status="active" price={15000} priceChange={50} />
+              <PostPrice status="active" price={15000} priceChange={50} />
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
@@ -99,7 +72,7 @@ const NoticeDetailPage = () => {
                 라면 올려두고 끓이기만 하면 되어서 쉬운 편에 속하는 가게입니다.
               </p>
             </S.DetailText>
-            <S.CustomRedButton>신청하기</S.CustomRedButton>
+            <S.CustomRedButton onClick={handleApplyClick}>신청하기</S.CustomRedButton>
           </S.TextContainer>
         </S.ContextWrap>
 
@@ -117,11 +90,20 @@ const NoticeDetailPage = () => {
             ))}
           </S.PostContainer>
         </S.RecentWrap>
-        
       </S.PageLayout>
       <Footer />
+
+      <Modal
+        modalHeader={modalHeader}
+        modalFooter={modalFooter}
+        modalKey={key}
+      >
+        {key === 'profileAlert'
+          ? <div>내 프로필을 먼저 등록해 주세요.</div>
+          : <div>신청이 완료되었습니다.</div>}
+      </Modal>
     </>
   );
 };
 
-export default NoticeDetailPage;
+export default NoticeDetail;
