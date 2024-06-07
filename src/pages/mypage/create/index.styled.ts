@@ -1,4 +1,3 @@
-import { RedButton } from '@/shared/components/Button/RedButton/RedButton.styled';
 import styled from 'styled-components';
 
 export const Container = styled.div`

@@ -17,6 +17,10 @@ export const ProfileBox = styled.div`
     margin: 24px 0 0;
     width: auto;
   }
+
+  @media (max-width: 744px) {
+    margin: 16px 0 0;
+  }
 `;
 
 export const ProfileNameBox = styled.dl`
