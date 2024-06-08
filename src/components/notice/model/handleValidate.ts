@@ -1,16 +1,14 @@
 import { validateIfEmpty } from './validateIfEmpty';
 
 export const handleValidate = (
-  { hourlyPay, startsAt, workhour, description }: CreateNotice,
+  { hourlyPay, startsAt, workhour }: CreateNotice,
   setErrors: any,
 ) => {
-  Object.entries({ hourlyPay, startsAt, workhour, description }).forEach(
-    ([key, value]) => {
-      validateIfEmpty(key, value, setErrors);
-    },
-  );
+  Object.entries({ hourlyPay, startsAt, workhour }).forEach(([key, value]) => {
+    validateIfEmpty(key, value, setErrors);
+  });
 
-  if (hourlyPay && startsAt && workhour && description) {
+  if (hourlyPay && startsAt && workhour) {
     return false;
   }
   return true;

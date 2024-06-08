@@ -16,7 +16,7 @@ export const InputContent = ({ notice, errors, setNotice }: Props) => {
         label="시급*"
         id="hourlyPay"
         type="hourlyWage"
-        // error={errors.hourlyPay}
+        error={errors.hourlyPay}
         value={String(notice.hourlyPay)}
         placeholder="0"
         inputType="text"
@@ -33,7 +33,7 @@ export const InputContent = ({ notice, errors, setNotice }: Props) => {
         label="시작 일시*"
         id="startsAt"
         type="basic"
-        // error={errors.startsAt}
+        error={errors.startsAt}
         value={notice.startsAt}
         placeholder="2024-01-05 15:00"
         inputType="datetime-local"
@@ -50,7 +50,7 @@ export const InputContent = ({ notice, errors, setNotice }: Props) => {
         label="업무 시간*"
         id="workHour"
         type="basic"
-        // error={errors.workHour}
+        error={errors.workhour}
         value={String(notice.workhour)}
         placeholder="0"
         inputType="text"
