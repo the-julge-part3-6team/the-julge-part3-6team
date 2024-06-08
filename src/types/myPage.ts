@@ -8,3 +8,11 @@ interface UserDataType {
   shop: Store;
   type: 'employee' | 'employer';
 }
+
+interface FieldErrors {
+  [key: string]: string;
+}
+
+interface SetFieldErrors {
+  (error: FieldErrors): void;
+}
