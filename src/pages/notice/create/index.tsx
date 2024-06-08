@@ -10,18 +10,13 @@ import { useRouter } from 'next/router';
 import { dateTransfromIso } from '@/shared/utils/dateTransform';
 import { useModal } from '@/shared/store/useModal';
 import Modal from '@/shared/components/Modal/Modal';
+import { onSubmit } from '@/components/notice/model/noticeSubmit';
 
 const index = () => {
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const router = useRouter();
   const { setIsOpen, setIsClose } = useModal();
-
-  useEffect(() => {
-    if (!shop_id) router.push('/mystore');
-  }, []);
-
-  const { mutate } = createNoticeMutate(shop_id || '', setIsOpen);
 
   const [notice, setNotice] = useState({
     hourlyPay: 0,
@@ -34,22 +29,13 @@ const index = () => {
     hourlyPay: '',
     startsAt: '',
     workhour: '',
-    description: '',
   });
 
-  const onSubmit = () => {
-    const hasError = handleValidate(notice, setErrors);
-    console.log('aa');
-    if (!hasError) {
-      console.log('bb');
-      mutate({
-        hourlyPay: notice.hourlyPay,
-        startsAt: dateTransfromIso(notice.startsAt),
-        workhour: Number(notice.workhour),
-        description: notice.description,
-      });
-    }
-  };
+  useEffect(() => {
+    if (!shop_id) router.push('/mystore');
+  }, []);
+
+  const { mutate } = createNoticeMutate(shop_id || '', setIsOpen);
 
   return (
     <>
@@ -59,20 +45,25 @@ const index = () => {
           <S.Title>공고 등록</S.Title>
           <InputContent notice={notice} setNotice={setNotice} errors={errors} />
           <S.ButtonWrap>
-            <PrimaryButton text="등록하기" onClick={onSubmit} />
+            <PrimaryButton
+              text="등록하기"
+              onClick={() => onSubmit(notice, setErrors, mutate)}
+            />
           </S.ButtonWrap>
         </S.Body>
         <Modal
           modalKey="등록완료 모달"
-          modalHeader={<div>header</div>}
+          modalHeader={<S.ModalHeader>등록이 완료되었습니다.</S.ModalHeader>}
           modalFooter={
-            <PrimaryButton
-              text="확인"
-              onClick={() => {
-                setIsClose;
-                router.push('/mystore');
-              }}
-            />
+            <S.ModalFooter>
+              <PrimaryButton
+                text="확인"
+                onClick={() => {
+                  setIsClose;
+                  router.push('/mystore');
+                }}
+              />
+            </S.ModalFooter>
           }
         />
       </S.BodyWrap>
