@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Input from '@/shared/components/Input/Input';
 import { locations } from '@/components/filter/constant/locations';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useProfileData } from '@/shared/store/useProfileData';
-import { useUserValidateion } from '@/widgets/mypage/model/useUserUpdateForm';
+import { useUserValidation } from '@/widgets/mypage/model/useUserUpdateForm';
 import * as S from './RegistrationProfile.styled';
 import { EditProfileModal } from '../editProfileModal/EditProfileModal';
 import { onChangeValue } from '../../model/onChangeValue';
@@ -12,7 +12,13 @@ export const RegistrationProfile = () => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
     useProfileData();
 
-  const { mutate } = useUserValidateion();
+  const [error, setError] = useState<FieldErrors>({
+    name,
+    phone,
+    address,
+    bio,
+  });
+  const { mutate } = useUserValidation(setError);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,6 +41,7 @@ export const RegistrationProfile = () => {
               onChange={e =>
                 onChangeValue(e, { setName, setPhone, setAddress, setBio })
               }
+              error={error.name}
             />
           </li>
           <li>
@@ -48,6 +55,7 @@ export const RegistrationProfile = () => {
               onChange={e =>
                 onChangeValue(e, { setName, setPhone, setAddress, setBio })
               }
+              error={error.phone}
             />
           </li>
           <li>
