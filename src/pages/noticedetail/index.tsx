@@ -84,9 +84,9 @@ const NoticeDetail = () => {
       </>
     ) : null;
 
-  if (userLoading || !shop_id) {
-    return <p>Loading...</p>;
-  }
+  // if (userLoading || !shop_id) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <>
@@ -94,7 +94,7 @@ const NoticeDetail = () => {
       <S.PageLayout>
         <S.TextWrap>
           <S.SmallText>식당</S.SmallText>
-          <S.BigText>{storeData?.name}</S.BigText>
+          {/* <S.BigText>{storeData?.name}</S.BigText> */}
         </S.TextWrap>
 
         <S.ContextWrap>
@@ -106,7 +106,7 @@ const NoticeDetail = () => {
             <S.SmallText>시급</S.SmallText>
             <S.PriceWrap>
             {/* priceChange 계산 */}
-              <PostPrice status="active" price={storeData?.originalHourlyPay} priceChange={50} /> 
+              {/* <PostPrice status="active" price={storeData?.originalHourlyPay} priceChange={50} />  */}
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
@@ -116,7 +116,7 @@ const NoticeDetail = () => {
               />
               <PostInform status="active" type="장소" content="서울시 송파구" />
             </S.WidgetWrap>
-            <S.DetailText><p>{storeData?.description}</p></S.DetailText>
+            {/* <S.DetailText><p>{storeData?.description}</p></S.DetailText> */}
             {isApplied ? (
               <div style={{ width: '346px' }}>
                 <CustomButton
@@ -145,9 +145,9 @@ const NoticeDetail = () => {
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            {recentPosts.map((post, index) => (
+            {/* {recentPosts.map((post, index) => (
               <Post key={index} {...post} />
-            ))}
+            ))} */}
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
