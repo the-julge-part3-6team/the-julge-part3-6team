@@ -1,6 +1,8 @@
 import React from 'react';
+import Image from 'next/image';
 import * as S from './index.styled';
 import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
 import PostImage from '@/shared/components/PostList/PostImage/PostImage';
@@ -13,11 +15,14 @@ import { useModal } from '@/shared/store/useModal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import { recentPosts } from './data/recentPosts';
 import storeImg from '@/assets/store.png';
+import testImg from '@/assets/caution.svg';
 
 const NoticeDetail = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const shop_id = searchParams.get('shop_id');
   const { data, isError, isLoading } = useUserQuery();
-  const { setIsOpen, setIsClose, key } = useModal();
+  const { setIsOpen, setIsClose, key, isOpen } = useModal();
 
   const handleApplyClick = () => {
     if (!data?.data.item.phone) {
@@ -27,17 +32,21 @@ const NoticeDetail = () => {
     }
   };
 
-  const modalHeader = key === 'profileAlert' ? '알림' : '신청 완료';
-  const modalFooter = (
-    <CustomButton onClick={() => {
-      setIsClose();
-      if (key === 'profileAlert') {
-        router.push('/mypage');
-      }
-    }}>
-      확인
-    </CustomButton>
-  );
+  const onClickConfirm = () => {
+    setIsClose();
+    if (key === 'profileAlert') {
+      router.push('/mypage');
+    }
+  };
+
+  const modalHeader =
+    key === 'profileAlert' ? (
+      <>
+        <Image src={testImg} alt="경고 표시" />내 프로필을 먼저 등록해 주세요.
+      </>
+    ) : (
+      '신청이 완료되었습니다.'
+    );
 
   return (
     <>
@@ -72,13 +81,18 @@ const NoticeDetail = () => {
                 라면 올려두고 끓이기만 하면 되어서 쉬운 편에 속하는 가게입니다.
               </p>
             </S.DetailText>
-            <S.CustomRedButton onClick={handleApplyClick}>신청하기</S.CustomRedButton>
+            <S.CustomRedButton onClick={handleApplyClick}>
+              신청하기
+            </S.CustomRedButton>
           </S.TextContainer>
         </S.ContextWrap>
 
         <S.DescripContainer>
           <S.SmallText isBlack>공고 설명</S.SmallText>
-          <p>기존 알바 친구가 그만둬서 새로운 친구를 구했는데, 그 사이에 하루가 비네요.</p>
+          <p>
+            기존 알바 친구가 그만둬서 새로운 친구를 구했는데, 그 사이에 하루가
+            비네요.
+          </p>
           <p>급해서 시급도 높였고 그렇게 바쁜 날이 아니라서 괜찮을거예요.</p>
         </S.DescripContainer>
 
@@ -94,14 +108,18 @@ const NoticeDetail = () => {
       <Footer />
 
       <Modal
-        modalHeader={modalHeader}
-        modalFooter={modalFooter}
         modalKey={key}
-      >
-        {key === 'profileAlert'
-          ? <div>내 프로필을 먼저 등록해 주세요.</div>
-          : <div>신청이 완료되었습니다.</div>}
-      </Modal>
+        modalHeader={modalHeader}
+        modalFooter={
+          <div style={{ width: '80px' }}>
+            <CustomButton
+              text="확인"
+              color="#EA3C12"
+              onClick={onClickConfirm}
+            />
+          </div>
+        }
+      />
     </>
   );
 };
