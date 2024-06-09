@@ -13,20 +13,20 @@ import { useUserQuery } from '@/components/user/model/useUserData';
 import Modal from '@/shared/components/Modal/Modal';
 import { useModal } from '@/shared/store/useModal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
-import { recentPosts } from './data/recentPosts';
+import RedButton from '@/shared/components/Button/RedButton/RedButton';
+// import { recentPosts } from './data/recentPosts'; 목업 데이터
 import storeImg from '@/assets/store.png';
-import testImg from '@/assets/caution.svg';
+import cautionImg from '@/assets/caution.svg';
+import checkImg from '@/assets/check.svg';
 
 const NoticeDetail = () => {
   const router = useRouter();
-  // 가게 아이디 가져오기
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const { data, isError, isLoading } = useUserQuery();
   const { setIsOpen, setIsClose, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
 
-  // 프로필 등록 여부 확인
   const handleApplyClick = () => {
     if (!data?.data.item.phone) {
       setIsOpen('profileAlert');
@@ -36,14 +36,19 @@ const NoticeDetail = () => {
     }
   };
 
-  // 신청 여부 확인
   const handleCancelClick = () => {
-    if (confirm("신청을 취소하시겠어요?")) {
-      setIsApplied(false);
-    }
+    setIsOpen('cancelModal');
   };
 
-  // 프로필 미등록일 경우 등록 페이지로 넘어가기
+  const handleConfirmCancel = () => {
+    setIsApplied(false);
+    setIsClose();
+  };
+
+  const handleCloseCancelModal = () => {
+    setIsClose();
+  };
+
   const onClickConfirm = () => {
     setIsClose();
     if (key === 'profileAlert') {
@@ -51,15 +56,17 @@ const NoticeDetail = () => {
     }
   };
 
-  // 모달 헤더 조건부 - 경고 이미지 사라지는 이슈 확인하기
   const modalHeader =
     key === 'profileAlert' ? (
       <>
-        <Image src={testImg} alt="경고 표시" />내 프로필을 먼저 등록해 주세요.
+        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해 주세요.
       </>
-    ) : (
-      '신청이 완료되었습니다.'
-    );
+    ) : key === 'applySuccess' ? (
+      <>
+        <Image src={checkImg} alt="체크 표시" />
+        신청이 완료되었습니다.
+      </>
+    ) : null;
 
   return (
     <>
@@ -96,11 +103,11 @@ const NoticeDetail = () => {
             </S.DetailText>
             {isApplied ? (
               <div style={{ width: '346px' }}>
-              <CustomButton 
-              onClick={handleCancelClick} 
-              color="#EA3C12"
-              text="취소하기"
-              />
+                <CustomButton
+                  onClick={handleCancelClick}
+                  color="#EA3C12"
+                  text="취소하기"
+                />
               </div>
             ) : (
               <S.CustomRedButton onClick={handleApplyClick}>
@@ -143,6 +150,35 @@ const NoticeDetail = () => {
           </div>
         }
       />
+
+      {isOpen && key === 'cancelModal' && (
+        <Modal
+          modalKey="cancelModal"
+          modalHeader={
+            <>
+              <Image src={checkImg} alt="체크 표시" />
+              <p>신청을 취소하시겠어요?</p>
+            </>
+          }
+          modalFooter={
+            <>
+              <div style={{ width: '80px' }}>
+                <CustomButton
+                  onClick={handleCloseCancelModal}
+                  text="아니오"
+                  color="#EA3C12"
+                />
+              </div>
+              <div style={{ width: '80px' }}>
+                <RedButton 
+                  onClick={handleConfirmCancel} 
+                  text="취소하기" 
+                />
+              </div>
+            </>
+          }
+        />
+      )}
     </>
   );
 };
