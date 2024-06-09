@@ -76,7 +76,7 @@ export const TextContainer = styled.div`
 `;
 
 export const PriceWrap = styled.div`
-/* gap 왜 안먹히는지 PostPrice 보고 수정하기 */
+  /* gap 왜 안먹히는지 PostPrice 보고 수정하기 */
   display: flex;
 `;
 
@@ -128,7 +128,7 @@ export const DescripContainer = styled.div`
 `;
 
 export const RecentWrap = styled.div`
-  margin: 60px 0 120px 0; 
+  margin: 60px 0 120px 0;
 `;
 
 export const PostContainer = styled.div`
@@ -146,3 +146,13 @@ export const PostContainer = styled.div`
     grid-template-columns: 1fr 1fr;
   }
 `;
+
+// 추후 수정
+// export const ModalHeader = styled.div`
+//   color: var(--black-black_333236, #333236);
+//   text-align: center;
+//   font-size: 18px;
+//   font-weight: 500;
+//   margin-top: 70px;
+//   gap: 16px;
+// `;
