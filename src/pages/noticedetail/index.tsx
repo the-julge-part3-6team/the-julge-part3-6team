@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import * as S from './index.styled';
 import { useRouter } from 'next/router';
@@ -19,19 +19,31 @@ import testImg from '@/assets/caution.svg';
 
 const NoticeDetail = () => {
   const router = useRouter();
+  // 가게 아이디 가져오기
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const { data, isError, isLoading } = useUserQuery();
   const { setIsOpen, setIsClose, key, isOpen } = useModal();
+  const [isApplied, setIsApplied] = useState(false);
 
+  // 프로필 등록 여부 확인
   const handleApplyClick = () => {
     if (!data?.data.item.phone) {
       setIsOpen('profileAlert');
     } else {
       setIsOpen('applySuccess');
+      setIsApplied(true);
     }
   };
 
+  // 신청 여부 확인
+  const handleCancelClick = () => {
+    if (confirm("신청을 취소하시겠어요?")) {
+      setIsApplied(false);
+    }
+  };
+
+  // 프로필 미등록일 경우 등록 페이지로 넘어가기
   const onClickConfirm = () => {
     setIsClose();
     if (key === 'profileAlert') {
@@ -39,6 +51,7 @@ const NoticeDetail = () => {
     }
   };
 
+  // 모달 헤더 조건부 - 경고 이미지 사라지는 이슈 확인하기
   const modalHeader =
     key === 'profileAlert' ? (
       <>
@@ -81,9 +94,19 @@ const NoticeDetail = () => {
                 라면 올려두고 끓이기만 하면 되어서 쉬운 편에 속하는 가게입니다.
               </p>
             </S.DetailText>
-            <S.CustomRedButton onClick={handleApplyClick}>
-              신청하기
-            </S.CustomRedButton>
+            {isApplied ? (
+              <div style={{ width: '346px' }}>
+              <CustomButton 
+              onClick={handleCancelClick} 
+              color="#EA3C12"
+              text="취소하기"
+              />
+              </div>
+            ) : (
+              <S.CustomRedButton onClick={handleApplyClick}>
+                신청하기
+              </S.CustomRedButton>
+            )}
           </S.TextContainer>
         </S.ContextWrap>
 
@@ -99,9 +122,9 @@ const NoticeDetail = () => {
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            {recentPosts.map((post, index) => (
+            {/* {recentPosts.map((post, index) => (
               <Post key={index} {...post} />
-            ))}
+            ))} */}
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
