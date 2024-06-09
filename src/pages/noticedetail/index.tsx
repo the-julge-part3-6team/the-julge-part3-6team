@@ -21,9 +21,9 @@ const NoticeDetail = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
-  const {
-    data: userData,
-    isError: userError,
+  const { 
+    data: userData, 
+    isError: userError, 
     isLoading: userLoading,
   } = useUserQuery();
   const { setIsOpen, setIsClose, key, isOpen } = useModal();
@@ -42,49 +42,40 @@ const NoticeDetail = () => {
     }
   }, []);
 
-  const handleApplyClick = () => {
-    if (!userData?.data.item.phone) {
-      setIsOpen('profileAlert');
-    } else {
-      setIsOpen('applySuccess');
-      setIsApplied(true);
+  const handleModal = {
+    applyClick: () => {
+      if (!userData?.data.item.phone) {
+        setIsOpen('profileAlert');
+      } else {
+        setIsOpen('applySuccess');
+        setIsApplied(true);
+      }
+    },
+    cancelClick: () => setIsOpen('cancelModal'),
+    confirmCancel: () => {
+      setIsApplied(false);
+      setIsClose();
+    },
+    closeCancelModal: () => setIsClose(),
+    confirm: () => {
+      setIsClose();
+      if (key === 'profileAlert') {
+        router.push('/mypage');
+      }
     }
   };
 
-  const handleCancelClick = () => {
-    setIsOpen('cancelModal');
-  };
+  const modalHeader = key === 'profileAlert' ? (
+    <>
+      <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해 주세요.
+    </>
+  ) : key === 'applySuccess' ? (
+    <>
+      <Image src={checkImg} alt="체크 표시" />신청이 완료되었습니다.
+    </>
+  ) : null;
 
-  const handleConfirmCancel = () => {
-    setIsApplied(false);
-    setIsClose();
-  };
-
-  const handleCloseCancelModal = () => {
-    setIsClose();
-  };
-
-  const onClickConfirm = () => {
-    setIsClose();
-    if (key === 'profileAlert') {
-      router.push('/mypage');
-    }
-  };
-
-  const modalHeader =
-    key === 'profileAlert' ? (
-      <>
-        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해
-        주세요.
-      </>
-    ) : key === 'applySuccess' ? (
-      <>
-        <Image src={checkImg} alt="체크 표시" />
-        신청이 완료되었습니다.
-      </>
-    ) : null;
-
-  // if (userLoading || !shop_id) {
+    // if (userLoading || !shop_id) {
   //   return <p>Loading...</p>;
   // }
 
@@ -105,7 +96,7 @@ const NoticeDetail = () => {
           <S.TextContainer>
             <S.SmallText>시급</S.SmallText>
             <S.PriceWrap>
-            {/* priceChange 계산 */}
+              {/* priceChange 계산 */}
               {/* <PostPrice status="active" price={storeData?.originalHourlyPay} priceChange={50} />  */}
             </S.PriceWrap>
             <S.WidgetWrap>
@@ -120,13 +111,13 @@ const NoticeDetail = () => {
             {isApplied ? (
               <div style={{ width: '346px' }}>
                 <CustomButton
-                  onClick={handleCancelClick}
+                  onClick={handleModal.cancelClick}
                   color="#EA3C12"
                   text="취소하기"
                 />
               </div>
             ) : (
-              <S.CustomRedButton onClick={handleApplyClick}>
+              <S.CustomRedButton onClick={handleModal.applyClick}>
                 신청하기
               </S.CustomRedButton>
             )}
@@ -161,7 +152,7 @@ const NoticeDetail = () => {
             <CustomButton
               text="확인"
               color="#EA3C12"
-              onClick={onClickConfirm}
+              onClick={handleModal.confirm}
             />
           </div>
         }
@@ -180,13 +171,13 @@ const NoticeDetail = () => {
             <>
               <div style={{ width: '80px' }}>
                 <CustomButton
-                  onClick={handleCloseCancelModal}
+                  onClick={handleModal.closeCancelModal}
                   text="아니오"
                   color="#EA3C12"
                 />
               </div>
               <div style={{ width: '80px' }}>
-                <RedButton onClick={handleConfirmCancel} text="취소하기" />
+                <RedButton onClick={handleModal.confirmCancel} text="취소하기" />
               </div>
             </>
           }
