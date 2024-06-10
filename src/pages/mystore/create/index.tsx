@@ -7,11 +7,11 @@ import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
 import { mutateAddStore } from '../../../models/store/mutateAddStore';
 import { useState } from 'react';
-
 import Modal from '@/shared/components/Modal/Modal';
 import { useRouter } from 'next/router';
 import { useModal } from '@/shared/store/useModal';
-import { handleValidate } from '@/models/store/handleValidate';
+import { handleSubmit } from '@/models/store/createStoreSubmit';
+import { STORE_FORM_ERRORS_INITIAL_VALUE } from '@/constant/store';
 
 const index = () => {
   const {
@@ -25,44 +25,10 @@ const index = () => {
     description,
     setStoreDescription,
   } = useAddStoreState();
-  const [errors, setErrors] = useState({
-    name: '',
-    category: '',
-    address1: '',
-    address2: '',
-    originalHourlyPay: '',
-    imageUrl: '',
-    description: '',
-  });
+  const [errors, setErrors] = useState(STORE_FORM_ERRORS_INITIAL_VALUE);
   const router = useRouter();
   const { setIsOpen, setIsClose } = useModal();
   const { mutate } = mutateAddStore(setIsOpen);
-
-  const handleSubmit = () => {
-    const hasError = handleValidate(
-      {
-        name,
-        category,
-        address1,
-        address2,
-        imageUrl,
-        originalHourlyPay,
-      },
-      setErrors,
-    );
-    if (!hasError) {
-      mutate({
-        id: id,
-        name,
-        category,
-        address1,
-        address2,
-        description,
-        imageUrl,
-        originalHourlyPay,
-      });
-    }
-  };
 
   const onClickConfirm = () => {
     setIsClose();
@@ -86,10 +52,27 @@ const index = () => {
             id="1"
           />
         </S.MyStoreContentWrap>
-
         <S.ButtonCotainer>
           <S.ButtonWrap>
-            <RedButton text="등록하기" onClick={handleSubmit} />
+            <RedButton
+              text="등록하기"
+              onClick={() =>
+                handleSubmit(
+                  {
+                    id,
+                    name,
+                    category,
+                    address1,
+                    address2,
+                    originalHourlyPay,
+                    imageUrl,
+                    description,
+                  },
+                  setErrors,
+                  mutate,
+                )
+              }
+            />
           </S.ButtonWrap>
         </S.ButtonCotainer>
         <Modal
@@ -118,6 +101,3 @@ const index = () => {
 };
 
 export default index;
-function setIsClose() {
-  throw new Error('Function not implemented.');
-}

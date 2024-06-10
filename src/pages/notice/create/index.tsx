@@ -6,29 +6,21 @@ import { useEffect, useState } from 'react';
 import { createNoticeMutate } from '@/models/notice/createNoticeMutate';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { dateTransfromIso } from '@/shared/utils/dateTransform';
 import { useModal } from '@/shared/store/useModal';
 import Modal from '@/shared/components/Modal/Modal';
 import { onSubmit } from '@/models/notice/noticeSubmit';
+import {
+  NOTICE_FORM_ERRORS_INITIAL_VALUE,
+  NOTICE_FORM_INITIAL_VALUE,
+} from '@/constant/notice';
 
 const index = () => {
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const router = useRouter();
   const { setIsOpen, setIsClose } = useModal();
-
-  const [notice, setNotice] = useState({
-    hourlyPay: 0,
-    startsAt: '',
-    workhour: 0,
-    description: '',
-  });
-
-  const [errors, setErrors] = useState({
-    hourlyPay: '',
-    startsAt: '',
-    workhour: '',
-  });
+  const [notice, setNotice] = useState(NOTICE_FORM_INITIAL_VALUE);
+  const [errors, setErrors] = useState(NOTICE_FORM_ERRORS_INITIAL_VALUE);
 
   useEffect(() => {
     if (!shop_id) router.push('/mystore');

@@ -8,14 +8,12 @@ import { useAddStoreState } from '@/shared/store/useAddStoreState';
 import { useSearchParams } from 'next/navigation';
 import { useUserQuery } from '@/models/user/useUserData';
 import { useEffect, useState } from 'react';
-
 import { useRouter } from 'next/router';
-import { useToast } from '@/shared/store/useToast';
 import { useModal } from '@/shared/store/useModal';
 import Modal from '@/shared/components/Modal/Modal';
-import { Employer } from '@/shared/components/Header/employer/Employer';
 import { handleSubmit } from '../../../models/store/handleSubmit';
 import { mutateUpdateStore } from '@/models/store/mutateUpdateStore';
+import { STORE_FORM_ERRORS_INITIAL_VALUE } from '@/constant/store';
 
 const index = () => {
   const {
@@ -34,15 +32,7 @@ const index = () => {
     setStoreDescription,
     setStoreImage,
   } = useAddStoreState();
-  const [errors, setErrors] = useState({
-    name: '',
-    category: '',
-    address1: '',
-    address2: '',
-    originalHourlyPay: '',
-    imageUrl: '',
-    description: '',
-  });
+  const [errors, setErrors] = useState(STORE_FORM_ERRORS_INITIAL_VALUE);
   const router = useRouter();
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
@@ -63,11 +53,6 @@ const index = () => {
   }, [store]);
 
   const { mutate } = mutateUpdateStore(shop_id || '', setIsOpen);
-
-  const onClickConfirm = () => {
-    setIsClose();
-    router.push('/mystore');
-  };
 
   return (
     <>
@@ -113,7 +98,13 @@ const index = () => {
           modalHeader={<S.ModalHeader>수정이 완료되었습니다.</S.ModalHeader>}
           modalFooter={
             <S.ModalFooter>
-              <RedButton text="확인" onClick={onClickConfirm} />
+              <RedButton
+                text="확인"
+                onClick={() => {
+                  setIsClose();
+                  router.push('/mystore');
+                }}
+              />
             </S.ModalFooter>
           }
         />

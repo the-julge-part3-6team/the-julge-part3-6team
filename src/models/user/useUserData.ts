@@ -1,5 +1,5 @@
 import { useUserData } from '@/shared/store/useUserData';
-import { getUserApi } from '@/widgets/mystore/api/getUser.api';
+import { apiInstance } from '@/shared/utils/axios';
 import { useQuery } from '@tanstack/react-query';
 
 export const useUserQuery = () => {
@@ -8,7 +8,7 @@ export const useUserQuery = () => {
   const { data, isError, isLoading } = useQuery({
     queryKey: [`/users/${user_id}`],
     queryFn: () => {
-      return getUserApi(user_id);
+      return apiInstance.get(`/users/${user_id}`);
     },
     enabled: !!user_id,
   });
