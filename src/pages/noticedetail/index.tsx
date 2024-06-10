@@ -11,27 +11,32 @@ import Post from '@/shared/components/PostList/Post/Post';
 import Modal from '@/shared/components/Modal/Modal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
-import storeImg from '@/assets/store.png';
+// import storeImg from '@/assets/store.png'; 목업
 import cautionImg from '@/assets/caution.svg';
 import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
+import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
+
+interface StoreData {
+  name: string;
+  address1: string;
+  originalHourlyPay: number;
+  imageUrl: string;
+  description: string;
+}
 
 const NoticeDetail = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
-  const {
-    data: userData,
-    isError: userError,
-    isLoading: userLoading,
-  } = useUserQuery();
+  const notice_id = searchParams.get('notice_id');
+  const { data: userData, isError: userError, isLoading: userLoading } = useUserQuery();
   const { setIsOpen, setIsClose, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
   const [recentPosts, setRecentPosts] = useState([]);
-  const [storeData, setStoreData] = useState(null);  
+  const [storeData, setStoreData] = useState<StoreData | null>(null);
 
-  // localStorage 수정하기
   useEffect(() => {
     const recentPostsFromLocalStorage = localStorage.getItem('recentPosts');
     if (recentPostsFromLocalStorage) {
@@ -40,7 +45,6 @@ const NoticeDetail = () => {
     }
   }, []);
 
-  // fetchStoreData 다른 파일로 분리하기
   useEffect(() => {
     const fetchStoreData = async () => {
       try {
@@ -52,7 +56,9 @@ const NoticeDetail = () => {
         console.log("Fetched store data:", data); 
         setStoreData({
           name: data.name,
+          address1: data.address1,
           originalHourlyPay: data.originalHourlyPay,
+          imageUrl: data.imageUrl,
           description: data.description
         });
       } catch (error) {
@@ -93,8 +99,7 @@ const NoticeDetail = () => {
   const modalHeader =
     key === 'profileAlert' ? (
       <>
-        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해
-        주세요.
+        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해 주세요.
       </>
     ) : key === 'applySuccess' ? (
       <>
@@ -103,9 +108,9 @@ const NoticeDetail = () => {
       </>
     ) : null;
 
-  // if (userLoading || !shop_id) {
-  //   return <p>Loading...</p>;
-  // }
+  if (userLoading || !shop_id || !notice_id || !storeData) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -113,18 +118,18 @@ const NoticeDetail = () => {
       <S.PageLayout>
         <S.TextWrap>
           <S.SmallText>식당</S.SmallText>
-          <S.BigText>{storeData?.name}</S.BigText>
+          <S.BigText>{storeData.name}</S.BigText>
         </S.TextWrap>
 
         <S.ContextWrap>
           <S.ImageContainer>
-            <PostImage status="active" imgSrc={storeImg} />
+            {storeData.imageUrl}
           </S.ImageContainer>
 
           <S.TextContainer>
             <S.SmallText>시급</S.SmallText>
             <S.PriceWrap>
-              <PostPrice status="active" price={storeData?.originalHourlyPay} priceChange={50} />
+              <PostPrice status="active" price={storeData.originalHourlyPay} priceChange={50} />
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
@@ -134,7 +139,7 @@ const NoticeDetail = () => {
               />
               <PostInform status="active" type="장소" content="서울시 송파구" />
             </S.WidgetWrap>
-            <S.DetailText><p>{storeData?.description}</p></S.DetailText>
+            <S.DetailText><p>{storeData.description}</p></S.DetailText>
             {isApplied ? (
               <div style={{ width: '346px' }}>
                 <CustomButton
@@ -154,8 +159,7 @@ const NoticeDetail = () => {
         <S.DescripContainer>
           <S.SmallText isBlack>공고 설명</S.SmallText>
           <p>
-            기존 알바 친구가 그만둬서 새로운 친구를 구했는데, 그 사이에 하루가
-            비네요.
+            기존 알바 친구가 그만둬서 새로운 친구를 구했는데, 그 사이에 하루가 비네요.
           </p>
           <p>급해서 시급도 높였고 그렇게 바쁜 날이 아니라서 괜찮을거예요.</p>
         </S.DescripContainer>
@@ -163,9 +167,9 @@ const NoticeDetail = () => {
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            {/* {recentPosts.map((post, index) => (
+            {recentPosts.map((post, index) => (
               <Post key={index} {...post} />
-            ))} */}
+            ))}
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
