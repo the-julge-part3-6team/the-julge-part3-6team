@@ -2,8 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { AxiosError } from 'axios';
 import { useUserData } from '@/shared/store/useUserData';
-import { myPageApi } from '../api/mypage.api';
 import { useModal } from '@/shared/store/useModal';
+import { apiInstance } from '@/shared/utils/axios';
 
 interface userData {
   name: string;
@@ -20,7 +20,12 @@ export const useUserValidation = () => {
   return useMutation({
     mutationKey: [`/users/${user_id}`],
     mutationFn: ({ name, phone, address, bio }: userData) => {
-      return myPageApi(name, phone, address, bio, user_id);
+      return apiInstance.put(`/users/${user_id}`, {
+        name,
+        phone,
+        address,
+        bio,
+      });
     },
     onSuccess: data => {
       setIsOpen('등록완료');
