@@ -14,10 +14,10 @@ export const RegistrationProfile = () => {
     useProfileData();
 
   const [error, setError] = useState<FieldErrors>({
-    name,
-    phone,
-    address,
-    bio,
+    name: '',
+    phone: '',
+    address: '',
+    bio: '',
   });
   const result = useUserValidation();
 
