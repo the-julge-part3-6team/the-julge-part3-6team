@@ -13,7 +13,6 @@ interface userData {
 }
 
 export const useUserValidation = () => {
-  const router = useRouter();
   const { user_id } = useUserData();
   const { setIsOpen } = useModal();
 

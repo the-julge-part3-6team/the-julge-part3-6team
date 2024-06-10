@@ -12,7 +12,7 @@ export const isValidData = (
   });
 
   if (!isSuccess) {
-    let errorField: { [key: string]: string } = {};
+    let errorField: FieldErrors = {};
     const { errors } = error;
     errors.forEach(error => {
       const path = error.path[0];

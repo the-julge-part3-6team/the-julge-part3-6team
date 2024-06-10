@@ -8,24 +8,24 @@ import { useUserValidation } from '@/models/user/useUserUpdateForm';
 import { EditProfileModal } from '../editProfileModal/EditProfileModal';
 import { isValidData } from '../../../../models/user/isValidDate';
 import { onChangeValue } from '@/models/user/onChangeValue';
+import { USER_FORM_ERRORS_INITIAL_VALUE } from '@/constant/user';
 
 export const RegistrationProfile = () => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
     useProfileData();
 
-  const [error, setError] = useState<FieldErrors>({
-    name: '',
-    phone: '',
-    address: '',
-    bio: '',
-  });
+  const [error, setError] = useState<FieldErrors>(
+    USER_FORM_ERRORS_INITIAL_VALUE,
+  );
+  const formData = { name, phone, address, bio };
+
   const result = useUserValidation();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isValid = isValidData({ name, phone, address, bio }, setError);
-    if (isValid) result.mutate({ name, phone, address, bio });
+    const isValid = isValidData(formData, setError);
+    if (isValid) result.mutate(formData);
   };
 
   return (
