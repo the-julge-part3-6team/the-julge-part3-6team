@@ -29,18 +29,43 @@ const NoticeDetail = () => {
   const { setIsOpen, setIsClose, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
   const [recentPosts, setRecentPosts] = useState([]);
+  const [storeData, setStoreData] = useState(null);  
 
+  // localStorage 수정하기
   useEffect(() => {
     const recentPostsFromLocalStorage = localStorage.getItem('recentPosts');
-    if (recentPostsFromLocalStorage !== null) {
+    if (recentPostsFromLocalStorage) {
       const recentPostsParsed = JSON.parse(recentPostsFromLocalStorage);
-      const sortedRecentPosts = recentPostsParsed.sort(
-        (a: any, b: any) => b.timestamp - a.timestamp,
-      );
-      const recentPostsToShow = sortedRecentPosts.slice(0, 6);
-      setRecentPosts(recentPostsToShow);
+      setRecentPosts(recentPostsParsed);
     }
   }, []);
+
+  // fetchStoreData 다른 파일로 분리하기
+  useEffect(() => {
+    const fetchStoreData = async () => {
+      try {
+        const response = await fetch(`/api/shops/${shop_id}/notices/${notice_id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch store data');
+        }
+        const data = await response.json();
+        console.log("Fetched store data:", data); 
+        setStoreData({
+          name: data.name,
+          originalHourlyPay: data.originalHourlyPay,
+          description: data.description
+        });
+      } catch (error) {
+        console.error('Failed to fetch store data:', error);
+      }
+    };
+
+    if (shop_id && notice_id) {
+      fetchStoreData();
+    }
+  }, [shop_id, notice_id]);
+
+  console.log(userData);
 
   const handleModal = {
     applyClick: () => {
@@ -88,7 +113,7 @@ const NoticeDetail = () => {
       <S.PageLayout>
         <S.TextWrap>
           <S.SmallText>식당</S.SmallText>
-          {/* <S.BigText>{storeData?.name}</S.BigText> */}
+          <S.BigText>{storeData?.name}</S.BigText>
         </S.TextWrap>
 
         <S.ContextWrap>
@@ -99,8 +124,7 @@ const NoticeDetail = () => {
           <S.TextContainer>
             <S.SmallText>시급</S.SmallText>
             <S.PriceWrap>
-              {/* priceChange 계산 */}
-              {/* <PostPrice status="active" price={storeData?.originalHourlyPay} priceChange={50} />  */}
+              <PostPrice status="active" price={storeData?.originalHourlyPay} priceChange={50} />
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
@@ -110,7 +134,7 @@ const NoticeDetail = () => {
               />
               <PostInform status="active" type="장소" content="서울시 송파구" />
             </S.WidgetWrap>
-            {/* <S.DetailText><p>{storeData?.description}</p></S.DetailText> */}
+            <S.DetailText><p>{storeData?.description}</p></S.DetailText>
             {isApplied ? (
               <div style={{ width: '346px' }}>
                 <CustomButton

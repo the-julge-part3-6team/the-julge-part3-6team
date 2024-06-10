@@ -17,6 +17,7 @@ const Dropdown = ({ options, onClick, value }: DropdownProps) => {
   if (value) selectedOption = value;
   const toggleDropdown = () => setIsOpen(!isOpen);
 
+  // handleClickOutside -> shared/utils에 분리 (인자는 dropdownRef, setIsOpen 받아오기)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
