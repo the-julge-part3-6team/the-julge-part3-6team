@@ -15,7 +15,6 @@ const EditForm = () => {
   const { data, isError, isLoading } = useUserQuery();
   const user_id = param.get('user_id');
   const item: UserDataType = data?.data.item;
-  console.log(item);
 
   useEffect(() => {
     if (isLoading) return;
