@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Input from '@/shared/components/Input/Input';
+import * as S from './RegistrationProfile.styled';
 import { locations } from '@/components/filter/constant/locations';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useProfileData } from '@/shared/store/useProfileData';
 import { useUserValidation } from '@/widgets/mypage/model/useUserUpdateForm';
-import * as S from './RegistrationProfile.styled';
 import { EditProfileModal } from '../editProfileModal/EditProfileModal';
 import { onChangeValue } from '../../model/onChangeValue';
+import { isValidData } from '../../model/isValidDate';
 
 export const RegistrationProfile = () => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
@@ -18,11 +19,13 @@ export const RegistrationProfile = () => {
     address,
     bio,
   });
-  const { mutate } = useUserValidation(setError);
+  const result = useUserValidation();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate({ name, phone, address, bio });
+
+    const isValid = isValidData({ name, phone, address, bio }, setError);
+    if (isValid) result.mutate({ name, phone, address, bio });
   };
 
   return (
