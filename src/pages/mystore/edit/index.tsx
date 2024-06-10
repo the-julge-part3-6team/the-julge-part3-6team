@@ -6,16 +6,16 @@ import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
 import { useSearchParams } from 'next/navigation';
-import { useUserQuery } from '@/components/user/model/useUserData';
+import { useUserQuery } from '@/models/user/useUserData';
 import { useEffect, useState } from 'react';
-import { mutateUpdateStore } from './model/mutateUpdateStore';
-import { handleValidate } from './model/handleValidate';
+
 import { useRouter } from 'next/router';
 import { useToast } from '@/shared/store/useToast';
 import { useModal } from '@/shared/store/useModal';
 import Modal from '@/shared/components/Modal/Modal';
 import { Employer } from '@/shared/components/Header/employer/Employer';
-import { handleSubmit } from './model/handleSubmit';
+import { handleSubmit } from '../../../models/store/handleSubmit';
+import { mutateUpdateStore } from '@/models/store/mutateUpdateStore';
 
 const index = () => {
   const {

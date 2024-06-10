@@ -5,14 +5,13 @@ import { AddStoreImage } from '@/components/ceo/ui/addStoreImage/AddStoreImage';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
-import { mutateAddStore } from './model/mutateAddStore';
+import { mutateAddStore } from '../../../models/store/mutateAddStore';
 import { useState } from 'react';
-import { handleValidate } from '../edit/model/handleValidate';
+
 import Modal from '@/shared/components/Modal/Modal';
 import { useRouter } from 'next/router';
 import { useModal } from '@/shared/store/useModal';
-import { useToast } from '@/shared/store/useToast';
-import { Employer } from '@/shared/components/Header/employer/Employer';
+import { handleValidate } from '@/models/store/handleValidate';
 
 const index = () => {
   const {

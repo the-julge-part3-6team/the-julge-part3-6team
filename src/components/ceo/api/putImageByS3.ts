@@ -1,4 +1,4 @@
-import { apiInstance } from '@/shared/utils/axios';
+import { awsApiInstance } from '@/shared/utils/axios';
 
 export const putImageByS3 = async ({
   file,
@@ -9,8 +9,7 @@ export const putImageByS3 = async ({
 }) => {
   const formData = new FormData();
   formData.append('file', file);
-  localStorage.setItem('hasImage', 'true');
-  return await apiInstance.put(url, file, {
+  return await awsApiInstance.put(url, file, {
     headers: { 'Content-Type': 'application/octet-stream' },
   });
 };

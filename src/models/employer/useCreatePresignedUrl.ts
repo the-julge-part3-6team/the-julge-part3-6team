@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { postImageApi } from '../api/postImage';
+import { postImageApi } from '../../components/ceo/api/postImage';
 
 export const useCreatePresignedUrl = () => {
   const mutation = useMutation(postImageApi);

@@ -1,7 +1,7 @@
 import * as S from './SigninForm.styled';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import { useSigninState } from '../../model/useSigninValidateion';
-import { useSigninMutation } from '../../model/useSigninMutation';
+import { useSigninMutation } from '../../../../models/auth/useSigninMutation';
 import Input from '@/shared/components/Input/Input';
 
 export const SigninForm = () => {

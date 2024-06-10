@@ -4,7 +4,7 @@ import logo from '../../../../public/logo.svg';
 import Image from 'next/image';
 import Search from './Search/Search';
 import { useUserData } from '@/shared/store/useUserData';
-import { useGetAlerts } from '@/components/alert/model/useGetAlerts';
+import { useGetAlerts } from '@/models/alert/useGetAlerts';
 import { NotLogin } from './notLogin/notLogin';
 import { IsLogin } from './isLogin/IsLogin';
 

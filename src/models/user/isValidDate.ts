@@ -1,4 +1,4 @@
-import { userDataSchema } from '@/widgets/mypage/model/useUserValidateion';
+import { userDataSchema } from '@/models/user/useUserValidateion';
 
 export const isValidData = (
   { name, phone, address, bio }: FieldErrors,

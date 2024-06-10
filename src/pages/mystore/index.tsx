@@ -1,21 +1,21 @@
 import Header from '@/shared/components/Header/Header';
 import * as S from './index.styled';
-import { useUserQuery } from '@/components/user/model/useUserData';
-import { NotFoundNotice, NotfoundStore, StoreCard } from '@/widgets/mystore';
+import { useUserQuery } from '@/models/user/useUserData';
+import {
+  NotFoundNotice,
+  NotfoundStore,
+  NoticeCardList,
+  StoreCard,
+} from '@/widgets/mystore';
 import { useUserData } from '@/shared/store/useUserData';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Footer from '@/shared/components/Footer/Footer';
+import { useGetNoticeByStoreId } from '@/models/notice/useGetNoticeByStoreId';
 
 const index = () => {
   const { type } = useUserData();
   const router = useRouter();
-
-  const {
-    data: userData,
-    isError: isUserError,
-    isLoading: isUserLoading,
-  } = useUserQuery();
 
   useEffect(() => {
     if (type === 'employee') {
@@ -23,17 +23,20 @@ const index = () => {
     }
   }, [type, router]);
 
-  if (isUserLoading) {
-    <div>...isLoading</div>;
-  }
+  const {
+    data: userData,
+    isError: isUserError,
+    isLoading: isUserLoading,
+  } = useUserQuery();
 
   const storeData: Store = userData?.data?.item?.shop?.item;
 
-  // const {
-  //   data: NoticeData,
-  //   isError: isNoticeError,
-  //   isLoading: isNoticeLoading,
-  // } = useGetNotice(storeData?.id);
+  const {
+    data: noticeData,
+    isError: isNoticeError,
+    isLoading: isNoticeLoading,
+  } = useGetNoticeByStoreId(storeData?.id);
+  const noticeList = noticeData?.data.items;
 
   let store = storeData ? (
     <StoreCard
@@ -47,11 +50,14 @@ const index = () => {
     <NotfoundStore />
   );
 
-  let application = <NotFoundNotice shop_id={storeData?.id} />;
+  let application = noticeList ? (
+    <NoticeCardList noticeList={noticeList} storeName={storeData?.name} />
+  ) : (
+    <NotFoundNotice shop_id={storeData?.id} />
+  );
 
-  if (isUserLoading) {
-    store = <div>Loading...</div>;
-  }
+  if (isUserLoading) store = <div>loading...</div>;
+  if (isNoticeLoading) application = <div>loading...</div>;
 
   return (
     <>

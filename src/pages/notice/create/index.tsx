@@ -3,14 +3,13 @@ import * as S from './index.styled';
 import { InputContent } from '@/widgets/createNotice';
 import PrimaryButton from '@/shared/components/Button/RedButton/RedButton';
 import { useEffect, useState } from 'react';
-import { handleValidate } from '@/components/notice/model/handleValidate';
-import { createNoticeMutate } from '@/components/notice/model/createNoticeMutate';
+import { createNoticeMutate } from '@/models/notice/createNoticeMutate';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { dateTransfromIso } from '@/shared/utils/dateTransform';
 import { useModal } from '@/shared/store/useModal';
 import Modal from '@/shared/components/Modal/Modal';
-import { onSubmit } from '@/components/notice/model/noticeSubmit';
+import { onSubmit } from '@/models/notice/noticeSubmit';
 
 const index = () => {
   const searchParams = useSearchParams();
