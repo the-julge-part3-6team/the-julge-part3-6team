@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { signinApi } from '../api/signin.api';
+import { signinApi } from '../../widgets/signin/api/signin.api';
 import { AxiosError } from 'axios';
 import { useUserData } from '@/shared/store/useUserData';
 

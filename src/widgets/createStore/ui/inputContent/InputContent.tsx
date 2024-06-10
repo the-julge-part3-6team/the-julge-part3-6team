@@ -3,7 +3,7 @@ import * as S from './InputContent.styled';
 import { locations } from '@/components/filter/constant/locations';
 import { storeTypes } from '@/components/filter/constant/storeTypes';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
-import { useHandleChangeValue } from '../../model/useHandleChangeValue';
+import { useHandleChangeValue } from '../../../../models/store/useHandleChangeValue';
 
 interface Props {
   errors: StoreError;

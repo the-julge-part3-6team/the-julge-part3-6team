@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { signupApi } from '../api/signup.api';
+import { signupApi } from '../../widgets/signup/api/signup.api';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 

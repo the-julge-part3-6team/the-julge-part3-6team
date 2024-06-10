@@ -15,14 +15,12 @@ import storeImg from '@/assets/store.png';
 import cautionImg from '@/assets/caution.svg';
 import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
-import { useUserQuery } from '@/components/user/model/useUserData';
-import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
+import { useUserQuery } from '@/models/user/useUserData';
 
 const NoticeDetail = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
-  const notice_id = searchParams.get('notice_id');  
   const {
     data: userData,
     isError: userError,
@@ -95,7 +93,8 @@ const NoticeDetail = () => {
   const modalHeader =
     key === 'profileAlert' ? (
       <>
-        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해 주세요.
+        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해
+        주세요.
       </>
     ) : key === 'applySuccess' ? (
       <>
@@ -104,9 +103,9 @@ const NoticeDetail = () => {
       </>
     ) : null;
 
-  if (userLoading || !shop_id || !notice_id || !storeData) {
-    return <p>Loading...</p>;
-  }
+  // if (userLoading || !shop_id) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <>

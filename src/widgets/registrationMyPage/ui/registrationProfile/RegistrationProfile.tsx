@@ -4,10 +4,10 @@ import * as S from './RegistrationProfile.styled';
 import { locations } from '@/components/filter/constant/locations';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useProfileData } from '@/shared/store/useProfileData';
-import { useUserValidation } from '@/widgets/mypage/model/useUserUpdateForm';
+import { useUserValidation } from '@/models/user/useUserUpdateForm';
 import { EditProfileModal } from '../editProfileModal/EditProfileModal';
-import { onChangeValue } from '../../model/onChangeValue';
-import { isValidData } from '../../model/isValidDate';
+import { isValidData } from '../../../../models/user/isValidDate';
+import { onChangeValue } from '@/models/user/onChangeValue';
 
 export const RegistrationProfile = () => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =

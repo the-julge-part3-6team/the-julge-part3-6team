@@ -1,11 +1,11 @@
 import * as S from './AddStoreImage.styled';
 import { useEffect, useState } from 'react';
-import { useCreatePresignedUrl } from '../../model/useCreatePresignedUrl';
-import { useSaveImage } from '../../model/useSaveImage';
-import { handleImageUpload } from '../../model/useImageUpload';
+import { useCreatePresignedUrl } from '../../../../models/employer/useCreatePresignedUrl';
 import Image from 'next/image';
 import fiCamera from '../../../../../public/fiCamera.svg';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
+import { useSaveImage } from '@/models/employer/useSaveImage';
+import { handleImageUpload } from '@/models/employer/useImageUpload';
 
 export const AddStoreImage = () => {
   const [file, setFile] = useState<File>();

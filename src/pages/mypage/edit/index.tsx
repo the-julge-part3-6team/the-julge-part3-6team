@@ -5,7 +5,7 @@ import Footer from '@/shared/components/Footer/Footer';
 import { RegistrationProfile } from '@/widgets/registrationMyPage';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { useUserQuery } from '@/components/user/model/useUserData';
+import { useUserQuery } from '@/models/user/useUserData';
 import { useProfileData } from '@/shared/store/useProfileData';
 
 const EditForm = () => {

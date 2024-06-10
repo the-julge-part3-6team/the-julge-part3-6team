@@ -13,19 +13,15 @@ apiInstance.interceptors.request.use(configOrigin => {
     if (config.headers && token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    if (localStorage.getItem('hasImage')) {
-      config.headers.Authorization = null;
-      localStorage.removeItem('hasImage');
-    }
   }
 
   return config;
 });
 
-// export const awsApiInstance = axios.create();
+export const awsApiInstance = axios.create();
 
-// awsApiInstance.interceptors.request.use(config => {
-//   if (typeof window === 'undefined') return config;
-//   config.headers.Authorization = null;
-//   return config;
-// });
+awsApiInstance.interceptors.request.use(config => {
+  if (typeof window === 'undefined') return config;
+  config.headers.Authorization = null;
+  return config;
+});

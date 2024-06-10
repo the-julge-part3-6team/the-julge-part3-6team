@@ -3,7 +3,7 @@ import * as S from './index.styled';
 import { AddProfile } from '@/widgets/mypage/ui/AddProfile/AddProfile';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
-import { useUserQuery } from '@/components/user/model/useUserData';
+import { useUserQuery } from '@/models/user/useUserData';
 import { ViewProfile } from '@/widgets/mypage/ui/ViewProfile/ViewProfile';
 import { EmptyList } from '@/widgets/mypage/ui/EmptyList/EmptyList';
 
