@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { signinApi } from '../../widgets/signin/api/signin.api';
 import { AxiosError } from 'axios';
 import { useUserData } from '@/shared/store/useUserData';
+import { apiInstance } from '@/shared/utils/axios';
 
 interface SigninData {
   email: string;
@@ -15,7 +15,8 @@ export const useSigninMutation = (setError: any) => {
 
   return useMutation({
     mutationKey: ['/token'],
-    mutationFn: ({ email, password }: SigninData) => signinApi(email, password),
+    mutationFn: ({ email, password }: SigninData) =>
+      apiInstance.post('/token', { email, password }),
 
     onSuccess: data => {
       const token = data.data.item.token;

@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { signupApi } from '../../widgets/signup/api/signup.api';
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/router';
+import { apiInstance } from '@/shared/utils/axios';
 
 interface SignUpData {
   email: string;
@@ -13,7 +12,7 @@ export const signupMutation = (setError: any, setIsOpen: any) => {
   return useMutation({
     mutationKey: ['/users'],
     mutationFn: ({ email, password, type }: SignUpData) =>
-      signupApi(email, password, type),
+      apiInstance.post('/users', { email, password, type }),
 
     onSuccess: () => {
       setIsOpen('complete_signup_modal');
