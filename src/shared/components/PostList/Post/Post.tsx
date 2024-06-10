@@ -1,5 +1,5 @@
 import * as S from './Post.styled';
-import { PostContent } from '@/types/post';
+import { PostContent } from '@/shared/types/post';
 import PostImage from '../PostImage/PostImage';
 import PostInform from '../PostInform/PostInform';
 import PostPrice from '../PostPrice/PostPrice';
