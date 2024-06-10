@@ -21,9 +21,9 @@ const NoticeDetail = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
-  const { 
-    data: userData, 
-    isError: userError, 
+  const {
+    data: userData,
+    isError: userError,
     isLoading: userLoading,
   } = useUserQuery();
   const { setIsOpen, setIsClose, key, isOpen } = useModal();
@@ -62,20 +62,23 @@ const NoticeDetail = () => {
       if (key === 'profileAlert') {
         router.push('/mypage');
       }
-    }
+    },
   };
 
-  const modalHeader = key === 'profileAlert' ? (
-    <>
-      <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해 주세요.
-    </>
-  ) : key === 'applySuccess' ? (
-    <>
-      <Image src={checkImg} alt="체크 표시" />신청이 완료되었습니다.
-    </>
-  ) : null;
+  const modalHeader =
+    key === 'profileAlert' ? (
+      <>
+        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해
+        주세요.
+      </>
+    ) : key === 'applySuccess' ? (
+      <>
+        <Image src={checkImg} alt="체크 표시" />
+        신청이 완료되었습니다.
+      </>
+    ) : null;
 
-    // if (userLoading || !shop_id) {
+  // if (userLoading || !shop_id) {
   //   return <p>Loading...</p>;
   // }
 
@@ -177,7 +180,10 @@ const NoticeDetail = () => {
                 />
               </div>
               <div style={{ width: '80px' }}>
-                <RedButton onClick={handleModal.confirmCancel} text="취소하기" />
+                <RedButton
+                  onClick={handleModal.confirmCancel}
+                  text="취소하기"
+                />
               </div>
             </>
           }
