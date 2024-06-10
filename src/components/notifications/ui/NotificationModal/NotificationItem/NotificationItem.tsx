@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './NotificationItem.styled';
-import { Notifications } from '@/types/notification';
+import { Notifications } from '@/shared/types/notification';
 
 const NotificationItem = ({ title, status, timeAgo, date }: Notifications) => {
   let statusText = '';

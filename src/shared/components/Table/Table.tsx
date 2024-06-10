@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './Table.styled';
 import PrimaryBadge from './Badge/Badge';
-import { ITable } from '@/types/table';
+import { ITable } from '@/shared/types/table';
 
 interface Props {
   list: ITable[];

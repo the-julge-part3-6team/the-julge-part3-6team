@@ -1,6 +1,6 @@
 import * as S from './Filter.styled';
 import { useModal } from '@/shared/store/useModal';
-import { FilterState } from '@/types/filterState';
+import { FilterState } from '@/shared/types/filterState';
 import { useFilterStore } from '@/shared/store/useFilterStore';
 import FilterLocation from './FilterLocation/FilterLocation';
 import FilterDate from './FilterDate/FilterDate';

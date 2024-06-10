@@ -1,4 +1,4 @@
-import theme from '@/styles/theme';
+import theme from '@/shared/styles/theme';
 import styled from 'styled-components';
 
 export const GrayButton = styled.button`

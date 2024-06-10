@@ -1,4 +1,4 @@
-import { PostContent } from '@/types/post';
+import { PostContent } from '@/shared/types/post';
 import Post from './Post/Post';
 import * as S from './PostList.styled';
 
