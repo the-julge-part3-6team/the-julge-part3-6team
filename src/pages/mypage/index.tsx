@@ -6,9 +6,9 @@ import Footer from '@/shared/components/Footer/Footer';
 import { useUserQuery } from '@/models/user/useUserData';
 import { ViewProfile } from '@/widgets/mypage/ui/ViewProfile/ViewProfile';
 import { EmptyList } from '@/widgets/mypage/ui/EmptyList/EmptyList';
-import { ClipLoader } from 'react-spinners';
 import { useUserData } from '@/shared/store/useUserData';
 import { useRouter } from 'next/router';
+import { renderSpinner } from '@/shared/utils/renderSpinner';
 
 const MyPage = () => {
   const { type } = useUserData();
@@ -32,11 +32,7 @@ const MyPage = () => {
             <S.ContentWrap>
               <S.ViewFlexBox>
                 <S.MyPageHeader>내 프로필</S.MyPageHeader>
-                {!isLoading ? (
-                  content
-                ) : (
-                  <ClipLoader size={50} color="#36d7b7" />
-                )}
+                {renderSpinner(content, isLoading)}
               </S.ViewFlexBox>
             </S.ContentWrap>
           </S.Container>
@@ -47,7 +43,7 @@ const MyPage = () => {
           <S.Container>
             <S.ContentWrap>
               <S.MyPageHeader>내 프로필</S.MyPageHeader>
-              {!isLoading ? content : <ClipLoader size={50} color="#EA3C12" />}
+              {renderSpinner(content, isLoading)}
             </S.ContentWrap>
           </S.Container>
         </>
