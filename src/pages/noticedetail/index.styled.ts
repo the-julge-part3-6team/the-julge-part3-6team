@@ -97,6 +97,8 @@ export const DetailText = styled.div`
 
 export const CustomRedButton = styled(RedButton)`
   width: 346px;
+  /* border: 1px; */
+  /* font-weight: 700; */
 
   @media (max-width: 744px) {
     width: 100%;

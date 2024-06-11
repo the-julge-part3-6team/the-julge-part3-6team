@@ -1,0 +1,88 @@
+import storeImg from '@/assets/store.png';
+
+export const mockRecentPosts = [
+  {
+    item: {
+      closed: false,
+      name: '수리 에스프레소 샵',
+      startsAt: '2023-07-19T15:00:00.000Z',
+      workhour: '3',
+      address1: '서울시 송파구',
+      hourlyPay: 10000,
+      priceChange: '20',
+      imageUrl: storeImg,
+      description: '카페',
+      id: '1',
+    },
+  },
+  {
+    item: {
+      closed: false,
+      name: '별빛카페',
+      startsAt: '2023-07-19T15:00:00.000Z',
+      workhour: '3',
+      address1: '서울시 마포구',
+      hourlyPay: 9900,
+      priceChange: '12',
+      imageUrl: storeImg,
+      description: '별빛이 내리네',
+      id: '2',
+    },
+  },
+  {
+    item: {
+      closed: false,
+      name: '커피바다',
+      startsAt: '2023-07-19T15:00:00.000Z',
+      workhour: '3',
+      address1: '서울시 광진구',
+      hourlyPay: 11000,
+      priceChange: '100',
+      imageUrl: storeImg,
+      description: '바다가 보이는 카페',
+      id: '3',
+    },
+  },
+  {
+    item: {
+      closed: false,
+      name: '해피버거',
+      startsAt: '2023-07-19T15:00:00.000Z',
+      workhour: '3',
+      address1: '서울시 도봉구',
+      hourlyPay: 9500,
+      priceChange: '12',
+      imageUrl: storeImg,
+      description: '언해피버거',
+      id: '4',
+    },
+  },
+  {
+    item: {
+      closed: false,
+      name: '정원식당',
+      startsAt: '2023-07-19T15:00:00.000Z',
+      workhour: '3',
+      address1: '서울시 동대문구',
+      hourlyPay: 16000,
+      priceChange: '12',
+      imageUrl: storeImg,
+      description: '식당이 정원에 있네요',
+      id: '5',
+    },
+  },
+  {
+    item: {
+      closed: false,
+      name: '우리동네카페',
+      startsAt: '2023-07-19T15:00:00.000Z',
+      workhour: '3',
+      address1: '서울시 강남구',
+      hourlyPay: 9500,
+      priceChange: '100',
+      imageUrl: storeImg,
+      description: '너네동네카페',
+      id: '6',
+    },
+  },
+];

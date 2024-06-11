@@ -5,62 +5,60 @@ import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
-import PostImage from '@/shared/components/PostList/PostImage/PostImage';
 import PostInform from '@/shared/components/PostList/PostInform/PostInform';
-import Post from '@/shared/components/PostList/Post/Post';
 import Modal from '@/shared/components/Modal/Modal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
-// import storeImg from '@/assets/store.png'; 목업
 import cautionImg from '@/assets/caution.svg';
 import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
+import { mockNoticeData } from './data/mockNoticeData';
+import { updateRecentPosts } from '@/models/notice/localStorageUtils';
 import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
+import NoticePostList from './NoticePostList';
+import { mockRecentPosts } from './data/mockRecentData'; // 목업
 
-interface StoreData {
-  name: string;
-  address1: string;
-  originalHourlyPay: number;
-  imageUrl: string;
-  description: string;
+interface NoticeDetailProps {
+  noticeId: string;
 }
 
-const NoticeDetail = () => {
+const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
+  useEffect(() => {
+    updateRecentPosts(noticeId, 6);
+  }, [noticeId]);
   const router = useRouter();
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const notice_id = searchParams.get('notice_id');
-  const { data: userData, isError: userError, isLoading: userLoading } = useUserQuery();
+  const {
+    data: userData,
+    isError: userError,
+    isLoading: userLoading,
+  } = useUserQuery();
   const { setIsOpen, setIsClose, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
   const [recentPosts, setRecentPosts] = useState([]);
-  const [storeData, setStoreData] = useState<StoreData | null>(null);
 
-  useEffect(() => {
-    const recentPostsFromLocalStorage = localStorage.getItem('recentPosts');
-    if (recentPostsFromLocalStorage) {
-      const recentPostsParsed = JSON.parse(recentPostsFromLocalStorage);
-      setRecentPosts(recentPostsParsed);
-    }
-  }, []);
+  const noticeData = mockNoticeData; // 목업 데이터 사용
+  const isNoticeLoading = false; // 데이터 로딩이 완료되었다고 가정
 
   useEffect(() => {
     const fetchStoreData = async () => {
       try {
-        const response = await fetch(`/api/shops/${shop_id}/notices/${notice_id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch store data');
-        }
+        if (!shop_id || !notice_id)
+          throw new Error('Missing shop_id or notice_id');
+        const response = await fetch(`/shops/${shop_id}/notices/${notice_id}`);
+        if (!response.ok) throw new Error('Failed to fetch store data');
         const data = await response.json();
-        console.log("Fetched store data:", data); 
-        setStoreData({
-          name: data.name,
-          address1: data.address1,
-          originalHourlyPay: data.originalHourlyPay,
-          imageUrl: data.imageUrl,
-          description: data.description
-        });
+        console.log('Fetched store data:', data);
+        // setStoreData({
+        //   name: data.shop.item.name,
+        //   address1: data.shop.item.address1,
+        //   originalHourlyPay: data.shop.item.originalHourlyPay,
+        //   imageUrl: data.shop.item.imageUrl,
+        //   description: data.shop.item.description,
+        // });
       } catch (error) {
         console.error('Failed to fetch store data:', error);
       }
@@ -99,7 +97,8 @@ const NoticeDetail = () => {
   const modalHeader =
     key === 'profileAlert' ? (
       <>
-        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해 주세요.
+        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해
+        주세요.
       </>
     ) : key === 'applySuccess' ? (
       <>
@@ -108,38 +107,43 @@ const NoticeDetail = () => {
       </>
     ) : null;
 
-  if (userLoading || !shop_id || !notice_id || !storeData) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <>
       <Header />
       <S.PageLayout>
         <S.TextWrap>
           <S.SmallText>식당</S.SmallText>
-          <S.BigText>{storeData.name}</S.BigText>
+          <S.BigText>{noticeData.item.shop.item.name}</S.BigText>
         </S.TextWrap>
 
         <S.ContextWrap>
           <S.ImageContainer>
-            {storeData.imageUrl}
+            <img
+              src={noticeData.item.shop.item.imageUrl}
+              alt={noticeData.item.shop.item.name}
+            />
           </S.ImageContainer>
 
           <S.TextContainer>
             <S.SmallText>시급</S.SmallText>
             <S.PriceWrap>
-              <PostPrice status="active" price={storeData.originalHourlyPay} priceChange={50} />
+              <PostPrice
+                status="active"
+                price={noticeData.item.hourlyPay}
+                priceChange={50}
+              />
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
-                status="active"
+                status={noticeData.item.closed ? 'closed' : 'active'}
                 type="시간"
-                content="2023.01.02 15:00~18:00 (3시간)"
+                content={noticeData.item.startsAt}
               />
               <PostInform status="active" type="장소" content="서울시 송파구" />
             </S.WidgetWrap>
-            <S.DetailText><p>{storeData.description}</p></S.DetailText>
+            <S.DetailText>
+              <p>{noticeData.item.description}</p>
+            </S.DetailText>
             {isApplied ? (
               <div style={{ width: '346px' }}>
                 <CustomButton
@@ -158,18 +162,14 @@ const NoticeDetail = () => {
 
         <S.DescripContainer>
           <S.SmallText isBlack>공고 설명</S.SmallText>
-          <p>
-            기존 알바 친구가 그만둬서 새로운 친구를 구했는데, 그 사이에 하루가 비네요.
-          </p>
-          <p>급해서 시급도 높였고 그렇게 바쁜 날이 아니라서 괜찮을거예요.</p>
+          <p></p>
+          <p>{noticeData.item.description}</p>
         </S.DescripContainer>
 
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            {recentPosts.map((post, index) => (
-              <Post key={index} {...post} />
-            ))}
+          <NoticePostList noticeList={mockRecentPosts} storeName='mockStore' />
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
