@@ -14,9 +14,7 @@ export const RegistrationProfile = () => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
     useProfileData();
 
-  const [error, setError] = useState<FieldErrors>(
-    USER_FORM_ERRORS_INITIAL_VALUE,
-  );
+  const [error, setError] = useState(USER_FORM_ERRORS_INITIAL_VALUE);
   const formData = { name, phone, address, bio };
 
   const result = useUserValidation();
