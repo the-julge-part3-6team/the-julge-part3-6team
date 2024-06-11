@@ -7,7 +7,7 @@ export const Employee = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    cookies.remove('token', { path: '*' });
+    cookies.remove('token', { path: '/*' });
 
     router.push('/signin');
   };
