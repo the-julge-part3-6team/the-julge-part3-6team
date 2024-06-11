@@ -16,3 +16,10 @@ interface FieldErrors {
 interface SetFieldErrors {
   (error: FieldErrors): void;
 }
+
+interface UserFromErrors extends FieldErrors {
+  name: string;
+  phone: string;
+  address: string;
+  bio: string;
+}
