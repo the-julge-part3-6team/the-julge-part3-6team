@@ -11,6 +11,7 @@ import { IsLogin } from './isLogin/IsLogin';
 const Header = () => {
   const { user_id, type } = useUserData();
   const [testAlarm, setTestAlarm] = useState('');
+
   const { data, isError, isLoading } = useGetAlerts(user_id);
 
   return (
