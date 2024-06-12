@@ -4,9 +4,10 @@ export const PostListContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
+  grid-row-gap: 28px;
+  grid-column-gap: 14px;
 
-  @media (max-width: 1440px) {
+  @media (max-width: 1040px) {
     grid-template-columns: 1fr 1fr;
   }
 

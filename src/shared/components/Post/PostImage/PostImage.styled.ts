@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import styled, { css } from 'styled-components';
 
 interface PostContainerProps {
-  status: 'closed' | 'expired' | 'active';
+  isClosed: boolean;
 }
 
 export const PostImageContainer = styled.div`
@@ -16,8 +16,8 @@ export const PostImage = styled.div<PostContainerProps>`
   overflow: hidden;
   height: 200px; /* 기본값 200px || props 받는 걸로 수정 */
 
-  ${({ status }) =>
-    (status === 'closed' || status === 'expired') &&
+  ${({ isClosed }) =>
+    isClosed === true &&
     css`
       filter: brightness(0.3);
     `}

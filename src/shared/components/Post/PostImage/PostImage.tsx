@@ -1,16 +1,16 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import * as S from './PostImage.styled';
 import testImg from '@/assets/test.jpg';
 
 interface PostImageProps {
-  status: 'closed' | 'expired' | 'active';
-  imgSrc?: StaticImageData;
+  isClosed: boolean;
+  imgSrc?: string;
 }
 
-const PostImage = ({ status, imgSrc }: PostImageProps) => {
+const PostImage = ({ isClosed, imgSrc }: PostImageProps) => {
   return (
     <S.PostImageContainer>
-      <S.PostImage status={status}>
+      <S.PostImage isClosed={isClosed}>
         <Image
           src={imgSrc || testImg}
           alt="가게 이미지"

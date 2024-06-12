@@ -11,16 +11,16 @@ import { useToast } from '@/shared/store/useToast';
 import Table from '@/shared/components/Table/Table';
 import { ITable } from '@/types/table';
 import Footer from '@/shared/components/Footer/Footer';
-import NotificationModal from '@/components/notifications/ui/NotificationModal/NotificationModal';
 import { Notifications } from '@/types/notification';
-import Filter from '@/components/filter/ui/Filter';
 import Header from '@/shared/components/Header/Header';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { ChangeEvent, useState } from 'react';
 import { FilterState } from '@/types/filterState';
 import { PostContent } from '@/types/post';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
-import PostList from '@/shared/components/PostList/PostList';
+import PostList from '@/shared/components/Post/PostList';
+import { NotificationModal } from '@/components/notifications';
+import { Filter } from '@/components/filter';
 
 const handlePageChange = (page: number) => {
   console.log(page);

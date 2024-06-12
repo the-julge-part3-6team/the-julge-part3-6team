@@ -12,7 +12,7 @@ interface Props {
   onApply: (filters: FilterState) => void;
 }
 
-const Filter = ({ modalKey, onApply }: Props) => {
+export const Filter = ({ modalKey, onApply }: Props) => {
   const { isOpen, key } = useModal();
   const isSelected = key === modalKey;
 
@@ -40,7 +40,7 @@ const Filter = ({ modalKey, onApply }: Props) => {
     <>
       {isOpen && isSelected && (
         <S.FilterContainer>
-          <S.Header>상세 필터</S.Header>
+          <S.FilterHeader>상세 필터</S.FilterHeader>
           <S.SectionTitle>위치</S.SectionTitle>
           <FilterLocation
             selectedLocations={selectedLocations}
@@ -61,5 +61,3 @@ const Filter = ({ modalKey, onApply }: Props) => {
     </>
   );
 };
-
-export default Filter;

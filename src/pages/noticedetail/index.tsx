@@ -5,9 +5,9 @@ import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
-import PostImage from '@/shared/components/PostList/PostImage/PostImage';
-import PostInform from '@/shared/components/PostList/PostInform/PostInform';
-import Post from '@/shared/components/PostList/Post/Post';
+import PostImage from '@/shared/components/Post/PostImage/PostImage';
+import PostInform from '@/shared/components/Post/PostInform/PostInform';
+import Post from '@/shared/components/Post/PostCard/Post';
 import Modal from '@/shared/components/Modal/Modal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
@@ -29,7 +29,7 @@ const NoticeDetail = () => {
   const { setIsOpen, setIsClose, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
   const [recentPosts, setRecentPosts] = useState([]);
-  const [storeData, setStoreData] = useState(null);  
+  const [storeData, setStoreData] = useState(null);
 
   // localStorage 수정하기
   useEffect(() => {
@@ -44,16 +44,18 @@ const NoticeDetail = () => {
   useEffect(() => {
     const fetchStoreData = async () => {
       try {
-        const response = await fetch(`/api/shops/${shop_id}/notices/${notice_id}`);
+        const response = await fetch(
+          `/api/shops/${shop_id}/notices/${notice_id}`,
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch store data');
         }
         const data = await response.json();
-        console.log("Fetched store data:", data); 
+        console.log('Fetched store data:', data);
         setStoreData({
           name: data.name,
           originalHourlyPay: data.originalHourlyPay,
-          description: data.description
+          description: data.description,
         });
       } catch (error) {
         console.error('Failed to fetch store data:', error);
@@ -124,7 +126,11 @@ const NoticeDetail = () => {
           <S.TextContainer>
             <S.SmallText>시급</S.SmallText>
             <S.PriceWrap>
-              <PostPrice status="active" price={storeData?.originalHourlyPay} priceChange={50} />
+              <PostPrice
+                status="active"
+                price={storeData?.originalHourlyPay}
+                priceChange={50}
+              />
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
@@ -134,7 +140,9 @@ const NoticeDetail = () => {
               />
               <PostInform status="active" type="장소" content="서울시 송파구" />
             </S.WidgetWrap>
-            <S.DetailText><p>{storeData?.description}</p></S.DetailText>
+            <S.DetailText>
+              <p>{storeData?.description}</p>
+            </S.DetailText>
             {isApplied ? (
               <div style={{ width: '346px' }}>
                 <CustomButton

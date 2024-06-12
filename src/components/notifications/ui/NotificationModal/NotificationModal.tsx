@@ -8,7 +8,7 @@ interface Props {
   modalKey: string;
 }
 
-const NotificationModal = ({ modalContents, modalKey }: Props) => {
+export const NotificationModal = ({ modalContents, modalKey }: Props) => {
   const { isOpen, key } = useModal();
   const isSelected = key === modalKey;
 
@@ -27,5 +27,3 @@ const NotificationModal = ({ modalContents, modalKey }: Props) => {
     </>
   );
 };
-
-export default NotificationModal;

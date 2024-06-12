@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import styled, { css } from 'styled-components';
 
 interface PostContainerProps {
-  status: 'closed' | 'expired' | 'active';
+  isClosed: boolean;
 }
 
 export const PostInform = styled.div<PostContainerProps>`
@@ -12,8 +12,8 @@ export const PostInform = styled.div<PostContainerProps>`
   font-size: 14px;
   line-height: 22px;
 
-  ${({ status }) =>
-    (status === 'closed' || status === 'expired') &&
+  ${({ isClosed }) =>
+    isClosed === true &&
     css`
       color: ${theme.Colors.Gray[30]};
     `}
