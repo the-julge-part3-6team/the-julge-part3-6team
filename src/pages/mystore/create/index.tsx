@@ -1,7 +1,7 @@
 import Header from '@/shared/components/Header/Header';
 import * as S from './index.styled';
 import { InputContent } from '@/widgets/createStore';
-import { AddStoreImage } from '@/components/ceo/ui/addStoreImage/AddStoreImage';
+import { AddStoreImage } from '@/components/store/ui/addStoreImage/AddStoreImage';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
