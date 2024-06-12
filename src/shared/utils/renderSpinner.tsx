@@ -5,7 +5,11 @@ export const renderSpinner = (
   isLoading: boolean,
 ) => {
   if (isLoading) {
-    return <ClipLoader size={50} color="#EA3C12" />;
+    return (
+      <div style={{ textAlign: 'center', padding: '50px 0 0' }}>
+        <ClipLoader size={50} color="#EA3C12" />
+      </div>
+    );
   } else {
     return component;
   }
