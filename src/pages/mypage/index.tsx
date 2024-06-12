@@ -15,12 +15,13 @@ const MyPage = () => {
 
   const { data, isError, isLoading } = useUserQuery();
   const userData = data?.data.item;
+  const isPhone = userData?.phone;
 
   return (
     <>
       <Header />
       <ProfileContent userData={userData} isLoading={isLoading} />
-      <ApplicationContent userData={userData} isLoading={isLoading} />
+      {isPhone ? <ApplicationContent isLoading={isLoading} /> : ''}
       <Footer />
     </>
   );

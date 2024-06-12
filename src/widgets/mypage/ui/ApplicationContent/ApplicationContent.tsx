@@ -1,11 +1,17 @@
 import { ApplicationDetailsEmptyList } from '@/components/user';
+import { useUserSupportList } from '@/models/user/useUserSupportList';
+import { renderSpinner } from '@/shared/utils/renderSpinner';
 
-export const ApplicationContent = ({ userData, isLoading }) => {
-  console.log(userData);
+export const ApplicationContent = ({ isLoading }: { isLoading: boolean }) => {
+  // 유저의 지원 목록 조회 useUserSupportList
+  const { data, isError } = useUserSupportList();
+  const AnnouncementApplicationListCount = data?.data?.count;
 
   return (
     <>
-      <ApplicationDetailsEmptyList />
+      {!AnnouncementApplicationListCount
+        ? renderSpinner(<ApplicationDetailsEmptyList />, isLoading)
+        : 'asd'}
     </>
   );
 };
