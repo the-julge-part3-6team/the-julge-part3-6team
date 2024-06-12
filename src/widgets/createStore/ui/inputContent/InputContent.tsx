@@ -10,8 +10,6 @@ import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import { handleSubmit } from '@/models/store/createStoreSubmit';
 import { useState } from 'react';
 import { STORE_FORM_ERRORS_INITIAL_VALUE } from '@/constant/store';
-import { mutateAddStore } from '@/models/store/mutateAddStore';
-import { useModal } from '@/shared/store/useModal';
 import { usePatchFormData } from '@/models/store/usePatchFromData';
 import { useUserQuery } from '@/models/user/useUserData';
 import { useRouter } from 'next/router';
@@ -19,7 +17,7 @@ import { useRouter } from 'next/router';
 interface Props {
   mutate: any;
   edit: boolean;
-  shop_id: string;
+  shop_id: string | null;
 }
 
 export const InputContent = ({ mutate, edit, shop_id }: Props) => {
