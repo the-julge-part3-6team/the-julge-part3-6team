@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { RedButton } from '@/shared/components/Button/RedButton/RedButton.styled';
+import Modal from '@/shared/components/Modal/Modal';
 
 export const PageLayout = styled.div`
   position: relative;
@@ -76,7 +77,7 @@ export const TextContainer = styled.div`
 `;
 
 export const PriceWrap = styled.div`
-display: flex;
+  display: flex;
 `;
 
 export const WidgetWrap = styled.div`
@@ -133,7 +134,7 @@ export const RecentWrap = styled.div`
 `;
 
 export const PostContainer = styled.div`
-// NoticePostList.styled로 분리
+  // NoticePostList.styled로 분리
   /* display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 14px;
@@ -158,3 +159,8 @@ export const PostContainer = styled.div`
 //   margin-top: 70px;
 //   gap: 16px;
 // `;
+
+export const CustomModal = styled(Modal)`
+  width: 298ppx;
+  height: 184px;
+`;

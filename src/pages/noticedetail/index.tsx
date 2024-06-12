@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
 import PostInform from '@/shared/components/PostList/PostInform/PostInform';
-import Modal from '@/shared/components/Modal/Modal';
+import CustomModal from './CustomModal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import cautionImg from '@/assets/caution.svg';
@@ -204,7 +204,7 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
       </S.PageLayout>
       <Footer />
 
-      <Modal
+      <CustomModal
         modalKey={key}
         modalHeader={modalHeader}
         modalFooter={
@@ -219,7 +219,7 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
       />
 
       {isOpen && key === 'cancelModal' && (
-        <Modal
+        <CustomModal
           modalKey="cancelModal"
           modalHeader={
             <>
