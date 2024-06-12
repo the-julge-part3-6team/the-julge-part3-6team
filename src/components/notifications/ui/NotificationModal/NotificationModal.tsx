@@ -1,7 +1,7 @@
 import * as S from './NotificationModal.styled';
 import NotificationItem from './NotificationItem/NotificationItem';
 import { useModal } from '@/shared/store/useModal';
-import { Notifications } from '@/types/notification';
+import { Notifications } from '@/shared/types/notification';
 
 interface Props {
   modalContents: Notifications[];

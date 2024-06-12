@@ -1,5 +1,5 @@
+import { SignupFormState } from '@/constant/auth';
 import { useForm } from 'react-hook-form';
-import { SignupFormState } from '../constant/signupFormState';
 
 export const useSignupState = () => {
   const {

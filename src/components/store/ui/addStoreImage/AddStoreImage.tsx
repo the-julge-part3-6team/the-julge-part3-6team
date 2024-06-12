@@ -1,29 +1,15 @@
 import * as S from './AddStoreImage.styled';
-import { useEffect, useState } from 'react';
 import { useCreatePresignedUrl } from '../../../../models/employer/useCreatePresignedUrl';
 import Image from 'next/image';
 import fiCamera from '../../../../../public/fiCamera.svg';
 import { useAddStoreState } from '@/shared/store/useAddStoreState';
 import { useSaveImage } from '@/models/employer/useSaveImage';
-import { handleImageUpload } from '@/models/employer/useImageUpload';
+import { handleImageChange } from '@/models/store/handleImageChange';
 
 export const AddStoreImage = () => {
-  const [file, setFile] = useState<File>();
   const { imageUrl, setStoreImage } = useAddStoreState();
-  const { mutatePresignedUrl } = useCreatePresignedUrl();
-  const { mutateSaveImage } = useSaveImage();
-
-  useEffect(() => {
-    const test = async () => {
-      const imageurl = await handleImageUpload(
-        file,
-        mutatePresignedUrl,
-        mutateSaveImage,
-      );
-      setStoreImage(imageurl);
-    };
-    test();
-  }, [file]);
+  const { mutateAsync: mutatePresignedUrl } = useCreatePresignedUrl();
+  const { mutateAsync: mutateImage } = useSaveImage();
 
   return (
     <S.AddImageLayout>
@@ -32,7 +18,15 @@ export const AddStoreImage = () => {
         <label>
           <input
             type="file"
-            onChange={e => e.target.files && setFile(e.target.files[0])}
+            onChange={e =>
+              e.target.files &&
+              handleImageChange(
+                e.target.files[0],
+                mutatePresignedUrl,
+                mutateImage,
+                setStoreImage,
+              )
+            }
           />
         </label>
 

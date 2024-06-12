@@ -1,8 +1,10 @@
+import { USER_FORM_ERRORS_INITIAL_VALUE } from '@/constant/user';
 import { userDataSchema } from '@/models/user/useUserValidateion';
+import { Dispatch, SetStateAction } from 'react';
 
 export const isValidData = (
-  { name, phone, address, bio }: FieldErrors,
-  setError: SetFieldErrors,
+  { name, phone, address, bio }: UserFromErrors,
+  setError: Dispatch<SetStateAction<UserFromErrors>>,
 ) => {
   const { success: isSuccess, error } = userDataSchema.safeParse({
     name,
@@ -12,7 +14,7 @@ export const isValidData = (
   });
 
   if (!isSuccess) {
-    let errorField: { [key: string]: string } = {};
+    let errorField: UserFromErrors = USER_FORM_ERRORS_INITIAL_VALUE;
     const { errors } = error;
     errors.forEach(error => {
       const path = error.path[0];
