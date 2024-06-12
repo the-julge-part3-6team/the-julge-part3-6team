@@ -13,14 +13,14 @@ import cautionImg from '@/assets/caution.svg';
 import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
-import { mockNoticeData } from './data/mockNoticeData';
 import { updateRecentPosts } from './utils/useLocalStorage';
 import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
 import NoticePostList from './NoticePostList/NoticePostList';
-import { mockRecentPosts } from './data/mockRecentData';
 import { formatWorkTime } from './utils/useTimeUtils';
 import { calculatePriceChange } from './utils/usePriceUtils';
 import { useHandleModal } from './utils/useHandleModal';
+import { mockNoticeData } from './data/mockNoticeData'; // 목업
+import { mockRecentPosts } from './data/mockRecentData'; // 목업
 
 interface NoticeDetailProps {
   noticeId: string;
@@ -43,6 +43,7 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
   const { setIsOpen, setIsClose, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
   const [recentPosts, setRecentPosts] = useState([]);
+  // const [noticeData, setNoticeData] = useState({}); 실제 API 호출시 사용
 
   const noticeData = mockNoticeData; // 목업 데이터 사용
   const isNoticeLoading = false; // 데이터 로딩이 완료되었다고 가정
@@ -56,12 +57,24 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
         if (!response.ok) throw new Error('Failed to fetch store data');
         const data = await response.json();
         console.log('Fetched store data:', data);
-        // setStoreData({
-        //   name: data.shop.item.name,
-        //   address1: data.shop.item.address1,
-        //   originalHourlyPay: data.shop.item.originalHourlyPay,
-        //   imageUrl: data.shop.item.imageUrl,
-        //   description: data.shop.item.description,
+        // setNoticeData(data); 실제 API 호출시 사용
+        // setNoticeData({
+        //   id: data.item.id,
+        //   hourlyPay: data.item.hourlyPay,
+        //   startsAt: data.item.startsAt,
+        //   workhour: data.item.workhour,
+        //   description: data.item.description,
+        //   closed: data.item.closed,
+        //   shop: {
+        //     id: data.item.shop.item.id,
+        //     name: data.item.shop.item.name,
+        //     category: data.item.shop.item.category,
+        //     address1: data.item.shop.item.address1,
+        //     address2: data.item.shop.item.address2,
+        //     description: data.item.shop.item.description,
+        //     imageUrl: data.item.shop.item.imageUrl,
+        //     originalHourlyPay: data.item.shop.item.originalHourlyPay,
+        //   },
         // });
       } catch (error) {
         console.error('Failed to fetch store data:', error);
