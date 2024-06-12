@@ -23,3 +23,10 @@ interface UserFromErrors extends FieldErrors {
   address: string;
   bio: string;
 }
+
+interface ProfileUserData {
+  name: string;
+  phone: string;
+  address: string;
+  bio: string;
+}
