@@ -3,7 +3,7 @@ import { userDataSchema } from '@/models/user/useUserValidateion';
 import { Dispatch, SetStateAction } from 'react';
 
 export const isValidData = (
-  { name, phone, address, bio }: UserFromErrors,
+  { name, phone, address, bio }: ProfileUserData,
   setError: Dispatch<SetStateAction<UserFromErrors>>,
 ) => {
   const { success: isSuccess, error } = userDataSchema.safeParse({
