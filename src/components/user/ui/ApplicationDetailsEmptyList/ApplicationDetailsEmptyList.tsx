@@ -1,8 +1,8 @@
 import React from 'react';
-import * as S from './EmptyList.styled';
+import * as S from './ApplicationDetailsEmptyList.styled';
 import { useRouter } from 'next/router';
 
-export const EmptyList = () => {
+export const ApplicationDetailsEmptyList = () => {
   const router = useRouter();
 
   return (
@@ -13,6 +13,7 @@ export const EmptyList = () => {
           <S.MyPageBox>
             아직 신청 내역이 없어요.
             <S.CustomRedButton
+              // 수정해야함
               onClick={() => {
                 router.push('mypage/create');
               }}
