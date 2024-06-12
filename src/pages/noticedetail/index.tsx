@@ -107,6 +107,35 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
       </>
     ) : null;
 
+  const formatWorkTime = (startsAt: string, workhour: number) => {
+    const startDate = new Date(startsAt);
+    const endDate = new Date(startDate.getTime() + workhour * 60 * 60 * 1000);
+
+    const formatDate = (date: Date) => {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}.${month}.${day}`;
+    };
+
+    const formatTime = (date: Date) => {
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      return `${hours}:${minutes}`;
+    };
+
+    return `${formatDate(startDate)} ${formatTime(startDate)}~${formatTime(endDate)} (${workhour}시간)`;
+  };
+
+  const calculatePriceChange = (originalPay: number, currentPay: number) => {
+    return ((currentPay - originalPay) / originalPay) * 100;
+  };
+
+  const priceChange = calculatePriceChange(
+    noticeData.item.shop.item.originalHourlyPay,
+    noticeData.item.hourlyPay
+  );
+
   return (
     <>
       <Header />
@@ -130,16 +159,16 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
               <PostPrice
                 status="active"
                 price={noticeData.item.hourlyPay}
-                priceChange={50}
+                priceChange={priceChange}
               />
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
                 status={noticeData.item.closed ? 'closed' : 'active'}
                 type="시간"
-                content={noticeData.item.startsAt}
+                content={formatWorkTime(noticeData.item.startsAt, noticeData.item.workhour)}
               />
-              <PostInform status="active" type="장소" content="서울시 송파구" />
+              <PostInform status="active" type="장소" content={noticeData.item.shop.item.address1} />
             </S.WidgetWrap>
             <S.DetailText>
               <p>{noticeData.item.description}</p>
@@ -163,13 +192,13 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
         <S.DescripContainer>
           <S.SmallText isBlack>공고 설명</S.SmallText>
           <p></p>
-          <p>{noticeData.item.description}</p>
+          <p>{noticeData.item.shop.item.description}</p>
         </S.DescripContainer>
 
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-          <NoticePostList noticeList={mockRecentPosts} storeName='mockStore' />
+            <NoticePostList noticeList={mockRecentPosts} storeName='mockStore' />
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>

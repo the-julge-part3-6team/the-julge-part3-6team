@@ -76,8 +76,7 @@ export const TextContainer = styled.div`
 `;
 
 export const PriceWrap = styled.div`
-  /* gap 왜 안먹히는지 PostPrice 보고 수정하기 */
-  display: flex;
+display: flex;
 `;
 
 export const WidgetWrap = styled.div`
@@ -134,7 +133,8 @@ export const RecentWrap = styled.div`
 `;
 
 export const PostContainer = styled.div`
-  display: grid;
+// NoticePostList.styled로 분리
+  /* display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 14px;
   row-gap: 32px;
@@ -146,7 +146,7 @@ export const PostContainer = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
-  }
+  } */
 `;
 
 // 추후 수정

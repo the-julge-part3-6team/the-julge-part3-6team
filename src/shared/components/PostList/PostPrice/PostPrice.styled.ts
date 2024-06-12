@@ -9,6 +9,7 @@ export const PostPriceContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* gap: 8px; */
 
   @media (max-width: 744px) {
     flex-direction: column;
@@ -28,6 +29,7 @@ export const PostPrice = styled.h2`
 
 export const PostPriceChange = styled.div<PostContainerProps>`
   display: flex;
+  /* width: 100%; */
   height: 36px;
   padding: 12px 30px 12px 12px;
   align-items: center;
