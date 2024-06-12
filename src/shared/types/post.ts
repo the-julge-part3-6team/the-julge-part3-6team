@@ -1,4 +1,4 @@
-export interface Notice {
+export interface NoticeData {
   item: Item;
   links: Link[];
 }

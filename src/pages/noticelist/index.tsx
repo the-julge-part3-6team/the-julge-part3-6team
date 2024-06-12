@@ -4,10 +4,10 @@ import * as S from './index.styled';
 import Footer from '@/shared/components/Footer/Footer';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { useModal } from '@/shared/store/useModal';
-import { FilterState } from '@/types/filterState';
 import { useGetNotices } from './useGetNotices';
 import PostEntire from '@/shared/components/Post/PostEntire/PostEntire';
 import { Filter } from '@/components/filter';
+import { FilterState } from '@/shared/types/filterState';
 
 const handlePageChange = (page: number) => {
   console.log(page);

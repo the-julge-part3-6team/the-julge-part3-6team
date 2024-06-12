@@ -1,19 +1,21 @@
-import { Notice } from '@/types/post';
 import * as S from './PostList.styled';
 import NotFoundPost from '../NotFoundPost/NotFoundPost';
 import formatWorkTime from '@/shared/utils/formatWorkTime';
 import PostCard from '../PostCard/PostCard';
+import { NoticeData } from '@/shared/types/post';
 
 interface Props {
-  items?: Notice[];
+  items?: NoticeData[];
   count: number;
 }
 
 const PostList = ({ items, count }: Props) => {
+  console.log(items);
   return (
     <S.PostListContainer>
       {items && items?.length > 0 ? (
-        items.slice(0, count).map((notice: Notice) => {
+        items.slice(0, count).map(item => {
+          console.log(item.item);
           const {
             id: noticeId,
             hourlyPay,
@@ -22,7 +24,7 @@ const PostList = ({ items, count }: Props) => {
             description,
             closed,
             shop,
-          } = notice.item;
+          } = item.item;
 
           const {
             id: shopId,

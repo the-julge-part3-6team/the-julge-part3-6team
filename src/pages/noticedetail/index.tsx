@@ -7,7 +7,6 @@ import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
 import PostImage from '@/shared/components/Post/PostImage/PostImage';
 import PostInform from '@/shared/components/Post/PostInform/PostInform';
-import Post from '@/shared/components/Post/PostCard/Post';
 import Modal from '@/shared/components/Modal/Modal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
@@ -16,6 +15,7 @@ import cautionImg from '@/assets/caution.svg';
 import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
+import { PostPrice } from '@/shared/components/Post/PostPrice/PostPrice.styled';
 
 const NoticeDetail = () => {
   const router = useRouter();

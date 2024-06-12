@@ -1,8 +1,8 @@
-import { Notice } from '@/types/post';
+import { NoticeData } from '@/shared/types/post';
 import PostList from '../PostList/PostList';
 
 interface Props {
-  items?: Notice[];
+  items?: NoticeData[];
 }
 
 function PostEntire({ items }: Props) {

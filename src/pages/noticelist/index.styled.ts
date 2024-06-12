@@ -1,5 +1,5 @@
-import theme from '@/styles/theme';
-import styled, { css } from 'styled-components';
+import theme from '@/shared/styles/theme';
+import styled from 'styled-components';
 
 export const ContainerBackground = styled.div`
   width: 100%;
