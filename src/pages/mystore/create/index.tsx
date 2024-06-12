@@ -16,9 +16,6 @@ const index = () => {
           <S.Title>가게 정보</S.Title>
           <InputContent mutate={mutate} edit={false} shop_id={null} />
         </S.MyStoreContentWrap>
-        <S.ButtonCotainer>
-          <S.ButtonWrap></S.ButtonWrap>
-        </S.ButtonCotainer>
         <ModalContainer />
       </S.Body>
     </>
