@@ -17,7 +17,9 @@ import { mockNoticeData } from './data/mockNoticeData';
 import { updateRecentPosts } from '@/models/notice/localStorageUtils';
 import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
 import NoticePostList from './NoticePostList';
-import { mockRecentPosts } from './data/mockRecentData'; // 목업
+import { mockRecentPosts } from './data/mockRecentData';
+import { formatWorkTime } from './useTimeUtils';
+import { calculatePriceChange } from './usePriceUtils';
 
 interface NoticeDetailProps {
   noticeId: string;
@@ -106,30 +108,6 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
         신청이 완료되었습니다.
       </>
     ) : null;
-
-  const formatWorkTime = (startsAt: string, workhour: number) => {
-    const startDate = new Date(startsAt);
-    const endDate = new Date(startDate.getTime() + workhour * 60 * 60 * 1000);
-
-    const formatDate = (date: Date) => {
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      return `${year}.${month}.${day}`;
-    };
-
-    const formatTime = (date: Date) => {
-      const hours = date.getHours().toString().padStart(2, '0');
-      const minutes = date.getMinutes().toString().padStart(2, '0');
-      return `${hours}:${minutes}`;
-    };
-
-    return `${formatDate(startDate)} ${formatTime(startDate)}~${formatTime(endDate)} (${workhour}시간)`;
-  };
-
-  const calculatePriceChange = (originalPay: number, currentPay: number) => {
-    return ((currentPay - originalPay) / originalPay) * 100;
-  };
 
   const priceChange = calculatePriceChange(
     noticeData.item.shop.item.originalHourlyPay,
