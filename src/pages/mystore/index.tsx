@@ -4,6 +4,7 @@ import { useUserQuery } from '@/models/user/useUserData';
 import { StoreContent } from '@/widgets/mystore';
 import Footer from '@/shared/components/Footer/Footer';
 import { NoticeContent } from '@/widgets/mystore/ui/NoticeContent/NoticeContent';
+import { useRouterGuard } from '@/shared/utils/useRouterGuard';
 
 const index = () => {
   const { data, isError, isLoading } = useUserQuery();

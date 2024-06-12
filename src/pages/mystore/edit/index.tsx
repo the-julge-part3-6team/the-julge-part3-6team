@@ -7,19 +7,12 @@ import { useModal } from '@/shared/store/useModal';
 import { mutateUpdateStore } from '@/models/store/mutateUpdateStore';
 import { ModalContainer } from '@/widgets/updateStore';
 import { useUserData } from '@/shared/store/useUserData';
+import { useRouterGuard } from '@/shared/utils/useRouterGuard';
 
 const index = () => {
-  const { type } = useUserData();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const { setIsOpen } = useModal();
-
-  if (type === 'employee') {
-    router.push('/mypage');
-    return;
-  }
-
   const { mutate } = mutateUpdateStore(shop_id || '', setIsOpen);
 
   return (

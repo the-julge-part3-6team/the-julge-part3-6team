@@ -1,17 +1,11 @@
 import Header from '@/shared/components/Header/Header';
 import * as S from './index.styled';
 import { InputContent, ModalContainer } from '@/widgets/createNotice';
-import PrimaryButton from '@/shared/components/Button/RedButton/RedButton';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { createNoticeMutate } from '@/models/notice/createNoticeMutate';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useModal } from '@/shared/store/useModal';
-import { onSubmit } from '@/models/notice/noticeSubmit';
-import {
-  NOTICE_FORM_ERRORS_INITIAL_VALUE,
-  NOTICE_FORM_INITIAL_VALUE,
-} from '@/constant/notice';
 
 const index = () => {
   const router = useRouter();
