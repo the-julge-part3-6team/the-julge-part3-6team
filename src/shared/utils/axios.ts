@@ -10,8 +10,7 @@ export const apiInstance = axios.create({
 apiInstance.interceptors.request.use(configOrigin => {
   const config = configOrigin;
   if (typeof window !== 'undefined') {
-    const cookies = document.cookie;
-    const [_, token] = cookies.split('=');
+    const token = cookies.get('token');
 
     if (config.headers && token) {
       config.headers.Authorization = `Bearer ${token}`;
