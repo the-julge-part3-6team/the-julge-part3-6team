@@ -1,4 +1,4 @@
-import Post from '@/shared/components/PostList/Post/Post';
+import Post from '@/shared/components/Post/PostCard/Post';
 import * as S from './NoticeCardList.styled';
 
 interface Props {

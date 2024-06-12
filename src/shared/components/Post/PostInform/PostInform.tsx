@@ -6,20 +6,20 @@ import grayClockImg from '@/assets/grayclock.svg';
 import grayLocationImg from '@/assets/graylocation.svg';
 
 interface PostInformProps {
-  status: 'closed' | 'expired' | 'active';
+  isClosed: boolean;
   type: '시간' | '장소';
   content: string;
 }
-const PostInform = ({ status, type, content }: PostInformProps) => {
+const PostInform = ({ isClosed, type, content }: PostInformProps) => {
   let iconSrc;
   if (type === '시간') {
-    iconSrc = status === 'active' ? redClockImg : grayClockImg;
+    iconSrc = isClosed === false ? redClockImg : grayClockImg;
   } else {
-    iconSrc = status === 'active' ? redLocationImg : grayLocationImg;
+    iconSrc = isClosed === false ? redLocationImg : grayLocationImg;
   }
 
   return (
-    <S.PostInform status={status}>
+    <S.PostInform isClosed={isClosed}>
       <S.PostInformImage>
         <Image src={iconSrc} alt={`${type} 아이콘`} />
       </S.PostInformImage>
