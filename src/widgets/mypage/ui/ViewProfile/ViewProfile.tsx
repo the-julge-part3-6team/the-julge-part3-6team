@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './ViewProfile.styled';
 import { useRouter } from 'next/router';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
+import { replacePhoneValue } from '@/shared/utils/replacePhoneValue';
 
 export const ViewProfile = ({ userData }: { userData: UserDataType }) => {
   const router = useRouter();
@@ -18,7 +19,7 @@ export const ViewProfile = ({ userData }: { userData: UserDataType }) => {
         <S.ProfileDetailBox>
           <li>
             <img src="" alt="" />
-            {userData.phone}
+            {replacePhoneValue(userData.phone)}
           </li>
           <li>
             <img src="" alt="" />

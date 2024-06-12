@@ -9,6 +9,7 @@ import { EditProfileModal } from '../editProfileModal/EditProfileModal';
 import { isValidData } from '../../../../models/user/isValidDate';
 import { onChangeValue } from '@/models/user/onChangeValue';
 import { USER_FORM_ERRORS_INITIAL_VALUE } from '@/constant/user';
+import { replacePhoneValue } from '@/shared/utils/replacePhoneValue';
 
 export const RegistrationProfile = () => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
@@ -47,7 +48,7 @@ export const RegistrationProfile = () => {
           </li>
           <li>
             <Input
-              value={phone}
+              value={replacePhoneValue(phone)}
               id="phone"
               placeholder="입력"
               label={'연락처*'}
