@@ -12,8 +12,18 @@ import { useState } from 'react';
 import { STORE_FORM_ERRORS_INITIAL_VALUE } from '@/constant/store';
 import { mutateAddStore } from '@/models/store/mutateAddStore';
 import { useModal } from '@/shared/store/useModal';
+import { usePatchFormData } from '@/models/store/usePatchFromData';
+import { useUserQuery } from '@/models/user/useUserData';
+import { useRouter } from 'next/router';
 
-export const InputContent = () => {
+interface Props {
+  mutate: any;
+  edit: boolean;
+  shop_id: string;
+}
+
+export const InputContent = ({ mutate, edit, shop_id }: Props) => {
+  const router = useRouter();
   const {
     id,
     imageUrl,
@@ -29,10 +39,30 @@ export const InputContent = () => {
     setStoreAddressDetail,
     setPay,
     setStoreDescription,
+    setStoreImage,
   } = useAddStoreState();
   const [errors, setErrors] = useState(STORE_FORM_ERRORS_INITIAL_VALUE);
-  const { setIsOpen } = useModal();
-  const { mutate } = mutateAddStore(setIsOpen);
+  const { data, isError, isLoading } = useUserQuery();
+  const store: Store = data?.data?.item?.shop?.item;
+
+  if (edit) {
+    usePatchFormData(
+      isLoading,
+      router,
+      {
+        setStoreName,
+        setStoreType,
+        setStoreAddress,
+        setStoreAddressDetail,
+        setPay,
+        setStoreDescription,
+        setStoreImage,
+      },
+      store,
+      shop_id,
+    );
+  }
+
   const action: { [key: string]: Function } = {
     storeName: setStoreName,
     storeAddressDetail: setStoreAddressDetail,
@@ -106,25 +136,29 @@ export const InputContent = () => {
         label="가게 설명"
         id="1"
       />
-      <RedButton
-        text="등록하기"
-        onClick={() =>
-          handleSubmit(
-            {
-              id,
-              name,
-              category,
-              address1,
-              address2,
-              originalHourlyPay,
-              imageUrl,
-              description,
-            },
-            setErrors,
-            mutate,
-          )
-        }
-      />
+      <S.ButtonCotainer>
+        <S.ButtonWrap>
+          <RedButton
+            text="등록하기"
+            onClick={() =>
+              handleSubmit(
+                {
+                  id,
+                  name,
+                  category,
+                  address1,
+                  address2,
+                  originalHourlyPay,
+                  imageUrl,
+                  description,
+                },
+                setErrors,
+                mutate,
+              )
+            }
+          />
+        </S.ButtonWrap>
+      </S.ButtonCotainer>
     </>
   );
 };
