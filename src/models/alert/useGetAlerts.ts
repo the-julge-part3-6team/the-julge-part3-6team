@@ -6,6 +6,5 @@ export const useGetAlerts = (user_id: string) => {
     queryKey: [`/users/${user_id}/alerts`],
     queryFn: () => apiInstance.get(`/users/${user_id}/alerts?offset=0&limit=3`),
     enabled: !!user_id,
-    retry: false,
   });
 };
