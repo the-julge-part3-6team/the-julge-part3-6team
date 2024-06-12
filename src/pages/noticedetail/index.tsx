@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
 import PostInform from '@/shared/components/PostList/PostInform/PostInform';
-import CustomModal from './CustomModal';
+import CustomModal from './CustomModal/CustomModal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import cautionImg from '@/assets/caution.svg';
@@ -14,19 +14,19 @@ import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
 import { mockNoticeData } from './data/mockNoticeData';
-import { updateRecentPosts } from '@/pages/noticedetail/useLocalStorage';
+import { updateRecentPosts } from './utils/useLocalStorage';
 import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
-import NoticePostList from './NoticePostList';
+import NoticePostList from './NoticePostList/NoticePostList';
 import { mockRecentPosts } from './data/mockRecentData';
-import { formatWorkTime } from './useTimeUtils';
-import { calculatePriceChange } from './usePriceUtils';
-import { useHandleModal } from './useHandleModal'; 
+import { formatWorkTime } from './utils/useTimeUtils';
+import { calculatePriceChange } from './utils/usePriceUtils';
+import { useHandleModal } from './utils/useHandleModal';
 
 interface NoticeDetailProps {
   noticeId: string;
 }
 
-const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
+const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
   useEffect(() => {
     updateRecentPosts(noticeId, 6);
   }, [noticeId]);
@@ -63,8 +63,6 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
         //   imageUrl: data.shop.item.imageUrl,
         //   description: data.shop.item.description,
         // });
-
-
       } catch (error) {
         console.error('Failed to fetch store data:', error);
       }
@@ -94,7 +92,7 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
 
   const priceChange = calculatePriceChange(
     noticeData.item.shop.item.originalHourlyPay,
-    noticeData.item.hourlyPay
+    noticeData.item.hourlyPay,
   );
 
   return (
@@ -127,9 +125,16 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
               <PostInform
                 status={noticeData.item.closed ? 'closed' : 'active'}
                 type="시간"
-                content={formatWorkTime(noticeData.item.startsAt, noticeData.item.workhour)}
+                content={formatWorkTime(
+                  noticeData.item.startsAt,
+                  noticeData.item.workhour,
+                )}
               />
-              <PostInform status="active" type="장소" content={noticeData.item.shop.item.address1} />
+              <PostInform
+                status="active"
+                type="장소"
+                content={noticeData.item.shop.item.address1}
+              />
             </S.WidgetWrap>
             <S.DetailText>
               <p>{noticeData.item.description}</p>
@@ -159,7 +164,10 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-          <NoticePostList noticeList={mockRecentPosts.slice(0, 6)} storeName='mockStore' />
+            <NoticePostList
+              noticeList={mockRecentPosts.slice(0, 6)}
+              storeName="mockStore"
+            />
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
