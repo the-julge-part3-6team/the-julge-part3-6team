@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
 import PostInform from '@/shared/components/PostList/PostInform/PostInform';
-import CustomModal from './CustomModal/CustomModal';
+import CustomModal from './component/CustomModal/CustomModal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import cautionImg from '@/assets/caution.svg';
@@ -15,7 +15,7 @@ import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
 import { updateRecentPosts } from './utils/useLocalStorage';
 import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
-import NoticePostList from './NoticePostList/NoticePostList';
+import NoticePostList from './component/NoticePostList/NoticePostList';
 import { formatWorkTime } from './utils/useTimeUtils';
 import { calculatePriceChange } from './utils/usePriceUtils';
 import { useHandleModal } from './utils/useHandleModal';
@@ -88,13 +88,14 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
 
   console.log(userData);
 
+  // userData가 초기에 undefined일 수 있기 때문에 발생하는 에러
   const handleModal = useHandleModal({ userData, setIsApplied });
+  // const handleModal = useHandleModal({ userData: userData || undefined, setIsApplied });
 
   const modalHeader =
     key === 'profileAlert' ? (
       <>
-        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해
-        주세요.
+        <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해주세요.
       </>
     ) : key === 'applySuccess' ? (
       <>

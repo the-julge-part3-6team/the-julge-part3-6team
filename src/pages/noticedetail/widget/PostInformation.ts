@@ -1,9 +1,9 @@
 import React from 'react';
-import { WidgetWrap, PriceWrap } from './index.styled';
+import { WidgetWrap, PriceWrap } from '../index.styled';
 import PostInform from '@/shared/components/PostList/PostInform/PostInform';
 import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
-import { formatWorkTime } from './utils/useTimeUtils';
-import { calculatePriceChange } from './utils/usePriceUtils';
+import { formatWorkTime } from '../utils/useTimeUtils';
+import { calculatePriceChange } from '../utils/usePriceUtils';
 
 interface PostInformationProps {
   data: {
