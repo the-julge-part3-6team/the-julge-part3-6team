@@ -2,8 +2,6 @@ import Header from '@/shared/components/Header/Header';
 import * as S from './index.styled';
 import { useUserQuery } from '@/models/user/useUserData';
 import { StoreContent } from '@/widgets/mystore';
-import { useUserData } from '@/shared/store/useUserData';
-import { useRouter } from 'next/router';
 import Footer from '@/shared/components/Footer/Footer';
 import { NoticeContent } from '@/widgets/mystore/ui/NoticeContent/NoticeContent';
 
