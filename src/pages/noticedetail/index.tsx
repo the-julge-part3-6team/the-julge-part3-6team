@@ -20,6 +20,7 @@ import NoticePostList from './NoticePostList';
 import { mockRecentPosts } from './data/mockRecentData';
 import { formatWorkTime } from './useTimeUtils';
 import { calculatePriceChange } from './usePriceUtils';
+import { useHandleModal } from './useHandleModal'; 
 
 interface NoticeDetailProps {
   noticeId: string;
@@ -73,28 +74,7 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
 
   console.log(userData);
 
-  const handleModal = {
-    applyClick: () => {
-      if (!userData?.data.item.phone) {
-        setIsOpen('profileAlert');
-      } else {
-        setIsOpen('applySuccess');
-        setIsApplied(true);
-      }
-    },
-    cancelClick: () => setIsOpen('cancelModal'),
-    confirmCancel: () => {
-      setIsApplied(false);
-      setIsClose();
-    },
-    closeCancelModal: () => setIsClose(),
-    confirm: () => {
-      setIsClose();
-      if (key === 'profileAlert') {
-        router.push('/mypage');
-      }
-    },
-  };
+  const handleModal = useHandleModal({ userData, setIsApplied });
 
   const modalHeader =
     key === 'profileAlert' ? (
