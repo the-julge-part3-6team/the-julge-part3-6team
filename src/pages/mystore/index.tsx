@@ -17,11 +17,7 @@ const index = () => {
   const { type } = useUserData();
   const router = useRouter();
 
-  useEffect(() => {
-    if (type === 'employee') {
-      router.push('/mypage');
-    }
-  }, [type, router]);
+  if (type === 'employee') router.push('/mypage');
 
   const {
     data: userData,
@@ -56,8 +52,8 @@ const index = () => {
     <NotFoundNotice shop_id={storeData?.id} />
   );
 
-  if (isUserLoading) store = <div>loading...</div>;
-  if (isNoticeLoading) application = <div>loading...</div>;
+  // if (isUserLoading) store = <div>loading...</div>;
+  // if (isNoticeLoading) application = <div>loading...</div>;
 
   return (
     <>
