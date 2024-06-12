@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Footer from '@/shared/components/Footer/Footer';
 import { useGetNoticeByStoreId } from '@/models/notice/useGetNoticeByStoreId';
+import { renderSpinner } from '@/shared/utils/renderSpinner';
 
 const index = () => {
   const { type } = useUserData();
@@ -62,12 +63,12 @@ const index = () => {
         <S.Body>
           <S.MyContentWrap>
             <S.Title>내 가게</S.Title>
-            {store}
+            {renderSpinner(store, isUserLoading)}
           </S.MyContentWrap>
           {storeData && (
             <S.MyContentWrap>
               <S.Title>등록한 공고</S.Title>
-              {application}
+              {renderSpinner(application, isNoticeLoading)}
             </S.MyContentWrap>
           )}
         </S.Body>
