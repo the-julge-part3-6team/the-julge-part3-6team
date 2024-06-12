@@ -3,6 +3,9 @@ import { useRouter } from 'next/router';
 import { AxiosError } from 'axios';
 import { useUserData } from '@/shared/store/useUserData';
 import { apiInstance } from '@/shared/utils/axios';
+import { Cookies } from 'react-cookie';
+
+const cookies = new Cookies();
 
 interface SigninData {
   email: string;
@@ -22,7 +25,7 @@ export const useSigninMutation = (setError: any) => {
       const token = data.data.item.token;
       const id = data.data.item.user.item.id;
       const type = data.data.item.user.item.type;
-      document.cookie = `token=${token}`;
+      cookies.set('token', token, { path: '/' });
       router.push('/mystore');
 
       setUserId(id);
