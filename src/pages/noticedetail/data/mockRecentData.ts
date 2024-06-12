@@ -85,4 +85,18 @@ export const mockRecentPosts = [
       id: '6',
     },
   },
+  {
+    item: {
+      closed: false,
+      name: '너네동네카페',
+      startsAt: '2023-07-19',
+      workhour: '3',
+      address1: '서울시 강남구',
+      hourlyPay: 9500,
+      priceChange: '100',
+      imageUrl: "https://bootcamp-project-api.s3.ap-northeast-2.amazonaws.com/0-1/the-julge/1970eebc-dfaf-4fea-8b86-071c28c3b78d-%EC%9D%B4%EB%AA%A8%EC%A7%80.png",
+      description: '우리동네카페',
+      id: '7',
+    },
+  },
 ];

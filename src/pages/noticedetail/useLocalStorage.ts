@@ -1,5 +1,5 @@
 export const updateRecentPosts = (noticeId: string, maxPosts: number): string[] => {
-  const recentPostsFromLocalStorage = localStorage.getItem('recentPosts');
+  let recentPostsFromLocalStorage = localStorage.getItem('recentPosts');
 
   let recentPosts: string[] = [];
   if (recentPostsFromLocalStorage) {
@@ -7,7 +7,7 @@ export const updateRecentPosts = (noticeId: string, maxPosts: number): string[] 
   }
 
   recentPosts.unshift(noticeId);
-  recentPosts = [...new Set(recentPosts)].slice(0, maxPosts);
+  recentPosts = recentPosts.slice(0, maxPosts);
 
   localStorage.setItem('recentPosts', JSON.stringify(recentPosts));
 

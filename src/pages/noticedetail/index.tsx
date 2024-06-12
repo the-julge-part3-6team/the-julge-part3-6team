@@ -14,7 +14,7 @@ import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
 import { mockNoticeData } from './data/mockNoticeData';
-import { updateRecentPosts } from '@/models/notice/localStorageUtils';
+import { updateRecentPosts } from '@/pages/noticedetail/useLocalStorage';
 import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
 import NoticePostList from './NoticePostList';
 import { mockRecentPosts } from './data/mockRecentData';
@@ -30,6 +30,7 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
   useEffect(() => {
     updateRecentPosts(noticeId, 6);
   }, [noticeId]);
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
@@ -62,6 +63,8 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
         //   imageUrl: data.shop.item.imageUrl,
         //   description: data.shop.item.description,
         // });
+
+
       } catch (error) {
         console.error('Failed to fetch store data:', error);
       }
@@ -156,7 +159,7 @@ const NoticeDetail: React.FC<NoticeDetailProps> = ({ noticeId }) => {
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            <NoticePostList noticeList={mockRecentPosts} storeName='mockStore' />
+          <NoticePostList noticeList={mockRecentPosts.slice(0, 6)} storeName='mockStore' />
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
