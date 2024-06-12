@@ -62,10 +62,26 @@ export const TextWrap = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  position: relative;
+  /* position: relative;
   overflow: hidden;
   width: 100%;
-  height: 100%;
+  height: 100%; */
+
+  --img-width: 539px;
+  --img-height: 308px;
+  --img-border-radius: 12px;
+  position: relative;
+  width: var(--img-width);
+  height: var(--img-height);
+  overflow: hidden;
+  border-radius: var(--img-border-radius);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export const TextContainer = styled.div`
