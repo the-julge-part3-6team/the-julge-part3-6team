@@ -28,7 +28,6 @@ export const useUserValidation = () => {
     },
     onSuccess: data => {
       setIsOpen('등록완료');
-      console.log(data);
     },
 
     onError: (error: AxiosError) => {
