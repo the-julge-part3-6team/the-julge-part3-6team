@@ -20,3 +20,13 @@ export const Description = styled.div`
   margin-top: 24px;
   grid-column: span 3;
 `;
+
+export const ButtonCotainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const ButtonWrap = styled.div`
+  width: 336px;
+`;

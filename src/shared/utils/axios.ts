@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { Cookies } from 'react-cookie';
+
+const cookies = new Cookies();
 
 export const apiInstance = axios.create({
   baseURL: 'https://bootcamp-api.codeit.kr/api/5-6/the-julge',
@@ -7,8 +10,7 @@ export const apiInstance = axios.create({
 apiInstance.interceptors.request.use(configOrigin => {
   const config = configOrigin;
   if (typeof window !== 'undefined') {
-    const cookies = document.cookie;
-    const [_, token] = cookies.split('=');
+    const token = cookies.get('token');
 
     if (config.headers && token) {
       config.headers.Authorization = `Bearer ${token}`;

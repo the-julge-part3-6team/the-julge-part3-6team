@@ -6,32 +6,26 @@ import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useProfileData } from '@/shared/store/useProfileData';
 import { useUserValidation } from '@/models/user/useUserUpdateForm';
 import { EditProfileModal } from '../editProfileModal/EditProfileModal';
-import { isValidData } from '../../../../models/user/isValidDate';
 import { onChangeValue } from '@/models/user/onChangeValue';
 import { USER_FORM_ERRORS_INITIAL_VALUE } from '@/constant/user';
+import { replacePhoneValue } from '@/shared/utils/replacePhoneValue';
+import { submitProfile } from '@/models/user/submitProfile';
 
 export const RegistrationProfile = () => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
     useProfileData();
 
-  const [error, setError] = useState<FieldErrors>(
-    USER_FORM_ERRORS_INITIAL_VALUE,
-  );
+  const [error, setError] = useState(USER_FORM_ERRORS_INITIAL_VALUE);
   const formData = { name, phone, address, bio };
 
   const result = useUserValidation();
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const isValid = isValidData(formData, setError);
-    if (isValid) result.mutate(formData);
-  };
-
   return (
     <>
       <EditProfileModal />
-      <S.CreateForm onSubmit={onSubmit}>
+      <S.CreateForm
+        onSubmit={e => submitProfile({ e, formData, setError, result })}
+      >
         <S.CreateFormUl>
           <li>
             <Input
@@ -49,7 +43,7 @@ export const RegistrationProfile = () => {
           </li>
           <li>
             <Input
-              value={phone}
+              value={replacePhoneValue(phone)}
               id="phone"
               placeholder="입력"
               label={'연락처*'}

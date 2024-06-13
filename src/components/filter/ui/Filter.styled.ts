@@ -1,4 +1,4 @@
-import theme from '@/styles/theme';
+import theme from '@/shared/styles/theme';
 import styled from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -18,7 +18,7 @@ export const FilterContainer = styled.div`
   z-index: 10;
 `;
 
-export const Header = styled.h3`
+export const FilterHeader = styled.h3`
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 24px;

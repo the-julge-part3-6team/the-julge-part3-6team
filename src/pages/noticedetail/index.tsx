@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
-import PostInform from '@/shared/components/PostList/PostInform/PostInform';
+import PostInform from '@/shared/components/Post/PostInform/PostInform';
 import CustomModal from './component/CustomModal/CustomModal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
@@ -14,7 +14,7 @@ import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
 import { updateRecentPosts } from './utils/useLocalStorage';
-import PostPrice from '@/shared/components/PostList/PostPrice/PostPrice';
+import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
 import NoticePostList from './component/NoticePostList/NoticePostList';
 import { formatWorkTime } from './utils/useTimeUtils';
 import { calculatePriceChange } from './utils/usePriceUtils';
@@ -130,13 +130,15 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
             <S.SmallText>시급</S.SmallText>
             <S.PriceWrap>
               <PostPrice
-                status="active"
+                isClosed={false}
+                // 변경사항 보고 수정하기
                 price={noticeData.item.hourlyPay}
                 priceChange={priceChange}
               />
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
+               // 변경사항 보고 수정하기
                 status={noticeData.item.closed ? 'closed' : 'active'}
                 type="시간"
                 content={formatWorkTime(
@@ -145,7 +147,7 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
                 )}
               />
               <PostInform
-                status="active"
+                isClosed={false}
                 type="장소"
                 content={noticeData.item.shop.item.address1}
               />

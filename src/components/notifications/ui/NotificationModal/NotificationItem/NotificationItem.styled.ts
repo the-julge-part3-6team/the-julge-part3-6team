@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from '@/styles/theme';
+import theme from '@/shared/styles/theme';
 
 export const NotificationItemContainer = styled.div`
   padding: 16px 12px;
