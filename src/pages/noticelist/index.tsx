@@ -1,30 +1,36 @@
 import Header from '@/shared/components/Header/Header';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './index.styled';
 import Footer from '@/shared/components/Footer/Footer';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { useModal } from '@/shared/store/useModal';
-import { useGetNotices } from './useGetNotices';
+import { useGetNotices } from '../../models/notice/useGetNotices';
 import PostEntire from '@/shared/components/Post/PostEntire/PostEntire';
 import { Filter } from '@/components/filter';
 import { FilterState } from '@/shared/types/filterState';
 
-const handlePageChange = (page: number) => {
-  console.log(page);
-};
-
 const NoticeList = () => {
-  const { isOpen, setIsOpen, setIsClose } = useModal();
-  const [filters, setFilters] = useState<FilterState | null>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [order, setOrder] = useState('마감임박순');
-  const { data, isLoading, error } = useGetNotices();
+  const { isOpen, setIsOpen, setIsClose } = useModal(); // 필터 모달
+  const [filters, setFilters] = useState<FilterState | null>(null); // 필터 값
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 정렬 드롭다운
+  const [order, setOrder] = useState('마감임박순'); // 정렬
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 설정
+  const { data, isLoading } = useGetNotices({
+    offset: (currentPage - 1) * 6,
+    limit: 6,
+  });
 
-  const noticeDatas = data?.data?.items;
+  const totalItems = data?.data?.count; // 공고 총 갯수
+  const noticeDatas = data?.data?.items; // { item{}, links[] }
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page); // 페이지네이션 버튼 클릭했을 때, currentPage 변경
+  };
 
   const handleApplyFilters = (filters: FilterState) => {
     setFilters(filters);
   };
+  // 필터 설정
 
   const toggleFilterModal = () => {
     if (isOpen) {
@@ -33,15 +39,21 @@ const NoticeList = () => {
       setIsOpen('필터모달');
     }
   };
+  // 필터 모달 토글
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+  // 정렬 드롭다운 토글
 
   const handleSortOptionClick = (option: string) => {
     setOrder(option);
     setIsDropdownOpen(false);
   };
+  // 정렬 state 변경
+
+  const totalPages = Math.ceil(totalItems / 6);
+  // 전체 페이지 설정
 
   return (
     <>
@@ -95,8 +107,8 @@ const NoticeList = () => {
           <PostEntire items={noticeDatas} />
         </S.PostListWrap>
         <Pagination
-          currentPage={1}
-          totalPages={10}
+          currentPage={currentPage}
+          totalPages={totalPages}
           onPageChange={handlePageChange}
         />
       </S.Container>

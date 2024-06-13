@@ -10,14 +10,12 @@ interface Props {
 }
 
 const PostList = ({ items, count }: Props) => {
-  console.log(items);
   return (
     <S.PostListContainer>
       {items && items?.length > 0 ? (
         items.slice(0, count).map(item => {
-          console.log(item.item);
           const {
-            id: noticeId,
+            id: notice_id,
             hourlyPay,
             startsAt,
             workhour,
@@ -27,7 +25,7 @@ const PostList = ({ items, count }: Props) => {
           } = item.item;
 
           const {
-            id: shopId,
+            id: shop_id,
             name,
             address1,
             imageUrl,
@@ -44,9 +42,9 @@ const PostList = ({ items, count }: Props) => {
 
           return (
             <PostCard
-              key={noticeId}
-              noticeId={noticeId}
-              shopId={shopId}
+              key={notice_id}
+              notice_id={notice_id}
+              shop_id={shop_id}
               imageUrl={imageUrl}
               shopName={name}
               duration={formattedWorkTime}

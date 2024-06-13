@@ -23,13 +23,13 @@ import { mockNoticeData } from './data/mockNoticeData'; // 목업
 import { mockRecentPosts } from './data/mockRecentData'; // 목업
 
 interface NoticeDetailProps {
-  noticeId: string;
+  notice_id: string;
 }
 
-const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
+const NoticeDetail = ({ notice_id }: NoticeDetailProps) => {
   useEffect(() => {
-    updateRecentPosts(noticeId, 6);
-  }, [noticeId]);
+    updateRecentPosts(notice_id, 6);
+  }, [notice_id]);
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -138,7 +138,7 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
-               // 변경사항 보고 수정하기
+                // 변경사항 보고 수정하기
                 status={noticeData.item.closed ? 'closed' : 'active'}
                 type="시간"
                 content={formatWorkTime(
