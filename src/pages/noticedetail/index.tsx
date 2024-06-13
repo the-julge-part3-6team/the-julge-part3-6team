@@ -27,6 +27,7 @@ interface NoticeDetailProps {
 }
 
 const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
+  // 최신공고에 사용하는거기 떄문에 widget으로 분리가능
   useEffect(() => {
     updateRecentPosts(noticeId, 6);
   }, [noticeId]);
@@ -40,8 +41,8 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
     isError: userError,
     isLoading: userLoading,
   } = useUserQuery();
-  const { setIsOpen, setIsClose, key, isOpen } = useModal();
-  const [isApplied, setIsApplied] = useState(false);
+  const { setIsOpen, setIsClose, key, isOpen } = useModal(); // Modal 따로 분리
+  const [isApplied, setIsApplied] = useState(false); // Modal이랑 같이 분리
   const [recentPosts, setRecentPosts] = useState([]);
   // const [noticeData, setNoticeData] = useState({}); 실제 API 호출시 사용
 
@@ -50,6 +51,7 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
 
   useEffect(() => {
     const fetchStoreData = async () => {
+      // query로 수정하기 => 페이지로 분리 => useEffect 사라지
       try {
         if (!shop_id || !notice_id)
           throw new Error('Missing shop_id or notice_id');
@@ -104,6 +106,7 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
       </>
     ) : null;
 
+  // postcard에 쓰이기 때문에 위젯으로 빠진다
   const priceChange = calculatePriceChange(
     noticeData.item.shop.item.originalHourlyPay,
     noticeData.item.hourlyPay,
@@ -113,6 +116,7 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
     <>
       <Header />
       <S.PageLayout>
+        {/* 페이지로 빠짐 */}
         <S.TextWrap>
           <S.SmallText>식당</S.SmallText>
           <S.BigText>{noticeData.item.shop.item.name}</S.BigText>
@@ -138,7 +142,7 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
             </S.PriceWrap>
             <S.WidgetWrap>
               <PostInform
-               // 변경사항 보고 수정하기
+                // 변경사항 보고 수정하기
                 status={noticeData.item.closed ? 'closed' : 'active'}
                 type="시간"
                 content={formatWorkTime(
@@ -171,6 +175,7 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
           </S.TextContainer>
         </S.ContextWrap>
 
+        {/* 공고 설명 => 컴포넌트  */}
         <S.DescripContainer>
           <S.SmallText isBlack>공고 설명</S.SmallText>
           <p></p>
