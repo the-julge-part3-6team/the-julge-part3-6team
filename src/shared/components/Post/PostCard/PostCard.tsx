@@ -31,7 +31,6 @@ const PostCard = ({
   const router = useRouter();
 
   return (
-    // <Link href={`/noticedetail?shop_id=${shop_id}&notice_id=${notice_id}`}>
     <S.PostContainer
       isClosed={isClosed}
       onClick={() =>
@@ -50,7 +49,6 @@ const PostCard = ({
         currentHourlyPay={currentHourlyPay}
       />
     </S.PostContainer>
-    // </Link>
   );
 };
 

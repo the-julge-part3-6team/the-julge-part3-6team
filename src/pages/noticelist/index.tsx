@@ -20,8 +20,6 @@ const NoticeList = () => {
     limit: 6,
   });
 
-  console.log(data);
-
   const totalItems = data?.data?.count; // 공고 총 갯수
   const noticeDatas = data?.data?.items; // { item{}, links[] }
 
