@@ -17,6 +17,7 @@ export const HeaderContainer = styled.div`
 
   @media (max-width: 1440px) {
     width: 100%;
+    gap: 12px;
   }
 
   @media (max-width: 744px) {
