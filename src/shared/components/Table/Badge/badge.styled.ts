@@ -2,12 +2,16 @@ import theme from '@/shared/styles/theme';
 import { styled } from 'styled-components';
 
 export interface BadgeStyled {
-  $status: '거절' | '대기중' | '승인 완료';
+  $status: 'rejected' | 'pending' | 'accepted' | 'canceled';
 }
 const config = {
-  거절: { background: theme.Colors.Red[10], color: theme.Colors.Red[40] },
-  대기중: { background: theme.Colors.Green[10], color: theme.Colors.Green[20] },
-  '승인 완료': {
+  rejected: { background: theme.Colors.Red[10], color: theme.Colors.Red[40] },
+  canceled: { background: theme.Colors.Red[10], color: theme.Colors.Red[40] }, // 유저가 취소
+  pending: {
+    background: theme.Colors.Green[10],
+    color: theme.Colors.Green[20],
+  },
+  accepted: {
     background: theme.Colors.Blue[10],
     color: theme.Colors.Blue[20],
   },
