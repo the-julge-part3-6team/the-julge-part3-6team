@@ -26,10 +26,9 @@ export const useSigninMutation = (setError: any) => {
       const id = data.data.item.user.item.id;
       const type = data.data.item.user.item.type;
       cookies.set('token', token, { path: '/' });
-      router.push('/mystore');
-
       setUserId(id);
       setType(type);
+      router.push('/');
     },
 
     onError: (error: AxiosError) => {

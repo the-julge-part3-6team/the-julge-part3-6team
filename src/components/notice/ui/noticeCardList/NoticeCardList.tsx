@@ -1,26 +1,35 @@
-import Post from '@/shared/components/Post/PostCard/Post';
+// import Post from '@/shared/components/Post/PostCard/Post';
+import PostCard from '@/shared/components/Post/PostCard/PostCard';
 import * as S from './NoticeCardList.styled';
+import formatWorkTime from '@/shared/utils/formatWorkTime';
 
 interface Props {
   noticeList: { item: Notice }[];
-  storeName: string;
+  store: Store;
 }
 
-export const NoticeCardList = ({ noticeList, storeName }: Props) => {
+export const NoticeCardList = ({ noticeList, store }: Props) => {
   return (
     <S.Layout>
       {noticeList.map(item => {
+        const notice = item.item;
         return (
-          <div>
-            <p>closed: {item.item.closed}</p>
-            <p>description: {item.item.description}</p>
-            <p>hourlyPay: {item.item.hourlyPay}</p>
-            <p>id: {item.item.id}</p>
-            <p>startsAt: {item.item.startsAt}</p>
-            <p>workhour: {item.item.workhour}</p>
-          </div>
+          <PostCard
+            isClosed={notice.closed}
+            notice_id={notice.id}
+            shop_id={store.id}
+            imageUrl={store.imageUrl}
+            shopName={store.name}
+            duration={formatWorkTime({
+              type: 'notice',
+              startsAt: notice.startsAt,
+              workHour: notice.workhour,
+            })}
+            address={store.address1}
+            defaultHourlyPay={store.originalHourlyPay}
+            currentHourlyPay={Number(notice.hourlyPay)}
+          />
         );
-        // return <Post status={item.item.closed} title={storeName} />;
       })}
     </S.Layout>
   );
