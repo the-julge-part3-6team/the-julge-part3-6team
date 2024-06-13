@@ -10,12 +10,10 @@ interface Props {
 }
 
 const PostList = ({ items, count }: Props) => {
-  console.log(items);
   return (
     <S.PostListContainer>
       {items && items?.length > 0 ? (
         items.slice(0, count).map(item => {
-          console.log(item.item);
           const {
             id: noticeId,
             hourlyPay,
