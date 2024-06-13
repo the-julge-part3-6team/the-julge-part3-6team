@@ -11,22 +11,20 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const Pagination = ({ totalPages }: PaginationProps) => {
-  const [currentPage, setCurrentPage] = React.useState(1);
-
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
-
+const Pagination = ({
+  totalPages,
+  currentPage,
+  onPageChange,
+}: PaginationProps) => {
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      handlePageChange(currentPage - 1);
+      onPageChange(currentPage - 1);
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      handlePageChange(currentPage + 1);
+      onPageChange(currentPage + 1);
     }
   };
 
@@ -53,7 +51,7 @@ const Pagination = ({ totalPages }: PaginationProps) => {
             key={pageNumber}
             pageNumber={pageNumber}
             currentPage={currentPage}
-            handlePageChange={handlePageChange}
+            onPageChange={onPageChange}
           />
         ))}
       </ul>

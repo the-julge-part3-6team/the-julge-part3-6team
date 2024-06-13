@@ -15,7 +15,7 @@ const NoticeList = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 정렬 드롭다운
   const [order, setOrder] = useState('마감임박순'); // 정렬
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 설정
-  const { data, isLoading, error, refetch } = useGetNotices({
+  const { data, isLoading } = useGetNotices({
     offset: (currentPage - 1) * 6,
     limit: 6,
   });
@@ -26,11 +26,6 @@ const NoticeList = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page); // 페이지네이션 버튼 클릭했을 때, currentPage 변경
   };
-
-  // useEffect(() => {
-  //   refetch();
-  // }, [currentPage, refetch]);
-  // currentPage 변경되면 다시 useGetNotices 호출
 
   const handleApplyFilters = (filters: FilterState) => {
     setFilters(filters);

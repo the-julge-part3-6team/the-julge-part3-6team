@@ -23,14 +23,14 @@ import { mockNoticeData } from './data/mockNoticeData'; // 목업
 import { mockRecentPosts } from './data/mockRecentData'; // 목업
 
 interface NoticeDetailProps {
-  noticeId: string;
+  notice_id: string;
 }
 
 const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
   // 최신공고에 사용하는거기 떄문에 widget으로 분리가능
   useEffect(() => {
-    updateRecentPosts(noticeId, 6);
-  }, [noticeId]);
+    updateRecentPosts(notice_id, 6);
+  }, [notice_id]);
 
   const router = useRouter();
   const searchParams = useSearchParams();
