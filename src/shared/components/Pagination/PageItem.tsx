@@ -4,20 +4,16 @@ import { PageItemWrapper, PageLink, ActivePageLink } from './Pagination.styled';
 interface PageItemProps {
   pageNumber: number;
   currentPage: number;
-  handlePageChange: (pageNumber: number) => void;
+  onPageChange: (pageNumber: number) => void;
 }
 
-const PageItem = ({
-  pageNumber,
-  currentPage,
-  handlePageChange,
-}: PageItemProps) => {
+const PageItem = ({ pageNumber, currentPage, onPageChange }: PageItemProps) => {
   const PageLinkComponent =
     pageNumber === currentPage ? ActivePageLink : PageLink;
 
   return (
     <PageItemWrapper>
-      <PageLinkComponent onClick={() => handlePageChange(pageNumber)}>
+      <PageLinkComponent onClick={() => onPageChange(pageNumber)}>
         {pageNumber}
       </PageLinkComponent>
     </PageItemWrapper>
