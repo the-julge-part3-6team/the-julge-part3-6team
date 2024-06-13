@@ -29,8 +29,8 @@ interface NoticeDetailProps {
 const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
   // 최신공고에 사용하는거기 떄문에 widget으로 분리가능
   useEffect(() => {
-    updateRecentPosts(notice_id, 6);
-  }, [notice_id]);
+    updateRecentPosts(noticeId, 6);
+  }, [noticeId]);
 
   const router = useRouter();
   const searchParams = useSearchParams();
