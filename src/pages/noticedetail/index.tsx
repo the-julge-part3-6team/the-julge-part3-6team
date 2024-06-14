@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as S from './index.styled';
@@ -13,22 +13,13 @@ import cautionImg from '@/assets/caution.svg';
 import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
-import { useRecentPosts } from './utils/useRecentPosts';
 import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
-import NoticePostList from './component/NoticePostList/NoticePostList';
 import { formatWorkTime } from './utils/useTimeUtils';
 import { useHandleModal } from './utils/useHandleModal';
 import { useGetNoticeDetail } from './utils/useGetNoticeDetail';
+import NoticePostList from './component/NoticePostList/NoticePostList';
 
-interface NoticeDetailProps {
-  noticeId: string;
-}
-
-const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
-  useEffect(() => {
-    useRecentPosts(noticeId, 6);
-  }, [noticeId]);
-
+const NoticeDetail = () => {
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const notice_id = searchParams.get('notice_id');
@@ -44,8 +35,27 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
   } = useGetNoticeDetail(shop_id || '', notice_id || '');
   const { setIsOpen, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
-  const [recentPosts, setRecentPosts] = useState([]);
   const router = useRouter();
+  const [recentPosts, setRecentPosts] = useState<string[]>(() => {
+    if (typeof window !== 'undefined') {
+      const recentPostsFromStorage = localStorage.getItem('recentPosts');
+      return recentPostsFromStorage ? JSON.parse(recentPostsFromStorage) : [];
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    if (notice_id && typeof window !== 'undefined') {
+      const saveRecentPost = (postId: string) => {
+        setRecentPosts(prevPosts => {
+          const newPosts = [postId, ...prevPosts.filter(id => id !== postId)].slice(0, 6);
+          localStorage.setItem('recentPosts', JSON.stringify(newPosts));
+          return newPosts;
+        });
+      };
+      saveRecentPost(notice_id);
+    }
+  }, [notice_id]);
 
   const handleModal = useHandleModal({ userData, setIsApplied });
 
@@ -132,15 +142,15 @@ const NoticeDetail = ({ noticeId }: NoticeDetailProps) => {
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            <NoticePostList
-              noticeList={recentPosts.slice(0, 6)}
-              storeName="Store"
-            />
+            {recentPosts.map(postId => (
+              <div key={postId}>
+                <p>{postId}</p>
+              </div>
+            ))}
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
       <Footer />
-
       <CustomModal
         modalKey={key}
         modalHeader={modalHeader}

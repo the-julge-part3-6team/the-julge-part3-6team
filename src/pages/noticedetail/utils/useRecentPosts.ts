@@ -1,18 +1,1 @@
-export const useRecentPosts = (
-  noticeId: string,
-  maxPosts: number,
-): string[] => {
-  let recentPostsFromLocalStorage = localStorage.getItem('recentPosts');
-
-  let recentPosts: string[] = [];
-  if (recentPostsFromLocalStorage) {
-    recentPosts = JSON.parse(recentPostsFromLocalStorage);
-  }
-
-  recentPosts.unshift(noticeId);
-  recentPosts = recentPosts.slice(0, maxPosts);
-
-  localStorage.setItem('recentPosts', JSON.stringify(recentPosts));
-
-  return recentPosts;
-};
+// 추후 로직 분리
