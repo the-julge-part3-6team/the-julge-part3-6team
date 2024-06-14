@@ -1,5 +1,5 @@
 export interface FilterState {
-  startsAtGte: Date | null;
-  hourlyPayGte: string;
-  address: string[];
+  startDate: Date | null;
+  price: string;
+  selectedLocations: string[];
 }

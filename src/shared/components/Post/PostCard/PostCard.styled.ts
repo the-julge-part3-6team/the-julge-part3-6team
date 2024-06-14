@@ -6,6 +6,7 @@ interface PostContainerProps {
 }
 
 export const PostContainer = styled.div<PostContainerProps>`
+  cursor: pointer;
   background-color: #fff;
   padding: 16px;
   display: flex;
