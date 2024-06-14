@@ -11,13 +11,13 @@ export const ApplicationContent = ({ isLoading }: { isLoading: boolean }) => {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 설정
   const { data, isError } = useUserSupportList({
     limit: 5,
-    offset: (currentPage - 1) * 6,
+    offset: (currentPage - 1) * 5,
   });
   const AnnouncementApplicationListCount = data?.data?.count;
   const listData = data?.data.items;
 
   const totalItems = data?.data?.count; // 공고 총 갯수
-  const totalPages = Math.ceil(totalItems / 6);
+  const totalPages = Math.ceil(totalItems / 5);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page); // 페이지네이션 버튼 클릭했을 때, currentPage 변경
