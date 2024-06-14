@@ -1,8 +1,15 @@
+import theme from '@/shared/styles/theme';
 import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
   background-color: #fafafa;
+`;
+
+export const PageNationWrap = styled.div`
+  width: 100%;
+  background-color: #fff;
+  padding: 12px 0;
 `;
 
 export const ContentWrap = styled.div`

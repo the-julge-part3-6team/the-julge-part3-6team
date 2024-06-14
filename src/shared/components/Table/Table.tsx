@@ -4,7 +4,7 @@ import PrimaryBadge from './Badge/Badge';
 import { formatWorkTime } from '@/pages/noticedetail/utils/useTimeUtils';
 import { formatNumberWithCommas } from '@/shared/utils/formatNumberWithCommas';
 
-const Table = ({ list }: tableProfileStatus) => {
+const Table = ({ list }: Pick<tableProfileStatus, 'list'>) => {
   return (
     <S.CustomTable>
       <S.CustomTableWrap>
