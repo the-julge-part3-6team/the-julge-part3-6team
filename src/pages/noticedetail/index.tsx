@@ -21,6 +21,7 @@ import NoticePostList from './component/NoticePostList/NoticePostList';
 
 const NoticeDetail = () => {
   const searchParams = useSearchParams();
+  const shop_id = searchParams.get('shop_id');
   const notice_id = searchParams.get('notice_id');
   const {
     data: userData,
@@ -31,36 +32,36 @@ const NoticeDetail = () => {
     data: noticeData,
     isError: noticeError,
     isLoading: noticeLoading,
-  } = useGetNoticeDetail('', notice_id || '');
+  } = useGetNoticeDetail(shop_id || '', notice_id || '');
   const { setIsOpen, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
   const router = useRouter();
-  const [recentNotices, setRecentNotices] = useState<string[]>([]);
+  const [recentPosts, setRecentPosts] = useState<string[]>([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const recentNoticesFromStorage = localStorage.getItem('recentNotices');
-      recentNoticesFromStorage
-        ? setRecentNotices(JSON.parse(recentNoticesFromStorage))
-        : setRecentNotices([]);
+      const recentPostsFromStorage = localStorage.getItem('recentPosts');
+      recentPostsFromStorage
+        ? setRecentPosts(JSON.parse(recentPostsFromStorage))
+        : setRecentPosts([]);
     } else {
-      setRecentNotices([]);
+      setRecentPosts([]);
     }
   }, []);
 
   useEffect(() => {
     if (notice_id && typeof window !== 'undefined') {
-      const saveRecentNotice = (notice_id: string) => {
-        setRecentNotices(prevNotices => {
-          const newNotices = [
-            notice_id,
-            ...prevNotices.filter(id => id !== notice_id),
+      const saveRecentPost = (postId: string) => {
+        setRecentPosts(prevPosts => {
+          const newPosts = [
+            postId,
+            ...prevPosts.filter(id => id !== postId),
           ].slice(0, 6);
-          localStorage.setItem('recentNotices', JSON.stringify(newNotices));
-          return newNotices;
+          localStorage.setItem('recentPosts', JSON.stringify(newPosts));
+          return newPosts;
         });
       };
-      saveRecentNotice(notice_id);
+      saveRecentPost(notice_id);
     }
   }, [notice_id]);
 
@@ -149,13 +150,12 @@ const NoticeDetail = () => {
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            {recentNotices.length === 0 ? (
-              <div>최근에 본 공고가 없습니다.</div>
-            ) : (
-              recentNotices.map(noticeId => (
-                <NoticePostList key={noticeId} noticeId={noticeId} />
-              ))
-            )}
+            {/* NoticePostList 컴포넌트에 매핑하기 */}
+            {recentPosts.map(postId => (
+              <div key={postId}>
+                <p>{postId}</p>
+              </div>
+            ))}
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
