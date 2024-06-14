@@ -17,7 +17,8 @@ import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
 import formatWorkTime from '@/shared/utils/formatWorkTime';
 import { useHandleModal } from './noticedetail/utils/useHandleModal';
 import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
-
+import OwnerTable from '@/shared/components/OwnerTable/OwnerTable';
+import { useGetApplicantsForJobPosting } from '@/models/employer/useGetApplicantsForJobPosting';
 
 const NoticeDetailCeo = () => {
   const searchParams = useSearchParams();
@@ -48,7 +49,10 @@ const NoticeDetailCeo = () => {
     if (notice_id && typeof window !== 'undefined') {
       const saveRecentPost = (postId: string) => {
         setRecentPosts(prevPosts => {
-          const newPosts = [postId, ...prevPosts.filter(id => id !== postId)].slice(0, 6);
+          const newPosts = [
+            postId,
+            ...prevPosts.filter(id => id !== postId),
+          ].slice(0, 6);
           localStorage.setItem('recentPosts', JSON.stringify(newPosts));
           return newPosts;
         });
@@ -70,6 +74,18 @@ const NoticeDetailCeo = () => {
         신청이 완료되었습니다.
       </>
     ) : null;
+
+  // 테이블 로직 시작
+  console.log(shop_id, notice_id);
+
+  const { data: applicationStatus, isLoading } = useGetApplicantsForJobPosting({
+    shop_id,
+    notice_id,
+  });
+  const applicationStatusList = applicationStatus?.data.items;
+  console.log(applicationStatus);
+
+  // 테이블 로직 끝
 
   return (
     <>
@@ -141,7 +157,12 @@ const NoticeDetailCeo = () => {
         </S.DescripContainer>
 
         {/* 여기에 테이블 컴포넌트 붙이시면 됩니다 */}
-        
+        {applicationStatusList ? (
+          <OwnerTable list={applicationStatusList} />
+        ) : (
+          '일단 테이블 없음'
+        )}
+        {/* 여기에 테이블 컴포넌트 붙이시면 됩니다 */}
       </S.PageLayout>
       <Footer />
       <CustomModal
