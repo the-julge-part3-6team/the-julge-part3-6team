@@ -2,37 +2,43 @@ import React from 'react';
 import * as S from './NoticePostList.styled';
 import formatWorkTime from '@/shared/utils/formatWorkTime';
 import PostCard from '@/shared/components/Post/PostCard/PostCard';
+import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
 
-interface Props {
-  noticeList: { item: Notice }[];
-  store: Store;
+interface NoticePostListProps {
+  noticeId: string;
 }
 
-export const NoticePostList = ({ noticeList, store }: Props) => {
+const NoticePostList = ({ noticeId }: NoticePostListProps) => {
+  const { data: noticeData, isLoading: noticeLoading } = useGetNoticeDetail('', noticeId);
+
+  if (noticeLoading) return <div>Loading...</div>;
+
+  const notice = noticeData?.data.item;
+
+  if (!notice) return null;
+
+  const store = notice.shop.item;
+
   return (
     <S.Layout>
-      {noticeList.map(item => {
-        const notice = item.item;
-        return (
-          <PostCard
-            isClosed={notice.closed}
-            notice_id={notice.id}
-            shop_id={store.id}
-            imageUrl={store.imageUrl}
-            shopName={store.name}
-            duration={formatWorkTime({
-              type: 'notice',
-              startsAt: notice.startsAt,
-              workHour: notice.workhour,
-            })}
-            address={store.address1}
-            defaultHourlyPay={store.originalHourlyPay}
-            currentHourlyPay={Number(notice.hourlyPay)}
-          />
-        );
-      })}
+      <PostCard
+        isClosed={notice.closed}
+        notice_id={notice.id}
+        shop_id={store.id}
+        imageUrl={store.imageUrl}
+        shopName={store.name}
+        duration={formatWorkTime({
+          type: 'notice',
+          startsAt: notice.startsAt,
+          workHour: notice.workhour,
+        })}
+        address={store.address1}
+        defaultHourlyPay={store.originalHourlyPay}
+        currentHourlyPay={Number(notice.hourlyPay)}
+      />
     </S.Layout>
   );
 };
 
 export default NoticePostList;
+
