@@ -44,6 +44,7 @@ export const CustomTableBody = styled.ul`
   grid-template-columns: 23.5% 31% 21% 24.5%;
   border-bottom: 1px solid ${theme.Colors.Gray[20]};
   font-size: 16px;
+  background-color: ${theme.Colors.White};
   &.first {
     border-top: 1px solid ${theme.Colors.Gray[20]};
   }
