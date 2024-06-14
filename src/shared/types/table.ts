@@ -18,4 +18,7 @@ interface tableProfileStatus {
       status: 'rejected' | 'pending' | 'accepted' | 'canceled';
     };
   }[];
+  handlePageChange: (page: number) => void;
+  currentPage: number;
+  totalPages: number;
 }
