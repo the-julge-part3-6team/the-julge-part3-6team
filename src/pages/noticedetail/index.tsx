@@ -82,9 +82,9 @@ const NoticeDetail = () => {
     <>
       <Header />
       <S.PageLayout>
-        <S.TextWrap>
           <S.SmallText>식당</S.SmallText>
-          <S.BigText>{noticeData?.data.item.shop.item.name}</S.BigText>
+          <S.TextWrap>
+          <S.BigText>{noticeData?.data.item.shop.item.name}가게 제목 테스트</S.BigText>
         </S.TextWrap>
 
         <S.ContextWrap>
