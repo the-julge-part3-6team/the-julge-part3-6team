@@ -87,6 +87,10 @@ const NoticeDetailCeo = () => {
 
   // 테이블 로직 끝
 
+  const handleEditClick = () => {
+    router.push('/notice/edit');
+  };
+
   return (
     <>
       <Header />
@@ -143,9 +147,7 @@ const NoticeDetailCeo = () => {
                 />
               </div>
             ) : (
-              <S.CustomRedButton onClick={handleModal.applyClick}>
-                신청하기
-              </S.CustomRedButton>
+              <CustomButton onClick={handleEditClick} color="#EA3C12" text="편집하기" />
             )}
           </S.TextContainer>
         </S.ContextWrap>
@@ -169,7 +171,7 @@ const NoticeDetailCeo = () => {
         modalKey={key}
         modalHeader={modalHeader}
         modalFooter={
-          key === 'profileAlert' ? (
+          key === 'profileAlert' || key === 'applySuccess' ? (
             <div style={{ width: '80px' }}>
               <CustomButton
                 text="확인"
@@ -178,13 +180,7 @@ const NoticeDetailCeo = () => {
               />
             </div>
           ) : (
-            <div style={{ width: '80px' }}>
-              <CustomButton
-                text="확인"
-                color="#EA3C12"
-                onClick={handleModal.confirm}
-              />
-            </div>
+            null
           )
         }
       />
