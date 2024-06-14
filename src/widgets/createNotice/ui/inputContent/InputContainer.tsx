@@ -25,15 +25,17 @@ export const InputContent = ({ mutate }: Props) => {
   const { data, isLoading, isError } = useGetNotice(shop_id!, notice_id!);
 
   useEffect(() => {
-    setNotice(prev => {
-      return {
-        ...prev,
-        hourlyPay: data?.data.item.hourlyPay,
-        startsAt: data?.data.item.startsAt,
-        workhour: data?.data.item.workhour,
-        description: data?.data.item.description,
-      };
-    });
+    if (data) {
+      setNotice(prev => {
+        return {
+          ...prev,
+          hourlyPay: data?.data.item.hourlyPay,
+          startsAt: data?.data.item.startsAt,
+          workhour: data?.data.item.workhour,
+          description: data?.data.item.description,
+        };
+      });
+    }
   }, [data?.data]);
 
   return (
