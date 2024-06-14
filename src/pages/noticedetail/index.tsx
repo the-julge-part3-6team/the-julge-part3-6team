@@ -16,7 +16,7 @@ import { useUserQuery } from '@/models/user/useUserData';
 import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
 import { formatWorkTime } from './utils/useTimeUtils';
 import { useHandleModal } from './utils/useHandleModal';
-import { useGetNoticeDetail } from './utils/useGetNoticeDetail';
+import { useGetNoticeDetail } from '../../models/notice/useGetNoticeDetail';
 import NoticePostList from './component/NoticePostList/NoticePostList';
 
 const NoticeDetail = () => {

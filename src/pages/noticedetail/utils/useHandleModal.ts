@@ -8,7 +8,10 @@ interface HandleModalProps {
   setIsApplied: (value: boolean) => void;
 }
 
-export const useHandleModal = ({ userData, setIsApplied }: HandleModalProps) => {
+export const useHandleModal = ({
+  userData,
+  setIsApplied,
+}: HandleModalProps) => {
   const router = useRouter();
   const { setIsOpen, setIsClose, key } = useModal();
 
