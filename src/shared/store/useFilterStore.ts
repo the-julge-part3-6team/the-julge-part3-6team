@@ -32,7 +32,7 @@ export const useFilterStore = create<Props>(set => ({
   resetFilters: () =>
     set({
       startDate: null,
-      price: '',
+      price: '0',
       selectedLocations: [],
     }),
 }));
