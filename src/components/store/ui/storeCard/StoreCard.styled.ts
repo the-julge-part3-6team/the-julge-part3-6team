@@ -12,6 +12,7 @@ export const Layout = styled.div`
 
   @media (max-width: 770px) {
     flex-direction: column;
+    gap: 16px;
   }
 `;
 
@@ -26,14 +27,14 @@ export const ImageWrap = styled.div`
 
   @media (max-width: 770px) {
     width: 100%;
-    height: 176px;
+    height: auto;
+    aspect-ratio: 16 /9;
   }
 `;
 
 export const StoreInfo = styled.div`
   width: 40%;
   display: flex;
-  align-items: left;
   flex-direction: column;
   gap: 12px;
 
@@ -44,8 +45,9 @@ export const StoreInfo = styled.div`
     line-height: 20px; /* 125% */
   }
 
-  @media (max-width: 770px) {
+  @media (max-width: 744px) {
     width: 100%;
+    gap: 9px;
   }
 `;
 
@@ -54,6 +56,10 @@ export const StoreName = styled.p`
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 0.56px;
+
+  @media (max-width: 744px) {
+    font-size: 24px;
+  }
 `;
 
 export const Address = styled.div`
@@ -66,6 +72,11 @@ export const Address = styled.div`
     font-size: 16px;
     font-weight: 400;
     line-height: 26px; /* 162.5% */
+
+    @media (max-width: 744px) {
+      font-size: 14px;
+      line-height: 22px;
+    }
   }
 `;
 
@@ -74,6 +85,11 @@ export const Description = styled.div`
   font-size: 16px;
   font-weight: 400;
   line-height: 26px; /* 162.5% */
+
+  @media (max-width: 744px) {
+    font-size: 14px;
+    line-height: 22px;
+  }
 `;
 
 export const BtnContainer = styled.div`
@@ -82,7 +98,7 @@ export const BtnContainer = styled.div`
   gap: 8px;
   width: 100%;
 
-  @media (max-width: 770) {
-    margin-top: 24px;
+  @media (max-width: 744px) {
+    margin-top: 16px;
   }
 `;
