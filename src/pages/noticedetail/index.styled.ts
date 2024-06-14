@@ -58,7 +58,7 @@ export const TextWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  margin-top: 8px;
 `;
 
 export const ImageContainer = styled.div`
