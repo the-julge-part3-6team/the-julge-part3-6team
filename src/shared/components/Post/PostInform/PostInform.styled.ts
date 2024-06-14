@@ -9,8 +9,8 @@ export const PostInform = styled.div<PostContainerProps>`
   display: flex;
   gap: 8px;
   color: ${theme.Colors.Gray[50]};
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 16px;
+  line-height: 26px;
 
   ${({ isClosed }) =>
     isClosed === true &&
@@ -20,6 +20,7 @@ export const PostInform = styled.div<PostContainerProps>`
 
   @media (max-width: 744px) {
     font-size: 12px;
+    line-height: 16px;
   }
 `;
 

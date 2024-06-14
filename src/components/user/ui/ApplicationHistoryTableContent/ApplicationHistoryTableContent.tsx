@@ -8,10 +8,10 @@ export const ApplicationHistoryTableContent = ({
     <>
       <S.Container>
         <S.ContentWrap>
-          <S.ViewFlexBox>
+          <div>
             <S.MyPageHeader>내 프로필</S.MyPageHeader>
             <Table list={list} />
-          </S.ViewFlexBox>
+          </div>
         </S.ContentWrap>
       </S.Container>
     </>

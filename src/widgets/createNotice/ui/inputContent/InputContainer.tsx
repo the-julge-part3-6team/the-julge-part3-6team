@@ -1,21 +1,42 @@
 import Input from '@/shared/components/Input/Input';
 import * as S from './InputContent.styled';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import {
   NOTICE_FORM_ERRORS_INITIAL_VALUE,
   NOTICE_FORM_INITIAL_VALUE,
 } from '@/constant/notice';
 import { onSubmit } from '@/models/notice/noticeSubmit';
 import PrimaryButton from '@/shared/components/Button/RedButton/RedButton';
+import { useGetNotice } from '@/models/notice/useGetNotice';
+import { useSearchParams } from 'next/navigation';
 
 interface Props {
   mutate: any;
 }
 
 export const InputContent = ({ mutate }: Props) => {
-  const [notice, setNotice] = useState(NOTICE_FORM_INITIAL_VALUE);
+  const [notice, setNotice] = useState<CreateNotice>(NOTICE_FORM_INITIAL_VALUE);
   const [errors, setErrors] = useState(NOTICE_FORM_ERRORS_INITIAL_VALUE);
+  const useParams = useSearchParams();
+  const shop_id = useParams.get('shop_id');
+  const notice_id = useParams.get('notice_id');
+
+  const { data, isLoading, isError } = useGetNotice(shop_id!, notice_id!);
+
+  useEffect(() => {
+    if (data) {
+      setNotice(prev => {
+        return {
+          ...prev,
+          hourlyPay: data?.data.item.hourlyPay,
+          startsAt: data?.data.item.startsAt,
+          workhour: data?.data.item.workhour,
+          description: data?.data.item.description,
+        };
+      });
+    }
+  }, [data?.data]);
 
   return (
     <>
