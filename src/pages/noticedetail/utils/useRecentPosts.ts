@@ -1,4 +1,4 @@
-export const updateRecentPosts = (
+export const useRecentPosts = (
   noticeId: string,
   maxPosts: number,
 ): string[] => {
