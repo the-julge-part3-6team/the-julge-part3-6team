@@ -28,7 +28,8 @@ export const PostPriceChange = styled.div<Props>`
     padding: 0 16px 0 0;
     background-color: #fff;
     color: ${theme.Colors.Red[40]};
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 16px;
     font-weight: 400;
     ${({ isClosed }) =>
       isClosed === true &&

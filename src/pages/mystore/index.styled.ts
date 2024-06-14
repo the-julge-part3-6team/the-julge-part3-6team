@@ -6,6 +6,10 @@ export const Title = styled.h1`
   font-weight: 700;
   letter-spacing: 0.56px;
   margin-bottom: 23px;
+
+  @media (max-width: 1440px) {
+    font-size: 24px;
+  }
 `;
 
 export const MyContentWrap = styled.div`
@@ -13,9 +17,9 @@ export const MyContentWrap = styled.div`
   width: 964px;
   margin: 0 auto;
 
-  @media (max-width: 1440px) {
+  @media (max-width: 744px) {
     width: auto;
-    padding: 60px 20px;
+    padding: 40px 20px;
   }
 `;
 

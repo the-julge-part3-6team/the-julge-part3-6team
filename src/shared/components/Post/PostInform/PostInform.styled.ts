@@ -20,6 +20,7 @@ export const PostInform = styled.div<PostContainerProps>`
 
   @media (max-width: 744px) {
     font-size: 12px;
+    line-height: 16px;
   }
 `;
 
