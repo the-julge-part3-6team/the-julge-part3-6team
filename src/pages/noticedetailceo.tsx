@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import * as S from './index.styled';
+import * as S from './noticedetail/index.styled';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
 import PostInform from '@/shared/components/Post/PostInform/PostInform';
-import CustomModal from './component/CustomModal/CustomModal';
+import CustomModal from './noticedetail/component/CustomModal/CustomModal';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import cautionImg from '@/assets/caution.svg';
@@ -14,12 +14,12 @@ import checkImg from '@/assets/check.svg';
 import { useModal } from '@/shared/store/useModal';
 import { useUserQuery } from '@/models/user/useUserData';
 import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
-import { formatWorkTime } from './utils/useTimeUtils';
-import { useHandleModal } from './utils/useHandleModal';
-import { useGetNoticeDetail } from '../../models/notice/useGetNoticeDetail';
-import NoticePostList from './component/NoticePostList/NoticePostList';
+import formatWorkTime from '@/shared/utils/formatWorkTime';
+import { useHandleModal } from './noticedetail/utils/useHandleModal';
+import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
 
-const NoticeDetail = () => {
+
+const NoticeDetailCeo = () => {
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const notice_id = searchParams.get('notice_id');
@@ -36,27 +36,19 @@ const NoticeDetail = () => {
   const { setIsOpen, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
   const router = useRouter();
-  const [recentPosts, setRecentPosts] = useState<string[]>([]);
-
-  useEffect(() => {
+  const [recentPosts, setRecentPosts] = useState<string[]>(() => {
     if (typeof window !== 'undefined') {
       const recentPostsFromStorage = localStorage.getItem('recentPosts');
-      recentPostsFromStorage
-        ? setRecentPosts(JSON.parse(recentPostsFromStorage))
-        : setRecentPosts([]);
-    } else {
-      setRecentPosts([]);
+      return recentPostsFromStorage ? JSON.parse(recentPostsFromStorage) : [];
     }
-  }, []);
+    return [];
+  });
 
   useEffect(() => {
     if (notice_id && typeof window !== 'undefined') {
       const saveRecentPost = (postId: string) => {
         setRecentPosts(prevPosts => {
-          const newPosts = [
-            postId,
-            ...prevPosts.filter(id => id !== postId),
-          ].slice(0, 6);
+          const newPosts = [postId, ...prevPosts.filter(id => id !== postId)].slice(0, 6);
           localStorage.setItem('recentPosts', JSON.stringify(newPosts));
           return newPosts;
         });
@@ -111,10 +103,11 @@ const NoticeDetail = () => {
               <PostInform
                 isClosed={false}
                 type="시간"
-                content={formatWorkTime(
-                  noticeData?.data.item.startsAt,
-                  noticeData?.data.item.workhour,
-                )}
+                content={formatWorkTime({
+                  type: 'notice',
+                  startsAt: noticeData?.data.item.startsAt,
+                  workHour: noticeData?.data.item.workhour,
+                })}
               />
               <PostInform
                 isClosed={false}
@@ -147,17 +140,8 @@ const NoticeDetail = () => {
           <p>{noticeData?.data.item.description}</p>
         </S.DescripContainer>
 
-        <S.RecentWrap>
-          <S.BigText>최근에 본 공고</S.BigText>
-          <S.PostContainer>
-            {/* NoticePostList 컴포넌트에 매핑하기 */}
-            {recentPosts.map(postId => (
-              <div key={postId}>
-                <p>{postId}</p>
-              </div>
-            ))}
-          </S.PostContainer>
-        </S.RecentWrap>
+        {/* 여기에 테이블 컴포넌트 붙이시면 됩니다 */}
+        
       </S.PageLayout>
       <Footer />
       <CustomModal
@@ -216,4 +200,4 @@ const NoticeDetail = () => {
   );
 };
 
-export default NoticeDetail;
+export default NoticeDetailCeo;
