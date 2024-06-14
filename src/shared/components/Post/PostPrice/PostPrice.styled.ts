@@ -4,6 +4,7 @@ export const PostPriceContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* gap: 8px; */
 
   @media (max-width: 744px) {
     flex-direction: column;
