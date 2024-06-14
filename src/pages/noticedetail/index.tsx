@@ -36,19 +36,27 @@ const NoticeDetail = () => {
   const { setIsOpen, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
   const router = useRouter();
-  const [recentPosts, setRecentPosts] = useState<string[]>(() => {
+  const [recentPosts, setRecentPosts] = useState<string[]>([]);
+
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const recentPostsFromStorage = localStorage.getItem('recentPosts');
-      return recentPostsFromStorage ? JSON.parse(recentPostsFromStorage) : [];
+      recentPostsFromStorage
+        ? setRecentPosts(JSON.parse(recentPostsFromStorage))
+        : setRecentPosts([]);
+    } else {
+      setRecentPosts([]);
     }
-    return [];
-  });
+  }, []);
 
   useEffect(() => {
     if (notice_id && typeof window !== 'undefined') {
       const saveRecentPost = (postId: string) => {
         setRecentPosts(prevPosts => {
-          const newPosts = [postId, ...prevPosts.filter(id => id !== postId)].slice(0, 6);
+          const newPosts = [
+            postId,
+            ...prevPosts.filter(id => id !== postId),
+          ].slice(0, 6);
           localStorage.setItem('recentPosts', JSON.stringify(newPosts));
           return newPosts;
         });
