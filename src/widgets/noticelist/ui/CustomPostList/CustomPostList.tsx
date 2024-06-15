@@ -72,6 +72,7 @@ export const CustomPostList = () => {
                 <SwiperSlide key={notice_id} className={styles['swiper-slide']}>
                   <S.StyledSwiperSlide>
                     <PostCard
+                      startsAt={startsAt}
                       notice_id={notice_id}
                       shop_id={shop_id}
                       imageUrl={imageUrl}

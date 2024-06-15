@@ -15,6 +15,7 @@ export const NoticeCardList = ({ noticeList, store }: Props) => {
         const notice = item.item;
         return (
           <PostCard
+            startsAt={notice.startsAt}
             isClosed={notice.closed}
             notice_id={notice.id}
             shop_id={store.id}
