@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const CustomTable = styled.div`
   width: 100%;
   background: ${theme.Colors.White};
-
+  min-height: 318px;
   border-radius: 10px;
 
   @media (max-width: 744px) {
