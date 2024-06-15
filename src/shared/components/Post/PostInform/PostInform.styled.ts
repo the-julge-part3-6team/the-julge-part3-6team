@@ -9,7 +9,7 @@ export const PostInform = styled.div<PostContainerProps>`
   display: flex;
   gap: 8px;
   color: ${theme.Colors.Gray[50]};
-  font-size: 16px;
+  font-size: 15px;
   line-height: 26px;
 
   ${({ isClosed }) =>
