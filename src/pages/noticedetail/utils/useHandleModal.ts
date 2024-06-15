@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import { useModal } from '@/shared/store/useModal';
-import { useUserData } from '@/shared/store/useUserData';
-import { useState } from 'react';
-import { UseQueryResult } from 'react-query';
+import { useEffect, useState } from 'react';
 import { MYPAGE } from '@/constant/path';
 
 export type HandleModalType = {
@@ -22,10 +20,15 @@ export const useHandleModal = ({
 }: HandleModalProps): HandleModalType => {
   const router = useRouter();
   const { setIsOpen, setIsClose, key } = useModal();
-  // const userData = useUserData(); 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // 토큰으로 로그인 여부 확인
-  const isAuthenticated = !!localStorage.getItem('accessToken');
+  // localStorage에 접근하기 전에 브라우저 환경인지 확인
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('accessToken');
+      setIsAuthenticated(!!token);
+    }
+  }, []);
 
   const applyClick = () => {
     if (!isAuthenticated) {
