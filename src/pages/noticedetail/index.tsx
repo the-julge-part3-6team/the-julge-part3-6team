@@ -17,7 +17,9 @@ import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
 import { formatWorkTime } from './utils/useTimeUtils';
 import { useHandleModal } from './utils/useHandleModal';
 import { useGetNoticeDetail } from '../../models/notice/useGetNoticeDetail';
-import NoticePostList from './component/NoticePostList/NoticePostList';
+import { renderSpinner } from '@/shared/utils/renderSpinner'; 
+import PostList from '@/shared/components/Post/PostList/PostList';
+import { NoticeData } from '@/shared/types/post'; 
 
 const NoticeDetail = () => {
   const searchParams = useSearchParams();
@@ -33,10 +35,11 @@ const NoticeDetail = () => {
     isError: noticeError,
     isLoading: noticeLoading,
   } = useGetNoticeDetail(shop_id || '', notice_id || '');
+
   const { setIsOpen, key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
   const router = useRouter();
-  const [recentPosts, setRecentPosts] = useState<string[]>([]);
+  const [recentPosts, setRecentPosts] = useState<NoticeData[]>([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -52,18 +55,44 @@ const NoticeDetail = () => {
   useEffect(() => {
     if (notice_id && typeof window !== 'undefined') {
       const saveRecentPost = (postId: string) => {
-        setRecentPosts(prevPosts => {
-          const newPosts = [
-            postId,
-            ...prevPosts.filter(id => id !== postId),
+        setRecentPosts((prevPosts: NoticeData[]) => {
+          const newPost: NoticeData = {
+            item: {
+              id: notice_id,
+              hourlyPay: '',
+              startsAt: '',
+              workhour: 0,
+              description: '',
+              closed: false,
+              shop: {
+                item: {
+                  id: noticeData?.data.item.shop.item.id || '',
+                  name: noticeData?.data.item.shop.item.name || '',
+                  category: '',
+                  address1: noticeData?.data.item.shop.item.address1 || '',
+                  address2: noticeData?.data.item.shop.item.address2 || '',
+                  description: noticeData?.data.item.shop.item.description || '',
+                  imageUrl: noticeData?.data.item.shop.item.imageUrl || '',
+                  originalHourlyPay: 0
+                },
+                href: ''
+              }
+            },
+            links: []
+          };
+
+          const updatedPosts = [
+            newPost,
+            ...(prevPosts || []).filter((post: NoticeData) => post.item.id !== notice_id)
           ].slice(0, 6);
-          localStorage.setItem('recentPosts', JSON.stringify(newPosts));
-          return newPosts;
+
+          localStorage.setItem('recentPosts', JSON.stringify(updatedPosts));
+          return updatedPosts;
         });
       };
       saveRecentPost(notice_id);
     }
-  }, [notice_id]);
+  }, [notice_id, noticeData]);
 
   const handleModal = useHandleModal({ userData, setIsApplied });
 
@@ -79,22 +108,24 @@ const NoticeDetail = () => {
       </>
     ) : null;
 
+  if (!noticeData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Header />
       <S.PageLayout>
-        
-          <S.SmallText>식당</S.SmallText>
-          <S.TextWrap>
-            
-          <S.BigText>{noticeData?.data.item.shop.item.name}</S.BigText>
+        <S.SmallText>식당</S.SmallText>
+        <S.TextWrap>
+          <S.BigText>{noticeData.data.item.shop.item.name}</S.BigText>
         </S.TextWrap>
 
         <S.ContextWrap>
           <S.ImageContainer>
             <img
-              src={noticeData?.data.item.shop.item.imageUrl}
-              alt={noticeData?.data.item.shop.item.name}
+              src={noticeData.data.item.shop.item.imageUrl}
+              alt={noticeData.data.item.shop.item.name}
             />
           </S.ImageContainer>
 
@@ -103,9 +134,9 @@ const NoticeDetail = () => {
             <S.PriceWrap>
               <PostPrice
                 isClosed={false}
-                defaultHourlyPay={noticeData?.data.item.hourlyPay}
+                defaultHourlyPay={noticeData.data.item.hourlyPay}
                 currentHourlyPay={
-                  noticeData?.data.item.shop.item.originalHourlyPay
+                  noticeData.data.item.shop.item.originalHourlyPay
                 }
               />
             </S.PriceWrap>
@@ -114,18 +145,18 @@ const NoticeDetail = () => {
                 isClosed={false}
                 type="시간"
                 content={formatWorkTime(
-                  noticeData?.data.item.startsAt,
-                  noticeData?.data.item.workhour,
+                  noticeData.data.item.startsAt,
+                  noticeData.data.item.workhour,
                 )}
               />
               <PostInform
                 isClosed={false}
                 type="장소"
-                content={noticeData?.data.item.shop.item.address1}
+                content={noticeData.data.item.shop.item.address1}
               />
             </S.WidgetWrap>
             <S.DetailText>
-              <p>{noticeData?.data.item.shop.item.description}</p>
+              <p>{noticeData.data.item.shop.item.description}</p>
             </S.DetailText>
             {isApplied ? (
               <div style={{ width: '346px' }}>
@@ -145,19 +176,13 @@ const NoticeDetail = () => {
 
         <S.DescripContainer>
           <S.SmallText isBlack>공고 설명</S.SmallText>
-          <p></p>
-          <p>{noticeData?.data.item.description}</p>
+          <p>{noticeData.data.item.description}</p>
         </S.DescripContainer>
 
         <S.RecentWrap>
           <S.BigText>최근에 본 공고</S.BigText>
           <S.PostContainer>
-            {/* NoticePostList 컴포넌트에 매핑하기 */}
-            {recentPosts.map(postId => (
-              <div key={postId}>
-                <p>{postId}</p>
-              </div>
-            ))}
+            {renderSpinner(<PostList items={recentPosts} />, noticeLoading)}
           </S.PostContainer>
         </S.RecentWrap>
       </S.PageLayout>
