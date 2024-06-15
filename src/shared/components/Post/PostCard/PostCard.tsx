@@ -2,7 +2,6 @@ import * as S from './PostCard.styled';
 import PostImage from '../PostImage/PostImage';
 import PostInform from '../PostInform/PostInform';
 import PostPrice from '../PostPrice/PostPrice';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 interface Props {

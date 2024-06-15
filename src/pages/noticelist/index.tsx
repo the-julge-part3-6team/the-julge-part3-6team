@@ -1,15 +1,16 @@
 import Header from '@/shared/components/Header/Header';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as S from './index.styled';
 import Footer from '@/shared/components/Footer/Footer';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { useModal } from '@/shared/store/useModal';
 import { useGetNotices } from '../../models/notice/useGetNotices';
-import PostEntire from '@/shared/components/Post/PostEntire/PostEntire';
 import { Filter } from '@/components/filter';
 import { FilterState } from '@/shared/types/filterState';
-import { dateTransfromIso } from '@/shared/utils/dateTransform';
+import { dateTransfromKST } from '@/shared/utils/dateTransform';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
+import PostList from '@/shared/components/Post/PostList/PostList';
+import { CustomPostList, SortDropdown } from '@/widgets/noticelist';
 
 const NoticeList = () => {
   const { isOpen, setIsOpen, setIsClose } = useModal(); // 필터 모달
@@ -19,7 +20,7 @@ const NoticeList = () => {
   const [sort, setSort] = useState('time');
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 설정
 
-  const startsAtGte = dateTransfromIso(filters?.startDate);
+  const startsAtGte = dateTransfromKST(filters?.startDate!);
 
   const address = filters?.selectedLocations
     ?.map(selectedLocation => `address=${encodeURIComponent(selectedLocation)}`)
@@ -31,7 +32,7 @@ const NoticeList = () => {
     sort: sort,
     hourlyPayGte: filters?.price,
     address: address,
-    startsAtGte: startsAtGte,
+    startsAtGte: startsAtGte ? `&startsAtGte=${startsAtGte}` : '',
   });
 
   const totalItems = data?.data?.count; // 공고 총 갯수
@@ -72,41 +73,19 @@ const NoticeList = () => {
       <S.ContainerBackground>
         <S.Container>
           <S.CustomTitle>맞춤 공고</S.CustomTitle>
-          {/* <PostList postList={customPostList} /> */}
+          {renderSpinner(<CustomPostList items={noticeDatas} />, isLoading)}
         </S.Container>
       </S.ContainerBackground>
       <S.Container>
         <S.TitleWrap>
           <S.CustomTitle>전체 공고</S.CustomTitle>
           <S.ButtonWrap>
-            <S.DeadlineButton onClick={toggleDropdown}>
-              {order}
-              <span>{isDropdownOpen ? '▲' : '▼'}</span>
-            </S.DeadlineButton>
-            {isDropdownOpen && (
-              <S.DropdownMenu>
-                <S.DropdownItem
-                  onClick={() => handleSortOptionClick('마감임박순', 'time')}
-                >
-                  마감 임박순
-                </S.DropdownItem>
-                <S.DropdownItem
-                  onClick={() => handleSortOptionClick('시급많은순', 'pay')}
-                >
-                  시급 많은순
-                </S.DropdownItem>
-                <S.DropdownItem
-                  onClick={() => handleSortOptionClick('시간적은순', 'hour')}
-                >
-                  시간 적은순
-                </S.DropdownItem>
-                <S.DropdownItem
-                  onClick={() => handleSortOptionClick('가나다순', 'shop')}
-                >
-                  가나다순
-                </S.DropdownItem>
-              </S.DropdownMenu>
-            )}
+            <SortDropdown
+              isDropdownOpen={isDropdownOpen}
+              order={order}
+              toggleDropdown={toggleDropdown}
+              handleSortOptionClick={handleSortOptionClick}
+            />
 
             <S.FilterButton onClick={toggleFilterModal}>
               상세 필터
@@ -115,7 +94,7 @@ const NoticeList = () => {
           </S.ButtonWrap>
         </S.TitleWrap>
         <S.PostListWrap>
-          {renderSpinner(<PostEntire items={noticeDatas} />, isLoading)}
+          {renderSpinner(<PostList items={noticeDatas} />, isLoading)}
         </S.PostListWrap>
         <Pagination
           currentPage={currentPage}

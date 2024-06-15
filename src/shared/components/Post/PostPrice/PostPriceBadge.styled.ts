@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 interface Props {
   isClosed: boolean;
+  determineColor: 'red40' | 'red30';
 }
 
 export const PostPriceChange = styled.div<Props>`
@@ -14,6 +15,11 @@ export const PostPriceChange = styled.div<Props>`
   color: #fff;
   border-radius: 20px;
   background-color: ${theme.Colors.Red[40]};
+  ${({ determineColor }) =>
+    determineColor === 'red30' &&
+    css`
+      background-color: ${theme.Colors.Red[30]};
+    `}
   font-size: 14px;
   text-align: center;
   font-weight: 500;
@@ -35,5 +41,17 @@ export const PostPriceChange = styled.div<Props>`
       css`
         color: ${theme.Colors.Gray[20]};
       `}
+    ${({ determineColor }) =>
+      determineColor === 'red30' &&
+      css`
+        color: ${theme.Colors.Red[30]};
+      `}
+  }
+`;
+
+export const PostPriceArrow = styled.div`
+  font-size: 18px;
+  @media (max-width: 744px) {
+    font-size: 15px;
   }
 `;

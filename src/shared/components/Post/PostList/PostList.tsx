@@ -6,14 +6,13 @@ import { NoticeData } from '@/shared/types/post';
 
 interface Props {
   items?: NoticeData[];
-  count: number;
 }
 
-const PostList = ({ items, count }: Props) => {
+const PostList = ({ items }: Props) => {
   return (
     <S.PostListContainer>
       {items && items?.length > 0 ? (
-        items.slice(0, count).map(item => {
+        items.map(item => {
           const {
             id: notice_id,
             hourlyPay,

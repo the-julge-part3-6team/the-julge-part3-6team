@@ -16,9 +16,9 @@ const PostPriceBadge = ({
 
   const determineArrowDirection = () => {
     if (defaultHourlyPay <= currentHourlyPay) {
-      return '↑';
+      return '⬆';
     }
-    return '↓';
+    return '⬇';
   };
 
   const averageChange = averageHourlyPay({
@@ -26,9 +26,12 @@ const PostPriceBadge = ({
     currentHourlyPay,
   });
 
+  const determineColor = averageChange >= 50 ? 'red40' : 'red30';
+
   return (
-    <S.PostPriceChange isClosed={isClosed}>
-      기존 시급보다 {averageChange}% {determineArrowDirection()}
+    <S.PostPriceChange isClosed={isClosed} determineColor={determineColor}>
+      기존 시급보다 {averageChange}%&nbsp;
+      <S.PostPriceArrow>{determineArrowDirection()}</S.PostPriceArrow>
     </S.PostPriceChange>
   );
 };

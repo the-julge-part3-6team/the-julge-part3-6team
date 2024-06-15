@@ -29,7 +29,7 @@ export const useGetNotices = ({
     ],
     queryFn: () =>
       apiInstance.get(
-        `/notices?limit=${limit}&offset=${offset}&sort=${sort}&hourlyPayGte=${hourlyPayGte}&${address}&startsAtGte=${startsAtGte}`,
+        `/notices?limit=${limit}&offset=${offset}&sort=${sort}&hourlyPayGte=${hourlyPayGte}&${address}${startsAtGte}`,
       ),
   });
 };
