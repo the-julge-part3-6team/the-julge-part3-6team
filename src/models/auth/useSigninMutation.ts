@@ -34,10 +34,11 @@ export const useSigninMutation = (setError: any) => {
       router.push('/');
     },
 
-    onError: (error: AxiosError) => {
-      const statusCode = error.response?.status;
+    onError: (error: { message: string }) => {
+      const statusCode = error.message;
+
       switch (statusCode) {
-        case 404:
+        case '404':
           setError('email', {
             type: 'manual',
             message: '존재하지 않거나 비밀번호가 일치하지 않습니다.',

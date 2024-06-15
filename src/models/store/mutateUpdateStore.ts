@@ -14,8 +14,8 @@ export const mutateUpdateStore = (shop_id: string, setIsOpen: any) => {
       setIsOpen('수정완료 모달');
     },
 
-    onError: (error: AxiosError) => {
-      const statusCode = error.response?.status;
+    onError: (error: { message: string }) => {
+      const statusCode = error.message;
       console.log(statusCode);
     },
   });

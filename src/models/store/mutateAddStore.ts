@@ -18,11 +18,11 @@ export const mutateAddStore = (setIsOpen: any) => {
       });
     },
     onSuccess: () => setIsOpen('등록완료 모달'),
-    onError: (error: AxiosError) => {
-      const statusCode = error.response?.status;
+    onError: (error: { message: string }) => {
+      const statusCode = error.message;
 
       switch (statusCode) {
-        case 409:
+        case '409':
           setIsOpen('이미 등록된 가게가 존재합니다.');
       }
     },
