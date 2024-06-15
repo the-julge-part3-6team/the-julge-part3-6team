@@ -22,10 +22,13 @@ export const useHandleModal = ({
 }: HandleModalProps): HandleModalType => {
   const router = useRouter();
   const { setIsOpen, setIsClose, key } = useModal();
-  const userData = useUserData(); 
+  // const userData = useUserData(); 
+
+  // 토큰으로 로그인 여부 확인
+  const isAuthenticated = !!localStorage.getItem('accessToken');
 
   const applyClick = () => {
-    if (!userData?.phone) {
+    if (!isAuthenticated) {
       setIsOpen('profileAlert');
     } else {
       setIsOpen('applySuccess');
