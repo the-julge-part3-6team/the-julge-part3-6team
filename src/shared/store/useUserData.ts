@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface Props {
+  phone: any;
   user_id: string;
   type: 'employee' | 'employer' | '';
   address: Locations;

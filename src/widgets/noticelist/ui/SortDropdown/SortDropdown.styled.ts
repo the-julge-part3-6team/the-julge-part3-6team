@@ -13,6 +13,9 @@ export const DeadlineButton = styled.button`
   color: black;
   padding: 12px;
   position: relative;
+  span {
+    font-size: 10px;
+  }
 `;
 
 export const DropdownMenu = styled.div`

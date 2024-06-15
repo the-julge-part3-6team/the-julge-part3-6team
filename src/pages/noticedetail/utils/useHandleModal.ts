@@ -1,23 +1,31 @@
 import { useRouter } from 'next/router';
 import { useModal } from '@/shared/store/useModal';
+import { useUserData } from '@/shared/store/useUserData';
 import { useState } from 'react';
 import { UseQueryResult } from 'react-query';
 import { MYPAGE } from '@/constant/path';
 
+export type HandleModalType = {
+  applyClick: () => void;
+  cancelClick: () => void;
+  confirmCancel: () => void;
+  closeCancelModal: () => void;
+  confirm: () => void;
+};
+
 interface HandleModalProps {
-  userData: UseQueryResult<any, unknown>;
   setIsApplied: (value: boolean) => void;
 }
 
 export const useHandleModal = ({
-  userData,
   setIsApplied,
-}: HandleModalProps) => {
+}: HandleModalProps): HandleModalType => {
   const router = useRouter();
   const { setIsOpen, setIsClose, key } = useModal();
+  const userData = useUserData(); 
 
   const applyClick = () => {
-    if (!userData?.data.item.phone) {
+    if (!userData?.phone) {
       setIsOpen('profileAlert');
     } else {
       setIsOpen('applySuccess');

@@ -39,14 +39,6 @@ export const CustomTitle = styled.h1`
 
 export const PostListWrap = styled.div`
   margin: 0 auto 40px;
-
-  @media (max-width: 1040px) {
-    width: 638px;
-  }
-
-  @media (max-width: 744px) {
-    width: 400px;
-  }
 `;
 
 export const ButtonWrap = styled.div`

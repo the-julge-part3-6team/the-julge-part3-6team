@@ -12,7 +12,6 @@ export const PostListContainer = styled.div`
   }
 
   @media (max-width: 744px) {
-    grid-template-columns: 195px 195px;
     gap: 9px;
   }
 `;
