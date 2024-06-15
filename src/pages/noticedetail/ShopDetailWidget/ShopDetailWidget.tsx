@@ -5,21 +5,21 @@ import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
 import PostInform from '@/shared/components/Post/PostInform/PostInform';
 import formatWorkTime from '@/shared/utils/formatWorkTime';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
-import { NoticeData } from '@/shared/types/post';
 import CustomModal from '../component/CustomModal/CustomModal';
 import checkImg from '@/assets/check.svg';
 import cautionImg from '@/assets/caution.svg';
-import RedButton from '@/shared/components/Button/RedButton/RedButton';
-import { useHandleModal, HandleModalType } from '../utils/useHandleModal';
+import { useHandleModal } from '../utils/useHandleModal';
 
 interface ShopDetailWidgetProps {
   noticeData?: any;
   isApplied: boolean;
+  setIsApplied: (value: boolean) => void;
 }
 
 const ShopDetailWidget = ({
   noticeData,
   isApplied,
+  setIsApplied,
 }: ShopDetailWidgetProps) => {
   if (!noticeData || !noticeData.data || !noticeData.data.item || !noticeData.data.item.shop) {
     return null;
@@ -27,10 +27,9 @@ const ShopDetailWidget = ({
 
   const { shop } = noticeData.data.item;
 
-  // useHandleModal을 호출하여 handleModal 객체를 가져옴
   const { applyClick, cancelClick, confirmCancel, closeCancelModal, confirm } =
     useHandleModal({
-      setIsApplied: (value: boolean) => {}, // 실제 setIsApplied 함수로 대체
+      setIsApplied: setIsApplied,
     });
 
   const modalHeader = isApplied ? (
@@ -46,12 +45,10 @@ const ShopDetailWidget = ({
   );
 
   const handleApplyClick = () => {
-    // 신청하기 버튼 클릭 시 처리할 로직
     applyClick();
   };
 
   const handleCancelClick = () => {
-    // 취소하기 버튼 클릭 시 처리할 로직
     cancelClick();
   };
 

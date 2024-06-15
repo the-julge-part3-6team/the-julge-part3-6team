@@ -6,14 +6,22 @@ import ShopDetailWidget from './ShopDetailWidget/ShopDetailWidget';
 import DetailWidget from './DetailWidget/DetailWidget';
 import RecentPostsWidget from './RecentPostsWidget/RecentPostWidget';
 import { useModal } from '@/shared/store/useModal';
-import { NoticeData } from '@/shared/types/post';
+import { useSearchParams } from 'next/navigation';
+import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
 
 const NoticeDetail = () => {
+
+  const searchParams = useSearchParams();
+  const shop_id = searchParams.get('shop_id');
+  const notice_id = searchParams.get('notice_id');
+  const {
+    data: noticeData,
+    isError: noticeError,
+    isLoading: noticeLoading,
+  } = useGetNoticeDetail(shop_id || '', notice_id || '');
+  
   const { key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
-
-  // NoticeData는 실제 데이터로 대체되어야 함
-  const noticeData = {} as NoticeData;
 
   if (!noticeData) {
     return <div>Loading...</div>;
