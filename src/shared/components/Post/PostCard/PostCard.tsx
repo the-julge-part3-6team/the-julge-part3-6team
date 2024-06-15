@@ -4,6 +4,7 @@ import PostInform from '../PostInform/PostInform';
 import PostPrice from '../PostPrice/PostPrice';
 import { useRouter } from 'next/router';
 import { NOTICE } from '@/constant/path';
+import { useUserData } from '@/shared/store/useUserData';
 
 interface Props {
   notice_id: string;
@@ -30,14 +31,22 @@ const PostCard = ({
 }: Props) => {
   const router = useRouter();
 
+  const { type } = useUserData();
+  console.log(type);
+  const handleRouterByUserType = (type: 'employer' | 'employee' | '') => {
+    if (type === 'employer') {
+      router.push(
+        `${NOTICE.DETAIL_CEO}?shop_id=${shop_id}&notice_id=${notice_id}`,
+      );
+    } else if (type === 'employee' || type === '') {
+      router.push(`${NOTICE.DETAIL}?shop_id=${shop_id}&notice_id=${notice_id}`);
+    }
+  };
+
   return (
     <S.PostContainer
       isClosed={isClosed}
-      onClick={() =>
-        router.push(
-          `${NOTICE.DETAIL}?shop_id=${shop_id}&notice_id=${notice_id}`,
-        )
-      }
+      onClick={() => handleRouterByUserType(type)}
     >
       <PostImage isClosed={isClosed} imgSrc={imageUrl} />
       <S.PostContent>
