@@ -12,7 +12,7 @@ const CreateForm = () => {
         <S.ContentWrap>
           <>
             <S.MyPageHeader>내 프로필</S.MyPageHeader>
-            <RegistrationProfile />
+            <RegistrationProfile edit={false} />
           </>
         </S.ContentWrap>
       </S.Container>

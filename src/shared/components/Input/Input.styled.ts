@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import theme from '@/styles/theme';
+import theme from '@/shared/styles/theme';
 
 interface InputFrameProps {
   hasError?: boolean;
@@ -12,7 +12,6 @@ export const InputContainer = styled.div`
   align-items: flex-start;
   gap: 8px;
   width: 100%;
-  height: 92px;
 `;
 
 export const InputLabel = styled.label`

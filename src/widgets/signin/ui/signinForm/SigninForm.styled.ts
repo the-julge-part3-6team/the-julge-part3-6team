@@ -6,7 +6,8 @@ export const SigninFormLayout = styled.form`
   gap: 28px;
   width: 350px;
 
-  @media (max-width: '744px') {
+  @media (max-width: 744px) {
     width: 100%;
+    padding: 0 20px;
   }
 `;

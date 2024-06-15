@@ -1,4 +1,9 @@
+import { handleLogout } from '@/models/auth/logout';
 import axios from 'axios';
+import { error } from 'console';
+import { Cookies } from 'react-cookie';
+
+const cookies = new Cookies();
 
 export const apiInstance = axios.create({
   baseURL: 'https://bootcamp-api.codeit.kr/api/5-6/the-julge',
@@ -7,25 +12,38 @@ export const apiInstance = axios.create({
 apiInstance.interceptors.request.use(configOrigin => {
   const config = configOrigin;
   if (typeof window !== 'undefined') {
-    const cookies = document.cookie;
-    const [_, token] = cookies.split('=');
+    const token = cookies.get('token');
 
     if (config.headers && token) {
       config.headers.Authorization = `Bearer ${token}`;
-    }
-    if (localStorage.getItem('hasImage')) {
-      config.headers.Authorization = null;
-      localStorage.removeItem('hasImage');
     }
   }
 
   return config;
 });
 
-// export const awsApiInstance = axios.create();
+apiInstance.interceptors.response.use(
+  configOrigin => {
+    const config = configOrigin;
 
-// awsApiInstance.interceptors.request.use(config => {
-//   if (typeof window === 'undefined') return config;
-//   config.headers.Authorization = null;
-//   return config;
-// });
+    return config;
+  },
+  error => {
+    if (error.response && error.response.status === 401) {
+      localStorage.clear();
+      cookies.remove('token', { path: '/' });
+      window.location.href = '/signin';
+    } else {
+      console.log(error.response.status);
+      throw new Error(error.response.status);
+    }
+  },
+);
+
+export const awsApiInstance = axios.create();
+
+awsApiInstance.interceptors.request.use(config => {
+  if (typeof window === 'undefined') return config;
+  config.headers.Authorization = null;
+  return config;
+});

@@ -1,4 +1,4 @@
-import theme from '@/styles/theme';
+import theme from '@/shared/styles/theme';
 import { styled } from 'styled-components';
 
 export const RedButton = styled.button`
@@ -7,6 +7,7 @@ export const RedButton = styled.button`
   align-items: center;
   padding: 14px 20px;
   width: 100%;
+  font-weight: 700;
 
   border-radius: 6px;
   background-color: ${theme.Colors.Red[50]};

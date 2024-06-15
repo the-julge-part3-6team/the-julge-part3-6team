@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from '@/styles/theme';
+import theme from '@/shared/styles/theme';
 
 export const NotificationModalContainer = styled.div`
   position: absolute;
@@ -13,6 +13,14 @@ export const NotificationModalContainer = styled.div`
   box-shadow: 0px 2px 8px 0px rgba(120, 116, 134, 0.25);
   z-index: 3;
   box-sizing: border-box;
+
+  @media (max-width: 744px) {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    border-radius: 0;
+    border: none;
+  }
 `;
 
 export const NotificationModalHeader = styled.h2`

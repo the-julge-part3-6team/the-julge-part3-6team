@@ -1,12 +1,13 @@
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import * as S from './SignupForm.styled';
 import { TypeSelectBtn } from '@/components/auth';
-import { useSignupState } from '../../model/useSignupValidate';
-import { signupMutation } from '../../model/signupMutation';
+import { signupMutation } from '../../../../models/auth/signupMutation';
 import Input from '@/shared/components/Input/Input';
 import { useModal } from '@/shared/store/useModal';
 import Modal from '@/shared/components/Modal/Modal';
 import { useRouter } from 'next/router';
+import { useSignupState } from '@/models/auth/useSignupValidate';
+import { AUTH } from '@/constant/path';
 
 export const SignupForm = () => {
   const {
@@ -27,7 +28,7 @@ export const SignupForm = () => {
 
   const onClickCompleteModal = () => {
     setIsClose();
-    router.push('/signin');
+    router.push(AUTH.SIGNIN);
   };
 
   return (

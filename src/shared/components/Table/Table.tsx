@@ -1,13 +1,10 @@
 import React from 'react';
 import * as S from './Table.styled';
 import PrimaryBadge from './Badge/Badge';
-import { ITable } from '@/types/table';
+import { formatNumberWithCommas } from '@/shared/utils/formatNumberWithCommas';
+import formatWorkTime from '@/shared/utils/formatWorkTime';
 
-interface Props {
-  list: ITable[];
-}
-
-const Table = ({ list }: Props) => {
+const Table = ({ list }: Pick<tableProfileStatus, 'list'>) => {
   return (
     <S.CustomTable>
       <S.CustomTableWrap>
@@ -17,14 +14,25 @@ const Table = ({ list }: Props) => {
           <li>시급</li>
           <li>상태</li>
         </S.CustomTableHeader>
-        {list.map((item, index) => {
+        {list.map((item: any, index: any) => {
           return (
             <S.CustomTableBody className={index === 0 ? 'first' : ''}>
-              <li>{item.title}</li>
-              <li>{item.date}</li>
-              <li>{item.price}</li>
+              <li>{item.item?.shop?.item.name}</li>
               <li>
-                <PrimaryBadge status={item.status} />
+                {formatWorkTime({
+                  type: 'notice',
+                  startsAt: item?.item.notice.item.startsAt,
+                  workHour: item?.item.notice.item.workhour,
+                })}
+              </li>
+              <li>
+                {formatNumberWithCommas(
+                  Number(item?.item.notice.item.hourlyPay),
+                )}
+                원
+              </li>
+              <li>
+                <PrimaryBadge status={item.item.status} />
               </li>
             </S.CustomTableBody>
           );

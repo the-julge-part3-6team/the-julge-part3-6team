@@ -3,6 +3,8 @@ import { PageLayout } from '@/components/auth';
 import * as S from './index.styled';
 import Link from 'next/link';
 import { SigninForm } from '@/widgets/signin';
+import { useRouterGuard } from '@/shared/utils/useRouterGuard';
+import { useUserData } from '@/shared/store/useUserData';
 
 const index = () => {
   return (

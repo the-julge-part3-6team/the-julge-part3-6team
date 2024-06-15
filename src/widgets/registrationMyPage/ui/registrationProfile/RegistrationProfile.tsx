@@ -1,28 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '@/shared/components/Input/Input';
+import * as S from './RegistrationProfile.styled';
 import { locations } from '@/components/filter/constant/locations';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import { useProfileData } from '@/shared/store/useProfileData';
-import { useUserValidateion } from '@/widgets/mypage/model/useUserUpdateForm';
-import * as S from './RegistrationProfile.styled';
+import { useUserValidation } from '@/models/user/useUserUpdateForm';
 import { EditProfileModal } from '../editProfileModal/EditProfileModal';
-import { onChangeValue } from '../../model/onChangeValue';
+import { onChangeValue } from '@/models/user/onChangeValue';
+import { USER_FORM_ERRORS_INITIAL_VALUE } from '@/constant/user';
+import { replacePhoneValue } from '@/shared/utils/replacePhoneValue';
+import { submitProfile } from '@/models/user/submitProfile';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useUserQuery } from '@/models/user/useUserData';
+import { useUpdateUserState } from '@/models/user/useUpdateUserState';
+import { useUserData } from '@/shared/store/useUserData';
 
-export const RegistrationProfile = () => {
+interface Props {
+  edit: boolean;
+}
+
+export const RegistrationProfile = ({ edit }: Props) => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
     useProfileData();
+  const { setAddress: setUserAddress } = useUserData();
+  const [error, setError] = useState(USER_FORM_ERRORS_INITIAL_VALUE);
+  const { data, isError, isLoading } = useUserQuery();
 
-  const { mutate } = useUserValidateion();
+  const item: UserDataType = data?.data.item;
+  const formData = { name, phone, address, bio };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    mutate({ name, phone, address, bio });
-  };
+  const result = useUserValidation(setUserAddress);
+  if (edit) {
+    useUpdateUserState(isLoading, item, {
+      setName,
+      setPhone,
+      setAddress,
+      setBio,
+    });
+  }
 
   return (
     <>
       <EditProfileModal />
-      <S.CreateForm onSubmit={onSubmit}>
+      <S.CreateForm
+        onSubmit={e => submitProfile({ e, formData, setError, result })}
+      >
         <S.CreateFormUl>
           <li>
             <Input
@@ -35,11 +57,12 @@ export const RegistrationProfile = () => {
               onChange={e =>
                 onChangeValue(e, { setName, setPhone, setAddress, setBio })
               }
+              error={error.name}
             />
           </li>
           <li>
             <Input
-              value={phone}
+              value={replacePhoneValue(phone)}
               id="phone"
               placeholder="입력"
               label={'연락처*'}
@@ -48,6 +71,7 @@ export const RegistrationProfile = () => {
               onChange={e =>
                 onChangeValue(e, { setName, setPhone, setAddress, setBio })
               }
+              error={error.phone}
             />
           </li>
           <li>

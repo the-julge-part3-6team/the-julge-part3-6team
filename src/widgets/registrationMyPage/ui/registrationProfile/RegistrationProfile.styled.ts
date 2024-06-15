@@ -1,5 +1,5 @@
 import { RedButton } from '@/shared/components/Button/RedButton/RedButton.styled';
-import theme from '@/styles/theme';
+import theme from '@/shared/styles/theme';
 import styled from 'styled-components';
 
 export const CustomRedButton = styled(RedButton)`
