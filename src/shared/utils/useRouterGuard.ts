@@ -12,7 +12,7 @@ export const useRouterGuard = () => {
   const pathname = router.pathname;
   const token = cookies.get('token');
 
-  const notSigninPath = ['/signin', '/signup'];
+  const notSigninPath = ['/signin', '/signup', '/noticelist', '/noticedetail'];
   const employer = [
     '/mystore',
     '/mystore/edit',
