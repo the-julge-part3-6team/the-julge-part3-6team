@@ -13,6 +13,7 @@ import { submitProfile } from '@/models/user/submitProfile';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUserQuery } from '@/models/user/useUserData';
 import { useUpdateUserState } from '@/models/user/useUpdateUserState';
+import { useUserData } from '@/shared/store/useUserData';
 
 interface Props {
   edit: boolean;
@@ -21,13 +22,14 @@ interface Props {
 export const RegistrationProfile = ({ edit }: Props) => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
     useProfileData();
+  const { setAddress: setUserAddress } = useUserData();
   const [error, setError] = useState(USER_FORM_ERRORS_INITIAL_VALUE);
   const { data, isError, isLoading } = useUserQuery();
 
   const item: UserDataType = data?.data.item;
   const formData = { name, phone, address, bio };
 
-  const result = useUserValidation();
+  const result = useUserValidation(setUserAddress);
   if (edit) {
     useUpdateUserState(isLoading, item, {
       setName,
