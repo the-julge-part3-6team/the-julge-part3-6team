@@ -44,6 +44,7 @@ export const SmallText = styled.h4<{ isBlack?: boolean }>`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
+  margin-bottom: 8px;
 `;
 
 export const BigText = styled.h1`
