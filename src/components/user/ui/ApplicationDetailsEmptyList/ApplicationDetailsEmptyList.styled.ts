@@ -57,7 +57,7 @@ export const BackgroundBox = styled.div`
 export const ContentBox = styled.div`
   width: 964px;
   margin: 0 auto;
-  padding: 60px 0;
+  padding: 60px 0 120px;
 
   @media (max-width: 1440px) {
     width: auto;

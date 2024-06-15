@@ -13,6 +13,11 @@ export const NotificationItemContainer = styled.div`
   border: 1px solid ${theme.Colors.Gray[20]};
   margin-top: 8px;
   box-sizing: border-box;
+  font-weight: 400;
+
+  @media (max-width: 744px) {
+    width: 100%;
+  }
 `;
 
 export const NotificationItemContent = styled.div`

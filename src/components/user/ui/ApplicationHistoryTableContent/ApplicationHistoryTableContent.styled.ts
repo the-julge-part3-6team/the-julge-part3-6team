@@ -10,6 +10,7 @@ export const PageNationWrap = styled.div`
   width: 100%;
   background-color: #fff;
   padding: 12px 0;
+  border-radius: 0 0 10px 10px;
 `;
 
 export const ContentWrap = styled.div`

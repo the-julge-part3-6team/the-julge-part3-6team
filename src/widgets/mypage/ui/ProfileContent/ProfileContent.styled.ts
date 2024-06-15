@@ -35,3 +35,7 @@ export const ViewFlexBox = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
+export const HeightCon = styled.div`
+  padding: 0 0 430px;
+`;

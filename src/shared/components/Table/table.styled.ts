@@ -5,7 +5,6 @@ export const CustomTable = styled.div`
   width: 100%;
   border-radius: 10px;
   background: ${theme.Colors.White};
-  min-height: 338px;
 
   @media (max-width: 744px) {
     overflow-x: scroll;
@@ -15,6 +14,7 @@ export const CustomTable = styled.div`
 export const CustomTableHeader = styled.ul`
   display: grid;
   grid-template-columns: 23.5% 31% 21% 24.5%;
+  border-radius: 10px 10px 0 0;
   background: ${theme.Colors.Red[10]};
   font-size: 14px;
   li {
