@@ -7,6 +7,7 @@ import { useUserData } from '@/shared/store/useUserData';
 import { useGetAlerts } from '@/models/alert/useGetAlerts';
 import { NotLogin } from './notLogin/notLogin';
 import { IsLogin } from './isLogin/IsLogin';
+import Link from 'next/link';
 
 const Header = () => {
   const { user_id, type } = useUserData();
@@ -17,7 +18,9 @@ const Header = () => {
   return (
     <S.Header>
       <S.HeaderContainer>
-        <Image height={20} src={logo} alt="" className="logo" />
+        <Link href="/noticelist">
+          <Image height={20} src={logo} alt="" className="logo" />
+        </Link>
         <Search placeholder={'가게 이름으로 찾아보세요.'} />
         <S.AuthContainer>
           {user_id ? (
