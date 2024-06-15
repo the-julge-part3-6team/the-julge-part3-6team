@@ -25,6 +25,10 @@ export const PostContainer = styled.div<PostContainerProps>`
     css`
       color: ${theme.Colors.Gray[30]};
     `}
+
+  @media (max-width: 744px) {
+    padding: 12px;
+  }
 `;
 
 export const PostContent = styled.div`

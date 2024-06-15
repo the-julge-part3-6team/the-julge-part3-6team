@@ -3,21 +3,21 @@ import { RedButton } from '@/shared/components/Button/RedButton/RedButton.styled
 import Modal from '@/shared/components/Modal/Modal';
 
 export const PageLayout = styled.div`
+  width: 964px;
   position: relative;
   align-items: center;
   justify-content: center;
-  max-width: 1200px;
   top: 60px;
-  width: calc(100% - 476px);
   margin: 0 auto;
   padding-bottom: 120px;
 
   @media (max-width: 1440px) {
-    width: calc(100% - 64px);
+    width: 100%;
+    padding: 0 32px;
   }
 
-  @media (max-width: 770px) {
-    width: calc(100% - 24px);
+  @media (max-width: 744px) {
+    padding: 0 12px;
   }
 `;
 
@@ -31,10 +31,10 @@ export const ContextWrap = styled.div`
   display: flex;
   height: auto;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
 
-  @media (max-width: 768px) {
+  @media (max-width: 744px) {
     flex-direction: column;
   }
 `;
@@ -58,29 +58,26 @@ export const TextWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  margin-top: 8px;
 `;
 
 export const ImageContainer = styled.div`
-  /* position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%; */
-
-  --img-width: 539px;
-  --img-height: 308px;
-  --img-border-radius: 12px;
+  width: 60%;
+  height: 308px;
+  border-radius: 12px;
   position: relative;
-  width: var(--img-width);
-  height: var(--img-height);
   overflow: hidden;
-  border-radius: var(--img-border-radius);
 
   img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  @media (max-width: 744px) {
+    width: 100%;
+    height: 178px;
   }
 `;
 
@@ -94,6 +91,7 @@ export const TextContainer = styled.div`
 
 export const PriceWrap = styled.div`
   display: flex;
+  margin: 8px 0 0;
 `;
 
 export const WidgetWrap = styled.div`
@@ -177,6 +175,6 @@ export const PostContainer = styled.div`
 // `;
 
 export const CustomModal = styled(Modal)`
-  width: 298ppx;
+  width: 298px;
   height: 184px;
 `;

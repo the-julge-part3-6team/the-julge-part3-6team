@@ -2,23 +2,21 @@ import { useUserData } from '@/shared/store/useUserData';
 import { apiInstance } from '@/shared/utils/axios';
 import { useQuery } from '@tanstack/react-query';
 
-export const useUserSupportList = ({
-  limit,
-  offset,
+export const useGetApplicantsForJobPosting = ({
+  shop_id,
+  notice_id,
 }: {
-  limit: number;
-  offset: number;
+  shop_id: string | null;
+  notice_id: string | null;
 }) => {
-  const { user_id } = useUserData();
-
   const { data, isError, isLoading } = useQuery({
-    queryKey: [`/users/${user_id}/applications`, limit, offset],
+    queryKey: [`/shops/${shop_id}/notices/${notice_id}/applications`],
     queryFn: () => {
       return apiInstance.get(
-        `/users/${user_id}/applications?offset=${offset}&limit=${limit}`,
+        `/shops/${shop_id}/notices/${notice_id}/applications`,
       );
     },
-    enabled: !!user_id,
+    enabled: !!shop_id && !!notice_id,
   });
   return { data, isError, isLoading };
 };

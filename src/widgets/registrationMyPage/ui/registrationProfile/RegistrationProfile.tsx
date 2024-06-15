@@ -14,7 +14,11 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useUserQuery } from '@/models/user/useUserData';
 import { useUpdateUserState } from '@/models/user/useUpdateUserState';
 
-export const RegistrationProfile = () => {
+interface Props {
+  edit: boolean;
+}
+
+export const RegistrationProfile = ({ edit }: Props) => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
     useProfileData();
   const [error, setError] = useState(USER_FORM_ERRORS_INITIAL_VALUE);
@@ -27,12 +31,14 @@ export const RegistrationProfile = () => {
 
   const result = useUserValidation();
 
-  useUpdateUserState(isLoading, user_id!, router, item, {
-    setName,
-    setPhone,
-    setAddress,
-    setBio,
-  });
+  if (edit) {
+    useUpdateUserState(isLoading, user_id!, router, item, {
+      setName,
+      setPhone,
+      setAddress,
+      setBio,
+    });
+  }
 
   return (
     <>

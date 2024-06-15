@@ -12,7 +12,13 @@ export const useRouterGuard = () => {
   const token = cookies.get('token');
 
   const notSigninPath = ['/signin', '/signup'];
-  const employer = ['/mystore', '/mystore/edit', '/mystore/create'];
+  const employer = [
+    '/mystore',
+    '/mystore/edit',
+    '/mystore/create',
+    '/notice/create',
+    '/notice/edit',
+  ];
   const employee = ['/mypage', 'mypage/edit', '/mypage/create'];
 
   useEffect(() => {

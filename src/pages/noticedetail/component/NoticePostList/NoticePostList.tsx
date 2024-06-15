@@ -1,38 +1,36 @@
 import React from 'react';
 import * as S from './NoticePostList.styled';
-
-interface Notice {
-  // 추후 closed 수정
-  closed: boolean;
-  name: string;
-  startsAt: string;
-  workhour: string;
-  address1: string;
-  hourlyPay: number;
-  priceChange: string;
-  imageUrl: string;
-  description: string;
-  id: string;
-}
+import formatWorkTime from '@/shared/utils/formatWorkTime';
+import PostCard from '@/shared/components/Post/PostCard/PostCard';
 
 interface Props {
   noticeList: { item: Notice }[];
-  storeName: string;
+  store: Store;
 }
 
-const NoticePostList: React.FC<Props> = ({ noticeList, storeName }) => {
+export const NoticePostList = ({ noticeList, store }: Props) => {
   return (
     <S.Layout>
-      {noticeList.map(({ item }) => (
-        <div key={item.id}>
-          <p>closed: {item.closed.toString()}</p>
-          <p>description: {item.description}</p>
-          <p>hourlyPay: {item.hourlyPay}</p>
-          <p>id: {item.id}</p>
-          <p>startsAt: {item.startsAt}</p>
-          <p>workhour: {item.workhour}</p>
-        </div>
-      ))}
+      {noticeList.map(item => {
+        const notice = item.item;
+        return (
+          <PostCard
+            isClosed={notice.closed}
+            notice_id={notice.id}
+            shop_id={store.id}
+            imageUrl={store.imageUrl}
+            shopName={store.name}
+            duration={formatWorkTime({
+              type: 'notice',
+              startsAt: notice.startsAt,
+              workHour: notice.workhour,
+            })}
+            address={store.address1}
+            defaultHourlyPay={store.originalHourlyPay}
+            currentHourlyPay={Number(notice.hourlyPay)}
+          />
+        );
+      })}
     </S.Layout>
   );
 };
