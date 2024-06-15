@@ -12,7 +12,7 @@ const EditForm = () => {
         <S.ContentWrap>
           <>
             <S.MyPageHeader>내 프로필</S.MyPageHeader>
-            <RegistrationProfile />
+            <RegistrationProfile edit />
           </>
         </S.ContentWrap>
       </S.Container>
