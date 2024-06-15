@@ -4,10 +4,8 @@ interface Props {
 }
 
 function averageHourlyPay({ currentHourlyPay, defaultHourlyPay }: Props) {
-  return (
-    Math.trunc(
-      ((currentHourlyPay - defaultHourlyPay) / defaultHourlyPay) * 10,
-    ) * 10
+  return Math.trunc(
+    ((currentHourlyPay - defaultHourlyPay) / defaultHourlyPay) * 100,
   );
 }
 

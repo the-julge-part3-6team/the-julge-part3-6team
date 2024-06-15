@@ -14,7 +14,7 @@ export const PostImageContainer = styled.div`
 export const PostImage = styled.div<PostContainerProps>`
   width: 100%;
   overflow: hidden;
-  height: 200px; /* 기본값 200px || props 받는 걸로 수정 */
+  height: 150px; /* 기본값 200px || props 받는 걸로 수정 */
 
   ${({ isClosed }) =>
     isClosed === true &&

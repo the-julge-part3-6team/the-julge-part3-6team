@@ -10,10 +10,8 @@ const EditForm = () => {
       <Header />
       <S.Container>
         <S.ContentWrap>
-          <>
-            <S.MyPageHeader>내 프로필</S.MyPageHeader>
-            <RegistrationProfile edit />
-          </>
+          <S.MyPageHeader>내 프로필</S.MyPageHeader>
+          <RegistrationProfile edit />
         </S.ContentWrap>
       </S.Container>
       <Footer />
