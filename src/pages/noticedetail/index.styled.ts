@@ -174,7 +174,7 @@ export const PostContainer = styled.div`
 //   gap: 16px;
 // `;
 
-export const CustomModal = styled(Modal)`
-  width: 298px;
-  height: 184px;
-`;
+// export const CustomModal = styled(Modal)`
+//   width: 298px;
+//   height: 184px;
+// `;

@@ -1,13 +1,13 @@
-
 import React from 'react';
 import * as S from './ShopDetailWidget.styled';
 import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
 import PostInform from '@/shared/components/Post/PostInform/PostInform';
 import formatWorkTime from '@/shared/utils/formatWorkTime';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
+import { NoticeData } from '@/shared/types/post';
 
 interface ShopDetailWidgetProps {
-  noticeData?: any; 
+  noticeData?: any;
   isApplied: boolean;
   handleModal: {
     cancelClick: () => void;
@@ -20,20 +20,23 @@ const ShopDetailWidget = ({
   isApplied,
   handleModal,
 }: ShopDetailWidgetProps) => {
-  if (!noticeData) {
-    return null; 
+  if (!noticeData || !noticeData.data || !noticeData.data.item || !noticeData.data.item.shop) {
+    return null;
   }
+
+  const { shop } = noticeData.data.item;
 
   return (
     <>
       <S.TextWrap>
-        <S.BigText>{noticeData?.data.item.shop.item.name}가게 제목 테스트</S.BigText>
+        <S.BigText>{shop.item.name}</S.BigText>
       </S.TextWrap>
+
       <S.ContextWrap>
         <S.ImageContainer>
           <img
-            src={noticeData?.data.item.shop.item.imageUrl}
-            alt={noticeData?.data.item.shop.item.name}
+            src={shop.item.imageUrl}
+            alt={shop.item.name}
           />
         </S.ImageContainer>
 
@@ -42,8 +45,8 @@ const ShopDetailWidget = ({
           <S.PriceWrap>
             <PostPrice
               isClosed={false}
-              defaultHourlyPay={noticeData?.data.item.hourlyPay}
-              currentHourlyPay={noticeData?.data.item.shop.item.originalHourlyPay}
+              defaultHourlyPay={noticeData.data.item.hourlyPay}
+              currentHourlyPay={shop.item.originalHourlyPay}
             />
           </S.PriceWrap>
           <S.WidgetWrap>
@@ -51,18 +54,18 @@ const ShopDetailWidget = ({
               isClosed={false}
               type="시간"
               content={formatWorkTime(
-                noticeData?.data.item.startsAt,
-                noticeData?.data.item.workhour,
+                noticeData.data.item.startsAt,
+                noticeData.data.item.workhour,
               )}
             />
             <PostInform
               isClosed={false}
               type="장소"
-              content={noticeData?.data.item.shop.item.address1}
+              content={shop.item.address1}
             />
           </S.WidgetWrap>
           <S.DetailText>
-            <p>{noticeData?.data.item.shop.item.description}</p>
+            <p>{shop.item.description}</p>
           </S.DetailText>
           {isApplied ? (
             <div style={{ width: '346px' }}>
