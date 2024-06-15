@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './GrayButton.styled';
+import * as S from './grayButton.styled';
 
 interface Props {
   text: string;

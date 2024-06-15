@@ -1,4 +1,3 @@
-import { CustomButton } from '@/shared/components/Button/CustomButton/customButton.styled';
 import { RedButton } from '@/shared/components/Button/RedButton/RedButton.styled';
 import theme from '@/shared/styles/theme';
 import styled from 'styled-components';
