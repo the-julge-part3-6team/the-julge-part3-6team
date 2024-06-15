@@ -5,7 +5,7 @@ import Footer from '@/shared/components/Footer/Footer';
 import ShopDetailWidget from './ShopDetailWidget/ShopDetailWidget';
 import DetailWidget from './DetailWidget/DetailWidget';
 import RecentPostsWidget from './RecentPostsWidget/RecentPostWidget';
-import { useModal } from '@/shared/store/useModal';
+import { useHandleModal } from './utils/useHandleModal';
 import { useSearchParams } from 'next/navigation';
 import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
 
@@ -18,8 +18,7 @@ const NoticeDetail = () => {
     isError: noticeError,
     isLoading: noticeLoading,
   } = useGetNoticeDetail(shop_id || '', notice_id || '');
-
-  const { key, isOpen } = useModal();
+  
   const [isApplied, setIsApplied] = useState(false);
 
   return (
@@ -30,14 +29,15 @@ const NoticeDetail = () => {
         {noticeData && (
           <>
             <ShopDetailWidget 
-            noticeData={noticeData} 
-            isApplied={isApplied} 
-            setIsApplied={setIsApplied} />
+              noticeData={noticeData} 
+              isApplied={isApplied} 
+              setIsApplied={setIsApplied} 
+            />
             <DetailWidget noticeData={noticeData} />
           </>
         )}
         <S.BigText>최근에 본 공고</S.BigText>
-        <RecentPostsWidget isOpen={isOpen} key={key} />
+        <RecentPostsWidget />
       </S.PageLayout>
       <Footer />
     </>

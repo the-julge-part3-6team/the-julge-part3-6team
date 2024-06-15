@@ -6,12 +6,7 @@ import { NoticeData } from '@/shared/types/post';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
 import PostList from '@/shared/components/Post/PostList/PostList';
 
-interface RecentPostsWidgetProps {
-  isOpen: boolean;
-  key: string;
-}
-
-const RecentPostsWidget = ({ isOpen, key }: RecentPostsWidgetProps) => {
+const RecentPostsWidget = () => {
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const notice_id = searchParams.get('notice_id');
