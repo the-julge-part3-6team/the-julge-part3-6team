@@ -21,4 +21,5 @@ interface tableProfileStatus {
   handlePageChange: (page: number) => void;
   currentPage: number;
   totalPages: number;
+  onClickEvent?: any;
 }

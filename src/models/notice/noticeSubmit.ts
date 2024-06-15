@@ -1,4 +1,4 @@
-import { dateTransfromIso } from '@/shared/utils/dateTransform';
+import { dateTransfromKST } from '@/shared/utils/dateTransform';
 import { handleValidate } from './handleValidate';
 
 export const onSubmit = (notice: CreateNotice, setErrors: any, mutate: any) => {
@@ -6,7 +6,7 @@ export const onSubmit = (notice: CreateNotice, setErrors: any, mutate: any) => {
   if (!hasError) {
     mutate({
       hourlyPay: notice.hourlyPay,
-      startsAt: dateTransfromIso(notice.startsAt),
+      startsAt: dateTransfromKST(notice.startsAt),
       workhour: Number(notice.workhour),
       description: notice.description,
     });

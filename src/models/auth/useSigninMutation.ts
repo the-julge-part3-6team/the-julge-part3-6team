@@ -14,7 +14,7 @@ interface SigninData {
 
 export const useSigninMutation = (setError: any) => {
   const router = useRouter();
-  const { setUserId, setType } = useUserData();
+  const { setUserId, setType, setAddress } = useUserData();
 
   return useMutation({
     mutationKey: ['/token'],
@@ -25,16 +25,20 @@ export const useSigninMutation = (setError: any) => {
       const token = data.data.item.token;
       const id = data.data.item.user.item.id;
       const type = data.data.item.user.item.type;
+      const address = data.data.item.user.item.address;
+
       cookies.set('token', token, { path: '/' });
       setUserId(id);
       setType(type);
+      setAddress(address);
       router.push('/');
     },
 
-    onError: (error: AxiosError) => {
-      const statusCode = error.response?.status;
+    onError: (error: { message: string }) => {
+      const statusCode = error.message;
+
       switch (statusCode) {
-        case 404:
+        case '404':
           setError('email', {
             type: 'manual',
             message: '존재하지 않거나 비밀번호가 일치하지 않습니다.',

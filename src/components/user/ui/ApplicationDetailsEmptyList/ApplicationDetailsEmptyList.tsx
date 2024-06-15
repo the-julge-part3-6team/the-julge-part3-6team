@@ -15,7 +15,7 @@ export const ApplicationDetailsEmptyList = () => {
             <S.CustomRedButton
               // 수정해야함
               onClick={() => {
-                router.push('mypage/create');
+                router.push('noticelist');
               }}
             >
               공고 보러가기

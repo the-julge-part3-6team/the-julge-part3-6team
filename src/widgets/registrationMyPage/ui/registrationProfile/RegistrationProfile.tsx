@@ -22,17 +22,14 @@ export const RegistrationProfile = ({ edit }: Props) => {
   const { name, phone, address, bio, setName, setPhone, setAddress, setBio } =
     useProfileData();
   const [error, setError] = useState(USER_FORM_ERRORS_INITIAL_VALUE);
-  const formData = { name, phone, address, bio };
-  const param = useSearchParams();
-  const router = useRouter();
   const { data, isError, isLoading } = useUserQuery();
-  const user_id = param.get('user_id');
+
   const item: UserDataType = data?.data.item;
+  const formData = { name, phone, address, bio };
 
   const result = useUserValidation();
-
   if (edit) {
-    useUpdateUserState(isLoading, user_id!, router, item, {
+    useUpdateUserState(isLoading, item, {
       setName,
       setPhone,
       setAddress,
