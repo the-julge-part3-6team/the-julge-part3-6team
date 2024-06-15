@@ -6,7 +6,7 @@ interface DetailWidgetProps {
   noticeData?: NoticeData;
 }
 
-const DetailWidget = ({ noticeData }: DetailWidgetProps) => {
+export const DetailWidget = ({ noticeData }: DetailWidgetProps) => {
   const description = noticeData?.data?.item?.description;
   return (
     <>
@@ -18,5 +18,3 @@ const DetailWidget = ({ noticeData }: DetailWidgetProps) => {
     </>
   );
 };
-
-export default DetailWidget;

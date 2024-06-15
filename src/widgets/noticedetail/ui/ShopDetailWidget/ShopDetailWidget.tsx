@@ -20,7 +20,7 @@ interface ShopDetailWidgetProps {
   setIsApplied: (value: boolean) => void;
 }
 
-const ShopDetailWidget = ({
+export const ShopDetailWidget = ({
   noticeData,
   isApplied,
   setIsApplied,
@@ -187,4 +187,3 @@ const ShopDetailWidget = ({
   );
 };
 
-export default ShopDetailWidget;
