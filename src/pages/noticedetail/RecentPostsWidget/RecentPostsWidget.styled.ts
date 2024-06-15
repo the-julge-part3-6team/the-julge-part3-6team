@@ -4,13 +4,6 @@ export const RecentWrap = styled.div`
   margin: 60px 0 120px 0;
 `;
 
-export const BigText = styled.h1`
-  color: var(--The-julge-black, #111322);
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0.56px;
-  margin-bottom: 24px;
-`;
 
 export const PostContainer = styled.div`
   // NoticePostList.styled로 분리
