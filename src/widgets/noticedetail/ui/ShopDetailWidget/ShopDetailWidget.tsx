@@ -13,6 +13,8 @@ import { NoticeData } from '@/shared/types/post';
 import { useModal } from '@/shared/store/useModal';
 import { useRouter } from 'next/router';
 import { MYPAGE } from '@/constant/path';
+import { useUserQuery } from '@/models/user/useUserData';
+import { postApplication } from '@/models/application/postApplication';
 
 interface ShopDetailWidgetProps {
   noticeData?: NoticeData;
@@ -30,6 +32,18 @@ export const ShopDetailWidget = ({
   const startsAt = noticeData?.item?.startsAt;
   const workhour = noticeData?.item?.workhour;
   const router = useRouter();
+  const { setIsOpen, setIsClose } = useModal();
+  const {
+    data: userData,
+    isLoading: userIsLoading,
+    isError: userIsError,
+  } = useUserQuery();
+
+  const { mutate } = postApplication(
+    shop!.item.id,
+    noticeData!.item.id,
+    setIsOpen,
+  );
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
 
   if (!shop) {
@@ -38,10 +52,9 @@ export const ShopDetailWidget = ({
 
   const { applyClick, cancelClick, confirmCancel, closeCancelModal, confirm } =
     useHandleModal({
+      mutate: mutate,
       setIsApplied: setIsApplied,
     });
-
-  const { setIsOpen, key } = useModal();
 
   const modalHeader = isApplied ? (
     <>
@@ -54,7 +67,9 @@ export const ShopDetailWidget = ({
     </>
   );
   const handleApplyClick = () => {
-    if (!isApplied) {
+    const isUserProfile = userData?.data?.item.phone;
+
+    if (!isUserProfile) {
       setIsOpen('profileAlert');
     } else {
       applyClick();
@@ -73,10 +88,11 @@ export const ShopDetailWidget = ({
   };
 
   const handleModalConfirm = () => {
-    confirm();
-    setIsOpen('');
+    setIsClose();
+    location.reload();
   };
 
+  console.log('isApplied', isApplied);
   return (
     <>
       <S.TextWrap>
@@ -151,7 +167,12 @@ export const ShopDetailWidget = ({
 
       <CustomModal
         modalKey="applySuccess"
-        modalHeader={modalHeader}
+        modalHeader={
+          <>
+            <Image src={checkImg} alt="체크 표시" />
+            신청이 완료되었습니다.
+          </>
+        }
         modalFooter={
           <div style={{ width: '80px' }}>
             <CustomButton

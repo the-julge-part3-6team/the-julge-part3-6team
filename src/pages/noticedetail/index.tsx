@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './index.styled';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
@@ -8,18 +8,36 @@ import { RecentPostsWidget } from '@/widgets/noticedetail';
 import { useSearchParams } from 'next/navigation';
 import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
+import { useGetUserApplicationList } from '@/models/application/useGetUsersApplicationList';
+import { useUserData } from '@/shared/store/useUserData';
 
 const NoticeDetail = () => {
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const notice_id = searchParams.get('notice_id');
+  const { user_id } = useUserData();
   const {
     data: noticeData,
     // isError: noticeError,
     isLoading: noticeLoading,
   } = useGetNoticeDetail(shop_id || '', notice_id || '');
+  const {
+    data: usersApplicationList,
+    isLoading: isApplicationListLoading,
+    isError,
+  } = useGetUserApplicationList(user_id);
 
   const [isApplied, setIsApplied] = useState(false);
+
+  useEffect(() => {
+    usersApplicationList?.data.items.forEach((item: any) => {
+      const isSupport = item.item.notice.item.id === noticeData?.data.item.id;
+
+      if (isSupport) {
+        setIsApplied(true);
+      }
+    });
+  }, [usersApplicationList, noticeData]);
 
   return (
     <>
