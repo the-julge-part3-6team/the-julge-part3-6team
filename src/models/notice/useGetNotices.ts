@@ -19,13 +19,7 @@ export const useGetNotices = ({
 }: Props) => {
   return useQuery({
     queryKey: [
-      `/notices`,
-      offset,
-      limit,
-      sort,
-      hourlyPayGte,
-      address,
-      startsAtGte,
+      `/notices?limit=${limit}&offset=${offset}&sort=${sort}&hourlyPayGte=${hourlyPayGte}&${address}${startsAtGte}`,
     ],
     queryFn: () =>
       apiInstance.get(

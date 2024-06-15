@@ -51,7 +51,7 @@ const NoticeList = () => {
       <S.ContainerBackground>
         <S.Container>
           <S.CustomTitle>맞춤 공고</S.CustomTitle>
-          {renderSpinner(<CustomPostList items={noticeDatas} />, isLoading)}
+          <CustomPostList />
         </S.Container>
       </S.ContainerBackground>
       <S.Container>
