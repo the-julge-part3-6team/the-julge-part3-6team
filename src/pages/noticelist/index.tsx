@@ -11,6 +11,10 @@ import { dateTransfromKST } from '@/shared/utils/dateTransform';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
 import PostList from '@/shared/components/Post/PostList/PostList';
 import { CustomPostList, SortDropdown } from '@/widgets/noticelist';
+import { toggleDropdown } from '@/models/dropdown/toggleDropDown';
+import { handleSortOptionClick } from '@/models/sort/handleSortOptionClick';
+import { handleApplyFilters } from '@/models/filter/handleApplyFilters';
+import { toggleFilterModal } from '@/models/modal/toggleFilterModal';
 
 const NoticeList = () => {
   const { isOpen, setIsOpen, setIsClose } = useModal(); // 필터 모달
@@ -38,32 +42,6 @@ const NoticeList = () => {
   const totalItems = data?.data?.count; // 공고 총 갯수
   const noticeDatas = data?.data?.items; // { item{}, links[] }
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page); // 페이지네이션 버튼 클릭했을 때, currentPage 변경
-  };
-
-  const handleApplyFilters = (filters: FilterState) => {
-    setFilters(filters);
-  };
-  // 필터 설정
-
-  const toggleFilterModal = () => {
-    isOpen ? setIsClose() : setIsOpen('필터모달');
-  };
-  // 필터 모달 토글
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-  // 정렬 드롭다운 토글
-
-  const handleSortOptionClick = (option: string, sort: string) => {
-    setOrder(option);
-    setSort(sort);
-    setIsDropdownOpen(false);
-  };
-  // 정렬 state 변경
-
   const totalPages = Math.ceil(totalItems / 6);
   // 전체 페이지 설정
 
@@ -83,14 +61,27 @@ const NoticeList = () => {
             <SortDropdown
               isDropdownOpen={isDropdownOpen}
               order={order}
-              toggleDropdown={toggleDropdown}
-              handleSortOptionClick={handleSortOptionClick}
+              toggleDropdown={() => toggleDropdown(setIsDropdownOpen)}
+              handleSortOptionClick={(option: string, sort: string) =>
+                handleSortOptionClick(
+                  option,
+                  sort,
+                  setOrder,
+                  setSort,
+                  setIsDropdownOpen,
+                )
+              }
             />
 
-            <S.FilterButton onClick={toggleFilterModal}>
+            <S.FilterButton
+              onClick={() => toggleFilterModal(isOpen, setIsOpen, setIsClose)}
+            >
               상세 필터
             </S.FilterButton>
-            <Filter modalKey="필터모달" onApply={handleApplyFilters} />
+            <Filter
+              modalKey="필터모달"
+              onApply={filters => handleApplyFilters(filters, setFilters)}
+            />
           </S.ButtonWrap>
         </S.TitleWrap>
         <S.PostListWrap>
@@ -99,7 +90,7 @@ const NoticeList = () => {
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={handlePageChange}
+          onPageChange={setCurrentPage}
         />
       </S.Container>
       <Footer />
