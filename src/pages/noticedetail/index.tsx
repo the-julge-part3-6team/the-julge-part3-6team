@@ -15,7 +15,7 @@ const NoticeDetail = () => {
   const notice_id = searchParams.get('notice_id');
   const {
     data: noticeData,
-    isError: noticeError,
+    // isError: noticeError,
     isLoading: noticeLoading,
   } = useGetNoticeDetail(shop_id || '', notice_id || '');
 

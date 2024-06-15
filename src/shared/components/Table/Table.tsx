@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './Table.styled';
 import PrimaryBadge from './Badge/Badge';
-import { formatWorkTime } from '@/pages/noticedetail/utils/useTimeUtils';
+import { formatWorkTime } from '@/shared/utils/useTimeUtils';
 import { formatNumberWithCommas } from '@/shared/utils/formatNumberWithCommas';
 
 const Table = ({ list }: Pick<tableProfileStatus, 'list'>) => {

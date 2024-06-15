@@ -10,8 +10,8 @@ import { useSetApprovalStatus } from '@/models/employer/useSetApprovalStatus';
 import { useOwnerSupportList } from '@/models/employer/useOwnerSupportList';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
-import ShopDetailWidget from '../../widgets/noticedetail/ui/ShopDetailWidget/ShopDetailWidget';
-import DetailWidget from '../../widgets/noticedetail/ui/DetailWidget/DetailWidget';
+import { ShopDetailWidget } from '@/widgets/noticedetail';
+import { DetailWidget } from '@/widgets/noticedetail';
 
 const NoticeDetailCeo = () => {
   const searchParams = useSearchParams();
