@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './Table.styled';
 import PrimaryBadge from './Badge/Badge';
-import { formatWorkTime } from '@/shared/utils/useTimeUtils';
 import { formatNumberWithCommas } from '@/shared/utils/formatNumberWithCommas';
+import formatWorkTime from '@/shared/utils/formatWorkTime';
 
 const Table = ({ list }: Pick<tableProfileStatus, 'list'>) => {
   return (
@@ -19,10 +19,11 @@ const Table = ({ list }: Pick<tableProfileStatus, 'list'>) => {
             <S.CustomTableBody className={index === 0 ? 'first' : ''}>
               <li>{item.item?.shop?.item.name}</li>
               <li>
-                {formatWorkTime(
-                  item?.item.notice.item.startsAt,
-                  item?.item.notice.item.workhour,
-                )}
+                {formatWorkTime({
+                  type: 'notice',
+                  startsAt: item?.item.notice.item.startsAt,
+                  workHour: item?.item.notice.item.workhour,
+                })}
               </li>
               <li>
                 {formatNumberWithCommas(
