@@ -14,7 +14,7 @@ const MyPage = () => {
     <>
       <Header />
       <ProfileContent userData={userData} isLoading={isLoading} />
-      {isPhone ? <ApplicationContent isLoading={isLoading} /> : ''}
+      {isPhone ? <ApplicationContent /> : ''}
       <Footer />
     </>
   );

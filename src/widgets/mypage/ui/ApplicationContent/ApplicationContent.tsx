@@ -6,10 +6,10 @@ import { useUserSupportList } from '@/models/user/useUserSupportList';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
 import { useState } from 'react';
 
-export const ApplicationContent = ({ isLoading }: { isLoading: boolean }) => {
+export const ApplicationContent = () => {
   // 유저의 지원 목록 조회 useUserSupportList
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 설정
-  const { data, isError } = useUserSupportList({
+  const { data, isError, isLoading } = useUserSupportList({
     limit: 5,
     offset: (currentPage - 1) * 5,
   });
