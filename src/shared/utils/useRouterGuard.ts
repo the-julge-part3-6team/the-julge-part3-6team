@@ -13,6 +13,7 @@ export const useRouterGuard = () => {
   const token = cookies.get('token');
 
   const notSigninPath = ['/signin', '/signup', '/noticelist', '/noticedetail'];
+
   const employer = [
     '/mystore',
     '/mystore/edit',
@@ -26,10 +27,6 @@ export const useRouterGuard = () => {
     if (!token && !notSigninPath.includes(pathname)) {
       router.push(AUTH.SIGNIN);
       return;
-    }
-
-    if (token && notSigninPath.includes(pathname)) {
-      router.push(NOTICE.LIST);
     }
 
     if (token && type === 'employee' && employer.includes(pathname)) {
