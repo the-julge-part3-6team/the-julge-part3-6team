@@ -5,14 +5,15 @@ import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
 import PostInform from '@/shared/components/Post/PostInform/PostInform';
 import formatWorkTime from '@/shared/utils/formatWorkTime';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
-import CustomModal from '../component/CustomModal/CustomModal';
+import CustomModal from '../../component/CustomModal/CustomModal';
 import checkImg from '@/assets/check.svg';
 import cautionImg from '@/assets/caution.svg';
-import { useHandleModal } from '../utils/useHandleModal';
+import { useHandleModal } from '../../utils/useHandleModal';
 import { NoticeData } from '@/shared/types/post';
+import { renderSpinner } from '@/shared/utils/renderSpinner';
 
 interface ShopDetailWidgetProps {
-  noticeData?: NoticeData; 
+  noticeData?: NoticeData;
   isApplied: boolean;
   setIsApplied: (value: boolean) => void;
 }
@@ -43,8 +44,7 @@ const ShopDetailWidget = ({
     </>
   ) : (
     <>
-      <Image src={cautionImg} alt="경고 표시" />
-      내 프로필을 먼저 등록해주세요.
+      <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해주세요.
     </>
   );
 
@@ -64,10 +64,7 @@ const ShopDetailWidget = ({
 
       <S.ContextWrap>
         <S.ImageContainer>
-          <img
-            src={shop.item.imageUrl}
-            alt={shop.item.name}
-          />
+          <img src={shop.item.imageUrl} alt={shop.item.name} />
         </S.ImageContainer>
 
         <S.TextContainer>
@@ -86,7 +83,7 @@ const ShopDetailWidget = ({
               content={formatWorkTime({
                 type: 'notice',
                 startsAt,
-                workHour: workhour
+                workHour: workhour,
               })}
             />
             <PostInform
