@@ -17,9 +17,9 @@ import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
 import { formatWorkTime } from './utils/useTimeUtils';
 import { useHandleModal } from './utils/useHandleModal';
 import { useGetNoticeDetail } from '../../models/notice/useGetNoticeDetail';
-import { renderSpinner } from '@/shared/utils/renderSpinner'; 
+import { renderSpinner } from '@/shared/utils/renderSpinner';
 import PostList from '@/shared/components/Post/PostList/PostList';
-import { NoticeData } from '@/shared/types/post'; 
+import { NoticeData } from '@/shared/types/post';
 
 const NoticeDetail = () => {
   const searchParams = useSearchParams();
@@ -53,43 +53,48 @@ const NoticeDetail = () => {
   }, []);
 
   useEffect(() => {
-    if (notice_id && typeof window !== 'undefined') {
+    if (notice_id && noticeData && typeof window !== 'undefined') {
       const saveRecentPost = (postId: string) => {
         setRecentPosts((prevPosts: NoticeData[]) => {
+          const shopData = noticeData.data.item.shop.item;
+
           const newPost: NoticeData = {
             item: {
               id: notice_id,
-              hourlyPay: '',
-              startsAt: '',
-              workhour: 0,
-              description: '',
-              closed: false,
+              hourlyPay: noticeData.data.item.hourlyPay,
+              startsAt: noticeData.data.item.startsAt,
+              workhour: noticeData.data.item.workhour,
+              description: noticeData.data.item.description,
+              closed: noticeData.data.item.closed,
               shop: {
                 item: {
-                  id: noticeData?.data.item.shop.item.id || '',
-                  name: noticeData?.data.item.shop.item.name || '',
-                  category: '',
-                  address1: noticeData?.data.item.shop.item.address1 || '',
-                  address2: noticeData?.data.item.shop.item.address2 || '',
-                  description: noticeData?.data.item.shop.item.description || '',
-                  imageUrl: noticeData?.data.item.shop.item.imageUrl || '',
-                  originalHourlyPay: 0
+                  id: shopData.id,
+                  name: shopData.name,
+                  category: shopData.category,
+                  address1: shopData.address1,
+                  address2: shopData.address2,
+                  description: shopData.description,
+                  imageUrl: shopData.imageUrl,
+                  originalHourlyPay: shopData.originalHourlyPay,
                 },
-                href: ''
-              }
+                href: noticeData.data.item.shop.href,
+              },
             },
-            links: []
+            links: [],
           };
 
           const updatedPosts = [
             newPost,
-            ...(prevPosts || []).filter((post: NoticeData) => post.item.id !== notice_id)
+            ...(prevPosts || []).filter(
+              (post: NoticeData) => post.item.id !== notice_id,
+            ),
           ].slice(0, 6);
 
           localStorage.setItem('recentPosts', JSON.stringify(updatedPosts));
           return updatedPosts;
         });
       };
+
       saveRecentPost(notice_id);
     }
   }, [notice_id, noticeData]);
@@ -176,6 +181,7 @@ const NoticeDetail = () => {
 
         <S.DescripContainer>
           <S.SmallText isBlack>공고 설명</S.SmallText>
+          <p>{/* 공백 */}</p>
           <p>{noticeData.data.item.description}</p>
         </S.DescripContainer>
 
