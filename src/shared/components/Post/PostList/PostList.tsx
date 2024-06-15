@@ -51,6 +51,7 @@ const PostList = ({ items }: Props) => {
               defaultHourlyPay={originalHourlyPay}
               currentHourlyPay={currentHourlyPay}
               isClosed={closed}
+              startsAt={startsAt}
             />
           );
         })
