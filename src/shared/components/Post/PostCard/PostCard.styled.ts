@@ -34,7 +34,7 @@ export const PostContainer = styled.div<PostContainerProps>`
 export const PostContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   align-items: flex-start;
   @media (max-width: 744px) {
     gap: 6px;
@@ -42,6 +42,7 @@ export const PostContent = styled.div`
 `;
 
 export const PostTitle = styled.h3`
+  width: 200px;
   font-size: 20px;
   font-weight: 700;
   white-space: nowrap;
@@ -49,8 +50,10 @@ export const PostTitle = styled.h3`
   text-overflow: ellipsis;
   display: block;
   max-width: 100%;
+  margin: 0 0 8px;
 
   @media (max-width: 744px) {
+    width: 130px;
     font-size: 16px;
     margin-bottom: 10px;
   }

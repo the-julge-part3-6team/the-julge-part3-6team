@@ -21,7 +21,6 @@ export const PostPrice = styled.h2`
   width: 100%;
   font-size: 24px;
   font-weight: 700;
-  letter-spacing: 0.48px;
 
   @media (max-width: 744px) {
     font-size: 18px;
