@@ -3,14 +3,14 @@ import PostPriceBadge from './PostPriceBadge';
 
 interface Props {
   isClosed: boolean;
-  defaultHourlyPay?: number;
+  defaultHourlyPay?: number | undefined;
   currentHourlyPay: number;
 }
 
 const PostPrice = ({ isClosed, defaultHourlyPay, currentHourlyPay }: Props) => {
   const formattedPrice = new Intl.NumberFormat('ko-KR', {
     minimumFractionDigits: 0,
-  }).format(currentHourlyPay);
+  }).format(currentHourlyPay!);
 
   return (
     <S.PostPriceContainer>

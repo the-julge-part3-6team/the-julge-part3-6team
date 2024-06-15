@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as S from './index.styled';
+import * as S from '../index.styled';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
@@ -71,13 +71,13 @@ const NoticeDetailCeo = () => {
         </S.TextWrap>
         {renderSpinner(
           <ShopDetailWidget
-            noticeData={noticeData}
+            noticeData={noticeData?.data}
             isApplied={isApplied}
             setIsApplied={setIsApplied}
           />,
           noticeLoading,
         )}
-        <DetailWidget noticeData={noticeData} />
+        <DetailWidget noticeData={noticeData?.data} />
         {/* 테이블 컴포넌트 시작 */}
         <S.TextWrap>
           <S.BigText>신청자 목록</S.BigText>

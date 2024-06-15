@@ -25,12 +25,12 @@ export const ShopDetailWidget = ({
   isApplied,
   setIsApplied,
 }: ShopDetailWidgetProps) => {
-  const shop = noticeData?.data?.item?.shop;
-  const hourlyPay = noticeData?.data?.item?.hourlyPay;
-  const startsAt = noticeData?.data?.item?.startsAt;
-  const workhour = noticeData?.data?.item?.workhour;
+  const shop = noticeData?.item?.shop;
+  const hourlyPay = noticeData?.item?.hourlyPay;
+  const startsAt = noticeData?.item?.startsAt;
+  const workhour = noticeData?.item?.workhour;
   const router = useRouter();
-  const [cancelModalOpen, setCancelModalOpen] = useState(false); 
+  const [cancelModalOpen, setCancelModalOpen] = useState(false);
 
   if (!shop) {
     return null;
@@ -55,9 +55,9 @@ export const ShopDetailWidget = ({
   );
   const handleApplyClick = () => {
     if (!isApplied) {
-      setIsOpen('profileAlert'); 
+      setIsOpen('profileAlert');
     } else {
-      applyClick(); 
+      applyClick();
     }
   };
 
@@ -67,9 +67,9 @@ export const ShopDetailWidget = ({
   };
 
   const handleCancelConfirm = () => {
-    confirmCancel(); 
+    confirmCancel();
     setCancelModalOpen(false);
-    setIsApplied(false); 
+    setIsApplied(false);
   };
 
   const handleModalConfirm = () => {
@@ -93,7 +93,7 @@ export const ShopDetailWidget = ({
           <S.PriceWrap>
             <PostPrice
               isClosed={false}
-              defaultHourlyPay={hourlyPay}
+              defaultHourlyPay={Number(hourlyPay)}
               currentHourlyPay={shop.item.originalHourlyPay}
             />
           </S.PriceWrap>
@@ -103,8 +103,8 @@ export const ShopDetailWidget = ({
               type="시간"
               content={formatWorkTime({
                 type: 'notice',
-                startsAt,
-                workHour: workhour,
+                startsAt: startsAt!,
+                workHour: workhour!,
               })}
             />
             <PostInform
@@ -142,7 +142,7 @@ export const ShopDetailWidget = ({
               color="#EA3C12"
               onClick={() => {
                 setIsOpen('');
-                router.push(MYPAGE.CREATE); 
+                router.push(MYPAGE.CREATE);
               }}
             />
           </div>
@@ -172,7 +172,7 @@ export const ShopDetailWidget = ({
               text="취소하기"
               color="#EA3C12"
               onClick={() => {
-                setCancelModalOpen(false); 
+                setCancelModalOpen(false);
               }}
             />
             <CustomButton
@@ -186,4 +186,3 @@ export const ShopDetailWidget = ({
     </>
   );
 };
-

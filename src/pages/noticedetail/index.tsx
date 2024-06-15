@@ -28,13 +28,13 @@ const NoticeDetail = () => {
         <S.SmallText>식당</S.SmallText>
         {renderSpinner(
           <ShopDetailWidget
-            noticeData={noticeData}
+            noticeData={noticeData?.data}
             isApplied={isApplied}
             setIsApplied={setIsApplied}
           />,
           noticeLoading,
         )}
-        <DetailWidget noticeData={noticeData} />
+        <DetailWidget noticeData={noticeData?.data} />
         <S.BigText>최근에 본 공고</S.BigText>
         <RecentPostsWidget />
       </S.PageLayout>
