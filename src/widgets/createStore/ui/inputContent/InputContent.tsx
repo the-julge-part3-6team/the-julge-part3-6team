@@ -40,7 +40,7 @@ export const InputContent = ({ mutate, edit, shop_id }: Props) => {
     setStoreImage,
   } = useAddStoreState();
   const [errors, setErrors] = useState(STORE_FORM_ERRORS_INITIAL_VALUE);
-  const { data, isError, isLoading } = useUserQuery();
+  const { data, isLoading } = useUserQuery();
   const store: Store = data?.data?.item?.shop?.item;
 
   if (edit) {

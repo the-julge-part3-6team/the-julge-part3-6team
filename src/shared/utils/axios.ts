@@ -1,6 +1,4 @@
-import { handleLogout } from '@/models/auth/logout';
 import axios from 'axios';
-import { error } from 'console';
 import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();

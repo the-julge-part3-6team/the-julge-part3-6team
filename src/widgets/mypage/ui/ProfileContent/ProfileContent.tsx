@@ -1,4 +1,3 @@
-import { useUserQuery } from '@/models/user/useUserData';
 import * as S from './ProfileContent.styled';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
 import { AddProfile, ViewProfile } from '@/components/user';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './ShopDetailWidget.styled';
 import Image from 'next/image';
 import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
@@ -33,28 +33,22 @@ export const ShopDetailWidget = ({
   const workhour = noticeData?.item?.workhour;
   const router = useRouter();
   const { setIsOpen, setIsClose } = useModal();
-  const {
-    data: userData,
-    isLoading: userIsLoading,
-    isError: userIsError,
-  } = useUserQuery();
+  const { data: userData } = useUserQuery();
 
   const { mutate } = postApplication(
     shop!.item.id,
     noticeData!.item.id,
     setIsOpen,
   );
-  const [cancelModalOpen, setCancelModalOpen] = useState(false);
 
   if (!shop) {
     return null;
   }
 
-  const { applyClick, cancelClick, confirmCancel, closeCancelModal, confirm } =
-    useHandleModal({
-      mutate: mutate,
-      setIsApplied: setIsApplied,
-    });
+  const { applyClick, confirmCancel } = useHandleModal({
+    mutate: mutate,
+    setIsApplied: setIsApplied,
+  });
 
   const modalHeader = isApplied ? (
     <>
@@ -78,12 +72,10 @@ export const ShopDetailWidget = ({
 
   const handleCancelClick = () => {
     if (!isApplied) return;
-    setCancelModalOpen(true);
   };
 
   const handleCancelConfirm = () => {
     confirmCancel();
-    setCancelModalOpen(false);
     setIsApplied(false);
   };
 
@@ -189,13 +181,7 @@ export const ShopDetailWidget = ({
         modalHeader="신청을 취소하시겠어요?"
         modalFooter={
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <CustomButton
-              text="취소하기"
-              color="#EA3C12"
-              onClick={() => {
-                setCancelModalOpen(false);
-              }}
-            />
+            <CustomButton text="취소하기" color="#EA3C12" onClick={() => {}} />
             <CustomButton
               text="확인"
               color="#EA3C12"

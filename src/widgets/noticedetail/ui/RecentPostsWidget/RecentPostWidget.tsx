@@ -10,11 +10,10 @@ export const RecentPostsWidget = () => {
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const notice_id = searchParams.get('notice_id');
-  const {
-    data: noticeData,
-    isError: noticeError,
-    isLoading: noticeLoading,
-  } = useGetNoticeDetail(shop_id || '', notice_id || '');
+  const { data: noticeData, isLoading: noticeLoading } = useGetNoticeDetail(
+    shop_id || '',
+    notice_id || '',
+  );
   const [recentPosts, setRecentPosts] = useState<NoticeData[]>([]);
 
   useEffect(() => {
@@ -30,7 +29,7 @@ export const RecentPostsWidget = () => {
 
   useEffect(() => {
     if (notice_id && noticeData && typeof window !== 'undefined') {
-      const saveRecentPost = (postId: string) => {
+      const saveRecentPost = () => {
         setRecentPosts((prevPosts: NoticeData[]) => {
           const shopData = noticeData.data.item.shop.item;
           // noticeData를 직접 사용하지 않고 필요한 데이터만 newPost 객체로 추출하여 의존성 최소화
@@ -71,7 +70,7 @@ export const RecentPostsWidget = () => {
         });
       };
 
-      saveRecentPost(notice_id);
+      saveRecentPost();
     }
   }, [notice_id, noticeData]);
 
@@ -83,4 +82,3 @@ export const RecentPostsWidget = () => {
     </S.RecentWrap>
   );
 };
-

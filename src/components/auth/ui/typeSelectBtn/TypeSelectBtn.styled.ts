@@ -1,6 +1,5 @@
 import theme from '@/shared/styles/theme';
 import styled from 'styled-components';
-import a from '../../../../../public/checkIcon.svg';
 
 export const SelectContainer = styled.div`
   width: 100%;

@@ -1,4 +1,4 @@
-import { Dispatch, Ref, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
 interface ObserverByScrollTypes {
   isLoading: boolean;

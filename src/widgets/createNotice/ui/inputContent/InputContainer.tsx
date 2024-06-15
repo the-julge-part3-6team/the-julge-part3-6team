@@ -22,7 +22,7 @@ export const InputContent = ({ mutate }: Props) => {
   const shop_id = useParams.get('shop_id');
   const notice_id = useParams.get('notice_id');
 
-  const { data, isLoading, isError } = useGetNotice(shop_id!, notice_id!);
+  const { data } = useGetNotice(shop_id!, notice_id!);
 
   useEffect(() => {
     if (data) {
