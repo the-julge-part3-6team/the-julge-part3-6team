@@ -33,6 +33,9 @@ apiInstance.interceptors.response.use(
       localStorage.clear();
       cookies.remove('token', { path: '/' });
       window.location.href = '/signin';
+    } else {
+      console.log(error.response.status);
+      throw new Error(error.response.status);
     }
   },
 );
