@@ -4,6 +4,7 @@ import { useUpdateNoticeList } from '@/models/notice/useUpdateNoticeList';
 import { observerByScroll } from '@/shared/utils/observerByScroll';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
 import { useRef, useState } from 'react';
+import * as S from './NoticeContent.styled';
 
 interface Props {
   store: Store;
@@ -21,13 +22,15 @@ export const NoticeContent = ({ store }: Props) => {
   useUpdateNoticeList(data, setNoticeList, setPagenation);
   observerByScroll({ isLoading, pagenation, setPagenation, ref: divRef });
 
-  const noticeContent = noticeList ? (
+  const noticeContent = noticeList.length ? (
     <>
       <NoticeCardList noticeList={noticeList} store={store} />
       <div ref={divRef} style={{ height: '0.1px', width: '100%' }} />
     </>
   ) : (
-    <NotFoundNotice shop_id={store?.id} />
+    <>
+      <NotFoundNotice shop_id={store?.id} />
+    </>
   );
 
   return (

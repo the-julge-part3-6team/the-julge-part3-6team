@@ -56,13 +56,26 @@ export const AuthContainer = styled.ul`
   font-weight: 700;
   color: ${theme.Colors.Black};
 
+  li {
+    position: relative;
+
+    button {
+      display: flex;
+    }
+  }
+
   a {
     color: inherit;
     text-decoration: none;
     display: flex;
   }
+
   @media (max-width: 744px) {
     gap: 16px;
+
+    li {
+      position: static;
+    }
   }
 `;
 

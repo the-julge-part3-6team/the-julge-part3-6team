@@ -58,8 +58,8 @@ export const IsLogin = ({ type, notification }: Props) => {
             onClick={toggleNotificationModal}
           />
         </button>
+        <NotificationModal modalContents={notifications} modalKey="알림모달" />
       </li>
-      <NotificationModal modalContents={notifications} modalKey="알림모달" />
     </>
   );
 };

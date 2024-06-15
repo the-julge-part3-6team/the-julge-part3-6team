@@ -33,7 +33,7 @@ export const ProfileContent = ({ userData, isLoading }: Props) => {
           <S.Container>
             <S.ContentWrap>
               <S.MyPageHeader>내 프로필</S.MyPageHeader>
-              {renderSpinner(content, isLoading)}
+              <S.HeightCon>{renderSpinner(content, isLoading)}</S.HeightCon>
             </S.ContentWrap>
           </S.Container>
         </>
