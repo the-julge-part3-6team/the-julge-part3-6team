@@ -12,7 +12,6 @@ export const InputContainer = styled.div`
   align-items: flex-start;
   gap: 8px;
   width: 100%;
-  height: 92px;
 `;
 
 export const InputLabel = styled.label`

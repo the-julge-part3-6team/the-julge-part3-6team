@@ -1,9 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const RecentWrap = styled.div`
   margin: 60px 0 120px 0;
-`;
 
+  @media (max-width: 744px) {
+    margin: 16px 0 80px;
+  }
+`;
 
 export const PostContainer = styled.div`
   // NoticePostList.styled로 분리
@@ -21,6 +24,3 @@ export const PostContainer = styled.div`
     grid-template-columns: 1fr 1fr;
   } */
 `;
-
-
-

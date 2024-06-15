@@ -14,6 +14,10 @@ export const BigText = styled.h1`
   font-weight: 700;
   letter-spacing: 0.56px;
   margin-bottom: 24px;
+
+  @media (max-width: 744px) {
+    font-size: 20px;
+  }
 `;
 
 export const ContextWrap = styled.div`
@@ -31,6 +35,8 @@ export const ContextWrap = styled.div`
 
   @media (max-width: 744px) {
     flex-direction: column;
+    padding: 20px;
+    margin-bottom: 12px;
   }
 `;
 
@@ -87,6 +93,11 @@ export const DetailText = styled.div`
   line-height: 26px;
   text-align: left;
   margin-bottom: 14px;
+
+  @media (max-width: 744px) {
+    font-size: 14px;
+    line-height: 1.5;
+  }
 `;
 
 export const CustomRedButton = styled(RedButton)`

@@ -7,7 +7,7 @@ export const SignupFormLayout = styled.form`
   gap: 28px;
   width: 350px;
 
-  @media (max-width: '744px') {
+  @media (max-width: 744px) {
     width: 100%;
   }
 `;
@@ -31,7 +31,7 @@ export const ModalHeader = styled.div`
   font-weight: 500;
   margin-top: 70px;
 
-  @media (max-width: 770px) {
+  @media (max-width: 744px) {
     margin-top: 55px;
   }
 `;
