@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useModal } from '@/shared/store/useModal';
 import { useState } from 'react';
 import { UseQueryResult } from 'react-query';
+import { MYPAGE } from '@/constant/path';
 
 interface HandleModalProps {
   userData: UseQueryResult<any, unknown>;
@@ -36,7 +37,7 @@ export const useHandleModal = ({
   const confirm = () => {
     setIsClose();
     if (key === 'profileAlert') {
-      router.push('/mypage');
+      router.push(MYPAGE.INDEX);
     }
   };
 

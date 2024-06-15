@@ -4,6 +4,7 @@ import { AxiosError } from 'axios';
 import { useUserData } from '@/shared/store/useUserData';
 import { apiInstance } from '@/shared/utils/axios';
 import { Cookies } from 'react-cookie';
+import { NOTICE } from '@/constant/path';
 
 const cookies = new Cookies();
 
@@ -31,7 +32,7 @@ export const useSigninMutation = (setError: any) => {
       setUserId(id);
       setType(type);
       setAddress(address);
-      router.push('/');
+      router.push(NOTICE.LIST);
     },
 
     onError: (error: { message: string }) => {

@@ -4,6 +4,7 @@ import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import PrimaryButton from '@/shared/components/Button/RedButton/RedButton';
 import fiMap from '../../../../../public/fiMap.svg';
 import { useRouter } from 'next/router';
+import { MYSTORE, NOTICE } from '@/constant/path';
 
 interface Props {
   shop_id: string;
@@ -38,11 +39,11 @@ export const StoreCard = ({
           <CustomButton
             text="편집하기"
             color="#EA3C12"
-            onClick={() => router.push(`/mystore/edit?shop_id=${shop_id}`)}
+            onClick={() => router.push(`${MYSTORE.EDIT}?shop_id=${shop_id}`)}
           />
           <PrimaryButton
             text="공고 등록하기"
-            onClick={() => router.push(`/notice/create?shop_id=${shop_id}`)}
+            onClick={() => router.push(`${NOTICE.CREATE}?shop_id=${shop_id}`)}
           />
         </S.BtnContainer>
       </S.StoreInfo>

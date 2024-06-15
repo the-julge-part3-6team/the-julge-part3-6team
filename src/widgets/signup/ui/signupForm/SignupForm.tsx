@@ -7,6 +7,7 @@ import { useModal } from '@/shared/store/useModal';
 import Modal from '@/shared/components/Modal/Modal';
 import { useRouter } from 'next/router';
 import { useSignupState } from '@/models/auth/useSignupValidate';
+import { AUTH } from '@/constant/path';
 
 export const SignupForm = () => {
   const {
@@ -27,7 +28,7 @@ export const SignupForm = () => {
 
   const onClickCompleteModal = () => {
     setIsClose();
-    router.push('/signin');
+    router.push(AUTH.SIGNIN);
   };
 
   return (

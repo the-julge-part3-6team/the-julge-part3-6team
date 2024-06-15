@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useUserData } from '../store/useUserData';
 import { Cookies } from 'react-cookie';
 import { handleLogout } from '@/models/auth/logout';
+import { AUTH, MYPAGE, MYSTORE, NOTICE } from '@/constant/path';
 const cookies = new Cookies();
 
 export const useRouterGuard = () => {
@@ -23,20 +24,20 @@ export const useRouterGuard = () => {
 
   useEffect(() => {
     if (!token && !notSigninPath.includes(pathname)) {
-      router.push('/signin');
+      router.push(AUTH.SIGNIN);
       return;
     }
 
     if (token && notSigninPath.includes(pathname)) {
-      router.push('/');
+      router.push(NOTICE.LIST);
     }
 
     if (token && type === 'employee' && employer.includes(pathname)) {
-      router.push('/mypage');
+      router.push(MYPAGE.INDEX);
     }
 
     if (token && type === 'employer' && employee.includes(pathname)) {
-      router.push('/mystore');
+      router.push(MYSTORE.INDEX);
     }
   }, [token, type, pathname, router]);
 
