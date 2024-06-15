@@ -5,7 +5,6 @@ import Footer from '@/shared/components/Footer/Footer';
 import ShopDetailWidget from './widget/ShopDetailWidget/ShopDetailWidget';
 import DetailWidget from './widget/DetailWidget/DetailWidget';
 import RecentPostsWidget from './widget/RecentPostsWidget/RecentPostWidget';
-import { useHandleModal } from './utils/useHandleModal';
 import { useSearchParams } from 'next/navigation';
 import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
 import { renderSpinner } from '@/shared/utils/renderSpinner';

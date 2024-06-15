@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './ShopDetailWidget.styled';
 import Image from 'next/image';
 import PostPrice from '@/shared/components/Post/PostPrice/PostPrice';
@@ -10,7 +10,9 @@ import checkImg from '@/assets/check.svg';
 import cautionImg from '@/assets/caution.svg';
 import { useHandleModal } from '../../utils/useHandleModal';
 import { NoticeData } from '@/shared/types/post';
-import { renderSpinner } from '@/shared/utils/renderSpinner';
+import { useModal } from '@/shared/store/useModal';
+import { useRouter } from 'next/router';
+import { MYPAGE } from '@/constant/path';
 
 interface ShopDetailWidgetProps {
   noticeData?: NoticeData;
@@ -27,6 +29,8 @@ const ShopDetailWidget = ({
   const hourlyPay = noticeData?.data?.item?.hourlyPay;
   const startsAt = noticeData?.data?.item?.startsAt;
   const workhour = noticeData?.data?.item?.workhour;
+  const router = useRouter();
+  const [cancelModalOpen, setCancelModalOpen] = useState(false); 
 
   if (!shop) {
     return null;
@@ -36,6 +40,8 @@ const ShopDetailWidget = ({
     useHandleModal({
       setIsApplied: setIsApplied,
     });
+
+  const { setIsOpen, key } = useModal();
 
   const modalHeader = isApplied ? (
     <>
@@ -47,13 +53,28 @@ const ShopDetailWidget = ({
       <Image src={cautionImg} alt="경고 표시" />내 프로필을 먼저 등록해주세요.
     </>
   );
-
   const handleApplyClick = () => {
-    applyClick();
+    if (!isApplied) {
+      setIsOpen('profileAlert'); 
+    } else {
+      applyClick(); 
+    }
   };
 
   const handleCancelClick = () => {
-    cancelClick();
+    if (!isApplied) return;
+    setCancelModalOpen(true);
+  };
+
+  const handleCancelConfirm = () => {
+    confirmCancel(); 
+    setCancelModalOpen(false);
+    setIsApplied(false); 
+  };
+
+  const handleModalConfirm = () => {
+    confirm();
+    setIsOpen('');
   };
 
   return (
@@ -111,17 +132,57 @@ const ShopDetailWidget = ({
         </S.TextContainer>
       </S.ContextWrap>
 
-      {isApplied && (
-        <CustomModal
-          modalKey="applySuccess"
-          modalHeader={modalHeader}
-          modalFooter={
-            <div style={{ width: '80px' }}>
-              <CustomButton text="확인" color="#EA3C12" onClick={confirm} />
-            </div>
-          }
-        />
-      )}
+      <CustomModal
+        modalKey="profileAlert"
+        modalHeader={modalHeader}
+        modalFooter={
+          <div style={{ width: '80px' }}>
+            <CustomButton
+              text="확인"
+              color="#EA3C12"
+              onClick={() => {
+                setIsOpen('');
+                router.push(MYPAGE.CREATE); 
+              }}
+            />
+          </div>
+        }
+      />
+
+      <CustomModal
+        modalKey="applySuccess"
+        modalHeader={modalHeader}
+        modalFooter={
+          <div style={{ width: '80px' }}>
+            <CustomButton
+              text="확인"
+              color="#EA3C12"
+              onClick={handleModalConfirm}
+            />
+          </div>
+        }
+      />
+
+      <CustomModal
+        modalKey="cancelConfirm"
+        modalHeader="신청을 취소하시겠어요?"
+        modalFooter={
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <CustomButton
+              text="취소하기"
+              color="#EA3C12"
+              onClick={() => {
+                setCancelModalOpen(false); 
+              }}
+            />
+            <CustomButton
+              text="확인"
+              color="#EA3C12"
+              onClick={handleCancelConfirm}
+            />
+          </div>
+        }
+      />
     </>
   );
 };
