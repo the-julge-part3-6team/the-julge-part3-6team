@@ -3,7 +3,6 @@ import 'swiper/swiper-bundle.css';
 import { Autoplay } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import { NoticeData } from '@/shared/types/post';
-import NotFoundPost from '@/shared/components/Post/NotFoundPost/NotFoundPost';
 import PostCard from '@/shared/components/Post/PostCard/PostCard';
 import formatWorkTime from '@/shared/utils/formatWorkTime';
 import * as S from './CustomPostList.styled';
@@ -12,12 +11,9 @@ import styles from './CustomPostList.module.css'; // CSS 모듈 import
 import { useUserData } from '@/shared/store/useUserData';
 import { useGetCustomNotices } from '@/models/notice/useGetCustomNotices';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
+import { CustomNotFoundPost } from '../CustomNotFoundPost/CustomNotFoundPost';
 
 SwiperCore.use([Autoplay]);
-
-interface Props {
-  items?: NoticeData[];
-}
 
 export const CustomPostList = () => {
   const { address } = useUserData(state => ({
@@ -28,7 +24,7 @@ export const CustomPostList = () => {
   return (
     <>
       {renderSpinner(
-        customDatas && customDatas.length > 0 ? (
+        address && customDatas && customDatas.length > 0 ? (
           <Swiper
             slidesPerView={'auto'}
             spaceBetween={14}
@@ -92,7 +88,7 @@ export const CustomPostList = () => {
             })}
           </Swiper>
         ) : (
-          <NotFoundPost />
+          <CustomNotFoundPost />
         ),
         isLoading,
       )}
