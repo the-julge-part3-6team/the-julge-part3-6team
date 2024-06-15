@@ -1,3 +1,4 @@
+import { MYSTORE } from '@/constant/path';
 import * as S from './ModalContainer.styled';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import Modal from '@/shared/components/Modal/Modal';
@@ -10,7 +11,7 @@ export const ModalContainer = () => {
 
   const onClickConfirm = () => {
     setIsClose();
-    router.push('/mystore');
+    router.push(MYSTORE.INDEX);
   };
 
   return (

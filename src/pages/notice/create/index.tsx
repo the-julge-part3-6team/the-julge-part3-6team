@@ -6,6 +6,7 @@ import { createNoticeMutate } from '@/models/notice/createNoticeMutate';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useModal } from '@/shared/store/useModal';
+import { MYSTORE } from '@/constant/path';
 
 const index = () => {
   const router = useRouter();
@@ -14,7 +15,7 @@ const index = () => {
   const { setIsOpen } = useModal();
 
   useEffect(() => {
-    if (!shop_id) router.push('/mystore');
+    if (!shop_id) router.push(MYSTORE.INDEX);
   }, []);
 
   const { mutate } = createNoticeMutate(shop_id || '', setIsOpen);

@@ -1,3 +1,4 @@
+import { MYPAGE } from '@/constant/path';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import Modal from '@/shared/components/Modal/Modal';
 import { useModal } from '@/shared/store/useModal';
@@ -21,7 +22,7 @@ export const EditProfileModal = () => {
           <div style={{ width: '80px' }}>
             <RedButton
               onClick={() => {
-                router.push('/mypage');
+                router.push(MYPAGE.INDEX);
                 setIsClose();
               }}
               text="확인"

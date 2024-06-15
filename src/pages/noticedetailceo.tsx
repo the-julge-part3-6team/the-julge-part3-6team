@@ -111,9 +111,9 @@ const NoticeDetailCeo = () => {
 
   // 테이블 로직 끝
 
-  const handleEditClick = () => {
-    router.push('/notice/edit');
-  };
+  // const handleEditClick = () => {
+  //   router.push('/notice/edit');
+  // };
 
   return (
     <>
