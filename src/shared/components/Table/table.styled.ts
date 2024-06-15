@@ -4,6 +4,8 @@ import styled from 'styled-components';
 export const CustomTable = styled.div`
   width: 100%;
   border-radius: 10px;
+  background: ${theme.Colors.White};
+  min-height: 338px;
 
   @media (max-width: 744px) {
     overflow-x: scroll;

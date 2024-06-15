@@ -1,4 +1,3 @@
-import theme from '@/shared/styles/theme';
 import styled from 'styled-components';
 
 export const TableBtn = styled.button`
@@ -7,8 +6,9 @@ export const TableBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${theme.Colors.Red};
-  color: ${theme.Colors.Red};
+  border: 1px solid ${props => props.color};
+  color: ${props => props.color};
+  border-radius: 6px;
 
   @media (max-width: 744px) {
   }

@@ -19,6 +19,9 @@ import { useHandleModal } from './noticedetail/utils/useHandleModal';
 import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
 import OwnerTable from '@/shared/components/OwnerTable/OwnerTable';
 import { useGetApplicantsForJobPosting } from '@/models/employer/useGetApplicantsForJobPosting';
+import { useSetApprovalStatus } from '@/models/employer/useSetApprovalStatus';
+import { useOwnerSupportList } from '@/models/employer/useOwnerSupportList';
+import Pagination from '@/shared/components/Pagination/Pagination';
 
 const NoticeDetailCeo = () => {
   const searchParams = useSearchParams();
@@ -76,14 +79,35 @@ const NoticeDetailCeo = () => {
     ) : null;
 
   // 테이블 로직 시작
-  console.log(shop_id, notice_id);
 
   const { data: applicationStatus, isLoading } = useGetApplicantsForJobPosting({
     shop_id,
     notice_id,
   });
   const applicationStatusList = applicationStatus?.data.items;
-  console.log(applicationStatus);
+  const { mutate: setApprovalStatus } = useSetApprovalStatus();
+
+  const onClickEvent = (id: string, isApproved: boolean) => {
+    const status = isApproved ? 'accepted' : 'rejected';
+    setApprovalStatus({ shop_id, notice_id, id, status });
+  };
+  // 페이지 네이션
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 설정
+  const { data: ownerTableData, isError } = useOwnerSupportList({
+    notice_id: notice_id,
+    shop_id: shop_id,
+    limit: 5,
+    offset: (currentPage - 1) * 5,
+  });
+  const AnnouncementApplicationListCount = ownerTableData?.data?.count;
+  const listData = ownerTableData?.data.items;
+
+  const totalItems = ownerTableData?.data?.count; // 공고 총 갯수
+  const totalPages = Math.ceil(totalItems / 5);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page); // 페이지네이션 버튼 클릭했을 때, currentPage 변경
+  };
 
   // 테이블 로직 끝
 
@@ -97,7 +121,9 @@ const NoticeDetailCeo = () => {
       <S.PageLayout>
         <S.TextWrap>
           <S.SmallText>식당</S.SmallText>
-          <S.BigText>{noticeData?.data.item.shop.item.name}사장님 공고 상세 페이지</S.BigText>
+          <S.BigText>
+            {noticeData?.data.item.shop.item.name}사장님 공고 상세 페이지
+          </S.BigText>
         </S.TextWrap>
 
         <S.ContextWrap>
@@ -147,7 +173,11 @@ const NoticeDetailCeo = () => {
                 />
               </div>
             ) : (
-              <CustomButton onClick={handleEditClick} color="#EA3C12" text="편집하기" />
+              <CustomButton
+                onClick={handleEditClick}
+                color="#EA3C12"
+                text="편집하기"
+              />
             )}
           </S.TextContainer>
         </S.ContextWrap>
@@ -159,10 +189,22 @@ const NoticeDetailCeo = () => {
         </S.DescripContainer>
 
         {/* 여기에 테이블 컴포넌트 붙이시면 됩니다 */}
-        {applicationStatusList ? (
-          <OwnerTable list={applicationStatusList} />
+        <S.TextWrap>
+          <S.BigText>신청자 목록</S.BigText>
+        </S.TextWrap>
+        {AnnouncementApplicationListCount ? (
+          <>
+            <OwnerTable list={listData} onClickEvent={onClickEvent} />
+            <S.PageNationWrap>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </S.PageNationWrap>
+          </>
         ) : (
-          '일단 테이블 없음'
+          <div>일단 테이블 없어요.</div>
         )}
         {/* 여기에 테이블 컴포넌트 붙이시면 됩니다 */}
       </S.PageLayout>
@@ -179,9 +221,7 @@ const NoticeDetailCeo = () => {
                 onClick={handleModal.confirm}
               />
             </div>
-          ) : (
-            null
-          )
+          ) : null
         }
       />
 
