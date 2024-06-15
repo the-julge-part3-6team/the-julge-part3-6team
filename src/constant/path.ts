@@ -2,7 +2,7 @@ export enum NOTICE {
   CREATE = '/notice/create',
   LIST = '/noticelist',
   DETAIL = '/noticedetail',
-  DETAIL_CEO = '/noticedetailceo',
+  DETAIL_CEO = '/noticedetail/ceo',
 }
 
 export enum MYSTORE {
