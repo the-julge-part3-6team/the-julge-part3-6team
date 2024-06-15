@@ -19,15 +19,15 @@ export const signupMutation = (setError: any, setIsOpen: any) => {
       return;
     },
 
-    onError: (error: AxiosError) => {
-      const statusCode = error.response?.status;
+    onError: (error: { message: string }) => {
+      const statusCode = error.message;
+
       switch (statusCode) {
-        case 409:
+        case '409':
           setIsOpen('conflict_email_modal');
           return;
 
         default:
-          console.log(error);
           return;
       }
     },
