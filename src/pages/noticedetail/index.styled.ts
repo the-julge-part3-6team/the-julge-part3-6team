@@ -7,8 +7,7 @@ export const PageLayout = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
-  top: 60px;
-  margin: 0 auto;
+  margin: 40px auto 0;
   padding-bottom: 120px;
 
   @media (max-width: 1440px) {
@@ -17,7 +16,7 @@ export const PageLayout = styled.div`
   }
 
   @media (max-width: 744px) {
-    padding: 0 12px;
+    padding: 0 20px;
   }
 `;
 
@@ -36,6 +35,7 @@ export const ContextWrap = styled.div`
 
   @media (max-width: 744px) {
     flex-direction: column;
+    margin-bottom: 12px;
   }
 `;
 
@@ -45,6 +45,10 @@ export const SmallText = styled.h4<{ isBlack?: boolean }>`
   font-weight: 700;
   line-height: 20px;
   margin-bottom: 8px;
+
+  @media (max-width: 744px) {
+    font-size: 14px;
+  }
 `;
 
 export const BigText = styled.h1`
@@ -53,6 +57,10 @@ export const BigText = styled.h1`
   font-weight: 700;
   letter-spacing: 0.56px;
   margin-bottom: 24px;
+
+  @media (max-width: 744px) {
+    font-size: 20px;
+  }
 `;
 
 export const TextWrap = styled.div`

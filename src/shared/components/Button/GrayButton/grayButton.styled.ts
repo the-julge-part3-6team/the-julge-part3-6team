@@ -7,6 +7,7 @@ export const GrayButton = styled.button`
   align-items: center;
   padding: 14px 20px;
   width: 100%;
+  font-weight: 700;
 
   border-radius: 6px;
   background-color: ${theme.Colors.Gray[40]};

@@ -5,6 +5,10 @@ export const SmallText = styled.h4<{ isBlack?: boolean }>`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
+
+  @media (max-width: 744px) {
+    font-size: 14px;
+  }
 `;
 
 export const DescripContainer = styled.div`
@@ -26,6 +30,15 @@ export const DescripContainer = styled.div`
 
     &:last-of-type {
       margin-top: 0;
+    }
+  }
+
+  @media (max-width: 744px) {
+    margin-bottom: 80px;
+
+    p {
+      font-size: 14px;
+      line-height: 22px;
     }
   }
 `;
