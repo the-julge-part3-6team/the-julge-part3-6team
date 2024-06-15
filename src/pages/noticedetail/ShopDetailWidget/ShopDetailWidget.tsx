@@ -9,9 +9,10 @@ import CustomModal from '../component/CustomModal/CustomModal';
 import checkImg from '@/assets/check.svg';
 import cautionImg from '@/assets/caution.svg';
 import { useHandleModal } from '../utils/useHandleModal';
+import { NoticeData } from '@/shared/types/post';
 
 interface ShopDetailWidgetProps {
-  noticeData?: any;
+  noticeData?: NoticeData; 
   isApplied: boolean;
   setIsApplied: (value: boolean) => void;
 }
@@ -21,11 +22,14 @@ const ShopDetailWidget = ({
   isApplied,
   setIsApplied,
 }: ShopDetailWidgetProps) => {
-  if (!noticeData || !noticeData.data || !noticeData.data.item || !noticeData.data.item.shop) {
+  const shop = noticeData?.data?.item?.shop;
+  const hourlyPay = noticeData?.data?.item?.hourlyPay;
+  const startsAt = noticeData?.data?.item?.startsAt;
+  const workhour = noticeData?.data?.item?.workhour;
+
+  if (!shop) {
     return null;
   }
-
-  const { shop } = noticeData.data.item;
 
   const { applyClick, cancelClick, confirmCancel, closeCancelModal, confirm } =
     useHandleModal({
@@ -71,7 +75,7 @@ const ShopDetailWidget = ({
           <S.PriceWrap>
             <PostPrice
               isClosed={false}
-              defaultHourlyPay={noticeData.data.item.hourlyPay}
+              defaultHourlyPay={hourlyPay}
               currentHourlyPay={shop.item.originalHourlyPay}
             />
           </S.PriceWrap>
@@ -79,10 +83,11 @@ const ShopDetailWidget = ({
             <PostInform
               isClosed={false}
               type="시간"
-              content={formatWorkTime(
-                noticeData.data.item.startsAt,
-                noticeData.data.item.workhour,
-              )}
+              content={formatWorkTime({
+                type: 'notice',
+                startsAt,
+                workHour: workhour
+              })}
             />
             <PostInform
               isClosed={false}
