@@ -1,6 +1,7 @@
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import * as S from './NotfoundStore.styled';
 import { useRouter } from 'next/router';
+import { MYSTORE } from '@/constant/path';
 
 export const NotfoundStore = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ export const NotfoundStore = () => {
       <S.ButtonWrap>
         <RedButton
           text="가게 등록하기"
-          onClick={() => router.push('/mystore/create')}
+          onClick={() => router.push(MYSTORE.CREATE)}
         />
       </S.ButtonWrap>
     </S.MyStoreContent>

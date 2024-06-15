@@ -1,3 +1,4 @@
+import { MYSTORE } from '@/constant/path';
 import React, { useEffect } from 'react';
 
 interface SetStore {
@@ -27,7 +28,7 @@ export const usePatchFormData = (
 ) => {
   useEffect(() => {
     if (isLoading) return;
-    if (!shop_id) router.push('/mystore');
+    if (!shop_id) router.push(MYSTORE.INDEX);
     setStoreName(store.name);
     setStoreType(store.category);
     setStoreAddress(store.address1);

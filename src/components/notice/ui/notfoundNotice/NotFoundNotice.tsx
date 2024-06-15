@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import * as S from './NotFoundNotice.styled';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
+import { NOTICE } from '@/constant/path';
 
 export const NotFoundNotice = ({ shop_id }: { shop_id: string }) => {
   const router = useRouter();
@@ -11,7 +12,7 @@ export const NotFoundNotice = ({ shop_id }: { shop_id: string }) => {
       <S.ButtonWrap>
         <RedButton
           text="공고 등록하기"
-          onClick={() => router.push(`/notice/create?shop_id=${shop_id}`)}
+          onClick={() => router.push(`${NOTICE.CREATE}?shop_id=${shop_id}`)}
         />
       </S.ButtonWrap>
     </S.MyStoreContent>

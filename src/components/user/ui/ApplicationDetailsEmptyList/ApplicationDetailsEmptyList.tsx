@@ -1,6 +1,7 @@
 import React from 'react';
 import * as S from './ApplicationDetailsEmptyList.styled';
 import { useRouter } from 'next/router';
+import { NOTICE } from '@/constant/path';
 
 export const ApplicationDetailsEmptyList = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ export const ApplicationDetailsEmptyList = () => {
             <S.CustomRedButton
               // 수정해야함
               onClick={() => {
-                router.push('noticelist');
+                router.push(NOTICE.LIST);
               }}
             >
               공고 보러가기

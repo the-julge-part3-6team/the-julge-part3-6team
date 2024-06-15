@@ -7,10 +7,11 @@ interface Props {
 }
 
 export const PostPriceChange = styled.div<Props>`
+  width: 168px;
   display: flex;
-  height: 36px;
-  padding: 12px;
+  padding: 10px 8px;
   align-items: center;
+  justify-content: center;
   gap: 3px;
   color: #fff;
   border-radius: 20px;
@@ -21,7 +22,6 @@ export const PostPriceChange = styled.div<Props>`
       background-color: ${theme.Colors.Red[30]};
     `}
   font-size: 14px;
-  text-align: center;
   font-weight: 500;
   ${({ isClosed }) =>
     isClosed === true &&
@@ -30,6 +30,7 @@ export const PostPriceChange = styled.div<Props>`
     `}
   @media
     (max-width: 744px) {
+    width: auto;
     border-radius: 0;
     padding: 0 16px 0 0;
     background-color: #fff;
@@ -51,8 +52,8 @@ export const PostPriceChange = styled.div<Props>`
 `;
 
 export const PostPriceArrow = styled.div`
-  font-size: 18px;
+  font-size: 14px;
   @media (max-width: 744px) {
-    font-size: 15px;
+    font-size: 10px;
   }
 `;

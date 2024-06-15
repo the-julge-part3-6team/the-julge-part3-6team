@@ -1,3 +1,4 @@
+import { MYSTORE } from '@/constant/path';
 import * as S from './ModalContainer.styled';
 import RedButton from '@/shared/components/Button/RedButton/RedButton';
 import Modal from '@/shared/components/Modal/Modal';
@@ -19,7 +20,7 @@ export const ModalContainer = () => {
               text="확인"
               onClick={() => {
                 setIsClose();
-                router.push('/mystore');
+                router.push(MYSTORE.INDEX);
               }}
             />
           </S.ModalFooter>

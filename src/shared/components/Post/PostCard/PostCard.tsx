@@ -3,6 +3,7 @@ import PostImage from '../PostImage/PostImage';
 import PostInform from '../PostInform/PostInform';
 import PostPrice from '../PostPrice/PostPrice';
 import { useRouter } from 'next/router';
+import { NOTICE } from '@/constant/path';
 
 interface Props {
   notice_id: string;
@@ -33,7 +34,9 @@ const PostCard = ({
     <S.PostContainer
       isClosed={isClosed}
       onClick={() =>
-        router.push(`/noticedetail?shop_id=${shop_id}&notice_id=${notice_id}`)
+        router.push(
+          `${NOTICE.DETAIL}?shop_id=${shop_id}&notice_id=${notice_id}`,
+        )
       }
     >
       <PostImage isClosed={isClosed} imgSrc={imageUrl} />

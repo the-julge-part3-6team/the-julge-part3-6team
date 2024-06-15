@@ -3,6 +3,7 @@ import * as S from './ViewProfile.styled';
 import { useRouter } from 'next/router';
 import CustomButton from '@/shared/components/Button/CustomButton/CustomButton';
 import { replacePhoneValue } from '@/shared/utils/replacePhoneValue';
+import { MYPAGE } from '@/constant/path';
 
 export const ViewProfile = ({ userData }: { userData: UserDataType }) => {
   const router = useRouter();
@@ -31,7 +32,7 @@ export const ViewProfile = ({ userData }: { userData: UserDataType }) => {
         <CustomButton
           text="편집하기"
           color="#EA3C12"
-          onClick={() => router.push(`/mypage/edit?user_id=${user_id}`)}
+          onClick={() => router.push(`${MYPAGE.EDIT}?user_id=${user_id}`)}
         />
       </S.ProfileBox>
     </>

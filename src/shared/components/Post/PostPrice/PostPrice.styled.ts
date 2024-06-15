@@ -13,9 +13,8 @@ export const PostPriceContainer = styled.div`
 `;
 
 export const PostPrice = styled.h2`
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
-  letter-spacing: 0.48px;
 
   @media (max-width: 744px) {
     font-size: 18px;
