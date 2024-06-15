@@ -1,6 +1,4 @@
 import { NotfoundStore, StoreCard } from '@/components/store';
-import { useGetNoticeByStoreId } from '@/models/notice/useGetNoticeByStoreId';
-import { useUserQuery } from '@/models/user/useUserData';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
 
 interface Props {

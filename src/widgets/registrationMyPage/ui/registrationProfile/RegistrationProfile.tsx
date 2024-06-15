@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Input from '@/shared/components/Input/Input';
 import * as S from './RegistrationProfile.styled';
 import { locations } from '@/components/filter/constant/locations';
@@ -10,7 +10,6 @@ import { onChangeValue } from '@/models/user/onChangeValue';
 import { USER_FORM_ERRORS_INITIAL_VALUE } from '@/constant/user';
 import { replacePhoneValue } from '@/shared/utils/replacePhoneValue';
 import { submitProfile } from '@/models/user/submitProfile';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useUserQuery } from '@/models/user/useUserData';
 import { useUpdateUserState } from '@/models/user/useUpdateUserState';
 import { useUserData } from '@/shared/store/useUserData';
@@ -24,7 +23,7 @@ export const RegistrationProfile = ({ edit }: Props) => {
     useProfileData();
   const { setAddress: setUserAddress } = useUserData();
   const [error, setError] = useState(USER_FORM_ERRORS_INITIAL_VALUE);
-  const { data, isError, isLoading } = useUserQuery();
+  const { data, isLoading } = useUserQuery();
 
   const item: UserDataType = data?.data.item;
   const formData = { name, phone, address, bio };

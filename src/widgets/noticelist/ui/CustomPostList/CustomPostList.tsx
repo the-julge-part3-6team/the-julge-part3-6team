@@ -45,7 +45,6 @@ export const CustomPostList = () => {
                 hourlyPay,
                 startsAt,
                 workhour,
-                description,
                 closed,
                 shop,
               } = customData.item;

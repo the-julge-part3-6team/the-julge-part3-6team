@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUserData } from '../store/useUserData';
 import { Cookies } from 'react-cookie';
-import { handleLogout } from '@/models/auth/logout';
-import { AUTH, MYPAGE, MYSTORE, NOTICE } from '@/constant/path';
+import { AUTH, MYPAGE, MYSTORE } from '@/constant/path';
 const cookies = new Cookies();
 
 export const useRouterGuard = () => {
