@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as S from './noticedetail/index.styled';
+import * as S from './index.styled';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
@@ -10,8 +10,8 @@ import { useSetApprovalStatus } from '@/models/employer/useSetApprovalStatus';
 import { useOwnerSupportList } from '@/models/employer/useOwnerSupportList';
 import Pagination from '@/shared/components/Pagination/Pagination';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
-import ShopDetailWidget from './noticedetail/widget/ShopDetailWidget/ShopDetailWidget';
-import DetailWidget from './noticedetail/widget/DetailWidget/DetailWidget';
+import ShopDetailWidget from '../../widgets/noticedetail/ui/ShopDetailWidget/ShopDetailWidget';
+import DetailWidget from '../../widgets/noticedetail/ui/DetailWidget/DetailWidget';
 
 const NoticeDetailCeo = () => {
   const searchParams = useSearchParams();
@@ -68,13 +68,16 @@ const NoticeDetailCeo = () => {
       <S.PageLayout>
         <S.TextWrap>
           <S.SmallText>식당</S.SmallText>
-          </S.TextWrap>
-          {renderSpinner(<ShopDetailWidget
-              noticeData={noticeData}
-              isApplied={isApplied}
-              setIsApplied={setIsApplied}
-            />, noticeLoading)}
-            <DetailWidget noticeData={noticeData} />
+        </S.TextWrap>
+        {renderSpinner(
+          <ShopDetailWidget
+            noticeData={noticeData}
+            isApplied={isApplied}
+            setIsApplied={setIsApplied}
+          />,
+          noticeLoading,
+        )}
+        <DetailWidget noticeData={noticeData} />
         {/* 테이블 컴포넌트 시작 */}
         <S.TextWrap>
           <S.BigText>신청자 목록</S.BigText>

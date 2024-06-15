@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import * as S from './index.styled';
 import Header from '@/shared/components/Header/Header';
 import Footer from '@/shared/components/Footer/Footer';
-import ShopDetailWidget from './widget/ShopDetailWidget/ShopDetailWidget';
-import DetailWidget from './widget/DetailWidget/DetailWidget';
-import RecentPostsWidget from './widget/RecentPostsWidget/RecentPostWidget';
+import ShopDetailWidget from '../../widgets/noticedetail/ui/ShopDetailWidget/ShopDetailWidget';
+import DetailWidget from '../../widgets/noticedetail/ui/DetailWidget/DetailWidget';
+import RecentPostsWidget from '../../widgets/noticedetail/ui/RecentPostsWidget/RecentPostWidget';
 import { useSearchParams } from 'next/navigation';
 import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
@@ -26,12 +26,15 @@ const NoticeDetail = () => {
       <Header />
       <S.PageLayout>
         <S.SmallText>식당</S.SmallText>
-            {renderSpinner(<ShopDetailWidget
-              noticeData={noticeData}
-              isApplied={isApplied}
-              setIsApplied={setIsApplied}
-            />, noticeLoading)}
-            <DetailWidget noticeData={noticeData} />
+        {renderSpinner(
+          <ShopDetailWidget
+            noticeData={noticeData}
+            isApplied={isApplied}
+            setIsApplied={setIsApplied}
+          />,
+          noticeLoading,
+        )}
+        <DetailWidget noticeData={noticeData} />
         <S.BigText>최근에 본 공고</S.BigText>
         <RecentPostsWidget />
       </S.PageLayout>
