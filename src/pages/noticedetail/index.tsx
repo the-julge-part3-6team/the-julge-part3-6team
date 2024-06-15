@@ -10,7 +10,6 @@ import { useSearchParams } from 'next/navigation';
 import { useGetNoticeDetail } from '@/models/notice/useGetNoticeDetail';
 
 const NoticeDetail = () => {
-
   const searchParams = useSearchParams();
   const shop_id = searchParams.get('shop_id');
   const notice_id = searchParams.get('notice_id');
@@ -19,21 +18,24 @@ const NoticeDetail = () => {
     isError: noticeError,
     isLoading: noticeLoading,
   } = useGetNoticeDetail(shop_id || '', notice_id || '');
-  
+
   const { key, isOpen } = useModal();
   const [isApplied, setIsApplied] = useState(false);
-
-  if (!noticeData) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>
       <Header />
       <S.PageLayout>
         <S.SmallText>식당</S.SmallText>
-        <ShopDetailWidget noticeData={noticeData} isApplied={isApplied} />
-        <DetailWidget noticeData={noticeData} />
+        {noticeData && (
+          <>
+            <ShopDetailWidget 
+            noticeData={noticeData} 
+            isApplied={isApplied} 
+            setIsApplied={setIsApplied} />
+            <DetailWidget noticeData={noticeData} />
+          </>
+        )}
         <S.BigText>최근에 본 공고</S.BigText>
         <RecentPostsWidget isOpen={isOpen} key={key} />
       </S.PageLayout>
