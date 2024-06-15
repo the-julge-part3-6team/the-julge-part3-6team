@@ -16,9 +16,11 @@ interface Props {
   defaultHourlyPay?: number;
   currentHourlyPay: number;
   isClosed: boolean;
+  startsAt: string;
 }
 
 const PostCard = ({
+  startsAt,
   notice_id,
   shop_id,
   imageUrl,
@@ -30,9 +32,14 @@ const PostCard = ({
   isClosed,
 }: Props) => {
   const router = useRouter();
-
   const { type } = useUserData();
-  console.log(type);
+  const now = new Date();
+
+  const validIsExpired = (startsAt: string, now: Date) => {
+    const isExpired = now > new Date(startsAt);
+    return isExpired;
+  };
+
   const handleRouterByUserType = (type: 'employer' | 'employee' | '') => {
     if (type === 'employer') {
       router.push(
@@ -48,7 +55,11 @@ const PostCard = ({
       isClosed={isClosed}
       onClick={() => handleRouterByUserType(type)}
     >
-      <PostImage isClosed={isClosed} imgSrc={imageUrl} />
+      <PostImage
+        isClosed={isClosed}
+        imgSrc={imageUrl}
+        isExpired={validIsExpired(startsAt, now)}
+      />
       <S.PostContent>
         <S.PostTitle>{shopName}</S.PostTitle>
         <PostInform isClosed={isClosed} type="시간" content={duration} />

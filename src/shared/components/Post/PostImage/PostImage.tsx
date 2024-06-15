@@ -5,9 +5,10 @@ import testImg from '@/assets/test.jpg';
 interface PostImageProps {
   isClosed: boolean;
   imgSrc?: string;
+  isExpired: boolean;
 }
 
-const PostImage = ({ isClosed, imgSrc }: PostImageProps) => {
+const PostImage = ({ isClosed, imgSrc, isExpired }: PostImageProps) => {
   return (
     <S.PostImageContainer>
       <S.PostImage isClosed={isClosed}>
@@ -19,8 +20,8 @@ const PostImage = ({ isClosed, imgSrc }: PostImageProps) => {
           objectPosition="center"
         />
       </S.PostImage>
-      {status === 'closed' && <S.PostStatusLabel>마감 완료</S.PostStatusLabel>}
-      {status === 'expired' && <S.PostStatusLabel>지난 공고</S.PostStatusLabel>}
+      {isClosed && <S.PostStatusLabel>마감 완료</S.PostStatusLabel>}
+      {isExpired && <S.PostStatusLabel>지난 공고</S.PostStatusLabel>}
     </S.PostImageContainer>
   );
 };
