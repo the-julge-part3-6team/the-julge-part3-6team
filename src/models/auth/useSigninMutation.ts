@@ -14,7 +14,7 @@ interface SigninData {
 
 export const useSigninMutation = (setError: any) => {
   const router = useRouter();
-  const { setUserId, setType } = useUserData();
+  const { setUserId, setType, setAddress } = useUserData();
 
   return useMutation({
     mutationKey: ['/token'],
@@ -25,9 +25,12 @@ export const useSigninMutation = (setError: any) => {
       const token = data.data.item.token;
       const id = data.data.item.user.item.id;
       const type = data.data.item.user.item.type;
+      const address = data.data.item.user.item.address;
+
       cookies.set('token', token, { path: '/' });
       setUserId(id);
       setType(type);
+      setAddress(address);
       router.push('/');
     },
 
