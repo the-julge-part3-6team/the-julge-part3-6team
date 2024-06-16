@@ -1,7 +1,12 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export const toggleDropdown = (
-  setIsDropdownOpen: Dispatch<SetStateAction<boolean>>,
+  setIsOpen: (key: string) => void,
+  setIsClose: () => void,
+  key: string,
 ) => {
-  setIsDropdownOpen((prev: boolean) => !prev);
+  if (key === '드롭다운모달') {
+    setIsClose();
+    setIsOpen('');
+  } else {
+    setIsOpen('드롭다운모달');
+  }
 };
