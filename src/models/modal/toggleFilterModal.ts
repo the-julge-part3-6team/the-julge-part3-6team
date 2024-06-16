@@ -1,9 +1,12 @@
-import { useModal } from '@/shared/store/useModal';
-
 export const toggleFilterModal = (
-  isOpen: boolean,
   setIsOpen: (key: string) => void,
   setIsClose: () => void,
+  key: string,
 ) => {
-  isOpen ? setIsClose() : setIsOpen('필터모달');
+  if (key === '필터모달') {
+    setIsClose();
+    setIsOpen('');
+  } else {
+    setIsOpen('필터모달');
+  }
 };

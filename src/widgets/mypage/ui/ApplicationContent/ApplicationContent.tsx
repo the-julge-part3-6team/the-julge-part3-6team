@@ -9,7 +9,7 @@ import { useState } from 'react';
 export const ApplicationContent = () => {
   // 유저의 지원 목록 조회 useUserSupportList
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 설정
-  const { data, isError, isLoading } = useUserSupportList({
+  const { data, isLoading } = useUserSupportList({
     limit: 5,
     offset: (currentPage - 1) * 5,
   });

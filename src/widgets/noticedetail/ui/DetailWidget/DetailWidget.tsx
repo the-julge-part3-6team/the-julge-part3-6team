@@ -1,9 +1,8 @@
 import React from 'react';
 import * as S from './DetailWidget.styled';
-import { NoticeData } from '@/shared/types/post';
 
 interface DetailWidgetProps {
-  noticeData?: NoticeData;
+  noticeData?: any;
 }
 
 export const DetailWidget = ({ noticeData }: DetailWidgetProps) => {

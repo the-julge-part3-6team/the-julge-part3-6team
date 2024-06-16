@@ -1,8 +1,5 @@
 import React from 'react';
 import * as S from './TypeSelectBtn.styled';
-import Image from 'next/image';
-import checkbox from '@/assets/checkbox.svg';
-import checkboxDone from '@/assets/checkboxDone.svg';
 
 interface Props {
   typeValidation?: any;
