@@ -2,16 +2,14 @@ import { Dispatch, SetStateAction, useEffect } from 'react';
 
 interface ObserverByScrollTypes {
   isLoading: boolean;
-  pagenation: { hasNext: boolean; offset: number };
-  setPagenation: Dispatch<SetStateAction<{ hasNext: boolean; offset: number }>>;
   ref: any;
+  fetchNextPage: any;
 }
 
 export const observerByScroll = ({
   isLoading,
-  pagenation,
-  setPagenation,
   ref,
+  fetchNextPage,
 }: ObserverByScrollTypes) => {
   useEffect(() => {
     const options = {
@@ -24,20 +22,12 @@ export const observerByScroll = ({
       const target = entries[0];
 
       if (target.isIntersecting && !isLoading) {
-        if (!pagenation.hasNext) return;
-
-        setPagenation(prev => {
-          return {
-            ...prev,
-            offset: prev.offset + 3,
-          };
-        });
+        fetchNextPage();
       }
     };
 
     const observer = new IntersectionObserver(handleObserver, options);
     const currentDivRef = ref.current;
-
     if (currentDivRef) {
       observer.observe(currentDivRef);
     }
@@ -47,5 +37,5 @@ export const observerByScroll = ({
         observer.unobserve(currentDivRef);
       }
     };
-  }, [isLoading]);
+  }, [isLoading, ref]);
 };

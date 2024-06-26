@@ -1,5 +1,7 @@
 import { NotfoundStore, StoreCard } from '@/components/store';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
+import { Suspense } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 interface Props {
   store: Store;

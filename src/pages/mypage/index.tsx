@@ -6,7 +6,7 @@ import { ApplicationContent } from '@/widgets/mypage';
 import { useUserQuery } from '@/models/user/useUserData';
 
 const MyPage = () => {
-  const { data, isError, isLoading } = useUserQuery();
+  const { data, isLoading } = useUserQuery();
   const userData = data?.data.item;
   const isPhone = userData?.phone;
 
