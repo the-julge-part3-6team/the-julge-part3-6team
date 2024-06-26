@@ -3,13 +3,12 @@ import * as S from './OwnerTable.styled';
 import PrimaryBadge from './Badge/Badge';
 import { replacePhoneValue } from '@/shared/utils/replacePhoneValue';
 import { TableBtn } from './TableBtn/TableBtn';
-import { useSearchParams } from 'next/navigation';
-import { useSetApprovalStatus } from '@/models/employer/useSetApprovalStatus';
 
 const OwnerTable = ({
   list,
   onClickEvent,
-}: Pick<tableProfileStatus, 'list' | 'onClickEvent'>) => {
+  isAccepted,
+}: Pick<tableProfileStatus, 'list' | 'onClickEvent' | 'isAccepted'>) => {
   return (
     <S.CustomTable>
       <S.CustomTableWrap>
@@ -20,7 +19,6 @@ const OwnerTable = ({
           <li>상태</li>
         </S.CustomTableHeader>
         {list?.map((item: any, index: any) => {
-          console.log(item.item.status);
           return (
             <S.CustomTableBody className={index === 0 ? 'first' : ''}>
               <li>{item.item?.user?.item.name}</li>
@@ -28,18 +26,22 @@ const OwnerTable = ({
               <li>{replacePhoneValue(item.item?.user?.item.phone)}</li>
               <li>
                 {item.item.status === 'pending' ? (
-                  <S.TableBtnWrap>
-                    <TableBtn
-                      text={'거절하기'}
-                      color={'#EA3C12'}
-                      onClick={() => onClickEvent(item.item.id, false)}
-                    />
-                    <TableBtn
-                      text={'승인하기'}
-                      color={'#0080FF'}
-                      onClick={() => onClickEvent(item.item.id, true)}
-                    />
-                  </S.TableBtnWrap>
+                  !isAccepted ? (
+                    <S.TableBtnWrap>
+                      <TableBtn
+                        text={'거절하기'}
+                        color={'#EA3C12'}
+                        onClick={() => onClickEvent(item.item.id, false)}
+                      />
+                      <TableBtn
+                        text={'승인하기'}
+                        color={'#0080FF'}
+                        onClick={() => onClickEvent(item.item.id, true)}
+                      />
+                    </S.TableBtnWrap>
+                  ) : (
+                    '마감 완료'
+                  )
                 ) : (
                   <PrimaryBadge status={item.item.status} />
                 )}

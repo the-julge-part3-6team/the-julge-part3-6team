@@ -22,4 +22,5 @@ interface tableProfileStatus {
   currentPage: number;
   totalPages: number;
   onClickEvent?: any;
+  isAccepted?: boolean;
 }
