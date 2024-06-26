@@ -1,7 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useUserData } from '@/shared/store/useUserData';
-import { useModal } from '@/shared/store/useModal';
 import { apiInstance } from '@/shared/utils/axios';
 
 interface Props {
