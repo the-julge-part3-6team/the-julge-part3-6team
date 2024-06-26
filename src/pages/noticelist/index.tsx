@@ -22,20 +22,15 @@ const NoticeList = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 정렬 드롭다운
   const [order, setOrder] = useState('마감임박순'); // 정렬
   const [sort, setSort] = useState('time');
+  const startsAtGte = dateTransfromKST(filters?.startDate!);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 설정
 
-  const startsAtGte = dateTransfromKST(filters?.startDate!);
-
-  const address = filters?.selectedLocations
-    ?.map(selectedLocation => `address=${encodeURIComponent(selectedLocation)}`)
-    .join('&');
-
   const { data, isLoading } = useGetNotices({
-    offset: (currentPage - 1) * 6,
+    currentPage: (currentPage - 1) * 6,
     limit: 6,
     sort: sort,
     hourlyPayGte: filters?.price,
-    address: address,
+    addressList: filters?.selectedLocations,
     startsAtGte: startsAtGte ? `&startsAtGte=${startsAtGte}` : '',
   });
 
@@ -43,7 +38,6 @@ const NoticeList = () => {
   const noticeDatas = data?.data?.items; // { item{}, links[] }
 
   const totalPages = Math.ceil(totalItems / 6);
-  // 전체 페이지 설정
 
   return (
     <>

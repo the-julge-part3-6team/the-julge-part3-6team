@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '@/shared/components/Input/Input';
 import * as S from './RegistrationProfile.styled';
 import { locations } from '@/components/filter/constant/locations';
@@ -24,11 +24,10 @@ export const RegistrationProfile = ({ edit }: Props) => {
   const { setAddress: setUserAddress } = useUserData();
   const [error, setError] = useState(USER_FORM_ERRORS_INITIAL_VALUE);
   const { data, isLoading } = useUserQuery();
-
   const item: UserDataType = data?.data.item;
   const formData = { name, phone, address, bio };
+  const { mutate } = useUserValidation(setUserAddress);
 
-  const result = useUserValidation(setUserAddress);
   if (edit) {
     useUpdateUserState(isLoading, item, {
       setName,
@@ -42,7 +41,7 @@ export const RegistrationProfile = ({ edit }: Props) => {
     <>
       <EditProfileModal />
       <S.CreateForm
-        onSubmit={e => submitProfile({ e, formData, setError, result })}
+        onSubmit={e => submitProfile({ e, formData, setError, mutate })}
       >
         <S.CreateFormUl>
           <li>

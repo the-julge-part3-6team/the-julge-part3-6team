@@ -1,29 +1,38 @@
 import { apiInstance } from '@/shared/utils/axios';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 interface Props {
-  offset: number;
+  currentPage: number;
   limit: number;
   sort: string;
   hourlyPayGte?: string;
-  address?: string;
+  addressList?: string[];
   startsAtGte?: string;
 }
 export const useGetNotices = ({
-  offset,
+  currentPage,
   limit,
   sort,
   hourlyPayGte,
-  address,
+  addressList,
   startsAtGte,
 }: Props) => {
   return useQuery({
     queryKey: [
-      `/notices?limit=${limit}&offset=${offset}&sort=${sort}&hourlyPayGte=${hourlyPayGte}&${address}${startsAtGte}`,
+      `/notices?limit=${limit}&offset=${currentPage}&sort=${sort}&hourlyPayGte=${hourlyPayGte}&${addressList}${startsAtGte}`,
     ],
-    queryFn: () =>
-      apiInstance.get(
-        `/notices?limit=${limit}&offset=${offset}&sort=${sort}&hourlyPayGte=${hourlyPayGte}&${address}${startsAtGte}`,
-      ),
+    queryFn: () => {
+      const address = addressList
+        ?.map(
+          selectedLocation => `address=${encodeURIComponent(selectedLocation)}`,
+        )
+        .join('&');
+
+      return apiInstance.get(
+        `/notices?limit=${limit}&offset=${currentPage}&sort=${sort}&hourlyPayGte=${hourlyPayGte}&${address}${startsAtGte}`,
+      );
+    },
+
+    keepPreviousData: true,
   });
 };

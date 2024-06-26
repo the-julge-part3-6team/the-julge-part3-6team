@@ -1,9 +1,8 @@
 import { NotFoundNotice, NoticeCardList } from '@/components/notice';
 import { useGetNoticeByStoreId } from '@/models/notice/useGetNoticeByStoreId';
-import { useUpdateNoticeList } from '@/models/notice/useUpdateNoticeList';
 import { observerByScroll } from '@/shared/utils/observerByScroll';
 import { renderSpinner } from '@/shared/utils/renderSpinner';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 interface Props {
   store: Store;
@@ -11,28 +10,24 @@ interface Props {
 
 export const NoticeContent = ({ store }: Props) => {
   const divRef = useRef<HTMLDivElement | null>(null);
-  const [pagenation, setPagenation] = useState({ offset: 0, hasNext: true });
-  const [noticeList, setNoticeList] = useState<{ item: Notice }[]>([]);
-  const { data, isLoading } = useGetNoticeByStoreId(
+  const { data, isLoading, isFetching, fetchNextPage } = useGetNoticeByStoreId(
     store?.id,
-    pagenation.offset,
   );
 
-  useUpdateNoticeList(data, setNoticeList, setPagenation);
-  observerByScroll({ isLoading, pagenation, setPagenation, ref: divRef });
+  observerByScroll({
+    isLoading,
+    ref: divRef,
+    fetchNextPage,
+  });
 
-  const noticeContent = noticeList.length ? (
+  const noticeContent = data?.pages ? (
     <>
-      <NoticeCardList noticeList={noticeList} store={store} />
+      <NoticeCardList noticeList={data.pages} store={store} />
       <div ref={divRef} style={{ height: '0.1px', width: '100%' }} />
     </>
   ) : (
-    <>
-      <NotFoundNotice shop_id={store?.id} />
-    </>
+    <NotFoundNotice shop_id={store?.id} />
   );
 
-  return (
-    <>{noticeList ? noticeContent : renderSpinner(noticeContent, isLoading)}</>
-  );
+  return renderSpinner(noticeContent, isLoading && !isFetching);
 };
