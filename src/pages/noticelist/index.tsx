@@ -17,7 +17,7 @@ import { handleApplyFilters } from '@/models/filter/handleApplyFilters';
 import { toggleFilterModal } from '@/models/modal/toggleFilterModal';
 
 const NoticeList = () => {
-  const { isOpen, setIsOpen, setIsClose } = useModal(); // 필터 모달
+  const { isOpen, setIsOpen, setIsClose, key } = useModal(); // 필터 모달
   const [filters, setFilters] = useState<FilterState | null>(null); // 필터 값
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 정렬 드롭다운
   const [order, setOrder] = useState('마감임박순'); // 정렬
@@ -55,7 +55,7 @@ const NoticeList = () => {
             <SortDropdown
               isDropdownOpen={isDropdownOpen}
               order={order}
-              toggleDropdown={() => toggleDropdown(setIsDropdownOpen)}
+              toggleDropdown={() => toggleDropdown(setIsOpen, setIsClose, key)}
               handleSortOptionClick={(option: string, sort: string) =>
                 handleSortOptionClick(
                   option,
@@ -68,7 +68,7 @@ const NoticeList = () => {
             />
 
             <S.FilterButton
-              onClick={() => toggleFilterModal(isOpen, setIsOpen, setIsClose)}
+              onClick={() => toggleFilterModal(setIsOpen, setIsClose, key)}
             >
               상세 필터
             </S.FilterButton>

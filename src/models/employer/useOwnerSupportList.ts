@@ -13,8 +13,6 @@ export const useOwnerSupportList = ({
   limit: number;
   offset: number;
 }) => {
-  const { user_id } = useUserData();
-
   const { data, isError, isLoading } = useQuery({
     queryKey: [
       `/shops/${shop_id}/notices/${notice_id}/applications`,
@@ -26,6 +24,8 @@ export const useOwnerSupportList = ({
         `/shops/${shop_id}/notices/${notice_id}/applications?offset=${offset}&limit=${limit}`,
       );
     },
+
+    keepPreviousData: true,
     enabled: !!shop_id && !!notice_id,
   });
   return { data, isError, isLoading };

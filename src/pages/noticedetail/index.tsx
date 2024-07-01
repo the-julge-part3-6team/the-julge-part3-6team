@@ -16,16 +16,11 @@ const NoticeDetail = () => {
   const shop_id = searchParams.get('shop_id');
   const notice_id = searchParams.get('notice_id');
   const { user_id } = useUserData();
-  const {
-    data: noticeData,
-    // isError: noticeError,
-    isLoading: noticeLoading,
-  } = useGetNoticeDetail(shop_id || '', notice_id || '');
-  const {
-    data: usersApplicationList,
-    isLoading: isApplicationListLoading,
-    isError,
-  } = useGetUserApplicationList(user_id);
+  const { data: noticeData, isLoading: noticeLoading } = useGetNoticeDetail(
+    shop_id || '',
+    notice_id || '',
+  );
+  const { data: usersApplicationList } = useGetUserApplicationList(user_id);
 
   const [isApplied, setIsApplied] = useState(false);
 
