@@ -25,7 +25,7 @@
 
 | **김한샘** | **김민섭** | **정성혜** | **박성재** |
 | :------: |  :------: | :------: | :------: |
-| [<img src="https://avatars.githubusercontent.com/u/106502312?v=4" height=150 width=150> <br/> @yeon1615](https://github.com/yeon1615) | [<img src="https://avatars.githubusercontent.com/u/112460466?v=4" height=150 width=150> <br/> @Cheorizzang](https://github.com/Cheorizzang) | [<img src="https://avatars.githubusercontent.com/u/112460506?v=4" height=150 width=150> <br/> @heejiyang](https://github.com/heejiyang) | [<img src="https://avatars.githubusercontent.com/u/76766459?v=4" height=150 width=150> <br/> @journey-ji](https://github.com/journey-ji) |
+| [<img src="https://avatars.githubusercontent.com/u/106502312?v=4" height=150 width=150> <br/> @hansaemkim38](https://github.com/hansaemkim38) | [<img src="https://avatars.githubusercontent.com/u/106502312?v=4" height=150 width=150> <br/> @striker1826](https://github.com/striker1826) | [<img src="https://avatars.githubusercontent.com/u/106502312?v=4" height=150 width=150> <br/> @eqypo9](https://github.com/eqypo9) | [<img src="https://avatars.githubusercontent.com/u/106502312?v=4" height=150 width=150> <br/> @Batrnan](https://github.com/Batrnan) |
 
 </div>
 
@@ -153,7 +153,6 @@
 
 | 초기화면 |
 |----------|
-|![splash](https://user-images.githubusercontent.com/112460466/210172920-aef402ed-5aef-4d4a-94b9-2b7147fd8389.gif)|
 
 <br>
 
@@ -164,7 +163,6 @@
 
 | 회원가입 |
 |----------|
-|![join](https://user-images.githubusercontent.com/112460466/210173571-490f5beb-5791-4a4a-8c5e-510cdcb5f1fe.gif)|
 
 <br>
 
@@ -177,7 +175,6 @@
 
 | 프로필 설정 |
 |----------|
-|![setProfile](https://user-images.githubusercontent.com/112460466/210173749-2da6c9af-eb93-4eea-9663-1a03e19299ec.gif)|
 
 <br>
 
@@ -189,7 +186,6 @@
 
 | 로그인 |
 |----------|
-|![login](https://user-images.githubusercontent.com/112460466/210177956-c716414e-01c2-4c1e-b1f7-6562b9b7a857.gif)|
 
 <br>
 
@@ -199,7 +195,6 @@
 
 | 로그아웃 |
 |----------|
-|![logout](https://user-images.githubusercontent.com/112460466/210178009-11225733-7af5-4b8b-aa1c-fe264af01797.gif)|
 
 <br>
 
@@ -215,7 +210,6 @@
 
 | 상하단 배너 |
 |----------|
-|![tab](https://user-images.githubusercontent.com/112460466/210178028-3185f944-6ac1-468a-94ba-b32cdc5e380e.gif)|
 
 <br>
 
@@ -226,7 +220,6 @@
 
 | 팔로우하는 유저가 없을 때 | 팔로우하는 유저가 있을 때 |
 |----------|----------|
-|![home0](https://user-images.githubusercontent.com/112460466/210379059-48900aac-3735-45c6-a249-bc9c41b49414.gif)|![home1](https://user-images.githubusercontent.com/112460466/210379110-49153d27-0405-48e6-adfb-62c7818d2f43.gif)|
 
 <br>
 
@@ -237,7 +230,6 @@
 
 | 검색 |
 |----------|
-|![search](https://user-images.githubusercontent.com/112460466/210379805-6c8a42c0-0de8-48d3-8f75-cdf0ae5f4fb6.gif)|
 
 <br>
 
@@ -253,7 +245,6 @@
 
 | 리스트형 & 앨범형 게시글 | 팔로잉 & 팔로워 리스트 |
 |----------|----------|
-|![myProfile](https://user-images.githubusercontent.com/112460466/210380492-40560e0b-c306-4e69-8939-cc3e7dc3d8fe.gif)|![followList](https://user-images.githubusercontent.com/112460466/210380539-d09b0bd7-0b61-4b22-85fa-f75e6bcecb68.gif)|
 
 <br>
 
@@ -262,7 +253,6 @@
 
 | 팔로우 & 언팔로우 |
 |----------|
-|![yourProfile](https://user-images.githubusercontent.com/112460466/210380853-04f2d2bd-adab-4786-a8e8-c275ce765071.gif)|
 
 <br>
 
@@ -274,7 +264,6 @@
 
 | 초기화면 |
 |----------|
-|![editProfile](https://user-images.githubusercontent.com/112460466/210381212-d67fdf87-b90c-4501-a331-f2a384534941.gif)|
 
 <br>
 
@@ -287,7 +276,6 @@
 
 | 게시글 작성 |
 |----------|
-|![uploadPost](https://user-images.githubusercontent.com/112460466/210381758-1de5a889-f587-41d2-b200-22c20a970519.gif)|
 
 <br>
 
@@ -298,7 +286,6 @@
 
 | 게시글 수정 & 삭제 |
 |----------|
-|![editDeletePost](https://user-images.githubusercontent.com/112460466/210382021-da057943-dc21-411e-a1f8-552be0e973bf.gif)|
 
 <br>
 
@@ -310,7 +297,6 @@
 
 | 좋아요 & 댓글 |
 |----------|
-|![likeComment](https://user-images.githubusercontent.com/112460466/210382217-01d70181-91c3-43db-a1b8-409a612afb1c.gif)|
 
 <br>
 
@@ -325,7 +311,6 @@
 
 | 상품 등록 |
 |----------|
-|![addProduct](https://user-images.githubusercontent.com/112460466/210386068-c6ff2e05-eb64-4abc-b6dc-93bf52b88d3f.gif)|
 
 <br>
 
@@ -336,19 +321,11 @@
 
 | 상품 수정 & 삭제 |
 |----------|
-|![editDeleteProduct](https://user-images.githubusercontent.com/112460466/210386311-5fae87a7-745f-47c0-b8e3-fc41c65cb3cb.gif)|
 
 <br>
 
-### [채팅]
-- 채팅 목록에서 아직 읽지 않은 채팅에는 좌측 상단의 파란색 알림을 띄워줍니다.
-- 채팅방에서 메시지를 입력하거나 파일을 업로드하면 전송 버튼이 활성화됩니다.
-- 채팅방에서 우측 상단의 채팅방 나가기 모달 버튼을 통해 채팅 목록 페이지로 이동할 수 있습니다.
-- 채팅 메시지 전송 및 수신 기능은 개발 예정입니다.
-
 | 채팅 |
 |----------|
-|![chat](https://user-images.githubusercontent.com/112460466/210386478-ea4877c5-1728-4872-ab50-a8408ddf6dcd.gif)|
 
 <br>
 
@@ -367,19 +344,7 @@
     - 모든 페이지에서 특히 Best Practices & SEO 점수는 90~100으로 우수
     - Performance 점수가 대체적으로 미흡한 문제
     
-    ![KakaoTalk_Photo_2023-01-04-16-55-30](https://user-images.githubusercontent.com/112460466/210591134-09bf8efd-3c34-4b99-a3d7-895ca99e1457.png)
     
-- **23-01-17 성능 개선 내용**
-    
-    ![성능개선 후](https://user-images.githubusercontent.com/106502312/212872369-7ceeb2cf-d551-41d2-bfb0-01e35e9903fe.png)
-    
-    - 이미지 최적화
-        - `<img>` 요소에 `width` , `height` 속성값을 명시해 불필요한 Reflow를 방지했습니다.
-        - browser-image-compression 라이브러리를 사용해 유저가 업로드하는 이미지를 압축했습니다.
-        - Intersection Observer API를 사용해 Lazy Loading 기법을 적용하여 홈 피드의 게시글 이미지가 viewport 내에 들어오는 순간 로딩되도록 변경했습니다.
-    - 웹폰트 최적화
-        - WOFF2 포맷을 추가하고 가장 우선적으로 적용되도록 선언했습니다.
-        - 서브셋 폰트로 교체해 용량을 줄였습니다.
     
 <br>
 
