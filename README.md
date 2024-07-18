@@ -38,10 +38,6 @@
 - 버전 및 이슈관리 : Github
 - 협업 툴 : Discord, Notion, Zoom
 - 서비스 배포 환경 : Vercel
-- 디자인 : [Figma](https://www.figma.com/file/fAisC2pEKzxTOzet9CfqML/README(oh-my-code)?node-id=39%3A1814)
-- [커밋 컨벤션](https://raspy-flea-f77.notion.site/5af1603c31734efea7a0c986feadbe55)
-- [코드 컨벤션](https://raspy-flea-f77.notion.site/505865251cc64cf6b72c7bb79adc9e14)
-- [스프라이트](https://github.com/likelion-project-README/README/wiki/%EC%8A%A4%ED%94%84%EB%9D%BC%EC%9D%B4%ED%8A%B8)
 <br>
 
 ## 2. 채택한 개발 기술과 브랜치 전략
